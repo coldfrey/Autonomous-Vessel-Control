@@ -35,43 +35,61 @@
 \newlabel{chap:intro}{{\M@TitleReference {1}{Introduction and Motivation}}{1}{Introduction and Motivation}{chapter.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.0.1}A Renewed Interest in Wind Propultion}{2}{subsection.1.0.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.0.2}Reinforcement Learning for Autonomous Control}{2}{subsection.1.0.2}\protected@file@percent }
+\citation{sutton2018reinforcement}
+\citation{watkins1992qlearning}
+\citation{bellman1957dynamic}
+\citation{silver2016mastering}
 \@writefile{lof}{\addvspace {10pt}}
 \@writefile{lot}{\addvspace {10pt}}
-\@writefile{toc}{\contentsline {chapter}{\chapternumberline {2}Background}{3}{chapter.2}\protected@file@percent }
-\newlabel{chap:intro}{{\M@TitleReference {2}{Background}}{3}{Background}{chapter.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.1}Reinforcement Learning (RL)}{3}{section.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.1}Introduction to RL}{3}{subsection.2.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}Application of RL}{3}{subsection.2.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2.2}Related Work}{3}{section.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Autonomous Control of Kite-Powered Vessels}{3}{subsection.2.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Limitations and Challenges}{3}{subsection.2.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\chapternumberline {2}Background}{4}{chapter.2}\protected@file@percent }
+\newlabel{chap:background}{{\M@TitleReference {2}{Background}}{4}{Background}{chapter.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}Reinforcement Learning (RL)}{4}{section.2.1}\protected@file@percent }
+\citation{yang2020reinforcement}
+\citation{hallion2003taking}
+\citation{erhard2013control}
+\citation{christiansen2013ship}
+\citation{mnih2015humanlevel}
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Unity Game Engine}{5}{section.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}Proximal Policy Optimization (PPO)}{6}{section.2.3}\protected@file@percent }
 \@writefile{lof}{\addvspace {10pt}}
 \@writefile{lot}{\addvspace {10pt}}
-\@writefile{toc}{\contentsline {chapter}{\chapternumberline {3}Methodology}{4}{chapter.3}\protected@file@percent }
-\newlabel{chap:aims_and_opjectives}{{\M@TitleReference {3}{Methodology}}{4}{Methodology}{chapter.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}A Simulation Environment}{4}{section.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Training Environment}{4}{section.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Buoyancy}{5}{subsection.3.2.1}\protected@file@percent }
-\newlabel{archimedes}{{3.1}{5}{Buoyancy}{equation.3.2.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Rudder}{5}{subsection.3.2.2}\protected@file@percent }
-\newlabel{lift}{{3.2}{5}{Rudder}{equation.3.2.2}{}}
-\newlabel{drag}{{3.3}{5}{Rudder}{equation.3.2.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Force Diagram of a boat rudder}}{6}{figure.3.1}\protected@file@percent }
-\newlabel{rudderForce}{{\M@TitleReference {3.1}{Force Diagram of a boat rudder}}{6}{Force Diagram of a boat rudder}{figure.3.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}Course Generation}{6}{subsection.3.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.4}Mark Roundings}{6}{subsection.3.2.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}MLAgents}{6}{section.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.4}The Boat Agent}{6}{section.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.5}Initial Training}{6}{section.3.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.6}Optimization}{6}{section.3.6}\protected@file@percent }
-\newlabel{sec:sec01}{{\M@TitleReference {3.6}{Optimization}}{6}{Optimization}{section.3.6}{}}
+\@writefile{toc}{\contentsline {chapter}{\chapternumberline {3}Methodology}{8}{chapter.3}\protected@file@percent }
+\newlabel{chap:aims_and_opjectives}{{\M@TitleReference {3}{Methodology}}{8}{Methodology}{chapter.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}A Simulation Environment}{8}{section.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Water Dynamics}{9}{subsection.3.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}Buoyancy}{9}{subsection.3.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.3}Rudder Dynamics}{9}{subsection.3.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.4}Buoyancy}{9}{subsection.3.1.4}\protected@file@percent }
+\newlabel{archimedes}{{3.1}{9}{Buoyancy}{equation.3.1.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Force Diagram of a boat rudder}}{10}{figure.3.1}\protected@file@percent }
+\newlabel{rudderForce}{{\M@TitleReference {3.1}{Force Diagram of a boat rudder}}{10}{Force Diagram of a boat rudder}{figure.3.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.5}Rudder}{10}{subsection.3.1.5}\protected@file@percent }
+\newlabel{lift}{{3.2}{10}{Rudder}{equation.3.1.2}{}}
+\newlabel{drag}{{3.3}{10}{Rudder}{equation.3.1.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.6}Course Generation}{11}{subsection.3.1.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.7}Mark Roundings}{11}{subsection.3.1.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}MLAgents}{11}{section.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}The Boat Agent}{11}{section.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Initial Training}{11}{section.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.5}Optimization}{11}{section.3.5}\protected@file@percent }
+\newlabel{sec:sec01}{{\M@TitleReference {3.5}{Optimization}}{11}{Optimization}{section.3.5}{}}
 \@writefile{lof}{\addvspace {10pt}}
 \@writefile{lot}{\addvspace {10pt}}
-\@writefile{toc}{\contentsline {appendix}{\chapternumberline {A}Appendix A}{7}{appendix.A}\protected@file@percent }
-\newlabel{app:app01}{{\M@TitleReference {A}{Appendix A}}{7}{Appendix A}{appendix.A}{}}
+\@writefile{toc}{\contentsline {appendix}{\chapternumberline {A}Appendix A}{12}{appendix.A}\protected@file@percent }
+\newlabel{app:app01}{{\M@TitleReference {A}{Appendix A}}{12}{Appendix A}{appendix.A}{}}
 \bibstyle{siam}
 \bibdata{thesisbiblio}
-\@writefile{toc}{\contentsline {chapter}{Bibliography}{8}{appendix*.8}\protected@file@percent }
-\memsetcounter{lastsheet}{15}
-\memsetcounter{lastpage}{8}
-\gdef \@abspage@last{15}
+\bibcite{bellman1957dynamic}{{1}{}{{}}{{}}}
+\bibcite{christiansen2013ship}{{2}{}{{}}{{}}}
+\bibcite{erhard2013control}{{3}{}{{}}{{}}}
+\bibcite{hallion2003taking}{{4}{}{{}}{{}}}
+\bibcite{mnih2015humanlevel}{{5}{}{{}}{{}}}
+\bibcite{silver2016mastering}{{6}{}{{}}{{}}}
+\bibcite{sutton2018reinforcement}{{7}{}{{}}{{}}}
+\bibcite{watkins1992qlearning}{{8}{}{{}}{{}}}
+\bibcite{yang2020reinforcement}{{9}{}{{}}{{}}}
+\providecommand\NAT@force@numbers{}\NAT@force@numbers
+\@writefile{toc}{\contentsline {chapter}{Bibliography}{13}{appendix*.8}\protected@file@percent }
+\memsetcounter{lastsheet}{20}
+\memsetcounter{lastpage}{13}
+\gdef \@abspage@last{20}

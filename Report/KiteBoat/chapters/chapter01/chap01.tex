@@ -27,6 +27,13 @@ Reinforcement Learning (RL), a subset of artificial intelligence, presents a com
 
 Talk about what we are going to investigate in the paper
 
+See if we can train a Reinforcement learning algorithm (agent) to be able to sail a boat (control direction and speed towards a target), while also flying a kite as the means of propulsion. 
+First make an agent that can drive a boat, control its direction and speed, with minimal outside interference (sea state, wind).
+Integrate expand the agent  
+
+
+
+
 % The objective of this paper is to delineate a novel Reinforcement Learning approach aimed at optimizing the autonomous control of kite-powered vessels. By leveraging the prowess of RL, we endeavor to address the challenges inherent in autonomous sail control, thereby contributing to the overarching goal of sustainable and efficient maritime transportation. The ensuing discourse will elucidate the theoretical underpinnings of our approach, the experimental setup, and the empirical findings, underscoring the potential benefits in terms of reducing operational costs and mitigating environmental impact.
 
 
@@ -34,8 +41,15 @@ Talk about what we are going to investigate in the paper
 
 Overall aim : Develope a RL algorithm for autonomous control of kite-powered vessels
 
-Along the way:
 
+
+This has several steps before we can train a RL algorithm to perform this we must:
+1st stage: get an algorithm similar to a driving game
+- create the environment for training:
+    - some form of sailing simulation, initially just a floating boat on water and a propeller for propulsion
+-expand the playable world to include a course
+
+-build agent with observations, actions and rewards
 
 % %A figures matrix.
 % \begin{figure}[t!]

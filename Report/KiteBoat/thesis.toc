@@ -5,23 +5,22 @@
 \contentsline {chapter}{\chapternumberline {1}Introduction and Motivation}{1}{chapter.1}%
 \contentsline {subsection}{\numberline {1.0.1}A Renewed Interest in Wind Propultion}{2}{subsection.1.0.1}%
 \contentsline {subsection}{\numberline {1.0.2}Reinforcement Learning for Autonomous Control}{2}{subsection.1.0.2}%
-\contentsline {chapter}{\chapternumberline {2}Background}{3}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Reinforcement Learning (RL)}{3}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}Introduction to RL}{3}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Application of RL}{3}{subsection.2.1.2}%
-\contentsline {section}{\numberline {2.2}Related Work}{3}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Autonomous Control of Kite-Powered Vessels}{3}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Limitations and Challenges}{3}{subsection.2.2.2}%
-\contentsline {chapter}{\chapternumberline {3}Methodology}{4}{chapter.3}%
-\contentsline {section}{\numberline {3.1}A Simulation Environment}{4}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Training Environment}{4}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Buoyancy}{5}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Rudder}{5}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Course Generation}{6}{subsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.2.4}Mark Roundings}{6}{subsection.3.2.4}%
-\contentsline {section}{\numberline {3.3}MLAgents}{6}{section.3.3}%
-\contentsline {section}{\numberline {3.4}The Boat Agent}{6}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Initial Training}{6}{section.3.5}%
-\contentsline {section}{\numberline {3.6}Optimization}{6}{section.3.6}%
-\contentsline {appendix}{\chapternumberline {A}Appendix A}{7}{appendix.A}%
-\contentsline {chapter}{Bibliography}{8}{appendix*.8}%
+\contentsline {chapter}{\chapternumberline {2}Background}{4}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Reinforcement Learning (RL)}{4}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Unity Game Engine}{5}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Proximal Policy Optimization (PPO)}{6}{section.2.3}%
+\contentsline {chapter}{\chapternumberline {3}Methodology}{8}{chapter.3}%
+\contentsline {section}{\numberline {3.1}A Simulation Environment}{8}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Water Dynamics}{9}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Buoyancy}{9}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}Rudder Dynamics}{9}{subsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.1.4}Buoyancy}{9}{subsection.3.1.4}%
+\contentsline {subsection}{\numberline {3.1.5}Rudder}{10}{subsection.3.1.5}%
+\contentsline {subsection}{\numberline {3.1.6}Course Generation}{11}{subsection.3.1.6}%
+\contentsline {subsection}{\numberline {3.1.7}Mark Roundings}{11}{subsection.3.1.7}%
+\contentsline {section}{\numberline {3.2}MLAgents}{11}{section.3.2}%
+\contentsline {section}{\numberline {3.3}The Boat Agent}{11}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Initial Training}{11}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Optimization}{11}{section.3.5}%
+\contentsline {appendix}{\chapternumberline {A}Appendix A}{12}{appendix.A}%
+\contentsline {chapter}{Bibliography}{13}{appendix*.8}%

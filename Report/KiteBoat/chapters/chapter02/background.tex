@@ -5,9 +5,9 @@
 %
 \let\textcircled=\pgftextcircled
 \chapter{Background}
-\label{chap:intro}
+\label{chap:background}
 
-\initial{T}his chapter delves into the application of machine learning in sailboat control, with a particular emphasis on utilizing kites as a means of propulsion. The exploration of kite-powered vessel technologies presents a novel avenue to enhance the efficiency of sailboats, transcending the limitations inherent in traditional sail systems. The fusion of machine learning, specifically Reinforcement Learning (RL), with kite propulsion systems, opens up a realm of possibilities for autonomous sailboat control, optimizing the harnessing of wind power in a dynamic and adaptive manner. Through a meticulous review of existing technologies, RL principles, and related work in this domain, this chapter aims to lay a solid foundation for the ensuing discussion on the proposed RL approach to optimizing the autonomous control of kite-powered boats. 
+\initial{T}his chapter delves into the application of machine learning in sailboat control, with a particular emphasis on utilizing kites as a means of propulsion. The exploration of kite-powered vessel technologies presents a novel avenue to enhance the efficiency of sailboats. The fusion of machine learning, specifically Reinforcement Learning (RL), with kite propulsion systems, opens up a realm of possibilities for autonomous sailboat control. 
 
 
 
@@ -15,17 +15,63 @@ The subsequent sections will provide an in-depth examination of kite-powered ves
 
 
 \section{Reinforcement Learning (RL)}
-\subsection{Introduction to RL}
+% User
+% Write me a technical and informative introduction for Reinforcement Learning (RL). This is part of the background section of a thesis and will lay the foundation for how and why RL can/has/might want to be used to control boats (and kites instead of sails). Make it about 1000 words and include citations for your sources. The style should be informative but upbeat. 
 
-\subsection{Application of RL}
+Reinforcement Learning (RL) is a paradigm of machine learning that has been making waves, both literally and figuratively, in the vast ocean of artificial intelligence (AI). At its core, RL is about learning by interaction: an agent takes actions in an environment to maximize some notion of cumulative reward. The agent learns from the consequences of its actions, rather than from being explicitly taught, making it a powerful tool for tasks where the optimal strategy is unknown or hard to define \cite{sutton2018reinforcement}.
 
-\section{Related Work}
-\subsection{Autonomous Control of Kite-Powered Vessels}
+Imagine teaching a child to ride a bicycle. You don't provide a step-by-step manual; instead, the child learns by trying different actions (like pedaling or balancing) and receiving feedback (falling down or moving forward). This trial-and-error approach is the essence of RL. The agent (in this case, the child) interacts with its environment (the bicycle and the ground) and learns a policy that dictates the best action to take in any given situation based on the rewards (or penalties) it receives \cite{watkins1992qlearning}.
 
-\subsection{Limitations and Challenges}
+Historically, RL has its roots in the fields of operations research and behavioral psychology. The idea of learning optimal strategies through interaction has been explored in various contexts, from game playing to industrial optimization \cite{bellman1957dynamic}. However, it's the recent advancements in computational power and algorithms that have propelled RL to the forefront of AI research. Games like Go, which were once considered too complex for computers to master, have now been conquered by RL agents, showcasing the immense potential of this approach\cite{silver2016mastering}.
+
+Now, let's explore how RL can be applied to the maritime world. Boats, with their intricate dynamics and the unpredictable nature of water, present a challenging environment for control systems. Traditional control methods often rely on predefined rules and heuristics, which might not always be optimal, especially in changing conditions. Enter RL. With its ability to learn from experience, an RL-based control system can adapt to varying conditions, ensuring smooth sailing even in turbulent waters, gusty winds and potentially more \cite{yang2020reinforcement}.
+
+But why stop at boats? The concept of using kites to harness wind power for propulsion is not new. Historically, kites have been used in various cultures for fishing, transportation, and even warfare \cite{hallion2003taking}. In the modern context, kites offer an exciting alternative to traditional sails, providing more power and maneuverability. However, controlling a kite, especially in varying wind conditions, is a complex task. This is where RL shines. By continuously interacting with the environment and adjusting the kite's position and angle, an RL agent can learn the optimal control strategy to harness the maximum wind power, propelling the boat efficiently \cite{erhard2013control}.
+
+The potential applications of RL in maritime navigation are vast. From optimizing routes for cargo ships to ensuring safe navigation in crowded ports, the possibilities are as vast as the open sea. Moreover, as environmental concerns become more pressing, the need for efficient and sustainable maritime solutions becomes paramount. RL, with its ability to optimize and adapt, can play a pivotal role in addressing these challenges \cite{christiansen2013ship}.
+
+In conclusion, Reinforcement Learning is not just another tool in the AI toolkit; it's a paradigm shift in how we approach problem-solving. Its potential in the maritime world is just beginning to be tapped. As we venture into the future, with boats steered by intelligent agents and sails replaced by kites controlled with precision, it's clear that RL will be at the helm, guiding us towards uncharted territories and new horizons\cite{mnih2015humanlevel}.
+
+\section{Unity Game Engine}
+
+Unity, a name that resonates with game developers and enthusiasts alike, stands as a beacon in the realm of game development. Born in the vibrant city of Copenhagen, Denmark, in 2005, Unity has since evolved into a powerhouse, democratizing game development and breathing life into iconic games like "Among Us" and "Pokemon Go"1.
+
+At its heart, Unity is a cross-platform game engine designed to craft both 2D and 3D experiences. It offers a harmonious blend of a powerful graphical editor and the flexibility of CSHARP coding, allowing developers to translate their visions into virtual realities2. While the engine's core is written in C++, it graciously opens its arms to developers familiar with CSHARP, making the development process both intuitive and efficient.
+
+Diving into the basics of Unity game development, one is greeted with a plethora of tools and components that simulate real-world interactions. Unity's lighting, physics, rigidbody, and colliders work in tandem to create immersive environments. Whether it's the glint of sunlight reflecting off a surface or the realistic bounce of a ball, Unity ensures every detail is just right3. Developers can further enhance objects with custom CSHARP scripts, paving the way for unique gameplay experiences.
+
+Imagine crafting a game level: a dodgeball arena illuminated by a radiant light source, with a camera capturing every thrilling moment. Unity makes this possible with simple objects like planes, cylinders, and spheres. The intuitive interface allows developers to select, move, rotate, and scale objects with ease, setting the stage for an exhilarating match4.
+
+But what's a game without some action? Unity's rigid body component breathes life into objects, allowing them to be influenced by gravity. Combine this with the material component, and you can create mesmerizing visual effects, from the sheen of a metallic surface to the rough texture of a stone5.
+
+Unity's commitment to realism and smooth gameplay is further evident in its two types of updates: Update and FixedUpdate. While the former is called every frame during gameplay, ensuring fluid animations and interactions, the latter syncs with the physics engine's frame rate, making it ideal for moving objects around6.
+
+Now, envision a player navigating this dodgeball arena, deftly maneuvering with the arrow keys, while a ball rolls with momentum as the game begins. Unity makes this possible with simple input methods in the FixedUpdate and scripts that add force to objects7.
+
+Unity's ML-Agents toolkit is a game-changer for those looking to infuse artificial intelligence into their games. ML-Agents provides a platform to train intelligent agents within the Unity environment using Reinforcement Learning, imitation learning, and more. This makes it an ideal choice for complex simulations like kiteboat training, where agents can learn optimal strategies through interaction9.
+
+In conclusion, Unity is not just a game engine; it's a canvas for creativity, a platform for innovation, and a testament to the limitless possibilities of virtual worlds. As we set sail in our virtual kiteboat, with the winds of Unity propelling us forward, the horizon looks promising and full of potential10.
+
+\section{Proximal Policy Optimization (PPO)}
+
+Reinforcement Learning (RL) has witnessed a plethora of algorithms, each striving to optimize policy in its unique way. Among these, the Proximal Policy Optimization (PPO) algorithm stands out as a beacon of efficiency and simplicity1.
+
+PPO is a member of the policy gradient family of RL algorithms. Unlike traditional policy gradient methods that perform a single gradient update per data sample, PPO introduces a "surrogate" objective function. This novel approach allows for multiple epochs of minibatch updates, optimizing the policy over a series of iterations1. The essence of PPO lies in its ability to alternate between sampling data through interaction with the environment and optimizing the surrogate objective using stochastic gradient ascent.
+
+The inception of PPO was driven by the need for an algorithm that combined the best of all worlds: scalability, data efficiency, and robustness. While deep Q-learning and vanilla policy gradient methods have their merits, they often fall short in terms of data efficiency and robustness. Trust Region Policy Optimization (TRPO), on the other hand, although effective, is relatively intricate and lacks compatibility with certain architectures2.
+
+PPO seeks to bridge these gaps. It aims to achieve the data efficiency and consistent performance of TRPO but does so using only first-order optimization. The brilliance of PPO is encapsulated in its objective with clipped probability ratios. This objective provides a pessimistic estimate (or a lower bound) of the policy's performance. The optimization process in PPO is iterative, alternating between data sampling from the policy and performing several epochs of optimization on this sampled data2.
+
+Empirical evidence underscores the efficacy of PPO. When pitted against various versions of the surrogate objective, PPO, with its clipped probability ratios, emerges as the top performer. Furthermore, in head-to-head comparisons with other algorithms, PPO shines brightly. On continuous control tasks, PPO outperforms its competitors. In the realm of Atari games, PPO showcases superior sample complexity compared to A2C and performs on par with ACER, all while maintaining a simpler architecture3.
+
+But the story doesn't end with PPO alone. Unity's ML-Agents toolkit, which we touched upon earlier, seamlessly integrates with PPO. ML-Agents provides a platform for training intelligent agents within the Unity environment, and when combined with the power of PPO, it paves the way for robust and efficient training regimes. This synergy between PPO and ML-Agents is particularly promising for complex simulations, such as kiteboat training, where agents can iteratively learn and refine their strategies for optimal performance.
+
+In conclusion, the Proximal Policy Optimization algorithm is a testament to the continuous evolution and innovation in the field of Reinforcement Learning. Its simplicity, efficiency, and robustness make it a prime choice for a myriad of applications. As we harness the combined power of PPO and Unity's ML-Agents for kiteboat simulations, the future looks bright, promising, and full of potential.
 
 
+% Schulman, J., Wolski, F., Dhariwal, P., Radford, A., & Klimov, O. (2017). Proximal Policy Optimization Algorithms. arXiv preprint arXiv:1707.06347. ↩ ↩2
 
+% Ibid. Section "Introduction". ↩ ↩2
 
-
+% Ibid. Section "Background: Policy Optimization". ↩
 %=========================================================

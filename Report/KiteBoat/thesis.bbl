@@ -1,3 +1,41 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
+
+\bibitem{bellman1957dynamic}
+{\sc R.~Bellman}, {\em Dynamic Programming}, Princeton University Press, 1957.
+
+\bibitem{christiansen2013ship}
+{\sc M.~Christiansen, K.~Fagerholt, and D.~Ronen}, {\em Ship routing and
+  scheduling in the new millennium}, European Journal of Operational Research,
+  228 (2013), pp.~467--483.
+
+\bibitem{erhard2013control}
+{\sc M.~Erhard and H.~Strauch}, {\em Control of towing kites for seagoing
+  vessels}, IEEE Transactions on Control Systems Technology, 21 (2013),
+  pp.~1629--1640.
+
+\bibitem{hallion2003taking}
+{\sc R.~Hallion}, {\em Taking flight: inventing the aerial age, from antiquity
+  through the First World War}, Oxford University Press, 2003.
+
+\bibitem{mnih2015humanlevel}
+{\sc V.~Mnih et~al.}, {\em Human-level control through deep reinforcement
+  learning}, Nature, 518 (2015), pp.~529--533.
+
+\bibitem{silver2016mastering}
+{\sc D.~Silver et~al.}, {\em Mastering the game of go with deep neural networks
+  and tree search}, Nature, 529 (2016), pp.~484--489.
+
+\bibitem{sutton2018reinforcement}
+{\sc R.~S. Sutton and A.~G. Barto}, {\em Reinforcement learning: An
+  introduction}, MIT press, 2018.
+
+\bibitem{watkins1992qlearning}
+{\sc C.~J. Watkins and P.~Dayan}, {\em Q-learning}, Machine learning, 8 (1992),
+  pp.~279--292.
+
+\bibitem{yang2020reinforcement}
+{\sc C.~Yang and L.~Wu}, {\em Reinforcement learning-based control for
+  autonomous boats: A survey}, Journal of Marine Science and Technology, 25
+  (2020), pp.~1--10.
 
 \end{thebibliography}
