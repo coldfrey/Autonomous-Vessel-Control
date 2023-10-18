@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 98d89738379b58d4fa6366837b44232a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 4734
+  packageName: Simple Buoy
+  packageVersion: 1.3
+  assetPath: Assets/Buoy/Prefab/buoy.prefab
+  uploadId: 10975

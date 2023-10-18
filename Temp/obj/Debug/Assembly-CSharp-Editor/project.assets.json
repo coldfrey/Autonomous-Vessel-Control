@@ -1,0 +1,149 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETStandard,Version=v2.1": {
+      "Assembly-CSharp/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "dependencies": {
+          "PathCreator": "1.0.0",
+          "PathCreatorEditor": "1.0.0",
+          "Unity.RenderPipelines.HighDefinition.Editor": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Assembly-CSharp.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Assembly-CSharp.dll": {}
+        }
+      },
+      "PathCreator/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "compile": {
+          "bin/placeholder/PathCreator.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/PathCreator.dll": {}
+        }
+      },
+      "PathCreatorEditor/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "dependencies": {
+          "PathCreator": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/PathCreatorEditor.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/PathCreatorEditor.dll": {}
+        }
+      },
+      "Unity.RenderPipelines.HighDefinition.Editor/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "compile": {
+          "bin/placeholder/Unity.RenderPipelines.HighDefinition.Editor.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Unity.RenderPipelines.HighDefinition.Editor.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Assembly-CSharp/1.0.0": {
+      "type": "project",
+      "path": "Assembly-CSharp.csproj",
+      "msbuildProject": "Assembly-CSharp.csproj"
+    },
+    "PathCreator/1.0.0": {
+      "type": "project",
+      "path": "PathCreator.csproj",
+      "msbuildProject": "PathCreator.csproj"
+    },
+    "PathCreatorEditor/1.0.0": {
+      "type": "project",
+      "path": "PathCreatorEditor.csproj",
+      "msbuildProject": "PathCreatorEditor.csproj"
+    },
+    "Unity.RenderPipelines.HighDefinition.Editor/1.0.0": {
+      "type": "project",
+      "path": "Unity.RenderPipelines.HighDefinition.Editor.csproj",
+      "msbuildProject": "Unity.RenderPipelines.HighDefinition.Editor.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETStandard,Version=v2.1": [
+      "Assembly-CSharp >= 1.0.0",
+      "PathCreator >= 1.0.0",
+      "PathCreatorEditor >= 1.0.0",
+      "Unity.RenderPipelines.HighDefinition.Editor >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "/home/joshua/.nuget/packages/": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "/home/joshua/Documents/Unity/ai_kite/Assembly-CSharp-Editor.csproj",
+      "projectName": "Assembly-CSharp-Editor",
+      "projectPath": "/home/joshua/Documents/Unity/ai_kite/Assembly-CSharp-Editor.csproj",
+      "packagesPath": "/home/joshua/.nuget/packages/",
+      "outputPath": "/home/joshua/Documents/Unity/ai_kite/Temp/obj/Debug/Assembly-CSharp-Editor/",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "/home/joshua/.nuget/NuGet/NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "netstandard2.1"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "projectReferences": {
+            "/home/joshua/Documents/Unity/ai_kite/Assembly-CSharp.csproj": {
+              "projectPath": "/home/joshua/Documents/Unity/ai_kite/Assembly-CSharp.csproj"
+            },
+            "/home/joshua/Documents/Unity/ai_kite/PathCreator.csproj": {
+              "projectPath": "/home/joshua/Documents/Unity/ai_kite/PathCreator.csproj"
+            },
+            "/home/joshua/Documents/Unity/ai_kite/PathCreatorEditor.csproj": {
+              "projectPath": "/home/joshua/Documents/Unity/ai_kite/PathCreatorEditor.csproj"
+            },
+            "/home/joshua/Documents/Unity/ai_kite/Unity.RenderPipelines.HighDefinition.Editor.csproj": {
+              "projectPath": "/home/joshua/Documents/Unity/ai_kite/Unity.RenderPipelines.HighDefinition.Editor.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "netstandard2.1": {
+        "targetAlias": "netstandard2.1",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "runtimeIdentifierGraphPath": "/home/joshua/.dotnet/sdk/6.0.415/RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

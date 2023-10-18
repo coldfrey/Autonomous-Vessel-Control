@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1d554c736a35b964a95d9893b4789673
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 4734
+  packageName: Simple Buoy
+  packageVersion: 1.3
+  assetPath: Assets/Buoy/Materials/BuoySelfIllum.mat
+  uploadId: 10975
