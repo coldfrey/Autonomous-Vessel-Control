@@ -1,0 +1,101 @@
+{
+    "BoatAgent": {
+        "checkpoints": [
+            {
+                "steps": 49997,
+                "file_path": "results/headless/BoatAgent/BoatAgent-49997.onnx",
+                "reward": null,
+                "creation_time": 1697752956.7291086,
+                "auxillary_file_paths": [
+                    "results/headless/BoatAgent/BoatAgent-49997.pt"
+                ]
+            },
+            {
+                "steps": 52877,
+                "file_path": "results/headless/BoatAgent/BoatAgent-52877.onnx",
+                "reward": null,
+                "creation_time": 1697752979.871771,
+                "auxillary_file_paths": [
+                    "results/headless/BoatAgent/BoatAgent-52877.pt"
+                ]
+            },
+            {
+                "steps": 99981,
+                "file_path": "results/headless/BoatAgent/BoatAgent-99981.onnx",
+                "reward": null,
+                "creation_time": 1697753291.46986,
+                "auxillary_file_paths": [
+                    "results/headless/BoatAgent/BoatAgent-99981.pt"
+                ]
+            },
+            {
+                "steps": 149965,
+                "file_path": "results/headless/BoatAgent/BoatAgent-149965.onnx",
+                "reward": null,
+                "creation_time": 1697753591.1533434,
+                "auxillary_file_paths": [
+                    "results/headless/BoatAgent/BoatAgent-149965.pt"
+                ]
+            },
+            {
+                "steps": 199937,
+                "file_path": "results/headless/BoatAgent/BoatAgent-199937.onnx",
+                "reward": null,
+                "creation_time": 1697753894.5847678,
+                "auxillary_file_paths": [
+                    "results/headless/BoatAgent/BoatAgent-199937.pt"
+                ]
+            },
+            {
+                "steps": 220770,
+                "file_path": "results/headless/BoatAgent/BoatAgent-220770.onnx",
+                "reward": null,
+                "creation_time": 1697754026.1705003,
+                "auxillary_file_paths": [
+                    "results/headless/BoatAgent/BoatAgent-220770.pt"
+                ]
+            },
+            {
+                "steps": 249959,
+                "file_path": "results/headless/BoatAgent/BoatAgent-249959.onnx",
+                "reward": null,
+                "creation_time": 1697754271.0614073,
+                "auxillary_file_paths": [
+                    "results/headless/BoatAgent/BoatAgent-249959.pt"
+                ]
+            },
+            {
+                "steps": 299943,
+                "file_path": "results/headless/BoatAgent/BoatAgent-299943.onnx",
+                "reward": null,
+                "creation_time": 1697754584.7570837,
+                "auxillary_file_paths": [
+                    "results/headless/BoatAgent/BoatAgent-299943.pt"
+                ]
+            },
+            {
+                "steps": 326759,
+                "file_path": "results/headless/BoatAgent/BoatAgent-326759.onnx",
+                "reward": null,
+                "creation_time": 1697754752.944948,
+                "auxillary_file_paths": [
+                    "results/headless/BoatAgent/BoatAgent-326759.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 326759,
+            "file_path": "results/headless/BoatAgent.onnx",
+            "reward": null,
+            "creation_time": 1697754752.944948,
+            "auxillary_file_paths": [
+                "results/headless/BoatAgent/BoatAgent-326759.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.26.0",
+        "torch_version": "1.8.1+cu102"
+    }
+}

@@ -1,0 +1,65 @@
+{
+    "BoatAgent": {
+        "checkpoints": [
+            {
+                "steps": 49957,
+                "file_path": "results/2nd_go_30/BoatAgent/BoatAgent-49957.onnx",
+                "reward": null,
+                "creation_time": 1697722604.3538392,
+                "auxillary_file_paths": [
+                    "results/2nd_go_30/BoatAgent/BoatAgent-49957.pt"
+                ]
+            },
+            {
+                "steps": 99937,
+                "file_path": "results/2nd_go_30/BoatAgent/BoatAgent-99937.onnx",
+                "reward": -5034.528486251831,
+                "creation_time": 1697722944.223726,
+                "auxillary_file_paths": [
+                    "results/2nd_go_30/BoatAgent/BoatAgent-99937.pt"
+                ]
+            },
+            {
+                "steps": 149981,
+                "file_path": "results/2nd_go_30/BoatAgent/BoatAgent-149981.onnx",
+                "reward": -5000.893036603928,
+                "creation_time": 1697723269.7446284,
+                "auxillary_file_paths": [
+                    "results/2nd_go_30/BoatAgent/BoatAgent-149981.pt"
+                ]
+            },
+            {
+                "steps": 199975,
+                "file_path": "results/2nd_go_30/BoatAgent/BoatAgent-199975.onnx",
+                "reward": -4999.417284339666,
+                "creation_time": 1697723596.4961004,
+                "auxillary_file_paths": [
+                    "results/2nd_go_30/BoatAgent/BoatAgent-199975.pt"
+                ]
+            },
+            {
+                "steps": 210644,
+                "file_path": "results/2nd_go_30/BoatAgent/BoatAgent-210644.onnx",
+                "reward": null,
+                "creation_time": 1697723669.9262862,
+                "auxillary_file_paths": [
+                    "results/2nd_go_30/BoatAgent/BoatAgent-210644.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 210644,
+            "file_path": "results/2nd_go_30/BoatAgent.onnx",
+            "reward": null,
+            "creation_time": 1697723669.9262862,
+            "auxillary_file_paths": [
+                "results/2nd_go_30/BoatAgent/BoatAgent-210644.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.26.0",
+        "torch_version": "1.8.1+cu102"
+    }
+}
