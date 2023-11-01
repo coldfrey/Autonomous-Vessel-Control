@@ -9,6 +9,7 @@ public class ExitingBuoyColliderListener : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        StartCoroutine(DelayedStart());
         if (segmentIndex < 0)
         {
             Debug.LogError("Segment index must be >= 0");
@@ -16,7 +17,12 @@ public class ExitingBuoyColliderListener : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "floor_proxy") agent.ExitSegmentEntered(segmentIndex);
-        print("ExitingBuoyColliderListener: OnTriggerEnter");
+        if (agent == null) return;
+        if (other.gameObject.name == "floor_proxy" || other.gameObject.name == "PathAgent") agent.ExitSegmentEntered(segmentIndex);
+    }
+    IEnumerator DelayedStart()
+    {
+        yield return new WaitForSeconds(1.0f);
+        // agent = FindObjectOfType<BoatPPOAgent>();
     }
 }

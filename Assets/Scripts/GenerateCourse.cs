@@ -183,6 +183,16 @@ namespace PathCreation.Examples
                     float angleToNorth = Vector3.SignedAngle(Vector3.forward, perpendicularDirection, Vector3.up);
                     buoy = Instantiate(buoyPrefab, current + perpendicularDirection * distanceThreshold, Quaternion.identity * Quaternion.Euler(0, angleToNorth + 90, 0));
                     buoy.transform.GetChild(2).GetComponent<Renderer>().material.color = Color.red;
+                    SegmentVis segmentVisApproach = buoy.transform.GetChild(0).GetComponent<SegmentVis>();
+                    SegmentVis segmentVisDeparture = buoy.transform.GetChild(1).GetComponent<SegmentVis>();
+                    Vector3[] tempAppr = new Vector3[2];
+                    tempAppr[0] = segmentVisDeparture.vector1;
+                    tempAppr[1] = segmentVisDeparture.vector2;
+                    segmentVisDeparture.vector1 = segmentVisApproach.vector1;
+                    segmentVisDeparture.vector2 = segmentVisApproach.vector2;
+                    segmentVisApproach.vector1 = tempAppr[0];
+                    segmentVisApproach.vector2 = tempAppr[1];
+
                     raceBuoys.Add(buoy);
                     raceBuoyIsRoundingToStarboard.Add(false);
                 }

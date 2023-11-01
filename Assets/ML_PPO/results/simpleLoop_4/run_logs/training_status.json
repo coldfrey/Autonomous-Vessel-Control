@@ -1,0 +1,65 @@
+{
+    "BoatAgent": {
+        "checkpoints": [
+            {
+                "steps": 49979,
+                "file_path": "results/simpleLoop_4/BoatAgent/BoatAgent-49979.onnx",
+                "reward": null,
+                "creation_time": 1698316405.2259612,
+                "auxillary_file_paths": [
+                    "results/simpleLoop_4/BoatAgent/BoatAgent-49979.pt"
+                ]
+            },
+            {
+                "steps": 99951,
+                "file_path": "results/simpleLoop_4/BoatAgent/BoatAgent-99951.onnx",
+                "reward": 2205.804229736328,
+                "creation_time": 1698316796.2645755,
+                "auxillary_file_paths": [
+                    "results/simpleLoop_4/BoatAgent/BoatAgent-99951.pt"
+                ]
+            },
+            {
+                "steps": 135995,
+                "file_path": "results/simpleLoop_4/BoatAgent/BoatAgent-135995.onnx",
+                "reward": null,
+                "creation_time": 1698317097.4531007,
+                "auxillary_file_paths": [
+                    "results/simpleLoop_4/BoatAgent/BoatAgent-135995.pt"
+                ]
+            },
+            {
+                "steps": 149950,
+                "file_path": "results/simpleLoop_4/BoatAgent/BoatAgent-149950.onnx",
+                "reward": null,
+                "creation_time": 1698317235.2172112,
+                "auxillary_file_paths": [
+                    "results/simpleLoop_4/BoatAgent/BoatAgent-149950.pt"
+                ]
+            },
+            {
+                "steps": 168408,
+                "file_path": "results/simpleLoop_4/BoatAgent/BoatAgent-168408.onnx",
+                "reward": null,
+                "creation_time": 1698317486.6078513,
+                "auxillary_file_paths": [
+                    "results/simpleLoop_4/BoatAgent/BoatAgent-168408.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 168408,
+            "file_path": "results/simpleLoop_4/BoatAgent.onnx",
+            "reward": null,
+            "creation_time": 1698317486.6078513,
+            "auxillary_file_paths": [
+                "results/simpleLoop_4/BoatAgent/BoatAgent-168408.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.26.0",
+        "torch_version": "1.8.1+cu102"
+    }
+}

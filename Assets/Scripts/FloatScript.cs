@@ -31,6 +31,7 @@ public class FloatScript : MonoBehaviour
     }
     void FixedUpdate()
     {
+        if (water == null) return;
         if (water.ProjectPointOnWaterSurface(searchParameters, out searchResult))
         {
             float targetWaterHeight = searchResult.projectedPositionWS.y;

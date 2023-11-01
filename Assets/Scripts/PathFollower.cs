@@ -19,6 +19,9 @@ namespace PathCreation.Examples
         public GameObject startFinishBuoy;
         float distanceTravelled;
 
+        public float maxCornerCuttingTolerance = 30.0f;
+        public float policedMaxDistanceTravelled;
+
         public int currentWaypointIndex = 0;
         public int lapsCompleted = 0;
         private bool justStarted = true;
@@ -35,6 +38,8 @@ namespace PathCreation.Examples
 
         bool followerHasRoundedBuoyPrevious = false;
 
+        bool cornerCutting = false;
+
         int buoysRounded = 0;
 
 
@@ -42,6 +47,8 @@ namespace PathCreation.Examples
         private MeshCollider[] exitingBuoyColliders;
 
         private MeshCollider boatCollider;
+
+        public bool followObject = false;
         
 
 
@@ -57,6 +64,7 @@ namespace PathCreation.Examples
                 transform.position = course.waypoints[0].position;
             }
             currentWaypointIndex = 0;
+            policedMaxDistanceTravelled = pathCreator.path.GetClosestDistanceAlongPath(transform.position);
             // wait for 1 second
             StartCoroutine(WaitForStart());
 
@@ -88,8 +96,10 @@ namespace PathCreation.Examples
 
             // make listeners for the colliders
             for (int i = 0; i < course.raceBuoys.Count; i++) {
-                approachingBuoyColliders[i].gameObject.AddComponent<ApproachingBuoyColliderListener>();
-                exitingBuoyColliders[i].gameObject.AddComponent<ExitingBuoyColliderListener>();
+                ApproachingBuoyColliderListener appr = approachingBuoyColliders[i].gameObject.AddComponent<ApproachingBuoyColliderListener>();
+                appr.segmentIndex = i;
+                ExitingBuoyColliderListener exit = exitingBuoyColliders[i].gameObject.AddComponent<ExitingBuoyColliderListener>();
+                exit.segmentIndex = i;
             }
         }
 
@@ -99,19 +109,63 @@ namespace PathCreation.Examples
             justMovedToNextWaypoint = false;
         }
 
-        void Update()
+        public void resetPosition()
+        {
+            transform.position = course.waypoints[0].position;
+            transform.rotation = course.waypoints[0].rotation;
+            distanceTravelled = 0;
+            currentWaypointIndex = 0;
+            lapsCompleted = 0;
+            justStarted = true;
+            justMovedToNextWaypoint = false;
+            buoysRounded = 0;
+            UpdateLapDisplay();
+        }
+
+       void FixedUpdate()
         {
             // CheckStartFinishCross();
 
             if (pathCreator != null)
             {
-                // distanceTravelled += speed * Time.deltaTime;
-                if (objectToTrack != null) {
-                    // should check if the objectToTrack is within the current segment
-                    distanceTravelled = pathCreator.path.GetClosestDistanceAlongPath(objectToTrack.transform.position);
-                } else {
+                if (followObject)
+                {
+                    if (objectToTrack != null) 
+                    {
+                        // Update distanceTravelled based on the object's position along the path.
+                        distanceTravelled = pathCreator.path.GetClosestDistanceAlongPath(objectToTrack.transform.position);
+                    } 
+                    else 
+                    {
+                        // Update distanceTravelled based on speed and time if objectToTrack is not available.
+                        distanceTravelled += speed * Time.deltaTime;
+                    }
+                }
+                else
+                {
                     distanceTravelled += speed * Time.deltaTime;
                 }
+
+                // Check if a corner has been cut
+                float distanceDifference = distanceTravelled - policedMaxDistanceTravelled;
+                if (distanceDifference > maxCornerCuttingTolerance && !cornerCutting)
+                {
+                    Debug.Log("Corner cut detected");
+                    cornerCutting = true;
+                }
+                if (distanceTravelled < policedMaxDistanceTravelled && distanceTravelled > policedMaxDistanceTravelled - maxCornerCuttingTolerance * 3 && cornerCutting)
+                {
+                    Debug.Log("Corner cut no longer detected");
+                    cornerCutting = false;
+                }
+
+                if (!cornerCutting)
+                {
+                    policedMaxDistanceTravelled = distanceTravelled;
+                }
+            }
+
+
                 // float distanceAlongPathAtClosestPoint = pathCreator.path.GetClosestDistanceAlongPath(objectToTrack.transform.position);
                 // float distanceAtNextWaypoint = course.waypointDistances[currentWaypointIndex + 1];
                 // if (currentWaypointIndex == course.waypointDistances.Length - 1) {
@@ -123,7 +177,6 @@ namespace PathCreation.Examples
                 // }
                 transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
                 transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
-            }
 
             float currentSegmentStart = course.waypointDistances[currentWaypointIndex];
             float currentSegmentEnd = (currentWaypointIndex == course.waypointDistances.Length - 1) ? pathCreator.path.length : course.waypointDistances[currentWaypointIndex + 1];

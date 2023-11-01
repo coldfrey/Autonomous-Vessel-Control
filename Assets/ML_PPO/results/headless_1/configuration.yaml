@@ -44,7 +44,7 @@ behaviors:
     init_path: null
     keep_checkpoints: 25
     checkpoint_interval: 50000
-    max_steps: 2000000
+    max_steps: 1000000
     time_horizon: 64
     summary_freq: 10000
     threaded: false
@@ -54,7 +54,7 @@ env_settings:
   env_path: ../../Builds/build5.x86_64
   env_args: null
   base_port: 5005
-  num_envs: 4
+  num_envs: 10
   seed: -1
 engine_settings:
   width: 84

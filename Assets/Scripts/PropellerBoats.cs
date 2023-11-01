@@ -7,7 +7,7 @@ public class PropellerBoats : MonoBehaviour
   public Transform[] rudder;
   private Rigidbody rb;
 
-  public float engine_rpm { get; private set; }
+  public float engine_rpm;
   public float throttle;
   int direction = 1;
 
@@ -21,7 +21,7 @@ public class PropellerBoats : MonoBehaviour
   void Awake()
   {
     engine_rpm = 1000F;
-    throttle = 0.5F;
+    throttle = 0F;
     rb = GetComponent<Rigidbody>();
   }
 
@@ -35,16 +35,17 @@ public class PropellerBoats : MonoBehaviour
     }
 
     throttle *= (1.0F - drag * 0.001F);
-    engine_rpm = throttle * engine_max_rpm * direction;
+    // engine_rpm = throttle * engine_max_rpm * direction;
+    engine_rpm = Mathf.Lerp(engine_rpm, throttle * engine_max_rpm * direction, 0.02F);
 
-    angle = Mathf.Lerp(angle, 0.0F, 0.02F);
+    angle = Mathf.Lerp(angle, 0.0F, 0.002F);
     for (int i = 0; i < rudder.Length; i++)
       rudder[i].localRotation = Quaternion.Euler(0, angle, 0);
   }
 
   public void ThrottleUp()
   {
-    print("ThrottleUp");
+    // print("ThrottleUp");
     throttle += acceleration_cst * 0.001F;
     if (throttle > 1)
       throttle = 1;
@@ -53,8 +54,8 @@ public class PropellerBoats : MonoBehaviour
   public void ThrottleDown()
   {
     throttle -= acceleration_cst * 0.001F;
-    if (throttle < 0)
-      throttle = 0;
+    if (throttle < -0.5f)
+      throttle = -0.5f;
   }
 
   public void Brake()
@@ -69,18 +70,20 @@ public class PropellerBoats : MonoBehaviour
 
   public void RudderRight()
   {
-    angle -= 0.9F;
+    // angle -= 0.01F;
+    angle -= 1F;
     angle = Mathf.Clamp(angle, -90F, 90F);
   }
 
   public void RudderLeft()
   {
-    angle += 0.9F;
+    // angle += 0.01F;
+    angle += 1F;
     angle = Mathf.Clamp(angle, -90F, 90F);
   }
 
-  void OnDrawGizmos()
-  {
-    Handles.Label(propellers[0].position, engine_rpm.ToString());
-  }
+  // void OnDrawGizmos()
+  // {
+  //   Handles.Label(propellers[0].position, engine_rpm.ToString());
+  // }
 }

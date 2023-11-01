@@ -1,0 +1,18 @@
+# Apple ModelI/O MTL File: Kite4.mtl
+
+newmtl Default_OBJ
+	map_Kd Default_OBJ-color.png
+	Kd 1 1 1
+	Ka 0 0 0
+	Ks 0
+	ao 0
+	subsurface 0
+	map_metallic Default_OBJ-metallic.png
+	specularTint 0
+	map_roughness Default_OBJ-roughness.png
+	anisotropicRotation 0
+	sheen 0.05
+	sheenTint 0
+	clearCoat 0
+	clearCoatGloss 0
+

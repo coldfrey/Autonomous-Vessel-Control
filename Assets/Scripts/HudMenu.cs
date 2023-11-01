@@ -24,6 +24,8 @@ public class HudMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (boat == null || wind == null)
+            return;
         Rigidbody bootRb = boat.GetComponent<Rigidbody>();
         status.text = ""+System.Math.Round(bootRb.velocity.magnitude, 2);        
         

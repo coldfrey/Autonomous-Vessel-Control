@@ -1,0 +1,47 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1698745825",
+        "python_version": "3.6.13 |Anaconda, Inc.| (default, Jun  4 2021, 14:25:59) \n[GCC 7.5.0]",
+        "command_line_arguments": "/home/joshua/miniconda3/envs/ai_boat/bin/mlagents-learn config/boatAgent.yaml --run-id=simpleLoop_7",
+        "mlagents_version": "0.26.0",
+        "mlagents_envs_version": "0.26.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "1.8.1+cu102",
+        "numpy_version": "1.19.5",
+        "end_time_seconds": "1698745835"
+    },
+    "total": 9.625870488991495,
+    "count": 1,
+    "self": 0.0218566059920704,
+    "children": {
+        "run_training.setup": {
+            "total": 0.01321097300387919,
+            "count": 1,
+            "self": 0.01321097300387919
+        },
+        "TrainerController.start_learning": {
+            "total": 9.590802909995546,
+            "count": 1,
+            "self": 0.0006312049808911979,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 9.5901379440038,
+                    "count": 1,
+                    "self": 9.5901379440038
+                },
+                "trainer_threads": {
+                    "total": 5.922003765590489e-06,
+                    "count": 1,
+                    "self": 5.922003765590489e-06
+                },
+                "TrainerController._save_models": {
+                    "total": 2.7839007088914514e-05,
+                    "count": 1,
+                    "self": 2.7839007088914514e-05
+                }
+            }
+        }
+    }
+}

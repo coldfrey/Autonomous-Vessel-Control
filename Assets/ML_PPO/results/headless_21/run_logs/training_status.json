@@ -1,0 +1,29 @@
+{
+    "BoatAgent": {
+        "checkpoints": [
+            {
+                "steps": 6340,
+                "file_path": "results/headless_21/BoatAgent/BoatAgent-6340.onnx",
+                "reward": -62.02400184044471,
+                "creation_time": 1698311858.9032648,
+                "auxillary_file_paths": [
+                    "results/headless_21/BoatAgent/BoatAgent-6340.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 6340,
+            "file_path": "results/headless_21/BoatAgent.onnx",
+            "reward": -62.02400184044471,
+            "creation_time": 1698311858.9032648,
+            "auxillary_file_paths": [
+                "results/headless_21/BoatAgent/BoatAgent-6340.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.26.0",
+        "torch_version": "1.8.1+cu102"
+    }
+}
