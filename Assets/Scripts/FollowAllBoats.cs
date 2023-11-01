@@ -10,8 +10,8 @@ public class FollowAllBoats : MonoBehaviour
     public GameObject[] boats;
     public GameObject boatToFollow;
 
-    public Vector3 offset = new Vector3(0, 10, 30);
-    public Vector3 rotation = new Vector3(20, 0, 0);
+    public Vector3 offset = new Vector3(0, 20, 50);
+    public Vector3 rotation = new Vector3(20, 180, 0);
     void Start()
     {
         if (boats.Length == 0)
@@ -19,6 +19,7 @@ public class FollowAllBoats : MonoBehaviour
             // boats = GameObject.FindGameObjectsWithTag("Boat");
         }
         // boatToFollow = boats[0];
+
 
     }
 
@@ -29,7 +30,6 @@ public class FollowAllBoats : MonoBehaviour
 
         // lerp towards the boat
         transform.position = Vector3.Lerp(transform.position, boatToFollow.transform.position + offset, 0.1f);
-        
     }
 
     void OnValidate()

@@ -31,9 +31,15 @@ public class BoatController : MonoBehaviour
   {
     if (Input.GetKey(KeyCode.Z)) rudder.RudderLeft();
     if (Input.GetKey(KeyCode.C)) rudder.RudderRight();
-    if (Input.GetKey(KeyCode.B)) jointSim.SteerLeft();
-    if (Input.GetKey(KeyCode.M)) jointSim.SteerRight();
+    if (Input.GetKey(KeyCode.B)) {
+      jointSim.SteerLeft();
+    } else if (Input.GetKey(KeyCode.M)) {
+      jointSim.SteerRight();
+    } else {
+      jointSim.StopSteering();
+    }
     // if (Input.GetKeyDown(KeyCode.Space)) jointSim.PowerOn();
+    if (Input.GetKeyDown(KeyCode.R)) jointSim.ResetKite();
 
     // if (Input.GetKey(KeyCode.Q))
     //   ship.RudderLeft();

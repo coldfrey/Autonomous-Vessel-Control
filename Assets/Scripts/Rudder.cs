@@ -7,10 +7,14 @@ public class Rudder : MonoBehaviour
     public float rudderLerpSpeed = 5.0F;
     public Transform[] rudder;
 
+    public float keelEfficiency = 0.5F;
     private Rigidbody boatRb;
     private float targetAngle = 0;
     private bool inputReceived = false; // Flag to check if any rudder input was received
 
+    public float boatForwardSpeed;
+
+    public float rotationScale = 10.0F;
     private void Awake()
     {
         boatRb = GetComponentInParent<Rigidbody>();
@@ -22,7 +26,7 @@ public class Rudder : MonoBehaviour
         angle = Mathf.Lerp(angle, targetAngle, rudderLerpSpeed * Time.deltaTime);
 
         // Calculate the forward speed of the boat
-        float boatForwardSpeed = Vector3.Dot(boatRb.velocity, transform.forward);
+        boatForwardSpeed = Vector3.Dot(boatRb.velocity, transform.forward);
 
         // Adjust the rudder angle based on boat's forward speed
         // float adjustedAngle = angle * turnSensitivity * boatForwardSpeed;
@@ -32,8 +36,21 @@ public class Rudder : MonoBehaviour
             rudder[i].localRotation = Quaternion.Euler(0, adjustedAngle, 0);
 
         // Apply turning force based on rudder's angle and boat's speed
-        float turnForce = angle * boatForwardSpeed;
+        float turnForce = angle * boatForwardSpeed * rotationScale;
         boatRb.AddTorque(transform.up * turnForce);
+
+        // // Generate keel lift force
+        // float liftForceMagnitude = Mathf.Abs(boatForwardSpeed) * keelEfficiency;
+        // Vector3 liftDirection = Vector3.Cross(transform.forward, boatRb.velocity).normalized;
+        // Vector3 liftForce = liftDirection * liftForceMagnitude;
+        // boatRb.AddForce(liftForce);
+
+        if (boatForwardSpeed > 0.5)
+        {
+            Vector3 lateralVelocity = Vector3.Dot(boatRb.velocity, transform.right) * transform.right;
+            boatRb.velocity -= lateralVelocity;
+        }
+
 
         // If no input is received, set target angle back to center
         if (!inputReceived)
@@ -47,14 +64,14 @@ public class Rudder : MonoBehaviour
 
     public void RudderLeft()
     {
-        targetAngle += 1F;
+        targetAngle -= 1F;
         targetAngle = Mathf.Clamp(targetAngle, -90F, 90F);
         inputReceived = true;
     }
 
     public void RudderRight()
     {
-        targetAngle -= 1F;
+        targetAngle += 1F;
         targetAngle = Mathf.Clamp(targetAngle, -90F, 90F);
         inputReceived = true;
     }

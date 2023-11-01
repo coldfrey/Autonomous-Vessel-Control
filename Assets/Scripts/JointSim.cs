@@ -24,6 +24,7 @@ public class JointSim : MonoBehaviour
     public KitePPOAgent agent;
 
     public Vector3 currentResultantForce;
+    public float forceMultiplier = 1.0f;
 
     // public float WindStrength = 20.0f; // 400
 
@@ -77,6 +78,10 @@ public class JointSim : MonoBehaviour
     public float steerSpeed = 0.1f;
     public float returnSpeed = 0.05f;
 
+    // kite start position
+    private Vector3 startPosition;
+    private Quaternion startRotation;
+
     private void Start() {
         // Set the wind direction
         time = 0;
@@ -90,6 +95,9 @@ public class JointSim : MonoBehaviour
         InvokeRepeating("UpdateWindAtKite", 0, 5);
         varyPhysics = PlayerPrefs.GetString("varyPhysics") == "true";
         // InvokeRepeating("Reset", 0, 1);
+        startPosition = KiteRigidbody.transform.position;
+        startRotation = KiteRigidbody.transform.rotation;
+
     }
 
     // private void UpdateWindAtKite(float time, Vector3 space) {
@@ -159,6 +167,12 @@ public class JointSim : MonoBehaviour
         isSteeringLeft = false;
     }
 
+    public void StopSteering()
+    {
+        isSteeringLeft = false;
+        isSteeringRight = false;
+    }
+
     private void UpdateBarPosition()
     {
         if (isSteeringLeft)
@@ -201,6 +215,22 @@ public class JointSim : MonoBehaviour
         counter = 0;
     }
 
+    public void ResetKite() {
+       KiteRigidbody.transform.position = startPosition;
+         KiteRigidbody.transform.rotation = startRotation;
+        KiteRigidbody.velocity = Vector3.zero;
+        KiteRigidbody.angularVelocity = Vector3.zero;
+        score = 0.0f;
+        counter = 0;
+
+        BaseRigidbody.transform.position = new Vector3(0, 0, 0);
+        BaseRigidbody.transform.rotation = Quaternion.identity;
+        BaseRigidbody.velocity = Vector3.zero;
+    }
+
+
+
+
     private void FixedUpdate() {
         counter++;
         // constrainRotationOfKite();
@@ -223,12 +253,15 @@ public class JointSim : MonoBehaviour
         Vector3 dragForce = apparentWind.normalized * apparentWindSpeedSquared / 2 * _dragCoefficient;
 
         // Apply the forces to the kite
-        KiteRigidbody.AddForce(liftForce + dragForce);
 
         currentResultantForce = liftForce + dragForce;
-        float resultantForceMagnitude = currentResultantForce.magnitude;
-        Debug.Log("Resultant Force Magnitude: " + resultantForceMagnitude);
+        // float resultantForceMagnitude = currentResultantForce.magnitude;
+        // Debug.Log("Resultant Force Magnitude: " + resultantForceMagnitude);
 
+        // multiply the resultant force by a constant to increase it
+        Vector3 forceOnBoat = currentResultantForce * forceMultiplier;
+        // KiteRigidbody.AddForce(liftForce + dragForce);
+        KiteRigidbody.AddForce(forceOnBoat);
 
         // Calculate the torque
         // Vector3 torque = Vector3.Cross(KiteRigidbody.velocity, (liftForce + dragForce));
@@ -275,18 +308,6 @@ public class JointSim : MonoBehaviour
         //     KiteRigidbody.velocity = Vector3.zero;
         //     KiteRigidbody.angularVelocity = Vector3.zero;
         // }
-
-        if (kiteCollider.bounds.Intersects(theSea.GetComponent<MeshCollider>().bounds)) {
-            Debug.Log("Kite is in the sea");
-            if (!isResetting) {
-                isResetting = true;
-                startResetTimer();
-            }
-
-            // KiteRigidbody.AddForceAtPosition(-KiteRigidbody.velocity * 0.1f, KiteRigidbody.position);
-            KiteRigidbody.velocity = Vector3.zero;
-            KiteRigidbody.angularVelocity = Vector3.zero;
-        }
 
         // Apply the torque to the kite
         // KiteRigidbody.AddTorque(torque);
