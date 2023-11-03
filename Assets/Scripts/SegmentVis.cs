@@ -68,43 +68,37 @@ public class SegmentVis : MonoBehaviour
         GetComponent<MeshFilter>().mesh = mesh;
 
         // Create the vertices
-        Vector3[] vertices = new Vector3[arcResolution + 4];
+        Vector3[] vertices = new Vector3[arcResolution + 2]; // +1 for center and +1 for wraparound
 
-        vertices[0] = Vector3.zero;
-        vertices[1] = vector1;
-        vertices[2] = vector2;
+        float angleIncrement = 360f / arcResolution;
 
-        for (int i = 0; i <= arcResolution; i++)
+        vertices[0] = Vector3.zero; // Center point
+
+        for (int i = 1; i <= arcResolution; i++)
         {
-            float t = i / (float)arcResolution;
-            vertices[i + 3] = Vector3.Slerp(vector1, vector2, t);
+            float angle = Mathf.Deg2Rad * (i - 1) * angleIncrement;
+            vertices[i] = new Vector3(20f * Mathf.Cos(angle), 0f, 20f * Mathf.Sin(angle));
         }
+        vertices[arcResolution + 1] = vertices[1]; // Wrap around to complete the circle
 
         // Create the triangles
-        int[] triangles = new int[(arcResolution + 1) * 3];
+        int[] triangles = new int[arcResolution * 3];
 
         for (int i = 0; i < arcResolution; i++)
         {
             triangles[i * 3] = 0; // center point
-            triangles[i * 3 + 1] = i + 4;
-            triangles[i * 3 + 2] = i + 3;
+            triangles[i * 3 + 1] = i + 2; // next vertex
+            triangles[i * 3 + 2] = i + 1; // current vertex
         }
-
-        // Add triangle for the end segment between arc end and vector2
-        triangles[arcResolution * 3] = 0;
-        triangles[arcResolution * 3 + 1] = 2; // vector2
-        triangles[arcResolution * 3 + 2] = vertices.Length - 1;
 
         // Assign the vertices and triangles to the mesh
         mesh.vertices = vertices;
         mesh.triangles = triangles;
 
-
         mesh.RecalculateNormals();
-
-
         transform.GetComponent<MeshFilter>().mesh = mesh;
     }
+
 
 
 

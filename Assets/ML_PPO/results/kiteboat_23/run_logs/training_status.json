@@ -1,0 +1,56 @@
+{
+    "BoatAgent": {
+        "checkpoints": [
+            {
+                "steps": 49942,
+                "file_path": "results/kiteboat_23/BoatAgent/BoatAgent-49942.onnx",
+                "reward": null,
+                "creation_time": 1699026456.0752583,
+                "auxillary_file_paths": [
+                    "results/kiteboat_23/BoatAgent/BoatAgent-49942.pt"
+                ]
+            },
+            {
+                "steps": 99964,
+                "file_path": "results/kiteboat_23/BoatAgent/BoatAgent-99964.onnx",
+                "reward": null,
+                "creation_time": 1699026744.458297,
+                "auxillary_file_paths": [
+                    "results/kiteboat_23/BoatAgent/BoatAgent-99964.pt"
+                ]
+            },
+            {
+                "steps": 149980,
+                "file_path": "results/kiteboat_23/BoatAgent/BoatAgent-149980.onnx",
+                "reward": 2.720098822377622,
+                "creation_time": 1699027037.7038643,
+                "auxillary_file_paths": [
+                    "results/kiteboat_23/BoatAgent/BoatAgent-149980.pt"
+                ]
+            },
+            {
+                "steps": 158470,
+                "file_path": "results/kiteboat_23/BoatAgent/BoatAgent-158470.onnx",
+                "reward": 2.6834453240735456,
+                "creation_time": 1699027088.5883892,
+                "auxillary_file_paths": [
+                    "results/kiteboat_23/BoatAgent/BoatAgent-158470.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 158470,
+            "file_path": "results/kiteboat_23/BoatAgent.onnx",
+            "reward": 2.6834453240735456,
+            "creation_time": 1699027088.5883892,
+            "auxillary_file_paths": [
+                "results/kiteboat_23/BoatAgent/BoatAgent-158470.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.26.0",
+        "torch_version": "1.8.1+cu102"
+    }
+}

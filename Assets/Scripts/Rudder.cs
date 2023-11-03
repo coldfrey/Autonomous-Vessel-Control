@@ -12,7 +12,7 @@ public class Rudder : MonoBehaviour
     private float targetAngle = 0;
     private bool inputReceived = false; // Flag to check if any rudder input was received
 
-    public float boatForwardSpeed;
+    [SerializeField] private float boatForwardSpeed = 0;
 
     public float rotationScale = 10.0F;
     private void Awake()
@@ -45,11 +45,12 @@ public class Rudder : MonoBehaviour
         // Vector3 liftForce = liftDirection * liftForceMagnitude;
         // boatRb.AddForce(liftForce);
 
-        if (boatForwardSpeed > 0.5)
+        if (boatForwardSpeed > 0.25 || boatForwardSpeed < -1)
         {
             Vector3 lateralVelocity = Vector3.Dot(boatRb.velocity, transform.right) * transform.right;
             boatRb.velocity -= lateralVelocity;
         }
+        
 
 
         // If no input is received, set target angle back to center
@@ -74,5 +75,15 @@ public class Rudder : MonoBehaviour
         targetAngle += 1F;
         targetAngle = Mathf.Clamp(targetAngle, -90F, 90F);
         inputReceived = true;
+    }
+
+    public float GetBoatForwardSpeed()
+    {
+        return boatForwardSpeed;
+    }
+
+    public void SetRudderTargetAngle(float targetAngle)
+    {
+        this.targetAngle = targetAngle;
     }
 }

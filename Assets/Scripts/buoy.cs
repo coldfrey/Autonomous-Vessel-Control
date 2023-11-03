@@ -28,14 +28,14 @@ public class Buoy : MonoBehaviour
 	private Vector3 localArchimedesForce;
 	private List<Vector3> voxels;
 	private bool isMeshCollider;
-	private List<Vector3[]> forces; // For drawing force gizmos
+	// private List<Vector3[]> forces; // For drawing force gizmos
 
 	/// <summary>
 	/// Provides initialization.
 	/// </summary>
 	private void Start()
 	{
-		forces = new List<Vector3[]>(); // For drawing force gizmos
+		// forces = new List<Vector3[]>(); // For drawing force gizmos
 
 		// Store original rotation and position
 		var originalRotation = transform.rotation;
@@ -262,12 +262,9 @@ public class Buoy : MonoBehaviour
         }
 	}
 
-	/// <summary>
-	/// Calculates physics.
-	/// </summary>
 	private void FixedUpdate()
 	{
-		forces.Clear(); // For drawing force gizmos
+		// forces.Clear(); // For drawing force gizmos
 
 		foreach (var point in voxels)
 		{
@@ -293,35 +290,35 @@ public class Buoy : MonoBehaviour
                 // Debug.Log("force: " + force);
 				GetComponent<Rigidbody>().AddForceAtPosition(force, wp);
 
-				forces.Add(new[] { wp, force }); // For drawing force gizmos
+				// forces.Add(new[] { wp, force }); // For drawing force gizmos
 			}
 		}
 	}
 
-	/// <summary>
-	/// Draws gizmos.
-	/// </summary>
-	private void OnDrawGizmos()
-	{
-		if (voxels == null || forces == null)
-		{
-			return;
-		}
+	// /// <summary>
+	// /// Draws gizmos.
+	// /// </summary>
+	// private void OnDrawGizmos()
+	// {
+	// 	if (voxels == null || forces == null)
+	// 	{
+	// 		return;
+	// 	}
 
-		const float gizmoSize = 0.05f;
-		Gizmos.color = Color.yellow;
+	// 	const float gizmoSize = 0.05f;
+	// 	Gizmos.color = Color.yellow;
 
-		foreach (var p in voxels)
-		{
-			Gizmos.DrawCube(transform.TransformPoint(p), new Vector3(gizmoSize, gizmoSize, gizmoSize));
-		}
+	// 	foreach (var p in voxels)
+	// 	{
+	// 		Gizmos.DrawCube(transform.TransformPoint(p), new Vector3(gizmoSize, gizmoSize, gizmoSize));
+	// 	}
 
-		Gizmos.color = Color.cyan;
+	// 	Gizmos.color = Color.cyan;
 
-		foreach (var force in forces)
-		{
-			Gizmos.DrawCube(force[0], new Vector3(gizmoSize, gizmoSize, gizmoSize));
-			Gizmos.DrawLine(force[0], force[0] + force[1] / GetComponent<Rigidbody>().mass);
-		}
-	}
+	// 	foreach (var force in forces)
+	// 	{
+	// 		Gizmos.DrawCube(force[0], new Vector3(gizmoSize, gizmoSize, gizmoSize));
+	// 		Gizmos.DrawLine(force[0], force[0] + force[1] / GetComponent<Rigidbody>().mass);
+	// 	}
+	// }
 }

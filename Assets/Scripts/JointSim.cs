@@ -82,6 +82,10 @@ public class JointSim : MonoBehaviour
     private Vector3 startPosition;
     private Quaternion startRotation;
 
+    private Vector3 boatStartPosition;
+
+    private Quaternion boatStartRotation;
+
     private void Start() {
         // Set the wind direction
         time = 0;
@@ -97,6 +101,8 @@ public class JointSim : MonoBehaviour
         // InvokeRepeating("Reset", 0, 1);
         startPosition = KiteRigidbody.transform.position;
         startRotation = KiteRigidbody.transform.rotation;
+        boatStartPosition = BaseRigidbody.transform.position;
+        boatStartRotation = BaseRigidbody.transform.rotation;
 
     }
 
@@ -144,7 +150,8 @@ public class JointSim : MonoBehaviour
     private IEnumerator resetTimer() {
         yield return new WaitForSeconds(1.0f);
         // reset the kite
-        Reset();
+        // Reset();
+        // ResetKite();
         StartCoroutine(resetIsResettingTimer());
     }
 
@@ -216,16 +223,28 @@ public class JointSim : MonoBehaviour
     }
 
     public void ResetKite() {
-       KiteRigidbody.transform.position = startPosition;
-         KiteRigidbody.transform.rotation = startRotation;
         KiteRigidbody.velocity = Vector3.zero;
         KiteRigidbody.angularVelocity = Vector3.zero;
+        BaseRigidbody.velocity = Vector3.zero;
+        BaseRigidbody.angularVelocity = Vector3.zero;
+        BaseRigidbody.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>().velocity = Vector3.zero;
+        BaseRigidbody.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+
+        // set the kite resultant force to zero
+        
+        StopSteering();
+
+        KiteRigidbody.transform.position = startPosition;
+        KiteRigidbody.transform.rotation = startRotation;
+
+    
+        // BaseRigidbody.transform.position = new Vector3(0, 0, 0);
+        // BaseRigidbody.transform.rotation = Quaternion.identity;
+        BaseRigidbody.transform.position = boatStartPosition;
+        BaseRigidbody.transform.rotation = boatStartRotation;
+        // get the 'Keel' child and set its child the 'mass' rigidbody to zero velocity
         score = 0.0f;
         counter = 0;
-
-        BaseRigidbody.transform.position = new Vector3(0, 0, 0);
-        BaseRigidbody.transform.rotation = Quaternion.identity;
-        BaseRigidbody.velocity = Vector3.zero;
     }
 
 
@@ -361,6 +380,7 @@ public class JointSim : MonoBehaviour
                 currentResultantForce += jointSteeringRight.currentForce;
         //     }
         // }
+
 
     }
 

@@ -11,7 +11,16 @@ public class BoatController : MonoBehaviour
   public Rudder rudder;
 
   public JointSim jointSim;
+
+  public WaypointManager waypointManager;
+
+  private GJKCollisionDetection gjkCollisionDetection = new GJKCollisionDetection();
+
   bool forward = true;
+
+  private GameObject finishWaypoint;
+
+  // private MeshFilter boatMesh;
 
 
   public void OnMove(float value1) 
@@ -27,6 +36,12 @@ public class BoatController : MonoBehaviour
       ship.ThrottleDown();
     // ship.Rudder(turn);
   }
+
+  private void start()
+  {
+    // finishWaypoint = GameObject.Find("FinishWaypoint");
+  }
+
   void Update()
   {
     if (Input.GetKey(KeyCode.Z)) rudder.RudderLeft();
@@ -39,7 +54,28 @@ public class BoatController : MonoBehaviour
       jointSim.StopSteering();
     }
     // if (Input.GetKeyDown(KeyCode.Space)) jointSim.PowerOn();
-    if (Input.GetKeyDown(KeyCode.R)) jointSim.ResetKite();
+    if (Input.GetKeyDown(KeyCode.R))  {
+      jointSim.ResetKite();
+      waypointManager.ResetWaypoint();
+    }
+
+    if (waypointManager.waypoint == null)
+    {
+      Debug.LogError("No waypoints found");
+      return;
+    }
+    if (gameObject.GetComponent<MeshFilter>() == null)
+    {
+      Debug.LogError("No mesh filter found");
+      return;
+    }
+
+    if (gjkCollisionDetection.GJK(gameObject.GetComponent<MeshFilter>(), transform.position, waypointManager.waypoint.GetComponent<MeshFilter>(), waypointManager.waypoint.transform.position))
+    {
+      Debug.Log("Finish");
+      jointSim.ResetKite();
+      waypointManager.ResetWaypoint();
+    }
 
     // if (Input.GetKey(KeyCode.Q))
     //   ship.RudderLeft();

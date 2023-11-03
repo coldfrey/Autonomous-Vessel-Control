@@ -2,56 +2,75 @@ using UnityEngine;
 
 public class WaypointManager : MonoBehaviour
 {
-    public GameObject boat; // Drag and drop your boat GameObject here in the inspector
-    public float waypointRadius = 50f; // Radius of the circular waypoint
-    public float distanceFromBoat = 500f; // Distance from the boat to spawn the waypoint
-    public float waypointHeight = 2f; // Height of the visible waypoint
+    public GameObject boat;
+    public float waypointRadius = 50f;
+    public float distanceFromBoat = 150f;
+    public float waypointHeight = 2f;
 
-    private GameObject waypoint; // The generated waypoint
+    public GameObject waypointPrefab;
+    public GameObject waypoint;
 
+    private Vector3 previousPosition;
+    private float completedWaypoints;
+
+    private Vector3 startPosition = new Vector3(0f, 0f, -200f);
     private void Start()
     {
+        completedWaypoints = 0f;
         CreateWaypoint();
     }
 
     void CreateWaypoint()
     {
-        // Create a Cylinder to represent the waypoint visually
-        waypoint = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+        waypoint = Instantiate(waypointPrefab);
         waypoint.name = "FinishWaypoint";
 
-        // Scale the waypoint based on our radius and height settings
-        waypoint.transform.localScale = new Vector3(waypointRadius, waypointHeight / 2, waypointRadius); // Divide height by 2 because the cylinder's default height is 2
-
-        // Position the waypoint
-        Vector3 randomDirection = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
-        Vector3 waypointPosition = boat.transform.position + randomDirection * distanceFromBoat;
-        waypointPosition.y = 0; // Assuming water surface is at y=0
-        waypoint.transform.position = waypointPosition;
-
-        // Add a circular collider (use the Cylinder's existing collider and adjust it)
-        CapsuleCollider collider = waypoint.GetComponent<CapsuleCollider>();
-        collider.radius = waypointRadius;
-        collider.height = waypointHeight;
-        collider.isTrigger = true;
-
-        waypoint.AddComponent<WaypointTrigger>().boat = boat; // Adds the trigger behavior to the waypoint
+        SegmentVis segmentVis = waypoint.GetComponent<SegmentVis>();
+        segmentVis.vector1 = new Vector3(waypointRadius, 0f, 0f);
+        segmentVis.vector2 = new Vector3(waypointRadius, 0f, 0f);
+        segmentVis.arcResolution = 120;
+        
+        MoveWaypoint();
     }
-}
 
-public class WaypointTrigger : MonoBehaviour
-{
-    public GameObject boat;
-
-    private void OnTriggerEnter(Collider other)
+    void MoveWaypoint()
     {
-        if (other.gameObject == boat) // Compares if the colliding object is our boat
-        {
-            Debug.Log("Boat has reached the finish waypoint!");
+        Vector3 spawnDirection;
 
-            // Optionally destroy the waypoint and/or spawn a new one
-            // Destroy(gameObject);
-            // Your code to create another waypoint, if desired
+        if (completedWaypoints < 20)
+        {
+            float zFactor = 1f - (completedWaypoints / 20f);  // Decreases from 1 to 0 as completedWaypoints increases from 0 to 20.
+            spawnDirection = new Vector3(Random.Range(-0.5f, 0.5f), 0, -1 * zFactor).normalized;
         }
+        else
+        {
+            spawnDirection = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
+        }
+
+        Vector3 waypointPosition = startPosition + spawnDirection * distanceFromBoat;
+        waypointPosition.y = waypointHeight;
+        waypoint.transform.position = waypointPosition;
+        previousPosition = waypointPosition;
+        Debug.Log("New waypoint position: " + waypointPosition);
+
+    }
+
+    public void NewWaypoint()
+    {
+        completedWaypoints++;
+        MoveWaypoint();
+        Debug.Log("Completed waypoints: " + completedWaypoints);
+    }
+
+    public void ResetWaypoint()
+    {
+        Debug.Log("Resetting waypoint");
+        completedWaypoints = 0f;
+        waypoint.transform.position = previousPosition;
+    }
+
+    public float GetCompletedWaypoints()
+    {
+        return completedWaypoints;
     }
 }
