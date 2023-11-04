@@ -170,6 +170,9 @@
 \usepackage{tikz}						%geometric/algebraic description.
 \usepackage{amsmath}
 
+\usepackage[numbers,sort&compress]{natbib}
+
+
 \usetikzlibrary{arrows,shapes,snakes,
 		       automata,backgrounds,
 		       petri,topaths}				%To use diverse features from tikz		
@@ -359,7 +362,9 @@
 % Apparently the guidelines don't say anything about citations or
 % bibliography styles so I guess we can use anything.
 \backmatter
-\bibliographystyle{siam}
+% \bibliographystyle{siam}
+\bibliographystyle{unsrtnat}
+
 \refstepcounter{chapter}
 \bibliography{thesisbiblio}
 

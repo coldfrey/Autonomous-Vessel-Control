@@ -1,46 +1,53 @@
 This is BibTeX, Version 0.99d (TeX Live 2022/dev/Debian)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: thesis.aux
-The style file: siam.bst
+The style file: unsrtnat.bst
 Database file #1: thesisbiblio.bib
-You've used 9 entries,
-            2030 wiz_defined-function locations,
-            556 strings with 4911 characters,
-and the built_in function-call counts, 3001 in all, are:
-= -- 283
-> -- 110
-< -- 0
-+ -- 43
-- -- 34
-* -- 212
-:= -- 460
-add.period$ -- 9
-call.type$ -- 9
-change.case$ -- 39
-chr.to.int$ -- 0
-cite$ -- 9
-duplicate$ -- 151
-empty$ -- 242
-format.name$ -- 34
-if$ -- 665
-int.to.chr$ -- 0
-int.to.str$ -- 9
-missing$ -- 12
-newline$ -- 30
-num.names$ -- 18
-pop$ -- 42
+Warning--entry type for "unity100seconds" isn't style-file defined
+--line 86 of file thesisbiblio.bib
+Warning--entry type for "unityupdatefixedupdate" isn't style-file defined
+--line 121 of file thesisbiblio.bib
+Warning--entry type for "unityrigidbody" isn't style-file defined
+--line 128 of file thesisbiblio.bib
+You've used 18 entries,
+            2481 wiz_defined-function locations,
+            649 strings with 6851 characters,
+and the built_in function-call counts, 5772 in all, are:
+= -- 464
+> -- 252
+< -- 15
++ -- 109
+- -- 72
+* -- 376
+:= -- 928
+add.period$ -- 55
+call.type$ -- 18
+change.case$ -- 29
+chr.to.int$ -- 17
+cite$ -- 18
+duplicate$ -- 326
+empty$ -- 587
+format.name$ -- 100
+if$ -- 1239
+int.to.chr$ -- 2
+int.to.str$ -- 19
+missing$ -- 20
+newline$ -- 99
+num.names$ -- 54
+pop$ -- 178
 preamble$ -- 1
-purify$ -- 33
+purify$ -- 18
 quote$ -- 0
-skip$ -- 134
+skip$ -- 196
 stack$ -- 0
-substring$ -- 208
-swap$ -- 64
+substring$ -- 159
+swap$ -- 40
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 30
+type$ -- 108
 warning$ -- 0
-while$ -- 30
-width$ -- 10
-write$ -- 80
+while$ -- 42
+width$ -- 0
+write$ -- 231
+(There were 3 warnings)

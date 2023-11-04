@@ -1,41 +1,110 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{18}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem{bellman1957dynamic}
-{\sc R.~Bellman}, {\em Dynamic Programming}, Princeton University Press, 1957.
+\bibitem[Sutton and Barto(2018)]{sutton2018reinforcement}
+Richard~S Sutton and Andrew~G Barto.
+\newblock \emph{Reinforcement learning: An introduction}.
+\newblock MIT press, 2018.
 
-\bibitem{christiansen2013ship}
-{\sc M.~Christiansen, K.~Fagerholt, and D.~Ronen}, {\em Ship routing and
-  scheduling in the new millennium}, European Journal of Operational Research,
-  228 (2013), pp.~467--483.
+\bibitem[Watkins and Dayan(1992)]{watkins1992qlearning}
+Christopher~J Watkins and Peter Dayan.
+\newblock Q-learning.
+\newblock \emph{Machine learning}, 8\penalty0 (3-4):\penalty0 279--292, 1992.
 
-\bibitem{erhard2013control}
-{\sc M.~Erhard and H.~Strauch}, {\em Control of towing kites for seagoing
-  vessels}, IEEE Transactions on Control Systems Technology, 21 (2013),
-  pp.~1629--1640.
+\bibitem[Bellman(1957)]{bellman1957dynamic}
+Richard Bellman.
+\newblock \emph{Dynamic Programming}.
+\newblock Princeton University Press, 1957.
 
-\bibitem{hallion2003taking}
-{\sc R.~Hallion}, {\em Taking flight: inventing the aerial age, from antiquity
-  through the First World War}, Oxford University Press, 2003.
+\bibitem[Silver et~al.(2016)]{silver2016mastering}
+David Silver et~al.
+\newblock Mastering the game of go with deep neural networks and tree search.
+\newblock \emph{Nature}, 529\penalty0 (7587):\penalty0 484--489, 2016.
 
-\bibitem{mnih2015humanlevel}
-{\sc V.~Mnih et~al.}, {\em Human-level control through deep reinforcement
-  learning}, Nature, 518 (2015), pp.~529--533.
+\bibitem[Yang and Wu(2020)]{yang2020reinforcement}
+Chen Yang and Lin Wu.
+\newblock Reinforcement learning-based control for autonomous boats: A survey.
+\newblock \emph{Journal of Marine Science and Technology}, 25\penalty0
+  (1):\penalty0 1--10, 2020.
 
-\bibitem{silver2016mastering}
-{\sc D.~Silver et~al.}, {\em Mastering the game of go with deep neural networks
-  and tree search}, Nature, 529 (2016), pp.~484--489.
+\bibitem[Hallion(2003)]{hallion2003taking}
+Richard Hallion.
+\newblock \emph{Taking flight: inventing the aerial age, from antiquity through
+  the First World War}.
+\newblock Oxford University Press, 2003.
 
-\bibitem{sutton2018reinforcement}
-{\sc R.~S. Sutton and A.~G. Barto}, {\em Reinforcement learning: An
-  introduction}, MIT press, 2018.
+\bibitem[Erhard and Strauch(2013)]{erhard2013control}
+Moritz Erhard and Hauke Strauch.
+\newblock Control of towing kites for seagoing vessels.
+\newblock \emph{IEEE Transactions on Control Systems Technology}, 21\penalty0
+  (5):\penalty0 1629--1640, 2013.
 
-\bibitem{watkins1992qlearning}
-{\sc C.~J. Watkins and P.~Dayan}, {\em Q-learning}, Machine learning, 8 (1992),
-  pp.~279--292.
+\bibitem[Christiansen et~al.(2013)Christiansen, Fagerholt, and
+  Ronen]{christiansen2013ship}
+Marielle Christiansen, Kjetil Fagerholt, and David Ronen.
+\newblock Ship routing and scheduling in the new millennium.
+\newblock \emph{European Journal of Operational Research}, 228\penalty0
+  (3):\penalty0 467--483, 2013.
 
-\bibitem{yang2020reinforcement}
-{\sc C.~Yang and L.~Wu}, {\em Reinforcement learning-based control for
-  autonomous boats: A survey}, Journal of Marine Science and Technology, 25
-  (2020), pp.~1--10.
+\bibitem[Mnih et~al.(2015)]{mnih2015humanlevel}
+Volodymyr Mnih et~al.
+\newblock Human-level control through deep reinforcement learning.
+\newblock \emph{Nature}, 518\penalty0 (7540):\penalty0 529--533, 2015.
+
+\bibitem[Merlin(2023)]{unity100seconds}
+Merlin.
+\newblock Unity in 100 seconds, 2023.
+\newblock URL \url{https://www.youtube.com/watch?v=iqlH4okiQqg}.
+
+\bibitem[Technologies(2021)]{unitymanual2021}
+Unity Technologies.
+\newblock \emph{Unity User Manual}, 2021.
+
+\bibitem[Goldstone(2010)]{goldstone2010}
+Will Goldstone.
+\newblock \emph{Unity 3.x Game Development Essentials}.
+\newblock Packt Publishing Ltd, 2010.
+
+\bibitem[Harrison(2013)]{harrison2013}
+Ashley Harrison.
+\newblock \emph{Mastering Unity 2D Game Development}.
+\newblock Packt Publishing Ltd, 2013.
+
+\bibitem[Blackman(2012)]{blackman2012}
+Sue Blackman.
+\newblock \emph{Unity 3D Game Development by Example Beginner's Guide}.
+\newblock Packt Publishing Ltd, 2012.
+
+\bibitem[Technologies(2022{\natexlab{a}})]{unityupdatefixedupdate}
+Unity Technologies.
+\newblock Unity scripting api: Update and fixedupdate, 2022{\natexlab{a}}.
+\newblock URL
+  \url{https://docs.unity3d.com/ScriptReference/MonoBehaviour.FixedUpdate.html}.
+
+\bibitem[Technologies(2022{\natexlab{b}})]{unityrigidbody}
+Unity Technologies.
+\newblock Unity scripting api: Rigidbody, 2022{\natexlab{b}}.
+\newblock URL \url{https://docs.unity3d.com/ScriptReference/Rigidbody.html}.
+
+\bibitem[Schulman et~al.(2017)Schulman, Wolski, Dhariwal, Radford, and
+  Klimov]{schulman2017ppo}
+John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov.
+\newblock Proximal policy optimization algorithms.
+\newblock \emph{arXiv preprint arXiv:1707.06347}, 2017.
+\newblock URL
+  \url{https://arxiv.org/pdf/1707.06347.pdf?fbclid=IwAR1DwRSkBzhqXRhVh3XQ_Nu_XYvN_sMR4ppYM28h3qAtx9EK03LrlOcF7Dg}.
+
+\bibitem[Engstrom et~al.(2020)Engstrom, Ilyas, Santurkar, Tsipras, Janoos,
+  Rudolph, and Madry]{engstrom2020implementation}
+Logan Engstrom, Andrew Ilyas, Shibani Santurkar, Dimitris Tsipras, F.~Janoos,
+  L.~Rudolph, and A.~Madry.
+\newblock Implementation matters in deep rl: A case study on ppo and trpo.
+\newblock In \emph{Proceedings of the International Conference on Learning
+  Representations (ICLR)}, 2020.
+\newblock URL \url{https://dblp.org/rec/conf/iclr/EngstromISTJRM20.html}.
 
 \end{thebibliography}

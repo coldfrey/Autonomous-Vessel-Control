@@ -5,36 +5,39 @@
 \chapter{Methodology}
 \label{chap:aims_and_opjectives}
 
-\initial{T}his section will investigate the approach taken to create an autonomous kite-powered vessel.
-- We need a physics engine
--we need to model a boat so that it behaves with realistic movements
-- need to be able to run machine learning in the physics simulations
+% \initial{T}his section will investigate the approach taken to create an autonomous kite-powered vessel.
+% - We need a physics engine
+% -we need to model a boat so that it behaves with realistic movements
+% - need to be able to run machine learning in the physics simulations
 
 \initial{T}he future of autonomous navigation in maritime settings is not limited to large vessels plying the world's oceans; smaller, nimble crafts, harnessing natural forces such as wind, present their own set of challenges and opportunities. Imagine a vessel, propelled not just by the currents below, but by the gusts above, using a kite to harness the power of the wind. This not only promises sustainable navigation but also offers a glimpse into the intricate dance between machine intelligence, physics, and nature's unpredictability. This project dives deep into simulating such a system— a kite-powered boat that autonomously navigates its environment. This methodology section elucidates the steps taken to bridge the gap between vision and virtual reality.
 
 \section{A Simulation Environment}
 For any machine learning endeavor, especially one with such intricate physical dynamics, the choice of simulation environment is paramount. Not only does it provide the playground for our AI agent to learn and make mistakes safely, but it also serves as a litmus test for the robustness and realism of the designed model.
 
-Given the myriad of choices available, the Unity game engine emerged as the most suitable platform. Beyond its reputation in gaming, Unity is recognized for its potent physics engine, an essential feature for our project. The inherent support for mesh bodies, colliders, and a variety of joints made it an attractive option for simulating the kite-boat system, a complex dance of forces, and counterforces.
+Given the myriad of choices available, the Unity game engine emerged as the most suitable platform. Beyond its reputation in gaming, Unity is recognized for its potent physics engine, an essential feature for this project. The inherent support for mesh bodies, colliders, and a variety of joints made it an attractive option for simulating the kite-boat system, which comprised a complex dance of forces, and counterforces.
 
 \subsection{Water Dynamics}
 Central to our simulation is the depiction of water, the medium in which our boat will navigate. Here, the Unity HDRP Water System 16.0.3 [cite] came to our aid. Bundled with Unity 2023.2.0b9 [cite], this water system provides a realistic representation of water with its undulating waves, refractions, and reflections. The first challenge, therefore, was to design a boat that could navigate this dynamic surface.
 
 \subsection{Buoyancy}
-Buoyancy, the force that allows ships to float, was the first physical property to be addressed. Rooted in Archimedes' Principle, it dictates that the buoyant force exerted on a submerged body is equivalent to the weight of the fluid displaced by that body. In our Unity environment, the boat's hull, represented as a 'mesh' with an associated 'mesh collider', was divided into myriad small triangles or Voxels. These Voxels became the fundamental units for calculating buoyancy, allowing for a granular and realistic representation of the boat's interaction with water.
-
-\subsection{Rudder Dynamics}
-While buoyancy ensures our boat doesn't sink, it's the rudder that grants it direction. Modeled as a rigid body in Unity, the rudder was designed as a symmetric foil, with
-\subsection{Buoyancy}
-To model buoyancy accurately, first the maths had to be reviewed. When a body is submerged in a fluid the fluid exerts a force on the surface of the body, due to the pressure in the fluid. Archimedes Principal states that "The upward buoyant force that is exerted on a body immersed in a fluid, whether partially or fully submerged, is equal to the weight of the fluid that the body displaces and acts in the upward direction at the center of mass of the displaced fluid", shown in equation \ref{archimedes}. In order to model the buoyancy of a complex object, such as a boat hull, the 'amount' of boat below the water needed to be calculated. In Unity the boat hull was a 'mesh' with a 'mesh collider' attached to it, this was incredibly helpful as it takes on the complex challenge of splitting the surface of the hull into many small triangles or Voxels 
-
+Buoyancy, the force that allows ships to float, was the first physical property to be addressed. Rooted in Archimedes' Principle, it dictates that the buoyant force exerted on a submerged body is equivalent to the weight of the fluid displaced by that body. In our Unity environment, the boat's hull, represented as a 'mesh' with an associated 'mesh collider', was divided into many small triangles or Voxels. These Voxels became the fundamental units for calculating buoyancy, allowing for a granular and realistic representation of the boat's interaction with water. This was achieved by first calculating the total Archimedes force (AF) of the entire boat using equation \ref{archimedes}, followed by a local AF at each Voxel. The water level, y component, was then computed at each voxel's (x,z) coordinates to determine if it was above or below the surface. If below the surface the component of the AF was applied vertically at each voxel. This can be seen in the buoy.cs script in the Unity project REF IN APENDIX.
 
 \begin{equation}
     F_B = \rho_{w}gV
     \label{archimedes}
 \end{equation}
 
-The total Archimedes force (AF) of the entire boat was calculated using equation \ref{archimedes}, followed by a local AF at each Voxel. The water level, y component, was then computed at each voxel's (x,z) coordinates to determine if it was above or below the surface. If below the surface the component of the AF was applied vertically at each voxel. 
+
+\subsection{Rudder Dynamics}
+While buoyancy ensures our boat doesn't sink, it's the rudder that grants it direction. Modeled as a rigid body in Unity, the rudder was designed as a symmetric foil, with
+
+
+
+% \subsection{Buoyancy}
+% To model buoyancy accurately, first the maths had to be reviewed. When a body is submerged in a fluid the fluid exerts a force on the surface of the body, due to the pressure in the fluid. Archimedes Principal states that "The upward buoyant force that is exerted on a body immersed in a fluid, whether partially or fully submerged, is equal to the weight of the fluid that the body displaces and acts in the upward direction at the center of mass of the displaced fluid", shown in equation \ref{archimedes}. In order to model the buoyancy of a complex object, such as a boat hull, the 'amount' of boat below the water needed to be calculated. In Unity the boat hull was a 'mesh' with a 'mesh collider' attached to it, this was incredibly helpful as it takes on the complex challenge of splitting the surface of the hull into many small triangles or Voxels 
+
+% The total Archimedes force (AF) of the entire boat was calculated using equation \ref{archimedes}, followed by a local AF at each Voxel. The water level, y component, was then computed at each voxel's (x,z) coordinates to determine if it was above or below the surface. If below the surface the component of the AF was applied vertically at each voxel. 
 
 \subsection{Rudder}
 The rudder was created as a rigid body and modeled as a simple symmetric foil using the force diagram in figure \ref{rudderForce}. The lift and drag forces were calculated using equations \ref{lift} and \ref{drag}, where ${C_l}$ is the lift coefficient, ${C_d}$ is the drag coefficient, A is the sing surface area, V is the velocity of the water and ${\rho}$ is the density of the water.
@@ -63,11 +66,50 @@ The rudder was created as a rigid body and modeled as a simple symmetric foil us
 
 \section{MLAgents}
 
-\section{The Boat Agent}
+\section{The Environment Structure}
+Keep alive problem.
+
+Diverse conditions
+
+ciriculum style learning
 
 \section{Initial Training}
 
 \section{Optimization}
+
+\subsection{Blue Crystal HPC}
+
+The Blue Crystal HPC, operated by the University of Bristol, offers significant computational resources tailored for intensive tasks such as machine learning simulations, like.
+
+
+To utilize Blue Crystal for MLAgents simulations, the following steps were undertaken:
+
+\begin{itemize}
+    \item \textbf{Access and Security:} Gained access to the university's HPC and set up SSH keys for secure communication.
+    \item \textbf{File Preparation:} Built the .x86\_64 Unity build file and uploaded it, along with the necessary config file, to Google Drive.
+    \item \textbf{Automation with Shell Script:} Developed a shell script to automate the process. This script:
+    \begin{itemize}
+        \item Retrieves the build files from Google Drive.
+        \item Sets up a virtual environment on Blue Crystal.
+        \item Installs the ML-Agents toolkit.
+        \item Initiates the simulation.
+        \item Upon completion, uploads the results back to Google Drive\textsuperscript{3}.
+    \end{itemize}
+\end{itemize}
+
+Useful commands for working with Blue Crystal:
+
+\begin{itemize}
+    \item \textbf{sbatch:} Submits a job to the queue.
+    \item \textbf{sacct:} Checks the status of a job.
+    \item \textbf{scancel:} Cancels a job.
+\end{itemize}
+
+Parallelization and Optimization:
+
+Initially, a single node on Blue Crystal was employed to run the simulation. This node with 28 CPUs was responsible for both hosting the environment and executing the model. However, Blue Crystal's architecture allows for more advanced parallelization strategies. Distributing the simulation across multiple nodes can enhance efficiency. Additionally, offloading the ML-Agents toolkit to a GPU core can further accelerate the learning process.
+
+However, it's worth noting that the demand for GPUs on Blue Crystal is high. For tasks that don't necessitate the power of GPUs, relying on CPUs, even if they take longer, is a practical choice given the limited GPU availability.
 
 %=======
 \label{sec:sec01}
