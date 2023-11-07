@@ -9,45 +9,45 @@ Warning--entry type for "unityupdatefixedupdate" isn't style-file defined
 --line 121 of file thesisbiblio.bib
 Warning--entry type for "unityrigidbody" isn't style-file defined
 --line 128 of file thesisbiblio.bib
-You've used 18 entries,
+You've used 19 entries,
             2481 wiz_defined-function locations,
-            649 strings with 6851 characters,
-and the built_in function-call counts, 5772 in all, are:
-= -- 464
-> -- 252
+            656 strings with 7120 characters,
+and the built_in function-call counts, 6096 in all, are:
+= -- 490
+> -- 273
 < -- 15
-+ -- 109
-- -- 72
-* -- 376
-:= -- 928
-add.period$ -- 55
-call.type$ -- 18
-change.case$ -- 29
-chr.to.int$ -- 17
-cite$ -- 18
-duplicate$ -- 326
-empty$ -- 587
-format.name$ -- 100
-if$ -- 1239
++ -- 117
+- -- 78
+* -- 397
+:= -- 981
+add.period$ -- 59
+call.type$ -- 19
+change.case$ -- 31
+chr.to.int$ -- 18
+cite$ -- 19
+duplicate$ -- 340
+empty$ -- 617
+format.name$ -- 107
+if$ -- 1309
 int.to.chr$ -- 2
-int.to.str$ -- 19
+int.to.str$ -- 20
 missing$ -- 20
-newline$ -- 99
-num.names$ -- 54
-pop$ -- 178
+newline$ -- 105
+num.names$ -- 57
+pop$ -- 190
 preamble$ -- 1
-purify$ -- 18
+purify$ -- 19
 quote$ -- 0
-skip$ -- 196
+skip$ -- 205
 stack$ -- 0
-substring$ -- 159
-swap$ -- 40
+substring$ -- 161
+swap$ -- 42
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 108
+type$ -- 115
 warning$ -- 0
-while$ -- 42
+while$ -- 44
 width$ -- 0
-write$ -- 231
+write$ -- 245
 (There were 3 warnings)

@@ -15,16 +15,15 @@
 \contentsline {section}{\numberline {3.2}The Environment}{12}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}Boat Model}{13}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}Kite Model}{14}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Collision Detection}{14}{subsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.2.4}Course Generation}{14}{subsection.3.2.4}%
-\contentsline {subsection}{\numberline {3.2.5}Mark Roundings}{14}{subsection.3.2.5}%
-\contentsline {section}{\numberline {3.3}RL Implementation}{14}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}The Agent Script}{14}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Observations}{14}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Actions}{14}{subsection.3.3.3}%
-\contentsline {subsection}{\numberline {3.3.4}Rewards}{14}{subsection.3.3.4}%
-\contentsline {section}{\numberline {3.4}Initial Training}{15}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Optimization}{15}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}Blue Crystal HPC}{15}{subsection.3.5.1}%
-\contentsline {appendix}{\chapternumberline {A}Appendix A}{16}{appendix.A}%
-\contentsline {chapter}{Bibliography}{17}{appendix*.8}%
+\contentsline {subsection}{\numberline {3.2.3}Collision Detection}{15}{subsection.3.2.3}%
+\contentsline {section}{\numberline {3.3}RL Implementation}{15}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}The Agent Script}{15}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Observations}{15}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Actions}{15}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}Rewards}{15}{subsection.3.3.4}%
+\contentsline {section}{\numberline {3.4}Initial Training}{16}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Optimization}{16}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Blue Crystal HPC}{16}{subsection.3.5.1}%
+\contentsline {chapter}{\chapternumberline {4}Results and Validation}{17}{chapter.4}%
+\contentsline {appendix}{\chapternumberline {A}Appendix A}{18}{appendix.A}%
+\contentsline {chapter}{Bibliography}{19}{appendix*.8}%

@@ -1,19 +1,19 @@
 # Fdb version 3
-["bibtex thesis"] 1699370611 "thesis.aux" "thesis.bbl" "thesis" 1699370620
+["bibtex thesis"] 1699375694 "thesis.aux" "thesis.bbl" "thesis" 1699375696
   "/usr/share/texlive/texmf-dist/bibtex/bst/natbib/unsrtnat.bst" 1233624470 24550 a41a6405f4de768c43e871d9fbce2bc8 ""
-  "thesis.aux" 1699370620 8509 99d62de9771914f0e720882562d4e5db "pdflatex"
-  "thesisbiblio.bib" 1697708574 4578 7c5e4988739a2268c494e50439eef074 ""
+  "thesis.aux" 1699375696 8664 d32ae3e5e5d77450146a164575a7e83a "pdflatex"
+  "thesisbiblio.bib" 1699375393 5026 3f22a6aa9020d6f728a633d05f0d8a9d ""
   (generated)
   "thesis.bbl"
   "thesis.blg"
-["makeindex thesis.idx"] 1699367439 "thesis.idx" "thesis.ind" "thesis" 1699370620
-  "thesis.idx" 1699370619 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+["makeindex thesis.idx"] 1699375425 "thesis.idx" "thesis.ind" "thesis" 1699375696
+  "thesis.idx" 1699375695 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
   "thesis.ilg"
   "thesis.ind"
-["pdflatex"] 1699370618 "/home/joshua/Documents/Unity/ai_kite/Report/KiteBoat/thesis.tex" "thesis.pdf" "thesis" 1699370620
+["pdflatex"] 1699375695 "/home/joshua/Documents/Unity/ai_kite/Report/KiteBoat/thesis.tex" "thesis.pdf" "thesis" 1699375696
   "/etc/texmf/web2c/texmf.cnf" 1696225864 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/joshua/Documents/Unity/ai_kite/Report/KiteBoat/thesis.tex" 1697708240 13295 db21a9671a37e3bbd9d48f0b8d28c706 ""
+  "/home/joshua/Documents/Unity/ai_kite/Report/KiteBoat/thesis.tex" 1699374675 13336 ef94c26c1b44e3ebe0e273ae770943b5 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/ncntrsbk/pncb8r.tfm" 1136768653 3220 7b5d1a9569a08754f1bdfbc1c7ad8dbd ""
@@ -302,20 +302,21 @@
   "chapters/appendices/app0A.tex" 1697182256 200 3b0a4479994859bdbadc487c25e36a0f ""
   "chapters/chapter01/chap01.tex" 1697650273 8190 79aaab604b7ef9b00b41f097b8c14e9d ""
   "chapters/chapter02/background.tex" 1699370584 17091 6f816282532b1ad22551c94b6d282047 ""
-  "chapters/chapter04/method.tex" 1699370618 11139 c2866ae3bcd39f0c6ecad6fd46a49223 ""
+  "chapters/chapter04/method.tex" 1699375693 14389 4195f4c4f2c4bf8e8a8f294a92f92437 ""
+  "chapters/chapter05/results.tex" 1699373538 66 e8a44a2fa1f87dee3334164f94b6beea ""
   "frontmatter/abstract.tex" 1697182256 552 61169a66a5584b71876e7ae842600758 ""
   "frontmatter/declaration.tex" 1697182256 1546 3968de86521f8290e217cc92e0a833d6 ""
   "frontmatter/dedication.tex" 1697182256 240 c3b6171ef2b271e75d4cd39cd1a3343b ""
   "frontmatter/title.tex" 1697182256 1964 0ca3c72af9c517ea285b463efa995a85 ""
   "logos/bristolcrest_colour.pdf" 1697182256 133081 910fa2330406778c6658724a5c646377 ""
-  "thesis.aux" 1699370620 8509 99d62de9771914f0e720882562d4e5db "pdflatex"
-  "thesis.bbl" 1699370611 4366 1bc2f29da2555ddbb4f4ad3448df618f "bibtex thesis"
-  "thesis.ind" 1699367439 0 d41d8cd98f00b204e9800998ecf8427e "makeindex thesis.idx"
-  "thesis.lof" 1699370620 457 a0009ccfa0295ed5e7257769112e910c "pdflatex"
-  "thesis.lot" 1699370620 169 a198cee113a57893d1c82bc6aa768aa6 "pdflatex"
-  "thesis.out" 1699370620 4053 9f98b719ef1ae93010b5a9345e9464c4 "pdflatex"
-  "thesis.tex" 1697708240 13295 db21a9671a37e3bbd9d48f0b8d28c706 ""
-  "thesis.toc" 1699370620 2359 c66e308add8f2aa9b66a2c2cab547d58 "pdflatex"
+  "thesis.aux" 1699375696 8664 d32ae3e5e5d77450146a164575a7e83a "pdflatex"
+  "thesis.bbl" 1699375695 4726 c36c7dc63516f2601e8927ad67913134 "bibtex thesis"
+  "thesis.ind" 1699375425 0 d41d8cd98f00b204e9800998ecf8427e "makeindex thesis.idx"
+  "thesis.lof" 1699375696 475 26ff7d98c888fbb5ed82a452ec79ed44 "pdflatex"
+  "thesis.lot" 1699375696 187 11e1efebc74b08798716583bf49043d9 "pdflatex"
+  "thesis.out" 1699375696 3928 a94d2b01c8352fa6dd69afbc5dd69947 "pdflatex"
+  "thesis.tex" 1699374675 13336 ef94c26c1b44e3ebe0e273ae770943b5 ""
+  "thesis.toc" 1699375696 2272 3e49ca8a2fb70254b492b80c3cc168e1 "pdflatex"
   (generated)
   "thesis.aux"
   "thesis.idx"

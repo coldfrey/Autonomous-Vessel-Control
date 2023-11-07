@@ -1,4 +1,4 @@
-\begin{thebibliography}{18}
+\begin{thebibliography}{19}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -106,5 +106,12 @@ Logan Engstrom, Andrew Ilyas, Shibani Santurkar, Dimitris Tsipras, F.~Janoos,
 \newblock In \emph{Proceedings of the International Conference on Learning
   Representations (ICLR)}, 2020.
 \newblock URL \url{https://dblp.org/rec/conf/iclr/EngstromISTJRM20.html}.
+
+\bibitem[Gilbert et~al.(1988)Gilbert, Johnson, and Keerthi]{gilbert88gjk}
+E.~G. Gilbert, D.~W. Johnson, and S.~S. Keerthi.
+\newblock {A fast procedure for computing the distance between complex objects
+  in three-dimensional space}.
+\newblock IEEE Journal on Robotics and Automation, 1988.
+\newblock The seminal work on the GJK collision detection algorithm.
 
 \end{thebibliography}
