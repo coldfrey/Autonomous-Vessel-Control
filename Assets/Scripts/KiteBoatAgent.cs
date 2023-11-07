@@ -63,6 +63,8 @@ public class KiteBoatAgent : Agent
             startKiteRotation = kiteRigidbody.transform.localRotation;
 
         }
+        // ResetEnvironment();
+        StartCoroutine(ResetEnvironment());
         previousPosition = transform.position;
         lastDistanceToWaypoint = waypointManager.distanceFromBoat;
         if (checkPositionRoutine != null)
@@ -71,7 +73,6 @@ public class KiteBoatAgent : Agent
         }
         checkPositionRoutine = StartCoroutine(CheckPosition());
         // StartCoroutine(WaitAndRequestDecision());
-        ResetEnvironment();
         Debug.Log("OnEpisodeBegin, post ResetEnvironment");
         RequestDecision();
     }
@@ -82,25 +83,30 @@ public class KiteBoatAgent : Agent
     //     yield return new WaitForSeconds(1.0f);  // Wait for 1 second
     //     RequestDecision();
     // }
-    private void ResetEnvironment() 
+    private IEnumerator ResetEnvironment() 
     {
-        rudder.angle = 0f;
-        rudder.SetRudderTargetAngle(0f);
-        jointSim.StopSteering();
+
+        yield return null;
+        
         kiteRigidbody.velocity = Vector3.zero;
         kiteRigidbody.angularVelocity = Vector3.zero;
         boatRigidbody.velocity = Vector3.zero;
         boatRigidbody.angularVelocity = Vector3.zero;
         boatRigidbody.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>().velocity = Vector3.zero;
         boatRigidbody.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        
+        rudder.angle = 0f;
+        rudder.SetRudderTargetAngle(0f);
+        jointSim.StopSteering();
 
-        transform.position = startPosition + new Vector3(0, 1, 0);
+        transform.position = startPosition + new Vector3(0, 2, 0);
         transform.rotation = startRotation;
 
         // set the local position of the kite to the start position
         kiteRigidbody.transform.localPosition = startKitePosition;
         kiteRigidbody.transform.localRotation = startKiteRotation;
 
+        // log the start position
 
         if (hitFinish)
         {
@@ -108,10 +114,26 @@ public class KiteBoatAgent : Agent
             hitFinish = false;
             
         }
+        kiteRigidbody.velocity = Vector3.zero;
+        kiteRigidbody.angularVelocity = Vector3.zero;
+        boatRigidbody.velocity = Vector3.zero;
+        boatRigidbody.angularVelocity = Vector3.zero;
+        boatRigidbody.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>().velocity = Vector3.zero;
+        boatRigidbody.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+
+        yield return new WaitForSeconds(1.0f);
     }
+    
 
     public void FixedUpdate()
     {
+        // try catch edge cases
+        if (GetCumulativeReward() < -100.0f || rudder.GetBoatForwardSpeed() > 100.0f || transform.position.y > 10.0f)
+        {
+            print("GetCumulativeReward: " + GetCumulativeReward() + ", rudder.GetBoatForwardSpeed(): " + rudder.GetBoatForwardSpeed() + ", transform.position.y: " + transform.position.y);
+            CompleteEpisode();
+        }
+
         boatForwardSpeed = rudder.GetBoatForwardSpeed();
 
         // reward: greater +ve velocity
@@ -124,8 +146,11 @@ public class KiteBoatAgent : Agent
         {
             // AddReward(0.001f);
             // make the reward inversely proportional to the distance
-            AddReward(0.01f / currentDistanceToWaypoint);
-
+            AddReward(1f / currentDistanceToWaypoint);
+        }
+        else if (currentDistanceToWaypoint > previousDistanceToWaypoint)
+        {
+            AddReward(-0.0001f * currentDistanceToWaypoint);
         }
         previousPosition = transform.position;
 
@@ -137,9 +162,22 @@ public class KiteBoatAgent : Agent
             CompleteEpisode();
         }
 
-        completedWaypointsText.text = "Completed Waypoints: " + waypointManager.GetCompletedWaypoints().ToString();
+        // if the kite is less that 1m above the water, end the episode
+        if (kiteRigidbody.transform.localPosition.y < 1.0f)
+        {
+            // AddReward(-0.1f);
+            CompleteEpisode();
+        }
+        else
+        {
+            AddReward(0.001f);
+            // CompleteEpisode();
+        }
 
         AddReward(-0.001f);
+
+        completedWaypointsText.text = "Completed Waypoints: " + waypointManager.GetCompletedWaypoints().ToString();
+
     }
 
     private IEnumerator CheckPosition()
@@ -153,13 +191,47 @@ public class KiteBoatAgent : Agent
             if (currentDistanceToWaypoint >= lastDistanceToWaypoint)
             {               
                 print("currentDistanceToWaypoint: " + currentDistanceToWaypoint + ", lastDistanceToWaypoint: " + lastDistanceToWaypoint);
-                AddReward(-8.0f);
+                AddReward(-2.0f);
                 CompleteEpisode();
             }
 
             // Update the last distance for the next check
             lastDistanceToWaypoint = currentDistanceToWaypoint;
         }
+    }
+
+    private Vector3 polarAngles(Vector3 kitePosition, Vector3 wind)
+    {
+        Vector3 basePosition = baseRigidbody.position + new Vector3(0, 1f, 0);
+        // Debug.DrawLine(basePosition, basePosition + kitePosition, Color.green, 1.0f);
+        // Debug.Log("kitePosition: " + kitePosition);
+        // wind projected on floor
+        Vector3 windOnFloor = new Vector3(wind.x, 0, wind.z);
+        // kite position projected on floor
+        Vector3 kitePositionOnFloor = Vector3.ProjectOnPlane(kitePosition, Vector3.up);
+        // angle between wind and kite
+        // Debug.DrawLine(basePosition, basePosition + windOnFloor, Color.red, 1.0f);
+        // Debug.DrawLine(basePosition, basePosition + kitePositionOnFloor, Color.blue, 1.0f);
+
+        float angleHorizontal = Vector3.Angle(windOnFloor, kitePositionOnFloor);
+        bool angleHorizontalSign = Vector3.Cross(windOnFloor, kitePositionOnFloor).y < 0;
+        if (angleHorizontalSign)
+        {
+            angleHorizontal = -angleHorizontal;
+        }
+        // wind projected on vertical plane as defined by direction of kitePositionOnFloor and up.
+        // Vector3 windOnVerticalPlane = Vector3.ProjectOnPlane(wind, Vector3.Cross(kitePositionOnFloor, Vector3.up));
+        // Debug.DrawLine(basePosition, basePosition + windOnVerticalPlane, Color.yellow, 1.0f);
+        // angle between windOnVerticalPlane and kitePosition
+        float angleVertical = Vector3.Angle(kitePositionOnFloor, kitePosition);
+        // kite transform.forward projected on plane defined by kitePositionOnFloor
+        Vector3 kiteForwardOnPlane = Vector3.ProjectOnPlane(kiteRigidbody.transform.forward, kitePositionOnFloor);
+        // Debug.DrawLine(basePosition, basePosition + kiteForwardOnPlane, Color.magenta, 1.0f);
+        // angle between kiteForwardOnPlane and up
+        float angleKiteUp = Vector3.Angle(kiteForwardOnPlane, Vector3.up);
+
+        return new Vector3(angleHorizontal, angleVertical, angleKiteUp);
+
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -169,8 +241,21 @@ public class KiteBoatAgent : Agent
         sensor.AddObservation(waypointPosition);
 
         // Boat position in world space
-        Vector3 boatPosition = transform.position;
-        sensor.AddObservation(boatPosition);
+        // Vector3 boatPosition = transform.position;
+        // sensor.AddObservation(boatPosition);
+        
+        // boat rotation relative to the wind   
+        Vector3 boatForward = transform.forward;
+        Vector3 wind = jointSim.windAtKite;
+        windOnHorizontalPlane = Vector3.ProjectOnPlane(wind, Vector3.up);
+        float angleHorizontal = Vector3.Angle(boatForward, windOnHorizontalPlane);
+        bool angleHorizontalSign = Vector3.Cross(boatForward, windOnHorizontalPlane).y < 0;
+        if (angleHorizontalSign)
+        {
+            angleHorizontal = -angleHorizontal;
+        }
+
+        sensor.AddObservation(angleHorizontal);
 
         // Boat speed
         sensor.AddObservation(boatForwardSpeed);
@@ -180,10 +265,15 @@ public class KiteBoatAgent : Agent
         sensor.AddObservation(distanceToWaypoint);
 
         // Kite position relative to boat, normalised relative position rotated to boat view and distance
-        Vector3 kiteRelativePosition = kiteRigidbody.transform.position - transform.position;
-        Vector3 kiteRelativePositionNormalised = kiteRelativePosition.normalized;
-        sensor.AddObservation(Quaternion.Inverse(transform.rotation) * kiteRelativePositionNormalised);
-        sensor.AddObservation(kiteRelativePosition.magnitude);
+        // Vector3 kiteRelativePosition = kiteRigidbody.transform.position - transform.position;
+        // Vector3 kiteRelativePositionNormalised = kiteRelativePosition.normalized;
+        // sensor.AddObservation(Quaternion.Inverse(transform.rotation) * kiteRelativePositionNormalised);
+        // sensor.AddObservation(kiteRelativePosition.magnitude);
+
+        // kite polar angles
+        sensor.AddObservation(polarAngles(kiteRigidbody.transform.localPosition, wind));
+        // kite altitude
+        sensor.AddObservation(kiteRigidbody.transform.localPosition.y);
 
     }
 
@@ -257,6 +347,8 @@ public class KiteBoatAgent : Agent
 
     public void CompleteEpisode()
     {
+        // ResetEnvironment();
+        StartCoroutine(ResetEnvironment());
         StopCoroutine(checkPositionRoutine);
         // StartCoroutine(WaitAndRequestDecision());
         // ResetEnvironment();

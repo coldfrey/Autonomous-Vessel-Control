@@ -1,11 +1,11 @@
 #!/bin/bash
 #SBATCH --account=COSC027924
 #SBATCH --job-name=first_job
-#SBATCH --partition=test
+#SBATCH --partition=cpu
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=28
-#SBATCH --time=0:59:00
+#SBATCH --time=2-00:00:00
 #SBATCH --mem=5000M
 
 
@@ -72,7 +72,7 @@ behavior_name = list(env.behavior_specs)[0]
 spec = env.behavior_specs[behavior_name]
 
 
-max_steps = 1000000  # Adjust this value based on your desired max steps
+max_steps = 50000000  # Adjust this value based on your desired max steps
 current_steps = 0
 
 while current_steps < max_steps:

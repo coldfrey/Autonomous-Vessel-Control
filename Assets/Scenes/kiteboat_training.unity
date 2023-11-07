@@ -6003,7 +6003,7 @@ GameObject:
   - component: {fileID: 7693920803344893639}
   m_Layer: 0
   m_Name: Kite
-  m_TagString: Untagged
+  m_TagString: Kite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6251,7 +6251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 12
+    VectorObservationSize: 15
     NumStackedVectorObservations: 20
     m_ActionSpec:
       m_NumContinuousActions: 0

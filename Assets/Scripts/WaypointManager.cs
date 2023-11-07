@@ -37,9 +37,9 @@ public class WaypointManager : MonoBehaviour
     {
         Vector3 spawnDirection;
 
-        if (completedWaypoints < 20)
+        if (completedWaypoints < 100)
         {
-            float zFactor = 1f - (completedWaypoints / 20f);  // Decreases from 1 to 0 as completedWaypoints increases from 0 to 20.
+            float zFactor = 1f - (completedWaypoints / 100f);  // Decreases from 1 to 0 as completedWaypoints increases from 0 to 20.
             spawnDirection = new Vector3(Random.Range(-0.5f, 0.5f), 0, -1 * zFactor).normalized;
         }
         else
