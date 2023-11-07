@@ -184,7 +184,6 @@ public class KiteBoatAgent : Agent
     {
         while (true)
         {
-            // Wait for 5 seconds
             yield return new WaitForSeconds(checkInterval);
 
             // If the boat hasn't moved closer to the waypoint, end the episode
@@ -202,7 +201,7 @@ public class KiteBoatAgent : Agent
 
     private Vector3 polarAngles(Vector3 kitePosition, Vector3 wind)
     {
-        Vector3 basePosition = baseRigidbody.position + new Vector3(0, 1f, 0);
+        Vector3 basePosition = boatRigidbody.position + new Vector3(0, 1f, 0);
         // Debug.DrawLine(basePosition, basePosition + kitePosition, Color.green, 1.0f);
         // Debug.Log("kitePosition: " + kitePosition);
         // wind projected on floor
@@ -241,13 +240,13 @@ public class KiteBoatAgent : Agent
         sensor.AddObservation(waypointPosition);
 
         // Boat position in world space
-        // Vector3 boatPosition = transform.position;
         // sensor.AddObservation(boatPosition);
         
         // boat rotation relative to the wind   
+        Vector3 boatPosition = transform.position;
         Vector3 boatForward = transform.forward;
         Vector3 wind = jointSim.windAtKite;
-        windOnHorizontalPlane = Vector3.ProjectOnPlane(wind, Vector3.up);
+        Vector3 windOnHorizontalPlane = Vector3.ProjectOnPlane(wind, Vector3.up);
         float angleHorizontal = Vector3.Angle(boatForward, windOnHorizontalPlane);
         bool angleHorizontalSign = Vector3.Cross(boatForward, windOnHorizontalPlane).y < 0;
         if (angleHorizontalSign)
