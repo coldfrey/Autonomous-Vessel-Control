@@ -23,13 +23,20 @@ This chapter aims to provide a comprehensive overview of the current state of ki
 
 As we navigate through this background, we will delve into the core concepts of RL, its relevance to maritime propulsion, and its potential in revolutionizing the way we think about sailing.
 
-\section{Reinforcement Learning (RL)}
+\section{Reinforcement Learning (RL)}\label{RL_background}
 % User
 % Write me a technical and informative introduction for Reinforcement Learning (RL). This is part of the background section of a thesis and will lay the foundation for how and why RL can/has/might want to be used to control boats (and kites instead of sails). Make it about 1000 words and include citations for your sources. The style should be informative but upbeat. 
 
 Reinforcement Learning (RL) is a paradigm of machine learning that has been making waves, both literally and figuratively, in the vast ocean of artificial intelligence (AI). At its core, RL is about learning by interaction: an agent takes actions in an environment to maximize some notion of cumulative reward. The agent learns from the consequences of its actions, rather than from being explicitly taught, making it a powerful tool for tasks where the optimal strategy is unknown or hard to define \cite{sutton2018reinforcement}.
 
 Imagine teaching a child to ride a bicycle. You don't provide a step-by-step manual; instead, the child learns by trying different actions (like pedaling or balancing) and receiving feedback (falling down or moving forward). This trial-and-error approach is the essence of RL. The agent (in this case, the child) interacts with its environment (the bicycle and the ground) and learns a policy that dictates the best action to take in any given situation based on the rewards (or penalties) it receives \cite{watkins1992qlearning}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{Images/RL_Loop.png}
+    \caption{A diagram of the RL Loop}
+    \label{fig:rl_diagram}
+\end{figure}
 
 Historically, RL has its roots in the fields of operations research and behavioral psychology. The idea of learning optimal strategies through interaction has been explored in various contexts, from game playing to industrial optimization \cite{bellman1957dynamic}. However, it's the recent advancements in computational power and algorithms that have propelled RL to the forefront of AI research. Games like Go, which were once considered too complex for computers to master, have now been conquered by RL agents, showcasing the immense potential of this approach\cite{silver2016mastering}.
 
@@ -61,7 +68,7 @@ Unity's ML-Agents toolkit is a game-changer for those looking to infuse artifici
 
 In conclusion, Unity is not just a game engine; it's a canvas for creativity, a platform for innovation, and a testament to the limitless possibilities of virtual worlds. As we set sail in our virtual kiteboat, with the winds of Unity propelling us forward, the horizon looks promising and full of potential.
 
-\section{Proximal Policy Optimization (PPO)}
+\section{Proximal Policy Optimization (PPO)}\label{sec:ppo_background}
 
 Reinforcement Learning (RL) has witnessed a plethora of algorithms, each striving to optimize policy in its unique way. Among these, the Proximal Policy Optimization (PPO) algorithm stands out as a beacon of efficiency and simplicity \cite{schulman2017ppo}.
 
@@ -76,3 +83,38 @@ Empirical evidence underscores the efficacy of PPO. When pitted against various 
 But the story doesn't end with PPO alone. Unity's ML-Agents toolkit, which was touched upon earlier, seamlessly integrates with PPO. ML-Agents provides a platform for training intelligent agents within the Unity environment, and when combined with the power of PPO, it paves the way for robust and efficient training regimes. This synergy between PPO and ML-Agents is particularly promising for complex simulations, such as kiteboat training, where agents can iteratively learn and refine their strategies for optimal performance.
 
 The Proximal Policy Optimization algorithm is a testament to the continuous evolution and innovation in the field of Reinforcement Learning. Its simplicity, efficiency, and robustness make it a prime choice for a myriad of applications. As we harness the combined power of PPO with Unity's ML-Agents for kiteboat simulations.
+
+
+ppo explained further:
+
+The key characteristic of PPO is that it is an on-policy algorithm, meaning that it learns from the most recent experiences and that it uses an `actor-critic' method. The actor-critic method is a combination of two neural networks, the actor and the critic. The actor is responsible for learning the optimal policy, while the critic is responsible for evaluating the actions of the actor by estimating the value function.  
+
+The actor-critic method can be broken down into the following steps:
+\begin{enumerate}
+    \item \textbf{Actor}: The actor network proposes an action given in the current state. The action is drawn from a probability distribution (the policy $\pi$) parameterized by the networks weights.
+    \item \textbf{Critic}: The critic network estimates the value function $V(s)$ $V(s)$, which predicts the expected return (sum of future rewards) from state s under the current policy.
+    \item \textbf{Advantage Estimation}: The advantage function $A(s,a)$ quantifies how much better taking a particular action aa is, compared to the average action in state ss, and is computed as 
+    \begin{equation}
+        A(s,a) = Q(s,a) - V(s)
+    \end{equation}
+    where $Q(s,a)$ is the action-value function, which is the expected return after taking action a in state s.
+    \item \textbf{Objective Function}:  PPO optimizes a clipped surrogate objective function to prevent large policy updates, which could lead to performance collapse. The objective function $L^{CLIP}$ is defined as
+    \begin{equation}
+        L^{CLIP}(\theta) = \hat{\mathbb{E}}_t[min(r_t(\theta)\hat{A}_t, clip(r_t(\theta), 1-\epsilon, 1+\epsilon)\hat{A}_t)]
+    \end{equation}
+    were $r_t(\theta)$ is the probability ratio between the new and old policy, $\hat{A}_t$ is the advantage at time step $t$, and $\epsilon$ is a hyperparameter that controls the size of the policy update.
+    \item \textbf{Policy Update}: PPO uses this objective to update the actor network's weights, maximizing the expected return while avoiding too large policy updates.
+    \item textbf{Value Function Loss}: The critic network is trained to minimize the value function loss, which is typically the Mean Squared Error between the estimated value function V(s) and the observed return R.
+    \item textbf{Entropy Bonus}: To encourage exploration, PPO adds an entropy bonus to the objective function, which promotes diversity in the action distribution.
+\end{enumerate}
+
+
+PPO iterates between sampling data through interaction with the environment and optimizing the clipped objective function using stochastic gradient ascent. This optimization is typically done using minibatch updates for efficiency.
+
+By employing PPO, the agent learns to balance exploration (trying new actions) with exploitation (taking known rewarding actions), which is particularly effective for complex tasks like sailing a kiteboat where the agent must adapt to dynamic conditions and long-term consequences of actions.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/ppo_explanation.png}
+    \caption{Actor-Critic Method}\label{actor_critic}
+\end{figure}

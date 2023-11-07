@@ -11,20 +11,38 @@
 % - need to be able to run machine learning in the physics simulations
 
 % \initial{T}he future of autonomous navigation in maritime settings is not limited to large vessels plying the world's oceans; smaller, nimble crafts, harnessing natural forces such as wind, present their own set of challenges and opportunities. Imagine a vessel, propelled not just by the currents below, but by the gusts above, using a kite to harness the power of the wind. This not only promises sustainable navigation but also offers a glimpse into the intricate dance between machine intelligence, physics, and nature's unpredictability. This project dives deep into simulating such a system— a kite-powered boat that autonomously navigates its environment. This methodology section elucidates the steps taken to bridge the gap between vision and virtual reality.
+\initial{T}his project will utilise the Unity game engine as the training environment for RL\@.
 
-\initial{T}his section will investigate the approach taken to create an autonomously controlled kiteboat in a simulation. As discussed in section 2.2 Reinforcement Learning (RL) is an appropriate type of ai for the control of a kiteboat. RL works on a trail and error approach and its core loop is shown in figure LABLE.
+
+\section{MLAgents}
+MLAgents is an open-source project that allows games and simulations to serve as the environment for training intelligent agents. At its core MLAgents utilizes RL, although it also supports other methods such as imitation learning.
+
+As discussed in section$~$\ref{RL_background}, RL is an approach to learning where an agent learns to make decisions by interacting with its environment. The fundamental components of this interaction are observations, actions and rewards.
+\begin{itemize}
+    \item Observations (State): These are the pieces of information that the agent receives from the environment at each step or frame. In Unity, observations are collected through sensors or manually coded to be extracted from the game objects. They are typically fed into the neural network as a vector of floating-point numbers, representing the current state of the environment.
+    \item Actions: Based on the observations, the agent takes actions which are the outputs of the neural network. These actions can be discrete (e.g., turn left, turn right) or continuous (e.g., change angle by a certain degree). The neural network's output layer is designed accordingly to provide the appropriate action space for the agent. (Configured as part of the behavioral parameters in Unity)
+    \item Rewards: After taking an action, the agent receives a reward signal, which is a numerical value indicating how well the action contributed to achieving its goal. This reward is used to adjust the neural network's weights, with the aim of maximizing the total accumulated reward.
+\end{itemize}
+A full breakdown of the actions, observations, rewards, and how the agent script configures these for this project can be found in section$~$\ref{sec:RL_Implementation}.
+
+
+\subsection{Python Implementation}
+The neural network used in the reinforcement learning is implemented in Python. MLAgents toolkit is a Python Library that acts as an interface between the Unity game engine and Pytorch [CITE]. PyTorch provides the computational enine that powers the training of neural networks. MLAgents uses a python API to communicate with the Unity environment frame by frame. This stepping process allows for the synchronous collection of observations, executions of actions and retrieval of rewards. The neural network used in this project is a Proximal Policy Optimization (PPO) network, and so will utilise the actor-critic method as discussed in section$~$\ref{sec:ppo_background}.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{Images/RL_Loop.png}
-    \caption{The RL Loop}
-\label{RL_loop}
+    \includegraphics[width=0.5\textwidth]{Images/unity_mlagents.png}
+    \caption{MLAgents Integration}\label{MLAgents_Integration}
 \end{figure}
 
 
+
+The technical instructions to setup MLAgents in Python and Unity can be found at 
+\url{https://github.com/lipj01/AI-Kite-Control}
+
 \section{The Environment}
 
-The first step to this process if to create the environment, which the agent will use to train. In this case that will need to look something like a sailing game; it will have some form of water, a boat, a kite and a course. 
+The first step to this process is to create the environment, which the agent will use to train. In this case that will need to look something like a sailing game; it will have some form of water, a boat, a kite and a course. 
 For any machine learning endeavor, especially one with such intricate physical dynamics, the choice of simulation environment is paramount. Not only does it provide the playground for our AI agent to learn and make mistakes safely, but it also serves as a litmus test for the robustness and realism of the designed model.
 
 Given the myriad of choices available, the Unity game engine emerged as the most suitable platform. Beyond its reputation in gaming, 
@@ -34,15 +52,15 @@ Unity is recognized for its potent physics engine, however for this project the 
 Central to our simulation is the depiction of water, the medium in which our boat will navigate. Here, the Unity HDRP Water System 16.0.3 [cite] came to the rescue. Bundled with Unity 2023.2.0b9 [cite], this water system provides a realistic representation of water with its undulating waves, refractions, and reflections. 
 The alternative option to using Unity's water system was to model an entire particle fluid simulation, this would have had its advantages, however it would have been a lot more computationally expensive and would have taken a lot longer to implement. As this project was primarily focused on creating a RL algorithm for controlling a kiteboat it was decided that the Unity water system would be sufficient for this project.  
 
-The boat part of the kiteboat had two main component scripts, the buoyancy and the rudder, allowing the boat to float and be steered. The implementation of Buoyancy and the rudder are discussed in more detail in section$~$\ref{sec:Buoyancy} and$~$\ref{sec:Rudder} respectively. 
+The boat part of the kiteboat had two main component scripts, the buoyancy and the rudder, allowing the boat to float and be steered. The implementation of Buoyancy and the rudder are discussed in more detail in section$~$\ref{sec:Boat}. 
 
 Several assumptions were made before modeling the boat, these were primarily made to save time on the implementation and were deemed to have insignificant effects on the overall performance of the boat. These assumptions were:
 \begin{itemize}
     \item The Archimedes force is uniform across all submerged sections of the boat.
-    \item The rudder forces of lift and drag could be aproximated to a torque applied to the boat.
+    \item The rudder forces of lift and drag could be aproximated to a torque applied about the rear of the boat.
     \item Once the boat is moving at a speed greater than 0.25m/s the lift and drag forces of the keel are equal to the downwind component of the kite's resultant force- essentially providing a non'slip condition.
 \end{itemize}
-\subsection{Buoyancy}\label{sec:Buoyancy}
+\subsection{Boat Model}\label{sec:Boat}
 Buoyancy, the force that allows ships to float, was the first physical property to be addressed. Rooted in Archimedes' Principle, it dictates that the buoyant force exerted on a submerged body is equivalent to the weight of the fluid displaced by that body. In our Unity environment, the boat's hull, represented as a `mesh' with an associated `mesh collider', was divided into many small triangles or Voxels. These Voxels became the fundamental units for calculating buoyancy, allowing for a granular and realistic representation of the boat's interaction with water. This was achieved by first calculating the total Archimedes force (AF) of the entire boat using equation$~$\ref{archimedes}, followed by a local AF at each Voxel. The water level, y component, was then computed at each voxel's (x,z) coordinates to determine if it was above or below the surface. If below the surface the component of the AF was applied vertically at each voxel. This implementation can be viewed in the buoy.cs script in the project REF IN APENDIX.
 
 \begin{equation}
@@ -50,36 +68,40 @@ Buoyancy, the force that allows ships to float, was the first physical property 
     \label{archimedes}
 \end{equation}
 
+While buoyancy ensures our boat doesn't sink, it's the rudder that grants it direction. The Rudder.cs script handles the implementation of the rudder and the keel. The equation for the torque applied about the rear of the boat is shown in equation$~$\ref{rudder_torque}. 
 
-\subsection{Rudder}\label{sec:Rudder}
-While buoyancy ensures our boat doesn't sink, it's the rudder that grants it direction. The Rudder.cs script handles the implementation of the rudder and the keel. Several assumptions were made 
-% The rudder was created as a rigid body and modeled as a simple symmetric foil using the force diagram in figure$~$\ref{rudderForce}. The lift and drag forces were calculated using equation$~$\ref{lift} and$~$\ref{drag}, where ${C_l}$ is the lift coefficient, ${C_d}$ is the drag coefficient, A is the sing surface area, V is the velocity of the water and ${\rho}$ is the density of the water.
+% the torque equation
+% float turnForce = angle * boatForwardSpeed * rotationScale;
+% boatRb.AddTorque(transform.up * turnForce);
+\begin{equation}
+    \tau = \alpha v R
+    \label{rudder_torque}
+\end{equation}
 
+where $\tau$ is the torque, $\alpha$ is the angle of the rudder, $v$ is the speed of the boat and $R$ is the rotation scale.
 
-% \begin{equation}
-%     L = {C_l}A\rho\frac{V^2}{2}
-%     \label{lift}
-% \end{equation}
-% \begin{equation}
-%     D = {C_d}A\rho\frac{V^2}{2}
-%     \label{drag}
-% \end{equation}
- 
-% \begin{figure}
-%     \centering
-%     \includegraphics{chapters/chapter04/rudder.JPG}
-%     \caption{Force Diagram of a boat rudder}\label{rudderForce}
-% \end{figure}
+\subsection{Kite Model}
 
-
+\subsection{Collision Detection}
 
 \subsection{Course Generation}
 
 \subsection{Mark Roundings}
 
-\section{MLAgents}
+\section{RL Implementation}\label{sec:RL_Implementation}
 
-\section{The Environment Structure}
+\subsection{The Agent Script}
+
+
+\subsection{Observations}
+
+\subsection{Actions}
+
+\textbf{Controls}
+
+
+
+\subsection{Rewards}
 Keep alive problem.
 
 Diverse conditions
