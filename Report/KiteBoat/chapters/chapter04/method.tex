@@ -16,7 +16,10 @@
 \section{MLAgents}
 MLAgents is an open-source project that allows games and simulations to serve as the environment for training intelligent agents. At its core MLAgents utilizes RL, although it also supports other methods such as imitation learning.
 
-As discussed in section$~$\ref{RL_background}, RL is an approach to learning where an agent learns to make decisions by interacting with its environment. The fundamental components of this interaction are observations, actions and rewards.
+\subsection{Python Implementation}
+The neural network used in the reinforcement learning is implemented in Python. MLAgents toolkit is a Python Library that acts as an interface between the environment (gym), in this case Unity, and PyTorch [CITE]. PyTorch is an open-source machine learning library based on the Torch library, known for its flexibility, ease of use, and native support for GPU acceleration, which is essential for the computation-heavy processes involved in training neural networks. Torch is a Python-based scientific computing package that provides prebuilt components for machine learning and deep learning, as well as a wide range of mathematical functions. MLAgents uses a python API to communicate with the Unity environment frame by frame. This stepping process allows for the synchronous collection of observations, executions of actions and retrieval of rewards. The neural network used in this project is a Proximal Policy Optimization (PPO) network, and so will utilise the actor-critic method as discussed in section$~$\ref{sec:ppo_background}.
+
+As discussed in section$~$\ref{RL_background}, RL is an approach to learning where an agent learns to make decisions by interacting with its environment. The fundamental components of this interaction with the environment are observations, actions and rewards.
 \begin{itemize}
     \item Observations (State): These are the pieces of information that the agent receives from the environment at each step or frame. In Unity, observations are collected through sensors or manually coded to be extracted from the game objects. They are typically fed into the neural network as a vector of floating-point numbers, representing the current state of the environment.
     \item Actions: Based on the observations, the agent takes actions which are the outputs of the neural network. These actions can be discrete (e.g., turn left, turn right) or continuous (e.g., change angle by a certain degree). The neural network's output layer is designed accordingly to provide the appropriate action space for the agent. (Configured as part of the behavioral parameters in Unity)
@@ -24,9 +27,27 @@ As discussed in section$~$\ref{RL_background}, RL is an approach to learning whe
 \end{itemize}
 A full breakdown of the actions, observations, rewards, and how the agent script configures these for this project can be found in section$~$\ref{sec:RL_Implementation}.
 
+A sequence diagram of the interaction between the Unity environment and the Python neural network can be seen in figure$~$\ref{MLAgents_Seq_Diagram}.
 
-\subsection{Python Implementation}
-The neural network used in the reinforcement learning is implemented in Python. MLAgents toolkit is a Python Library that acts as an interface between the Unity game engine and Pytorch [CITE]. PyTorch provides the computational enine that powers the training of neural networks. MLAgents uses a python API to communicate with the Unity environment frame by frame. This stepping process allows for the synchronous collection of observations, executions of actions and retrieval of rewards. The neural network used in this project is a Proximal Policy Optimization (PPO) network, and so will utilise the actor-critic method as discussed in section$~$\ref{sec:ppo_background}.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/MLAgents_Seq_Diagram.png}
+    \caption{MLAgents Sequence Diagram}\label{MLAgents_Seq_Diagram}
+\end{figure}
+
+% sequenceDiagram
+%     participant Unity as Unity (Gym Environment)
+%     participant MLAgents as ML-Agents Toolkit
+%     participant PyTorch as PyTorch (Neural Net)
+
+%     Unity->>MLAgents: Observations (State)
+%     MLAgents->>PyTorch: Processed Observations
+%     PyTorch-->>MLAgents: Action Predictions
+%     MLAgents-->>Unity: Actions
+%     Unity->>MLAgents: Rewards / New State
+%     MLAgents->>PyTorch: Process Rewards
+%     PyTorch->>PyTorch: Update Weights
+
 
 \begin{figure}[h]
     \centering
@@ -53,15 +74,15 @@ The alternative option to using Unity's water system was to model an entire part
 
 The boat part of the kiteboat had two main component scripts, the buoyancy and the rudder, allowing the boat to float and be steered. The implementation of Buoyancy and the rudder are discussed in more detail in section$~$\ref{sec:Boat}. The explanation of the kite model can be found in section$~$\ref{sec:Kite}.
 
-Several assumptions were made for the initial model of the kiteboat. These assumptions were:
+
+\subsection{Boat Model}\label{sec:Boat}
+
+\textbf{Boat Assumptions}
 \begin{itemize}
     \item The Archimedes force is uniform across all submerged sections of the boat.
     \item The rudder forces of lift and drag could be aproximated to a torque applied about the rear of the boat.
     \item Once the boat is moving at a speed greater than 0.25m/s the lift and drag forces of the keel are equal to the downwind component of the kite's resultant force- essentially providing a non'slip condition.
-    \item The kite is modeled as a symmetrical aerofoil, with constant lift and drag coefficients.
-    \item Constant wind angle and laminar flow over the entire kite.
 \end{itemize}
-\subsection{Boat Model}\label{sec:Boat}
 Buoyancy, the force that allows ships to float, was the first physical property to be addressed. Rooted in Archimedes' Principle, it dictates that the buoyant force exerted on a submerged body is equivalent to the weight of the fluid displaced by that body. In our Unity environment, the boat's hull, represented as a `mesh' with an associated `mesh collider', was divided into many small triangles or Voxels. These Voxels became the fundamental units for calculating buoyancy, allowing for a granular and realistic representation of the boat's interaction with water. This was achieved by first calculating the total Archimedes force (AF) of the entire boat using equation$~$\ref{archimedes}, followed by a local AF at each Voxel. The water level, y component, was then computed at each voxel's (x,z) coordinates to determine if it was above or below the surface. If below the surface the component of the AF was applied vertically at each voxel. This implementation can be viewed in the buoy.cs script in the project REF IN APENDIX.
 
 \begin{equation}
@@ -82,7 +103,25 @@ While buoyancy ensures our boat doesn't sink, it's the rudder that grants it dir
 where $\tau$ is the torque, $\alpha$ is the angle of the rudder, $v$ is the speed of the boat and $R$ is the rotation scale.
 
 \subsection{Kite Model}\label{sec:Kite}
-The kite model was implemented using the kite.cs script. The kite was modeled as a symmetrical aerofoil, with constant lift and drag coefficients. The lift and drag forces were calculated using the equations shown in equation$~$\ref{lift} and equation$~$\ref{drag}.
+Capturing the intricate movements of a kite as it fly's through the air involves a complex balance between theoretical aerodynamics and the unpredictability of real-world conditions. In this model several assumptions were made to streamline the complexity into a more manageable form and are shown below.
+
+\textbf{Kite Assumptions}
+\begin{itemize}
+    \item The kite is modeled as a symmetrical aerofoil, with constant lift and drag coefficients.
+    \item Constant wind angle and laminar flow over the entire kite.
+    \item The kite is always in the air, for the initial model the case where the kite crashes and requires relaunching was not considered. This would require adding buoyancy to the kite.
+\end{itemize}
+
+This sections outlines a kite model that, while simplified, serves as an effective tool for designing and testing the RL algorithm. The model is geared towards a realistic representation of the kites behavior and its response to control inputs. The kite chosen for this project was a Leading Edge Inflatable (LEI) kite, which is the most popular and mass produced recreational style of kites that exists. These kites connect to a control bar via 4 dyneema kite lines. Two center power lines take the load of the kite, while the outside two are responsible for steering, as shown in figure$~$\ref{kite_diagram}.
+
+% insert kite diagram
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/kitediagram.jpg}
+    \caption{Kite Diagram}\label{kite_diagram}
+\end{figure}
+
+The kite model was implemented using the kite.cs script. The kite was modeled as a symmetrical aerofoil, and implemented as a rigid body with constant lift and drag coefficients. The lift and drag forces were calculated using the equations shown in equation$~$\ref{lift} and equation$~$\ref{drag}.
 \begin{equation}
     F_L = \rho C_L A \frac{v^2}{2} 
     \label{lift}
@@ -105,21 +144,65 @@ Within the GJK method, the Support function plays a pivotal role, calculating th
 
 The HandleSimplex function is a recursive strategy that adjusts the simplex and direction d based on whether the current simplex is a line or triangle. For a line, the LineCase function is invoked, and for a triangle, the TriangleCase is employed. These functions adjust the simplex and direction of search to move closer to the origin, if it is not already contained within the simplex.
 
-% \subsection{Course Generation}
+\subsection{Course Generation}
 
 % \subsection{Mark Roundings}
 
+\section{Controls}
+In order to ensure the AI would be able to learn to sail the kiteboat a playable game version was created. As discussed above the kite was modeled using 4 configurable joints to replicate the line system. There are several ways of configuring these so that a simple control input will result in the desired movement of the kite. 
+
+
+
 \section{RL Implementation}\label{sec:RL_Implementation}
-
 \subsection{The Agent Script}
+The kiteboat agent sets up the scene for learning and in order for Unity to correctly process the script it must have the following 4 functions implemented:
+\begin{itemize}
+    \item OnEpisodeBegin()
+    \item CollectObservations(VectorSensor sensor)
+    \item OnActionReceived(ActionBuffers actions)
+    \item Heuristic(in ActionBuffers actionsOut)
+\end{itemize}
 
-\textbf{Controls}
-In order to ensure the AI would be able to learn to sail the kiteboat a playable game version was created using arrow keys for the kite and `A' and `D' for the rudder.  
-
+These are the minimum requirements for the agent setup, however there are several other functions that can be implemented to further customize the agent, handle errors and provide additional information. The agent starts by taking in the Kite and the Boat rigid bodies, as well as the rudder and kite scripts. A new gjkCollisionDetection is also initialised. The script starts with the OnEpisodeBegin method, which in turn starts by ensuring the training environment has been reset. The reset method sets the velocities and angular velocities of all rigid bodies in the scene to 0 and returns the kiteboat to a starting position. The remaining methods will be discussed in more detail below.
 \subsection{Observations}
+CollectObservations provides the network will all the information about the State of the environment and so aim to provide all the required information for the agent to make an informed decision. This means fully describing the movement of the kite and boat, as well as the position of the boat relative to the waypoint, allowing it to gain an idea of direction. It is easy to see how the number of observations could rapidly increase, but this would also increase the complexity of the network and the likelihood of the agent becoming `confused' by the data its receiving. With this in mind the goal is to provide all the required information about the state in the minimum number of observations possible, this is achieved by combining vectors where appropriate. Another consideration when thinking about the observations was that they should be possible to collect if this system were to be created in the real world. This means that the observations should be possible to collect using sensors, such as GPS, wind speed and direction, and accelerometers. The observations used in this project are shown in table$~$\ref{observations}.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c|c}
+        Observation & Vector Size & Description \\
+        \midrule
+        Waypoint Position & 3 & The position of the waypoint relative to the origin \\
+        Distance to the waypoint & 1 & The distance to the waypoint from the boat \\
+        Boat Position & 3 & The position of the boat relative to the origin \\
+        Boat Speed & 1 & The speed of the boat in the forwards direction \\
+        Relative Boat Angle & 1 & The angle of the boat relative to the wind \\
+        Kite Position & &\\
+        Kite altitude & &\\
+        \hline
+    \end{tabular}
+    \caption{Observations}\label{observations}
+\end{table}
+
+The total number of observations passed to the network is .......
 
 \subsection{Actions}
+When the agent starts to train it has no idea what to do, it is essentially a blank slate, so starts by randomly flicking around the actions. The agent was given a discrete action space of 6 actions, these are shown in table$~$\ref{actions}. The actions are passed to the network as a vector of 6 values, each value is a float between 0 and 1. The network then interprets these values and outputs the appropriate action. The actions are then passed to the OnActionReceived method, which in calls the methods that control the kite and boat. Discrete actions were chosen because then the rate of change of the angles that control the rudder and kite is not the choice of the network. This gives the network an easier job and means the amount of freedom the network has can be configured. i.e. if the network could pick any value between 0 and 1 for the bar position, it would see far more aggressive controls making it harder for a stable flight to be achieved. On the other had the discrete action space encourages the agent to make a decision and stick with it while the action is being applied. 
 
+These actions were tested as part of making a playable game so that the agent receives the same actions as a human controlling the kiteboat simulation. The Heuristic method that is one of the required functions for the agent script, allows the agent to be controlled by a human. This is useful for testing the environment and the controls, as well as for playing the game. The Heuristic method is called when the agent is not training and so the agent can be controlled by a human. The Heuristic method takes in the action vector and sets the values of the actions to the values of the keyboard inputs. The keyboard inputs are set in the Unity editor and are shown in table$~$\ref{actions}. 
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c|c|c}
+        Action & States & Description & Keyboard Input\\
+        \midrule
+        Kite Bar Position & Left, Off, Right & The different states change the bar position & Arrow left/right \\
+        Rudder Angle & Left, Off, Right & The angle of the rudder & Keys `A' and `D'\\
+        Kite Bar Power & 0, 1 & The power of the kite bar & Space Bar \\
+        \hline
+    \end{tabular}
+    \caption{Actions}\label{actions}
+\end{table}
 
 
 \subsection{Rewards}
@@ -130,6 +213,19 @@ Diverse conditions
 ciriculum style learning
 
 \section{Initial Training}
+Before commencing the training of the kiteboat agent, a simpler test agent was created to check the workflow and ensure the environment was setup correctly. This test agent was a simple cube that was trained to move towards a waypoint, following a pacemaker. This was a good test of the environment as it was a simple task that could be easily visualized as shown in figure .... However this test agent proved more tricky than initially anticipated and after some additional research some core RL training concepts that improve the quality of training were discovered. The first of these being make the problem a `Keep Alive' i.e. do the correct thing or die. In the context of the path follower this meant that should the cube ever be further away from the pacemaker than its original distance of 2m the episode was ended and a large negative reward given. This method encourages the agent to do the correct process if it wants to stay alive. Making the problem a keep alive problem is a simple way to improve the quality of training and is a common practice in RL. The path follower changed from not making much progress over the course of 500000 steps to being able to complete full laps of the course in around 100000 steps, as shown in figure  .....
+
+The next RL technique to help improve training is called Curriculum Learning (CL). CL is an instructional strategy that structures the learning process, much like how a school curriculum guides human learning. It involves organising the leaning tasks from simple to complex, facilitating the agent's ability to incrementally acquire, transfer and refine knowledge. In essence it breaks down large complex tasks into more manageable bitesized chunks that the agent can progress through. CL was not utilised in the path follower but was used in the kiteboat agent. The kiteboat agent was trained in several stages shown below.
+\begin{enumerate}
+    \item Master the controls- a keep alive problem
+    \item Sail Straight downwind
+    \item Progressively move the waypoints upwind with each completed waypoint
+    \item Randomly generate waypoints in any direction 
+\end{enumerate}
+
+Step 1 in the curriculum ensures the agent has a fundamental grasp of the controls and is able to keep the kite in the air. This is a keep alive problem and so the agent is rewarded for keeping the kite in the air and penalised for crashing. The direction the boat sails is not important at this stage. Step 2 is a simple task that the agent can learn quickly, having now gained a grasp of the kite control it must learn to steer straight towards the waypoint. This was also turned into a keep alive problem, move closer to the next waypoint or end the episode. Step 3 is where the agent starts to learn to sail its own path, initially this will still be a straight line until the waypoints are spawning upwind of the kiteboats initial location. At this point the agent must start to experiment with finding the VMG (velocity made good), which is a measure of the speed at which a vessel is moving directly towards its destination, considering both its heading and wind direction. In stage 3 the waypoints will spawn more and more upwind until they are directly upwind, this is in an effort to encourage the agent to find the emergent property of Tacking, a maneuver by which the nose of the boat transitions through the wind while it turns around.  
+
+Figure ... shows the difference in the paths at stages 2 and 3 of the curriculum. The path in stage 2 is a straight line towards the waypoint, while the path in stage 3 is a zigzag as the agent tries to find the VMG. 
 
 \section{Optimization}
 

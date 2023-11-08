@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.10.13)  7 NOV 2023 16:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.10.13)  8 NOV 2023 13:23
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1508,7 +1508,7 @@ LaTeX Font Info:    Font shape `T1/fnc/m/n' will be
 (Font)              scaled to size 11.15991pt on input line 30.
 LaTeX Font Info:    Font shape `T1/fnc/m/sc' will be
 (Font)              scaled to size 11.15991pt on input line 32.
-<logos/bristolcrest_colour.pdf, id=115, 114.4275pt x 137.51375pt>
+<logos/bristolcrest_colour.pdf, id=123, 114.4275pt x 137.51375pt>
 File: logos/bristolcrest_colour.pdf Graphic file (type pdf)
 <use logos/bristolcrest_colour.pdf>
 Package pdftex.def Info: logos/bristolcrest_colour.pdf  used on input line 34.
@@ -1614,10 +1614,10 @@ LaTeX Font Info:    Font shape `T1/fnc/b/n' will be
 ])
 LaTeX Font Info:    Font shape `T1/fnc/m/sc' will be
 (Font)              scaled to size 9.29993pt on input line 336.
- [5] (./thesis.lot
+ [5] (./thesis.lof
 LaTeX Font Info:    Font shape `T1/fnc/b/sc' will be
 (Font)              scaled to size 10.18341pt on input line 2.
-) [6] (./thesis.lof) [7] (./chapters/chapter01/chap01.tex
+) (./thesis.lot) [6] (./chapters/chapter01/chap01.tex
 LaTeX Font Info:    Font shape `T1/fnc/m/n' will be
 (Font)              scaled to size 36.3328pt on input line 10.
 LaTeX Font Info:    Font shape `T1/fnc/m/n' will be
@@ -1646,13 +1646,13 @@ Package lettrine.sty Info: Targeted height = 39.06784pt
  [4
 
 ]
-<Images/RL_Loop.png, id=212, 714.67pt x 444.66125pt>
+<Images/RL_Loop.png, id=226, 714.67pt x 444.66125pt>
 File: Images/RL_Loop.png Graphic file (type png)
 <use Images/RL_Loop.png>
 Package pdftex.def Info: Images/RL_Loop.png  used on input line 36.
 (pdftex.def)             Requested size: 358.40137pt x 222.995pt.
  [5 <./Images/RL_Loop.png>] [6] [7] [8]
-<Images/ppo_explanation.png, id=268, 999.735pt x 862.22125pt>
+<Images/ppo_explanation.png, id=282, 999.735pt x 862.22125pt>
 File: Images/ppo_explanation.png Graphic file (type png)
 <use Images/ppo_explanation.png>
 Package pdftex.def Info: Images/ppo_explanation.png  used on input line 118.
@@ -1662,12 +1662,12 @@ Package lettrine.sty Info: Targeted height = 39.06784pt
 (lettrine.sty)             (for loversize=0, accent excluded),
 (lettrine.sty)             Lettrine height = 39.76254pt ( \color {gray} {\textsc {T}});
 (lettrine.sty)             reported on input line 13.
-LaTeX Font Info:    Trying to load font information for TS1+fnc on input line 21.
+LaTeX Font Info:    Trying to load font information for TS1+fnc on input line 24.
  (/usr/share/texlive/texmf-dist/tex/latex/fouriernc/ts1fnc.fd
 File: ts1fnc.fd 2005/12/13 font definitions for TS1/fnc.
 )
 LaTeX Font Info:    Font shape `TS1/fnc/m/n' will be
-(Font)              scaled to size 10.18341pt on input line 21.
+(Font)              scaled to size 10.18341pt on input line 24.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `fnc' (encoding: TS1).
 (microtype)             For optimal results, create family-specific settings.
@@ -1675,32 +1675,55 @@ Package microtype Info: Loading generic protrusion settings for font family
  [11
 
 ]
-<Images/unity_mlagents.png, id=296, 999.735pt x 862.22125pt>
+<Images/MLAgents_Seq_Diagram.png, id=310, 1040.88875pt x 788.9475pt>
+File: Images/MLAgents_Seq_Diagram.png Graphic file (type png)
+<use Images/MLAgents_Seq_Diagram.png>
+Package pdftex.def Info: Images/MLAgents_Seq_Diagram.png  used on input line 34.
+(pdftex.def)             Requested size: 224.0pt x 169.7769pt.
+<Images/unity_mlagents.png, id=311, 999.735pt x 862.22125pt>
 File: Images/unity_mlagents.png Graphic file (type png)
 <use Images/unity_mlagents.png>
-Package pdftex.def Info: Images/unity_mlagents.png  used on input line 33.
+Package pdftex.def Info: Images/unity_mlagents.png  used on input line 54.
 (pdftex.def)             Requested size: 224.0pt x 193.18886pt.
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 40.
- (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 61.
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [12 <./Images/unity_mlagents.png>] [13] [14] [15]) (./chapters/chapter05/results.tex [16]) (./chapters/appendices/app0A.tex [17
+ [12 <./Images/MLAgents_Seq_Diagram.png>] [13 <./Images/unity_mlagents.png>] [14]
+<Images/kitediagram.jpg, id=338, 251.86095pt x 300.6432pt>
+File: Images/kitediagram.jpg Graphic file (type jpg)
+<use Images/kitediagram.jpg>
+Package pdftex.def Info: Images/kitediagram.jpg  used on input line 120.
+(pdftex.def)             Requested size: 224.0pt x 267.38351pt.
+ [15 <./Images/kitediagram.jpg>] [16] [17]
+Overfull \hbox (33.68385pt too wide) in paragraph at lines 196--204
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[18] [19] [20]) (./chapters/chapter05/results.tex [21]) (./chapters/appendices/app0A.tex [22
 
 ]
 Package lettrine.sty Info: Targeted height = 39.06784pt
 (lettrine.sty)             (for loversize=0, accent excluded),
 (lettrine.sty)             Lettrine height = 39.76254pt ( \color {gray} {\textsc {B}});
 (lettrine.sty)             reported on input line 10.
-) [18
+) [23
 
 ] (./thesis.bbl
 LaTeX Font Info:    Font shape `T1/fnc/m/it' will be
 (Font)              scaled to size 10.18341pt on input line 10.
- [19
+ [24
 
 
 ]
@@ -1708,35 +1731,35 @@ Underfull \hbox (badness 10000) in paragraph at lines 85--87
 []\T1/fnc/m/n/10.95 (+20) URL [][]$\T1/cmtt/m/n/10.95 https : / / docs . unity3d . com / ScriptReference / MonoBehaviour . FixedUpdate .
  []
 
-[20])
+[25])
 No complaints by nag.
-[21]
+[26]
 \tf@toc=\write7
 \openout7 = `thesis.toc'.
 
-\tf@lot=\write8
-\openout8 = `thesis.lot'.
+\tf@lof=\write8
+\openout8 = `thesis.lof'.
 
-\tf@lof=\write9
-\openout9 = `thesis.lof'.
+\tf@lot=\write9
+\openout9 = `thesis.lot'.
 
  (./thesis.aux)
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: A94D2B01C8352FA6DD69AFBC5DD69947;3928.
+(rerunfilecheck)             Checksum: 3860100EDC3ECAE8D3BEF5224A96B73D;4173.
  ) 
 Here is how much of TeX's memory you used:
- 35197 strings out of 478287
- 660928 string characters out of 5849288
- 1117026 words of memory out of 5000000
- 52226 multiletter control sequences out of 15000+600000
- 558263 words of font info for 290 fonts, out of 8000000 for 9000
+ 35240 strings out of 478287
+ 661642 string characters out of 5849288
+ 1118264 words of memory out of 5000000
+ 52246 multiletter control sequences out of 15000+600000
+ 558511 words of font info for 294 fonts, out of 8000000 for 9000
  1146 hyphenation exceptions out of 8191
- 70i,13n,79p,1160b,658s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 70i,13n,79p,1380b,658s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/fourier/fourier-bb.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/fourier/fourier-mlit.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/fourier/fourier-ms.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/ncntrsbk/uncb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/ncntrsbk/uncr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/ncntrsbk/uncri8a.pfb>
-Output written on thesis.pdf (29 pages, 435902 bytes).
+Output written on thesis.pdf (33 pages, 553321 bytes).
 PDF statistics:
- 420 PDF objects out of 1000 (max. 8388607)
- 363 compressed objects within 4 object streams
- 97 named destinations out of 1000 (max. 500000)
- 88825 words of extra memory for PDF output out of 89155 (max. 10000000)
+ 471 PDF objects out of 1000 (max. 8388607)
+ 406 compressed objects within 5 object streams
+ 111 named destinations out of 1000 (max. 500000)
+ 88851 words of extra memory for PDF output out of 89155 (max. 10000000)
 

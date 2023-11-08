@@ -1,7 +1,7 @@
 \babel@toc {english}{}\relax 
 \par \nobreak \mbox {}\hfill {\bfseries Page}\par \nobreak 
-\contentsline {chapter}{List of Tables}{vi}{section*.5}%
-\contentsline {chapter}{List of Figures}{vii}{section*.6}%
+\contentsline {chapter}{List of Figures}{vi}{section*.5}%
+\contentsline {chapter}{List of Tables}{vi}{section*.6}%
 \contentsline {chapter}{\chapternumberline {1}Introduction and Motivation}{1}{chapter.1}%
 \contentsline {subsection}{\numberline {1.0.1}A Renewed Interest in Wind Propultion}{2}{subsection.1.0.1}%
 \contentsline {subsection}{\numberline {1.0.2}Reinforcement Learning for Autonomous Control}{2}{subsection.1.0.2}%
@@ -11,19 +11,21 @@
 \contentsline {section}{\numberline {2.3}Proximal Policy Optimization (PPO)}{7}{section.2.3}%
 \contentsline {chapter}{\chapternumberline {3}Methodology}{11}{chapter.3}%
 \contentsline {section}{\numberline {3.1}MLAgents}{11}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Python Implementation}{12}{subsection.3.1.1}%
-\contentsline {section}{\numberline {3.2}The Environment}{12}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Boat Model}{13}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Kite Model}{14}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Collision Detection}{15}{subsection.3.2.3}%
-\contentsline {section}{\numberline {3.3}RL Implementation}{15}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}The Agent Script}{15}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Observations}{15}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Actions}{15}{subsection.3.3.3}%
-\contentsline {subsection}{\numberline {3.3.4}Rewards}{15}{subsection.3.3.4}%
-\contentsline {section}{\numberline {3.4}Initial Training}{16}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Optimization}{16}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}Blue Crystal HPC}{16}{subsection.3.5.1}%
-\contentsline {chapter}{\chapternumberline {4}Results and Validation}{17}{chapter.4}%
-\contentsline {appendix}{\chapternumberline {A}Appendix A}{18}{appendix.A}%
-\contentsline {chapter}{Bibliography}{19}{appendix*.8}%
+\contentsline {subsection}{\numberline {3.1.1}Python Implementation}{11}{subsection.3.1.1}%
+\contentsline {section}{\numberline {3.2}The Environment}{13}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Boat Model}{14}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Kite Model}{15}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Collision Detection}{16}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Course Generation}{17}{subsection.3.2.4}%
+\contentsline {section}{\numberline {3.3}Controls}{17}{section.3.3}%
+\contentsline {section}{\numberline {3.4}RL Implementation}{17}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}The Agent Script}{17}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Observations}{17}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Actions}{18}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.4}Rewards}{19}{subsection.3.4.4}%
+\contentsline {section}{\numberline {3.5}Initial Training}{19}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Optimization}{20}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Blue Crystal HPC}{20}{subsection.3.6.1}%
+\contentsline {chapter}{\chapternumberline {4}Results and Validation}{22}{chapter.4}%
+\contentsline {appendix}{\chapternumberline {A}Appendix A}{23}{appendix.A}%
+\contentsline {chapter}{Bibliography}{24}{appendix*.8}%
