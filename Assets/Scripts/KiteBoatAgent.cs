@@ -30,8 +30,7 @@ public class KiteBoatAgent : Agent
     private float currentDistanceToWaypoint;
     private float previousDistanceToWaypoint;
 
-    private float lastDistanceToWaypoint;
-    private float checkInterval = 5f;
+    private readonly float checkInterval = 5f;
     private Coroutine checkPositionRoutine;
 
     public UnityEngine.UI.Text rewardText;
@@ -39,6 +38,7 @@ public class KiteBoatAgent : Agent
     public UnityEngine.UI.Text actionText;
 
     public UnityEngine.UI.Text completedWaypointsText;
+    public UnityEngine.UI.Text lessonText;
 
     private Vector3 startPosition;
     private Quaternion startRotation;
@@ -51,6 +51,18 @@ public class KiteBoatAgent : Agent
 
     private bool isFirstEpisode = true;
 
+    public int lessonNumber = 0;
+    
+    public float goneTheDistance = 0;
+
+    public float lvl0Success = 5;
+    private bool hitLessonTarget = false;
+
+    private const float KiteStableHeight = 10f; // Example stable height for the kite
+    private const float KiteHeightRewardMultiplier = 0.1f;
+
+    private int[] lastActions = new int[2];
+
     public override void OnEpisodeBegin()
     {
         // jointSim.ResetKite();
@@ -58,31 +70,28 @@ public class KiteBoatAgent : Agent
         {
             isFirstEpisode = false;
             startPosition = transform.position;
-            startRotation = transform.rotation;
-            startKitePosition = kiteRigidbody.transform.localPosition;
-            startKiteRotation = kiteRigidbody.transform.localRotation;
+            // startRotation = transform.rotation;
+            startKitePosition = kiteRigidbody.transform.position;
+            startKiteRotation = kiteRigidbody.transform.rotation;
 
+        }
+        if (lessonNumber != 0 && waypointManager.GetWaypoint() == null)
+        {
+            waypointManager.CreateWaypoint();
         }
         // ResetEnvironment();
         StartCoroutine(ResetEnvironment());
         previousPosition = transform.position;
-        lastDistanceToWaypoint = waypointManager.distanceFromBoat;
         if (checkPositionRoutine != null)
         {
             StopCoroutine(checkPositionRoutine);
         }
         checkPositionRoutine = StartCoroutine(CheckPosition());
         // StartCoroutine(WaitAndRequestDecision());
+        SetReward(0f);
         Debug.Log("OnEpisodeBegin, post ResetEnvironment");
         RequestDecision();
     }
-
-    // IEnumerator WaitAndRequestDecision()
-    // {
-    //     ResetEnvironment();
-    //     yield return new WaitForSeconds(1.0f);  // Wait for 1 second
-    //     RequestDecision();
-    // }
     private IEnumerator ResetEnvironment() 
     {
 
@@ -99,18 +108,13 @@ public class KiteBoatAgent : Agent
         rudder.SetRudderTargetAngle(0f);
         jointSim.StopSteering();
 
-        transform.position = startPosition + new Vector3(0, 2, 0);
-        transform.rotation = startRotation;
-
-        // set the local position of the kite to the start position
-        kiteRigidbody.transform.localPosition = startKitePosition;
-        kiteRigidbody.transform.localRotation = startKiteRotation;
-
-        // log the start position
+        startRotation = Quaternion.Euler(0, Random.Range(90, 270), 0);
+        transform.SetPositionAndRotation(startPosition + new Vector3(0, 2, 0), startRotation);
+        kiteRigidbody.transform.SetPositionAndRotation(startKitePosition, startKiteRotation);
 
         if (hitFinish)
         {
-            waypointManager.NewWaypoint();
+            waypointManager.NewWaypoint(lessonNumber);
             hitFinish = false;
             
         }
@@ -120,6 +124,13 @@ public class KiteBoatAgent : Agent
         boatRigidbody.angularVelocity = Vector3.zero;
         boatRigidbody.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>().velocity = Vector3.zero;
         boatRigidbody.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+
+        // goneTheDistance = 0;
+        hitLessonTarget = false;
+        if (lessonNumber != 0 && waypointManager.GetWaypoint() == null)
+        {
+            waypointManager.CreateWaypoint();
+        }
 
         yield return new WaitForSeconds(1.0f);
     }
@@ -138,8 +149,8 @@ public class KiteBoatAgent : Agent
 
         // reward: greater +ve velocity
         if (boatForwardSpeed > 1f) {
-            AddReward(boatForwardSpeed * 0.001f);
-            if (boatForwardSpeed > 5f)
+            AddReward(boatForwardSpeed * 0.005f);
+            if (boatForwardSpeed > 4f)
             {
                 AddReward(boatForwardSpeed * 0.01f);
             }
@@ -148,32 +159,83 @@ public class KiteBoatAgent : Agent
         {
             AddReward(-0.001f);
         }
-        // // reward if the boat is moving towards the waypoint
-        // currentDistanceToWaypoint = Vector3.Distance(transform.position, waypointManager.waypoint.transform.position);
-        // previousDistanceToWaypoint = Vector3.Distance(previousPosition, waypointManager.waypoint.transform.position);        
-        // if (currentDistanceToWaypoint < previousDistanceToWaypoint)
-        // {
-        //     // AddReward(0.001f);
-        //     // make the reward inversely proportional to the distance
-        //     AddReward(1f / currentDistanceToWaypoint);
-        // }
-        // else if (currentDistanceToWaypoint > previousDistanceToWaypoint)
-        // {
-        //     AddReward(-0.0001f * currentDistanceToWaypoint);
-        // }
-        // previousPosition = transform.position;
+        // reward if the boat is moving towards the waypoint
+        if (lessonNumber != 0 && waypointManager.GetWaypoint() != null)
+        {
+            currentDistanceToWaypoint = Vector3.Distance(transform.position, waypointManager.GetWaypoint().transform.position);
+            previousDistanceToWaypoint = Vector3.Distance(previousPosition, waypointManager.GetWaypoint().transform.position);        
+            if (currentDistanceToWaypoint < previousDistanceToWaypoint)
+            {
+                // AddReward(0.001f);
+                // make the reward inversely proportional to the distance
+                AddReward(10f / currentDistanceToWaypoint);
+            }
+            else if (currentDistanceToWaypoint > previousDistanceToWaypoint)
+            {
+                AddReward(-0.1f * (currentDistanceToWaypoint- previousDistanceToWaypoint));
+            }
+            previousPosition = transform.position;
 
-        // if (gjkCollisionDetection.GJK(gameObject.GetComponent<MeshFilter>(), transform.position, waypointManager.waypoint.GetComponent<MeshFilter>(), waypointManager.waypoint.transform.position))
-        // {
-        //     Debug.Log("Finish");
-        //     hitFinish = true;
-        //     AddReward(10.0f);
-        //     CompleteEpisode();
-        // }
+            if (gjkCollisionDetection.GJK(gameObject.GetComponent<MeshFilter>(), transform.position, waypointManager.GetWaypoint().GetComponent<MeshFilter>(), waypointManager.GetWaypoint().transform.position))
+            {
+                Debug.Log("Finish");
+                hitFinish = true;
+                AddReward(10.0f);
+                CompleteEpisode();
+            }
+        }
+
+        // negativly reward if the rudder is greater than 45 degrees by increasing the reward the further away from 45 degrees
+        if (Mathf.Abs(rudder.angle) > 60.0f)
+        {
+            AddReward(-0.001f * (Mathf.Abs(rudder.angle) - 60.0f));
+        }
 
         AddReward(-0.001f);
-
+        CheckLessonSuccess();
         completedWaypointsText.text = "Completed Waypoints: " + waypointManager.GetCompletedWaypoints().ToString();
+        if (lessonNumber == 0)
+        {
+            lessonText.text = "Lesson: 0, " + goneTheDistance.ToString() + "/" + lvl0Success.ToString() + ", " + (500f - Vector3.Distance(transform.position, startPosition)).ToString("0.0") + "m to go";
+        }
+        else 
+        {
+            lessonText.text = "Lesson: " + lessonNumber.ToString();
+        }
+    }
+
+    private void CheckLessonSuccess()
+    {
+        // to graduate from lesson 0 to 1, the boat must travel 500m from the start position 5 times
+        if (lessonNumber == 0 && Vector3.Distance(transform.position, startPosition) > 500f)
+        {
+            if (hitLessonTarget) return;
+            goneTheDistance ++;
+            hitLessonTarget = true;
+            if (goneTheDistance >= lvl0Success)
+            {
+                lessonNumber ++;
+                waypointManager.CreateWaypoint();
+                goneTheDistance = 0;
+            }
+        }
+        // to graduate from lesson 1 to 2, the boat must complete 10 waypoints in the 45 degree window
+        if (lessonNumber == 1 && waypointManager.GetCompletedWaypoints() > 10f)
+        {
+            lessonNumber ++;
+        }
+        if (lessonNumber == 2 && waypointManager.GetCompletedWaypoints() > 50f)
+        {
+            lessonNumber ++;
+        }
+        if (lessonNumber == 3 && waypointManager.GetCompletedWaypoints() > 80f)
+        {
+            lessonNumber ++;
+        }
+        if (lessonNumber == 4 && waypointManager.GetCompletedWaypoints() > 150f)
+        {
+            lessonNumber ++;
+        }
 
     }
 
@@ -182,21 +244,21 @@ public class KiteBoatAgent : Agent
         while (true)
         {
             yield return new WaitForSeconds(checkInterval);
-
-            // If the boat hasn't moved closer to the waypoint, end the episode
-            // if (currentDistanceToWaypoint >= lastDistanceToWaypoint)
-            // {               
-            //     print("currentDistanceToWaypoint: " + currentDistanceToWaypoint + ", lastDistanceToWaypoint: " + lastDistanceToWaypoint);
-            //     AddReward(-2.0f);
-            //     CompleteEpisode();
-            // }
-
-            // Update the last distance for the next check
-            lastDistanceToWaypoint = currentDistanceToWaypoint;
+            if (lessonNumber != 0)
+            {
+                float startDistanceToWaypoint = Vector3.Distance(startPosition, waypointManager.GetWaypoint().transform.position);
+                // If the boat if further away now than it started end episode
+                if (currentDistanceToWaypoint >= startDistanceToWaypoint + 10.0f)
+                {               
+                    print("currentDistanceToWaypoint: " + currentDistanceToWaypoint + ", started at position: " + startDistanceToWaypoint);
+                    AddReward(-10.0f);
+                    CompleteEpisode();
+                }
+            }
         }
     }
 
-    private Vector3 polarAngles(Vector3 kitePosition, Vector3 wind)
+    private Vector3 PolarAngles(Vector3 kitePosition, Vector3 wind)
     {
         Vector3 basePosition = boatRigidbody.position + new Vector3(0, 1f, 0);
         // Debug.DrawLine(basePosition, basePosition + kitePosition, Color.green, 1.0f);
@@ -232,44 +294,61 @@ public class KiteBoatAgent : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        // Waypoint position in world space
-        // Vector3 waypointPosition = waypointManager.waypoint.transform.position;
-        // sensor.AddObservation(waypointPosition);
-
         Vector3 boatPosition = transform.position;
         Vector3 boatForward = transform.forward;
         Vector3 wind = jointSim.windAtKite;
-        
-        // boat position in world space
-        // sensor.AddObservation(boatPosition);
-        
-        // boat rotation relative to the wind   
-        // Vector3 windOnHorizontalPlane = Vector3.ProjectOnPlane(wind, Vector3.up);
-        // float angleHorizontal = Vector3.Angle(boatForward, windOnHorizontalPlane);
-        // bool angleHorizontalSign = Vector3.Cross(boatForward, windOnHorizontalPlane).y < 0;
-        // if (angleHorizontalSign)
-        // {
-        //     angleHorizontal = -angleHorizontal;
-        // }
-        // sensor.AddObservation(angleHorizontal);
-
-
-        // Boat speed
-        sensor.AddObservation(boatForwardSpeed);
-        sensor.AddObservation(wind);
+        float distanceToWaypoint;
+        if (lessonNumber == 0)
+        {
+            distanceToWaypoint = 0;
+        }
+        else 
+        {
+            Vector3 waypointPosition = waypointManager.GetWaypoint().transform.position;
+            distanceToWaypoint = Vector3.Distance(boatPosition, waypointPosition);
+        }
 
         // Distance to waypoint
-        // float distanceToWaypoint = Vector3.Distance(boatPosition, waypointPosition);
-        // sensor.AddObservation(distanceToWaypoint);
+        sensor.AddObservation(distanceToWaypoint);
+        // Boat speed
+        sensor.AddObservation(boatForwardSpeed);
+        // Wind
+        sensor.AddObservation(wind);
+        // kite polar angles
+        sensor.AddObservation(PolarAngles(kiteRigidbody.transform.localPosition, wind));
+
+        // Calculate the relative wind direction in the horizontal plane
+        Vector3 windDirectionOnHorizontalPlane = Vector3.ProjectOnPlane(wind, Vector3.up).normalized;
+        Vector3 boatForwardOnHorizontalPlane = Vector3.ProjectOnPlane(boatForward, Vector3.up).normalized;
+
+        // Calculate the angle using atan2 for a smooth transition
+        float angleToWind = Mathf.Atan2(
+            Vector3.Dot(Vector3.Cross(boatForwardOnHorizontalPlane, windDirectionOnHorizontalPlane), Vector3.up),
+            Vector3.Dot(boatForwardOnHorizontalPlane, windDirectionOnHorizontalPlane)
+        );
+
+        // Normalize the angle to be between 0 and 1
+        float normalizedAngleToWind = (angleToWind + Mathf.PI) / (2 * Mathf.PI);
+
+        sensor.AddObservation(normalizedAngleToWind);
+
+        // Additional observations for kite control
+        Vector3 kiteVelocityRelative = kiteRigidbody.velocity - boatRigidbody.velocity;
+        sensor.AddObservation(kiteVelocityRelative); // Relative velocity of kite to boat
+
+        float normalizedKiteHeight = Mathf.Clamp01((kiteRigidbody.transform.localPosition.y - 1f) / (KiteStableHeight - 1f));
+        sensor.AddObservation(normalizedKiteHeight); // Kite height relative to water
+
+
+        float normalizedRudderAngle = rudder.angle / 90.0f;
+        sensor.AddObservation(normalizedRudderAngle);
 
         // Kite position relative to boat, normalised relative position rotated to boat view and distance
         // Vector3 kiteRelativePosition = kiteRigidbody.transform.position - transform.position;
         // Vector3 kiteRelativePositionNormalised = kiteRelativePosition.normalized;
         // sensor.AddObservation(Quaternion.Inverse(transform.rotation) * kiteRelativePositionNormalised);
         // sensor.AddObservation(kiteRelativePosition.magnitude);
-
-        // kite polar angles
-        sensor.AddObservation(polarAngles(kiteRigidbody.transform.localPosition, wind));
+        // print("angle of boat to wind: " + angleToWind * Mathf.Rad2Deg);
 
     }
 
@@ -306,18 +385,38 @@ public class KiteBoatAgent : Agent
             jointSim.SteerRight();
         }
 
+        if (lastActions[0] != rudderAction || lastActions[1] != kiteControlAction)
+        {
+            AddReward(-0.1f);
+        }
+        lastActions[0] = rudderAction;
+        lastActions[1] = kiteControlAction;
+
         // if the kite is less that 1m above the water, end the episode
         if (kiteRigidbody.transform.localPosition.y < 1.0f)
         {
-            AddReward(-1f);
+            AddReward(-10f);
             CompleteEpisode();
         }
 
-        // reward the kite for being above 45 degrees
-        if (polarAngles(kiteRigidbody.transform.localPosition, jointSim.windAtKite).y > 45.0f)
+        if (PolarAngles(kiteRigidbody.transform.localPosition, jointSim.windAtKite).y >15)
         {
-            AddReward(0.1f);
+            AddReward(0.01f);
+            if (PolarAngles(kiteRigidbody.transform.localPosition, jointSim.windAtKite).y > 45.0f)
+            {
+                AddReward(0.05f);
+            }
         }
+
+        // float heightDifference = Mathf.Abs(kiteRigidbody.transform.localPosition.y - KiteStableHeight);
+        // if (heightDifference < 2f) // Kite is within the desired height range
+        // {
+        //     AddReward((2f - heightDifference) * KiteHeightRewardMultiplier);
+        // }
+        // else
+        // {
+        //     AddReward(-heightDifference * KiteHeightRewardMultiplier);
+        // }
 
         rewardText.text = "Reward: " + GetCumulativeReward().ToString("0.0000");
 

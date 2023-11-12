@@ -27,5 +27,8 @@
 \contentsline {section}{\numberline {3.6}Optimization}{20}{section.3.6}%
 \contentsline {subsection}{\numberline {3.6.1}Blue Crystal HPC}{20}{subsection.3.6.1}%
 \contentsline {chapter}{\chapternumberline {4}Results and Validation}{22}{chapter.4}%
-\contentsline {appendix}{\chapternumberline {A}Appendix A}{23}{appendix.A}%
-\contentsline {chapter}{Bibliography}{24}{appendix*.8}%
+\contentsline {section}{\numberline {4.1}Final Experimental Setup}{22}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Training Results}{22}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Evaluation Of Agent Performance}{22}{section.4.3}%
+\contentsline {appendix}{\chapternumberline {A}Appendix A}{24}{appendix.A}%
+\contentsline {chapter}{Bibliography}{25}{appendix*.8}%

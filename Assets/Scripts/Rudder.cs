@@ -45,11 +45,11 @@ public class Rudder : MonoBehaviour
         // Vector3 liftForce = liftDirection * liftForceMagnitude;
         // boatRb.AddForce(liftForce);
 
-        if (boatForwardSpeed > 0.25 || boatForwardSpeed < -1)
-        {
+        // if (boatForwardSpeed > 0.25 || boatForwardSpeed < -1)
+        // {
             Vector3 lateralVelocity = Vector3.Dot(boatRb.velocity, transform.right) * transform.right;
             boatRb.velocity -= lateralVelocity;
-        }
+        // }
         
 
 

@@ -59,7 +59,7 @@ public class BoatController : MonoBehaviour
       waypointManager.ResetWaypoint();
     }
 
-    if (waypointManager.waypoint == null)
+    if (waypointManager.GetWaypoint() == null)
     {
       Debug.LogError("No waypoints found");
       return;
@@ -70,7 +70,7 @@ public class BoatController : MonoBehaviour
       return;
     }
 
-    if (gjkCollisionDetection.GJK(gameObject.GetComponent<MeshFilter>(), transform.position, waypointManager.waypoint.GetComponent<MeshFilter>(), waypointManager.waypoint.transform.position))
+    if (gjkCollisionDetection.GJK(gameObject.GetComponent<MeshFilter>(), transform.position, waypointManager.GetWaypoint().GetComponent<MeshFilter>(), waypointManager.GetWaypoint().transform.position))
     {
       Debug.Log("Finish");
       jointSim.ResetKite();

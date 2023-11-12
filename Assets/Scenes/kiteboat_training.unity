@@ -701,12 +701,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boat: {fileID: 1732797992444528722}
   waypointRadius: 50
-  distanceFromBoat: 150
+  distanceFromBoat: 400
   waypointHeight: 2
   waypointPrefab: {fileID: 3049488577073184054, guid: 9d9fa258faf42c385bd9c49864a665a4,
     type: 3}
-  waypoint: {fileID: 3049488577073184054, guid: 9d9fa258faf42c385bd9c49864a665a4,
-    type: 3}
+  completedWaypoints: 0
 --- !u!4 &604526106
 Transform:
   m_ObjectHideFlags: 0
@@ -854,6 +853,85 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 668495222}
+  m_CullTransparentMesh: 1
+--- !u!1 &686176386
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 686176387}
+  - component: {fileID: 686176389}
+  - component: {fileID: 686176388}
+  m_Layer: 0
+  m_Name: Lesson
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &686176387
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686176386}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1747075073}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -511, y: -137.5}
+  m_SizeDelta: {x: 161.8881, y: 29}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &686176388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686176386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.963735, g: 1, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Lesson
+--- !u!222 &686176389
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686176386}
   m_CullTransparentMesh: 1
 --- !u!1001 &835857227
 PrefabInstance:
@@ -1754,6 +1832,7 @@ RectTransform:
   - {fileID: 1108477399}
   - {fileID: 668495223}
   - {fileID: 1041140733}
+  - {fileID: 686176387}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6051,7 +6130,7 @@ MonoBehaviour:
   joyController: {fileID: 7693920803344893637}
   agent: {fileID: 0}
   currentResultantForce: {x: 0, y: 0, z: 0}
-  forceMultiplier: 40
+  forceMultiplier: 50
   windSim: {fileID: 1797218799}
   lineLength: 35
   jointPowerLeft: {fileID: 8819750887354370108}
@@ -6251,7 +6330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 12
+    VectorObservationSize: 14
     NumStackedVectorObservations: 30
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -6320,8 +6399,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1732797992444528722}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.86602545, z: 0, w: 0.49999994}
-  m_LocalPosition: {x: 0, y: 1.2, z: -200}
+  m_LocalRotation: {x: -0.0012435139, y: 0.94656426, z: 0.037552025, w: 0.32031932}
+  m_LocalPosition: {x: 0.2784096, y: 1.4338131, z: -200.30891}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6337,7 +6416,7 @@ Transform:
   - {fileID: 5529558334045827402}
   - {fileID: 7693920803344893635}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 120, z: 0}
+  m_LocalEulerAnglesHint: {x: -4.122, y: 142.563, z: 1.247}
 --- !u!1 &8231387184996051278
 GameObject:
   m_ObjectHideFlags: 0
@@ -6409,13 +6488,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865877692313682545}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 0, y: 0.5, z: -0.9000001}
+  m_LocalRotation: {x: -0.45048022, y: -0, z: 0.89278644, w: 0}
+  m_LocalPosition: {x: 0.6933333, y: 0.49981117, z: -0.5620799}
   m_LocalScale: {x: 0.1, y: 0.10000002, z: 0.10000003}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7693920803135848778}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: -53.549, z: 180}
 --- !u!65 &8452599858716890382
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6984,6 +7063,10 @@ MonoBehaviour:
   rewardText: {fileID: 1108477400}
   actionText: {fileID: 668495224}
   completedWaypointsText: {fileID: 1041140734}
+  lessonText: {fileID: 686176388}
+  lessonNumber: 1
+  goneTheDistance: 0
+  lvl0Success: 5
 --- !u!23 &9021457761630476968
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -1,17 +1,17 @@
 # Fdb version 3
-["bibtex thesis"] 1699449568 "thesis.aux" "thesis.bbl" "thesis" 1699449826
+["bibtex thesis"] 1699623955 "thesis.aux" "thesis.bbl" "thesis" 1699623957
   "/usr/share/texlive/texmf-dist/bibtex/bst/natbib/unsrtnat.bst" 1233624470 24550 a41a6405f4de768c43e871d9fbce2bc8 ""
-  "thesis.aux" 1699449826 9823 cd2d4479248e979f5723e4e8884de7b5 "pdflatex"
+  "thesis.aux" 1699623957 10198 37fd77ad75528a69807c02c9f2904c74 "pdflatex"
   "thesisbiblio.bib" 1699375393 5026 3f22a6aa9020d6f728a633d05f0d8a9d ""
   (generated)
   "thesis.bbl"
   "thesis.blg"
-["makeindex thesis.idx"] 1699446595 "thesis.idx" "thesis.ind" "thesis" 1699449826
-  "thesis.idx" 1699449825 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+["makeindex thesis.idx"] 1699446595 "thesis.idx" "thesis.ind" "thesis" 1699623957
+  "thesis.idx" 1699623955 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
   "thesis.ilg"
   "thesis.ind"
-["pdflatex"] 1699449824 "/home/joshua/Documents/Unity/ai_kite/Report/KiteBoat/thesis.tex" "thesis.pdf" "thesis" 1699449826
+["pdflatex"] 1699623955 "/home/joshua/Documents/Unity/ai_kite/Report/KiteBoat/thesis.tex" "thesis.pdf" "thesis" 1699623957
   "/etc/texmf/web2c/texmf.cnf" 1696225864 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/joshua/Documents/Unity/ai_kite/Report/KiteBoat/thesis.tex" 1699446779 13322 b340d83f4bc71630b5015ed285bb8fa7 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -303,22 +303,22 @@
   "Images/unity_mlagents.png" 1699370446 104484 944a1b8b498a347b332a84d256e8f0a6 ""
   "chapters/appendices/app0A.tex" 1697182256 200 3b0a4479994859bdbadc487c25e36a0f ""
   "chapters/chapter01/chap01.tex" 1697650273 8190 79aaab604b7ef9b00b41f097b8c14e9d ""
-  "chapters/chapter02/background.tex" 1699370584 17091 6f816282532b1ad22551c94b6d282047 ""
-  "chapters/chapter04/method.tex" 1699449824 25887 4bebb598566d262550eac7e1b84c7359 ""
-  "chapters/chapter05/results.tex" 1699373538 66 e8a44a2fa1f87dee3334164f94b6beea ""
+  "chapters/chapter02/background.tex" 1699615976 17069 8852bc4cf1f423db5daf7e9b739e4a39 ""
+  "chapters/chapter04/method.tex" 1699614877 26154 07951ec5c38dfe3fe70659a824093994 ""
+  "chapters/chapter05/results.tex" 1699623952 1813 1280d52c8d6e025603a3ad9b7a9db95a ""
   "frontmatter/abstract.tex" 1697182256 552 61169a66a5584b71876e7ae842600758 ""
   "frontmatter/declaration.tex" 1697182256 1546 3968de86521f8290e217cc92e0a833d6 ""
   "frontmatter/dedication.tex" 1697182256 240 c3b6171ef2b271e75d4cd39cd1a3343b ""
   "frontmatter/title.tex" 1697182256 1964 0ca3c72af9c517ea285b463efa995a85 ""
   "logos/bristolcrest_colour.pdf" 1697182256 133081 910fa2330406778c6658724a5c646377 ""
-  "thesis.aux" 1699449826 9823 cd2d4479248e979f5723e4e8884de7b5 "pdflatex"
-  "thesis.bbl" 1699449568 4726 c36c7dc63516f2601e8927ad67913134 "bibtex thesis"
+  "thesis.aux" 1699623957 10198 37fd77ad75528a69807c02c9f2904c74 "pdflatex"
+  "thesis.bbl" 1699623955 4726 c36c7dc63516f2601e8927ad67913134 "bibtex thesis"
   "thesis.ind" 1699446595 0 d41d8cd98f00b204e9800998ecf8427e "makeindex thesis.idx"
-  "thesis.lof" 1699449826 662 545a6ed903fa8a793e60daa0a988258f "pdflatex"
-  "thesis.lot" 1699449826 352 53f9c15d77f99e9d5ac1f59c04f1c402 "pdflatex"
-  "thesis.out" 1699449826 4173 3860100edc3ecae8d3bef5224a96b73d "pdflatex"
+  "thesis.lof" 1699623957 661 e7730a8b9ea23a9bafce56555b85c20e "pdflatex"
+  "thesis.lot" 1699623957 352 53f9c15d77f99e9d5ac1f59c04f1c402 "pdflatex"
+  "thesis.out" 1699623957 4711 df5a4b6df37997053546ceccdba1a032 "pdflatex"
   "thesis.tex" 1699446779 13322 b340d83f4bc71630b5015ed285bb8fa7 ""
-  "thesis.toc" 1699449826 2428 d5764c7253d312fe534700e5fbd2ca56 "pdflatex"
+  "thesis.toc" 1699623957 2682 ee041f81f3bb4a735ecce39e62ff3316 "pdflatex"
   (generated)
   "thesis.aux"
   "thesis.idx"
