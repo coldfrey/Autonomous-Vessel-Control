@@ -1,3 +1,4 @@
 # ignore all libary files
 
-Libary/*
+Libary/
+*.meta
