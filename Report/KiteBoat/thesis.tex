@@ -171,6 +171,8 @@
 \usepackage{amsmath}
 
 \usepackage[numbers,sort&compress]{natbib}
+\usepackage{multirow} % Add this in the preamble
+\usepackage{graphicx}
 
 
 \usetikzlibrary{arrows,shapes,snakes,
@@ -342,14 +344,13 @@
 %
 % The bulk of the document is delegated to these chapter files in
 % subdirectories.
-\mainmatter
-%
-\import{chapters/chapter01/}{chap01.tex}
+\mainmatter\import{chapters/chapter01/}{chap01.tex}
 \import{chapters/chapter02/}{background.tex}
 % \import{chapters/chapter03/}{aims.tex}
 \import{chapters/chapter04/}{method.tex}
 %
 \import{chapters/chapter05}{results.tex}
+\import{chapters/chapter06}{future_work.tex}
 
 
 % And the appendix goes here

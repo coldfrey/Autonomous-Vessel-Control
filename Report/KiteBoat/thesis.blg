@@ -4,50 +4,50 @@ The top-level auxiliary file: thesis.aux
 The style file: unsrtnat.bst
 Database file #1: thesisbiblio.bib
 Warning--entry type for "unity100seconds" isn't style-file defined
---line 86 of file thesisbiblio.bib
+--line 150 of file thesisbiblio.bib
 Warning--entry type for "unityupdatefixedupdate" isn't style-file defined
---line 121 of file thesisbiblio.bib
+--line 185 of file thesisbiblio.bib
 Warning--entry type for "unityrigidbody" isn't style-file defined
---line 128 of file thesisbiblio.bib
-You've used 19 entries,
+--line 192 of file thesisbiblio.bib
+You've used 24 entries,
             2481 wiz_defined-function locations,
-            656 strings with 7120 characters,
-and the built_in function-call counts, 6096 in all, are:
-= -- 490
-> -- 273
-< -- 15
-+ -- 117
-- -- 78
-* -- 397
-:= -- 981
-add.period$ -- 59
-call.type$ -- 19
-change.case$ -- 31
-chr.to.int$ -- 18
-cite$ -- 19
-duplicate$ -- 340
-empty$ -- 617
-format.name$ -- 107
-if$ -- 1309
+            692 strings with 8099 characters,
+and the built_in function-call counts, 7808 in all, are:
+= -- 639
+> -- 336
+< -- 19
++ -- 145
+- -- 96
+* -- 517
+:= -- 1255
+add.period$ -- 77
+call.type$ -- 24
+change.case$ -- 39
+chr.to.int$ -- 23
+cite$ -- 24
+duplicate$ -- 435
+empty$ -- 791
+format.name$ -- 131
+if$ -- 1677
 int.to.chr$ -- 2
-int.to.str$ -- 20
-missing$ -- 20
-newline$ -- 105
-num.names$ -- 57
-pop$ -- 190
+int.to.str$ -- 25
+missing$ -- 27
+newline$ -- 133
+num.names$ -- 72
+pop$ -- 232
 preamble$ -- 1
-purify$ -- 19
+purify$ -- 24
 quote$ -- 0
-skip$ -- 205
+skip$ -- 258
 stack$ -- 0
-substring$ -- 161
-swap$ -- 42
+substring$ -- 238
+swap$ -- 52
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 115
+type$ -- 144
 warning$ -- 0
-while$ -- 44
+while$ -- 58
 width$ -- 0
-write$ -- 245
+write$ -- 314
 (There were 3 warnings)

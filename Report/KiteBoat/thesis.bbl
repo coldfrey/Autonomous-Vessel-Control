@@ -1,9 +1,45 @@
-\begin{thebibliography}{19}
+\begin{thebibliography}{24}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Ferentinos et~al.(2012)Ferentinos, Gkioni, Geraga, and
+  Papatheodorou]{Ferentinos2012}
+G.~Ferentinos, M.~Gkioni, M.~Geraga, and G.~Papatheodorou.
+\newblock Early seafaring activity in the southern ionian islands,
+  mediterranean sea.
+\newblock \emph{Journal of Archaeological Science}, 39\penalty0 (7):\penalty0
+  2167--2176, 2012.
+\newblock \doi{10.1016/J.JAS.2012.01.032}.
+\newblock URL \url{https://dx.doi.org/10.1016/J.JAS.2012.01.032}.
+
+\bibitem[Casson(1995)]{casson1995ships}
+Lionel Casson.
+\newblock \emph{Ships and Seamanship in the Ancient World}.
+\newblock Princeton University Press, 1995.
+
+\bibitem[Gardiner(1993)]{gardiner1993advent}
+Robert Gardiner.
+\newblock \emph{The Advent of Steam - The Merchant Steamship before 1900}.
+\newblock Conway Maritime Press Ltd., 1993.
+
+\bibitem[Corbett et~al.(2007)]{corbett2007mortality}
+J.J. Corbett et~al.
+\newblock Mortality from ship emissions: A global assessment.
+\newblock \emph{Environmental Science \& Technology}, 41\penalty0
+  (24):\penalty0 8512--8518, 2007.
+
+\bibitem[Vahs(2019)]{vahs2019retrofitting}
+M.~Vahs.
+\newblock Retrofitting of flettner rotors – results from sea trials of the
+  general cargo ship "fehn pollux".
+\newblock \emph{Proceedings of the Royal Institution of Naval Architects - Part
+  A: International Journal of Maritime Engineering}, 2020\penalty0
+  (A4):\penalty0 641, 2019.
+\newblock
+  \doi{https://www.intmaritimeengineering.org/index.php/ijme/article/view/1146}.
 
 \bibitem[Sutton and Barto(2018)]{sutton2018reinforcement}
 Richard~S Sutton and Andrew~G Barto.

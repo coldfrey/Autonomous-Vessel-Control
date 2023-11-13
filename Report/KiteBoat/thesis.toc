@@ -3,33 +3,38 @@
 \contentsline {chapter}{List of Figures}{vi}{section*.5}%
 \contentsline {chapter}{List of Tables}{vi}{section*.6}%
 \contentsline {chapter}{\chapternumberline {1}Introduction and Motivation}{1}{chapter.1}%
-\contentsline {subsection}{\numberline {1.0.1}A Renewed Interest in Wind Propultion}{2}{subsection.1.0.1}%
-\contentsline {subsection}{\numberline {1.0.2}Reinforcement Learning for Autonomous Control}{2}{subsection.1.0.2}%
-\contentsline {chapter}{\chapternumberline {2}Background}{4}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Reinforcement Learning (RL)}{5}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Unity Game Engine}{6}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Proximal Policy Optimization (PPO)}{7}{section.2.3}%
-\contentsline {chapter}{\chapternumberline {3}Methodology}{11}{chapter.3}%
-\contentsline {section}{\numberline {3.1}MLAgents}{11}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Python Implementation}{11}{subsection.3.1.1}%
-\contentsline {section}{\numberline {3.2}The Environment}{13}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Boat Model}{14}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Kite Model}{15}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Collision Detection}{16}{subsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.2.4}Course Generation}{17}{subsection.3.2.4}%
-\contentsline {section}{\numberline {3.3}Controls}{17}{section.3.3}%
-\contentsline {section}{\numberline {3.4}RL Implementation}{17}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}The Agent Script}{17}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}Observations}{17}{subsection.3.4.2}%
-\contentsline {subsection}{\numberline {3.4.3}Actions}{18}{subsection.3.4.3}%
-\contentsline {subsection}{\numberline {3.4.4}Rewards}{19}{subsection.3.4.4}%
-\contentsline {section}{\numberline {3.5}Initial Training}{19}{section.3.5}%
-\contentsline {section}{\numberline {3.6}Optimization}{20}{section.3.6}%
-\contentsline {subsection}{\numberline {3.6.1}Blue Crystal HPC}{20}{subsection.3.6.1}%
-\contentsline {chapter}{\chapternumberline {4}Results and Validation}{22}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Final Experimental Setup}{22}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Training Results}{22}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Evaluation Of Agent Performance}{22}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Evaluation Introduction}{23}{section.4.4}%
-\contentsline {appendix}{\chapternumberline {A}Appendix A}{24}{appendix.A}%
-\contentsline {chapter}{Bibliography}{25}{appendix*.8}%
+\contentsline {section}{\numberline {1.1}A Renewed Interest in Wind Propultion}{2}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Reinforcement Learning for Autonomous Control}{2}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Aims and Objectives}{2}{section.1.3}%
+\contentsline {chapter}{\chapternumberline {2}Background}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Reinforcement Learning (RL)}{6}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Unity Game Engine}{7}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Proximal Policy Optimization (PPO)}{8}{section.2.3}%
+\contentsline {chapter}{\chapternumberline {3}Methodology}{12}{chapter.3}%
+\contentsline {section}{\numberline {3.1}MLAgents}{12}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Python Implementation}{12}{subsection.3.1.1}%
+\contentsline {section}{\numberline {3.2}The Environment}{14}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Boat Model}{15}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Kite Model}{16}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Collision Detection}{17}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Course Generation}{18}{subsection.3.2.4}%
+\contentsline {section}{\numberline {3.3}Controls}{18}{section.3.3}%
+\contentsline {section}{\numberline {3.4}RL Implementation}{18}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}The Agent Script}{18}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Observations}{19}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Actions}{20}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.4}Rewards}{20}{subsection.3.4.4}%
+\contentsline {section}{\numberline {3.5}Training}{21}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Hyperparameters}{22}{subsection.3.5.1}%
+\contentsline {section}{\numberline {3.6}Optimization}{23}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Blue Crystal HPC}{23}{subsection.3.6.1}%
+\contentsline {chapter}{\chapternumberline {4}Results and Validation}{24}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Final Experimental Setup}{24}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Training Results}{25}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Evaluation Of Agent Performance}{25}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Training Results}{25}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Evaluation Of Agent Performance}{25}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Evaluation Introduction}{26}{section.4.6}%
+\contentsline {chapter}{\chapternumberline {5}Future Work}{28}{chapter.5}%
+\contentsline {appendix}{\chapternumberline {A}Appendix A}{29}{appendix.A}%
+\contentsline {chapter}{Bibliography}{30}{appendix*.13}%

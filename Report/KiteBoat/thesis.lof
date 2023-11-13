@@ -2,11 +2,14 @@
 \par \nobreak \textbf {{\scshape Figure} \hfill Page}\par \nobreak 
 \addvspace {10pt}
 \addvspace {10pt}
-\contentsline {figure}{\numberline {2.1}{\ignorespaces A diagram of the RL Loop}}{5}{figure.2.1}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Actor-Critic Method}}{9}{figure.2.2}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces A diagram of the RL Loop}}{6}{figure.2.1}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Actor-Critic Method}}{10}{figure.2.2}%
 \addvspace {10pt}
-\contentsline {figure}{\numberline {3.1}{\ignorespaces MLAgents Sequence Diagram}}{12}{figure.3.1}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces MLAgents Integration}}{13}{figure.3.2}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Kite Diagram}}{15}{figure.3.3}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces MLAgents Sequence Diagram}}{13}{figure.3.1}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces MLAgents Integration}}{14}{figure.3.2}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Training Environment}}{15}{figure.3.3}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Kite Diagram}}{17}{figure.3.4}%
+\addvspace {10pt}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces The agent steering on hard lock}}{26}{figure.4.1}%
 \addvspace {10pt}
 \addvspace {10pt}

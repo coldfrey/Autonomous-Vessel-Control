@@ -17,9 +17,9 @@
 MLAgents is an open-source project that allows games and simulations to serve as the environment for training intelligent agents. At its core MLAgents utilizes RL, although it also supports other methods such as imitation learning.
 
 \subsection{Python Implementation}
-The neural network used in the reinforcement learning is implemented in Python. MLAgents toolkit is a Python Library that acts as an interface between the environment (gym), in this case Unity, and PyTorch [CITE]. PyTorch is an open-source machine learning library based on the Torch library, known for its flexibility, ease of use, and native support for GPU acceleration, which is essential for the computation-heavy processes involved in training neural networks. Torch is a Python-based scientific computing package that provides prebuilt components for machine learning and deep learning, as well as a wide range of mathematical functions. MLAgents uses a python API to communicate with the Unity environment frame by frame. This stepping process allows for the synchronous collection of observations, executions of actions and retrieval of rewards. The neural network used in this project is a Proximal Policy Optimization (PPO) network, and so will utilise the actor-critic method as discussed in section$~$\ref{sec:ppo_background}.
+The neural network used in the reinforcement learning is implemented in Python. MLAgents toolkit is a Python Library that acts as an interface between the environment (gym), in this case Unity, and PyTorch [CITE]. PyTorch is an open-source machine learning library based on the Torch library, known for its flexibility, ease of use, and native support for GPU acceleration, which is essential for the computation-heavy processes involved in training neural networks. Torch is a Python-based scientific computing package that provides prebuilt components for machine learning and deep learning, as well as a wide range of mathematical functions. MLAgents uses a low level API to communicate directly with the Unity environment (\texttt{mlagents\_envs}) frame by frame, and an entry point to train (\texttt{mlagents-learn}). This stepping process allows for the synchronous collection of observations, executions of actions and retrieval of rewards. The neural network used in this project is a Proximal Policy Optimization (PPO) network, and so will utilise the actor-critic method as discussed in section$~$\ref{sec:ppo_background}.
 
-As discussed in section$~$\ref{RL_background}, RL is an approach to learning where an agent learns to make decisions by interacting with its environment. The fundamental components of this interaction with the environment are observations, actions and rewards.
+RL, preveously discussed in section$~$\ref{RL_background}, is an approach to learning where an agent learns to make decisions by interacting with its environment. The fundamental components of this interaction with the environment are observations, actions and rewards.
 \begin{itemize}
     \item Observations (State): These are the pieces of information that the agent receives from the environment at each step or frame. In Unity, observations are collected through sensors or manually coded to be extracted from the game objects. They are typically fed into the neural network as a vector of floating-point numbers, representing the current state of the environment.
     \item Actions: Based on the observations, the agent takes actions which are the outputs of the neural network. These actions can be discrete (e.g., turn left, turn right) or continuous (e.g., change angle by a certain degree). The neural network's output layer is designed accordingly to provide the appropriate action space for the agent. (Configured as part of the behavioral parameters in Unity)
@@ -57,8 +57,12 @@ A sequence diagram of the interaction between the Unity environment and the Pyth
 
 
 
-The technical instructions to setup MLAgents in Python and Unity can be found at 
-\url{https://github.com/lipj01/AI-Kite-Control}
+The technical instructions to setup MLAgents in Python and Unity can be found at:
+\newline$~$\url{https://github.com/lipj01/AI-Kite-Control} CHANGE TO MY REPO
+\newline$~$In summary the steps are as follows:
+\begin{itemize}
+    \item 
+\end{itemize}
 
 \section{The Environment}
 
@@ -72,7 +76,13 @@ Unity is recognized for its potent physics engine, however for this project the 
 Central to our simulation is the depiction of water, the medium in which our boat will navigate. Here, the Unity HDRP Water System 16.0.3 [cite] came to the rescue. Bundled with Unity 2023.2.0b9 [cite], this water system provides a realistic representation of water with its undulating waves, refractions, and reflections. 
 The alternative option to using Unity's water system was to model an entire particle fluid simulation, this would have had its advantages, however it would have been a lot more computationally expensive and would have taken a lot longer to implement. As this project was primarily focused on creating a RL algorithm for controlling a kiteboat it was decided that the Unity water system would be sufficient for this project.  
 
-The boat part of the kiteboat had two main component scripts, the buoyancy and the rudder, allowing the boat to float and be steered. The implementation of Buoyancy and the rudder are discussed in more detail in section$~$\ref{sec:Boat}. The explanation of the kite model can be found in section$~$\ref{sec:Kite}.
+The boat part of the kiteboat had two main component scripts, the buoyancy and the rudder, allowing the boat to float and be steered. The implementation of Buoyancy and the rudder are discussed in more detail in section$~$\ref{sec:Boat}. The kite had a single script that defined the physics and its explanation can be found in section$~$\ref{sec:Kite}. The final training environment can be seen in figure$~$\ref{training_enviroment}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/TrainingEnv.png}
+    \caption{Training Environment}\label{training_enviroment}
+\end{figure}
 
 
 \subsection{Boat Model}\label{sec:Boat}
@@ -154,6 +164,17 @@ In order to ensure the AI would be able to learn to sail the kiteboat a playable
 
 
 \section{RL Implementation}\label{sec:RL_Implementation}
+
+In order to use Unity game engine as the environment for RL it must be setup correctly, the steps are as follows:
+\begin{enumerate}
+    \item Enable MLAgents in Unity:
+    Window $\rightarrow$ Package Manager $\rightarrow$ MLAgents $\rightarrow$ Install
+    \item Create an empty game object in the scene.
+    \item Create a new \texttt{C\#} script of with class of type `agent' and attach it to the game object, include the methods discussed below.
+    \item Add the Behaviour Parameters component to the game object.
+    \item Create a new agent config file (\texttt{.yaml}) and set the `Behavioural Name' in the Behaviour Parameters component to the name of the config file.
+\end{enumerate}  
+
 \subsection{The Agent Script}
 The kiteboat agent sets up the scene for learning and in order for Unity to correctly process the script it must have the following 4 functions implemented:
 \begin{itemize}
@@ -164,27 +185,31 @@ The kiteboat agent sets up the scene for learning and in order for Unity to corr
 \end{itemize}
 
 These are the minimum requirements for the agent setup, however there are several other functions that can be implemented to further customize the agent, handle errors and provide additional information. The agent starts by taking in the Kite and the Boat rigid bodies, as well as the rudder and kite scripts. A new gjkCollisionDetection is also initialised. The script starts with the OnEpisodeBegin method, which in turn starts by ensuring the training environment has been reset. The reset method sets the velocities and angular velocities of all rigid bodies in the scene to 0 and returns the kiteboat to a starting position. The remaining methods will be discussed in more detail below.
+
+
 \subsection{Observations}
-CollectObservations provides the network will all the information about the State of the environment and so aim to provide all the required information for the agent to make an informed decision. This means fully describing the movement of the kite and boat, as well as the position of the boat relative to the waypoint, allowing it to gain an idea of direction. It is easy to see how the number of observations could rapidly increase, but this would also increase the complexity of the network and the likelihood of the agent becoming `confused' by the data its receiving. With this in mind the goal is to provide all the required information about the state in the minimum number of observations possible, this is achieved by combining vectors where appropriate. Another consideration when thinking about the observations was that they should be possible to collect if this system were to be created in the real world. This means that the observations should be possible to collect using sensors, such as GPS, wind speed and direction, and accelerometers. The observations used in this project are shown in table$~$\ref{observations}.
+CollectObservations provides the network will all the information about the State of the environment, and so aims to provide all the required information for the agent to make an informed decision. This means fully describing the movement of the kite and boat, as well as the position of the boat relative to the waypoint, allowing it to gain an idea of direction. It is easy to see how the number of observations could rapidly increase, but this would also increase the complexity of the network and the likelihood of the agent becoming `confused' by the data its receiving. With this in mind the goal is to provide all the required information about the state in the minimum number of observations possible, this is achieved by combining vectors where appropriate. Another consideration when thinking about the observations was that they should be possible to collect if this system were to be created in the real world. This means that the observations should be possible to collect using sensors, such as GPS, wind speed and direction, and accelerometers. The observations used in this project are shown in table$~$\ref{observations}.
 
 \begin{table}[h]
     \centering
     \begin{tabular}{c|c|c}
         Observation & Vector Size & Description \\
         \midrule
-        Waypoint Position & 3 & The position of the waypoint relative to the origin \\
         Distance to the waypoint & 1 & The distance to the waypoint from the boat \\
-        Boat Position & 3 & The position of the boat relative to the origin \\
         Boat Speed & 1 & The speed of the boat in the forwards direction \\
+        Wind vector & 3 & The direction of the wind \\
         Relative Boat Angle & 1 & The angle of the boat relative to the wind \\
-        Kite Position & &\\
-        Kite altitude & &\\
+        Kite Position & 3 & polar angles of the kite relative to the wind\\
+        Relative velocity of the kite & 3 & The velocity of the kite relative to the boat \\
+        Kite altitude & 1 & The height of the kite above sea level \\
+        Rudder Angle & 1 & The angle of the rudder \\
+
         \hline
     \end{tabular}
     \caption{Observations}\label{observations}
 \end{table}
 
-The total number of observations passed to the network is .......
+The total number of observations passed to the network is 14, this is a relatively small number of observations and so the network should be able to process them quickly. When providing observations to an agent is is essential they have no discontinuity in their values, as this can cause the network to become unstable. Observations that may be discontinuous are normalized to a value between 0 and 1. Normalised observations can increase the learning speed of algorithms, as the network does not have to learn the scale of the observations.
 
 \subsection{Actions}
 When the agent starts to train it has no idea what to do, it is essentially a blank slate, so starts by randomly flicking around the actions. The agent was given a discrete action space of 6 actions, these are shown in table$~$\ref{actions}. The actions are passed to the network as a vector of 6 values, each value is a float between 0 and 1. The network then interprets these values and outputs the appropriate action. The actions are then passed to the OnActionReceived method, which in calls the methods that control the kite and boat. Discrete actions were chosen because then the rate of change of the angles that control the rudder and kite is not the choice of the network. This gives the network an easier job and means the amount of freedom the network has can be configured. i.e. if the network could pick any value between 0 and 1 for the bar position, it would see far more aggressive controls making it harder for a stable flight to be achieved. On the other had the discrete action space encourages the agent to make a decision and stick with it while the action is being applied. 
@@ -193,26 +218,53 @@ These actions were tested as part of making a playable game so that the agent re
 
 \begin{table}[h]
     \centering
+    \resizebox{\textwidth}{!}{%
     \begin{tabular}{c|c|c|c}
-        Action & States & Description & Keyboard Input\\
+        \textbf{Action} & \textbf{States} & \textbf{Description} & \textbf{Keyboard Input}\\
         \midrule
         Kite Bar Position & Left, Off, Right & The different states change the bar position & Arrow left/right \\
         Rudder Angle & Left, Off, Right & The angle of the rudder & Keys `A' and `D'\\
         Kite Bar Power & 0, 1 & The power of the kite bar & Space Bar \\
         \hline
     \end{tabular}
+    }
     \caption{Actions}\label{actions}
 \end{table}
 
 
 \subsection{Rewards}
-Keep alive problem.
 
-Diverse conditions
+The rewards provided to the agent each step are the fundamental input that influences the future actions taken by the neural network, and so must be carefully applied when the agent performs positive actions and penalized when it performs negative actions. The reward function is the most important part of the RL algorithm, as it is the only way the agent can learn. The reward function is also the most difficult part of the RL algorithm to get right, as it is very easy to create a reward function that does not encourage the desired behavior, moreover it is common to create a reward function that helps the agent fall into local maxima while training, especially with complex tasks. Table$~$\ref{rewards} shows the rewards used in this project, These rewards were however not all applied at the same time, they were applied in stages as the agent progressed through the curriculum. This is discussed in more detail in the following section$~$\ref{sec:training}.
 
-ciriculum style learning
 
-\section{Initial Training}
+\begin{table}[h]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{c|c|c|c|c}
+        \textbf{Reward} & \textbf{Condition} & \textbf{Value} & \textbf{Timing} & \textbf{Description/Impact} \\
+        \hline
+        \multirow{3}{*}{Boat Forward Speed} & >1m/s & +0.005 & Every Step & \multirow{3}{*}{Optimise the boat for forward speed} \\
+                                               & >4m/s & +0.01  & Every Step &  \\
+                                               & <0.1m/s & -0.001 & Every Step &  \\
+        Rudder Angle & > 60$^{\circ}$ & -0.001 * abs(rudderAngle-60) & Every Step & Penalise the agent for aggressive steering \\
+        \multirow{2}{*}{Distance to Waypoint} & current < previous\footnotemark[1]& +$\frac{10}{current}$ &Every Step & \multirow{2}{*}{Encourage the agent to move towards the waypoint}  \\
+                                                  & current > previous & -0.01 * (current - previous) & Every Step &  \\
+        Waypoint Reached & Waypoint Reached & +10 & On End & Encourage the agent to reach the waypoint \\
+        Kite Crashes & Kite Hits Water & -10 & On End & Penalise the agent for crashing the kite \\
+        \multirow{2}{*}{Kite Flying} & Kite Angle > 15$^{\circ}$ & +0.01 & On Action & \multirow{2}{*}{Encourage the agent to keep the kite in the air} \\
+        & Kite Angle > 45$^{\circ}$ & +0.05 & On Action &  \\
+        Keep Alive & Always & -0.001 & Every Step & Encourage the agent to explore the action space \\
+        Decision Making & Current Actions != Previous Actions & -0.1 & On Action & Encourage the agent to be decisive in its actions \\
+        \hline
+    \end{tabular}
+    }
+    \caption{Rewards}\label{rewards}
+\end{table}
+\footnotetext[1]{`previous' is the previous distance to the waypoint at the previous time step, and `current' is the current distance to the waypoint.}
+
+
+
+\section{Training}\label{sec:training}
 Before commencing the training of the kiteboat agent, a simpler test agent was created to check the workflow and ensure the environment was setup correctly. This test agent was a simple cube that was trained to move towards a waypoint, following a pacemaker. This was a good test of the environment as it was a simple task that could be easily visualized as shown in figure .... However this test agent proved more tricky than initially anticipated and after some additional research some core RL training concepts that improve the quality of training were discovered. The first of these being make the problem a `Keep Alive' i.e. do the correct thing or die. In the context of the path follower this meant that should the cube ever be further away from the pacemaker than its original distance of 2m the episode was ended and a large negative reward given. This method encourages the agent to do the correct process if it wants to stay alive. Making the problem a keep alive problem is a simple way to improve the quality of training and is a common practice in RL. The path follower changed from not making much progress over the course of 500000 steps to being able to complete full laps of the course in around 100000 steps, as shown in figure  .....
 
 The next RL technique to help improve training is called Curriculum Learning (CL). CL is an instructional strategy that structures the learning process, much like how a school curriculum guides human learning. It involves organising the leaning tasks from simple to complex, facilitating the agent's ability to incrementally acquire, transfer and refine knowledge. In essence it breaks down large complex tasks into more manageable bitesized chunks that the agent can progress through. CL was not utilised in the path follower but was used in the kiteboat agent. The kiteboat agent was trained in several stages shown below.
@@ -227,11 +279,15 @@ Step 1 in the curriculum ensures the agent has a fundamental grasp of the contro
 
 Figure ... shows the difference in the paths at stages 2 and 3 of the curriculum. The path in stage 2 is a straight line towards the waypoint, while the path in stage 3 is a zigzag as the agent tries to find the VMG. 
 
+\subsection{Hyperparameters}\label{sec:hyperparameters}
+Hyperparameters are critical configurations that govern the training process of machine learning models. In reinforcement learning, particularly within the scope of PPO, they play a pivotal role in determining how effectively the model learns from its environment. The hyperparameters are defined within the boatAgent.yaml config file. A variety of different configurations were tested to find the a set of hyperparameters that yielded the best results. Experimentation was done with the 
+
 
 Difficulties with initial training approaches:
 -The learning of the kite is relativly straight forwards
--Rudder controls were tricky, boat has a habit of hard lock, letting the boat drag sideways seems to be a local maxima for stability,  lets the kite larn bettter
+-Rudder controls were tricky, boat has a habit of hard lock, letting the boat drag sideways seems to be a local maxima for stability,  lets the kite learn bettter
 \section{Optimization}
+
 
 \subsection{Blue Crystal HPC}
 

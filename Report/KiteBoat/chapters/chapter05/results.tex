@@ -7,9 +7,33 @@ Briefly summarize the goals of the RL experiments.
 Outline the structure of the results chapter.
 
 \section{Final Experimental Setup}
-Experimental Setup
-Detail the final setup of the training environment in Unity.
-Describe the neural network architecture and the parameters used.
+The training scene used for the final training runs can be found in the \texttt{Assets/Scenes/kiteboat\_training}. 
+
+The final experimental setup was a combination of the best performing elements from the previous experiments. The model was configured as follows, shown in table $~$\ref{model_config}:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c}
+        \textbf{Hyperparameters} & \textbf{Value} \\
+        \midrule
+        batch size & 256 \\
+        buffer size & 4096 \\
+        learning rate & 3.0e-4 \\
+
+        \midrule
+        \textbf{Network Architecture} & \textbf{Value} \\
+        \midrule
+        hidden units & 256 \\
+        hidden layers & 6 \\
+        \midrule
+        \textbf{Reward Signals} & \textbf{Value} \\
+        \midrule
+        
+        \hline
+    \end{tabular}
+    \caption{Model Configuration}\label{model_config}
+\end{table}
+
 Outline the training procedure, including any pre-training steps.
 
 \section{Training Results}
@@ -19,6 +43,28 @@ Include a table or graph of the agent’s performance metrics at various checkpo
 Discuss any unexpected behaviors or anomalies observed during training.
 
 \section{Evaluation Of Agent Performance}
+
+Difficulties Encountered
+
+\section{Training Results}
+Training Results
+Present the learning curves for the agent, showing reward over time.
+Include a table or graph of the agent’s performance metrics at various checkpoints.
+Discuss any unexpected behaviors or anomalies observed during training.
+
+\section{Evaluation Of Agent Performance}
+
+Difficulties Encountered:
+There were several difficulties encountered when trying to get the agent to learn anything let alone the combination of directionally sailing a kiteboat. One of the most common local maxima that the agent fell into was for the agent to steer on `hard lock' with the rudder at ~70-90$^{\circ}$, shown in figure$~$\ref{hard_lock} where the target can be seen as the green area in the distance. This behavior allowed it to learn to fly the kite very reliably with the boat in a more consistent and stable position. These episodes provided false positives in the training data because as soon as the agent started to explore the rudder space more it was not able to fly the kite. To try and combat this behavior a large negative reward was added for aggressive steering as shown in table$~$\ref{rewards}. This went some way to discouraging this behavior but it was still observed in some of the later training runs. After this rudder reward was added it was observed that the agent took almost 5 times as long to learn to fly the kite with some reliability. 
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Images/hard_lock.png}
+    \caption{The agent steering on hard lock}
+    \label{hard_lock}
+\end{figure}
+
+
 Evaluation of Agent Performance
 Explain the methods used to evaluate the trained agent (e.g., test episodes in varied conditions).
 Present the results of these evaluations in a systematic manner (e.g., tables, graphs).
