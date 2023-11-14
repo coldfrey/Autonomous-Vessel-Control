@@ -71,16 +71,19 @@ For any machine learning endeavor, especially one with such intricate physical d
 
 Given the myriad of choices available, the Unity game engine emerged as the most suitable platform. Beyond its reputation in gaming, 
 The inherent support for mesh bodies, colliders, and a variety of joints made it an attractive option for simulating the kite-boat system, which comprised a complex dance of forces, and counterforces.
-Unity is recognized for its potent physics engine, however for this project the use of Unity's physics engine will be kept to a minimum. Unity will be used primarily for its visual capabilities and the ability to run machine learning simulations. 
+Unity is recognized for its potent physics engine, however for this project the use of Unity's physics engine will be kept to a minimum. Unity will be used primarily for its visual capabilities and the ability to be used as the gym environment for machine learning simulations. 
 
 Central to our simulation is the depiction of water, the medium in which our boat will navigate. Here, the Unity HDRP Water System 16.0.3 [cite] came to the rescue. Bundled with Unity 2023.2.0b9 [cite], this water system provides a realistic representation of water with its undulating waves, refractions, and reflections. 
 The alternative option to using Unity's water system was to model an entire particle fluid simulation, this would have had its advantages, however it would have been a lot more computationally expensive and would have taken a lot longer to implement. As this project was primarily focused on creating a RL algorithm for controlling a kiteboat it was decided that the Unity water system would be sufficient for this project.  
 
 The boat part of the kiteboat had two main component scripts, the buoyancy and the rudder, allowing the boat to float and be steered. The implementation of Buoyancy and the rudder are discussed in more detail in section$~$\ref{sec:Boat}. The kite had a single script that defined the physics and its explanation can be found in section$~$\ref{sec:Kite}. The final training environment can be seen in figure$~$\ref{training_enviroment}.
 
+% full width image
 \begin{figure}[h]
     \centering
+    \resizebox{\textwidth}{!}{%
     \includegraphics[width=0.5\textwidth]{Images/TrainingEnv.png}
+    }
     \caption{Training Environment}\label{training_enviroment}
 \end{figure}
 
