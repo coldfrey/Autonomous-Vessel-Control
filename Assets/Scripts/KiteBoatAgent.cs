@@ -30,7 +30,7 @@ public class KiteBoatAgent : Agent
     private float currentDistanceToWaypoint;
     private float previousDistanceToWaypoint;
 
-    private readonly float checkInterval = 5f;
+    private float checkInterval = 5f;
     private Coroutine checkPositionRoutine;
 
     public UnityEngine.UI.Text rewardText;
@@ -62,6 +62,8 @@ public class KiteBoatAgent : Agent
     private const float KiteHeightRewardMultiplier = 0.1f;
 
     private int[] lastActions = new int[2];
+    private float currentRudderAngle = 0f;
+    private float lastRudderAngle = 0f;
 
     public override void OnEpisodeBegin()
     {
@@ -79,6 +81,8 @@ public class KiteBoatAgent : Agent
         {
             waypointManager.CreateWaypoint();
         }
+        if (lessonNumber == 3) checkInterval = 10f;
+        if (lessonNumber == 4) checkInterval = 20f;
         // ResetEnvironment();
         StartCoroutine(ResetEnvironment());
         previousPosition = transform.position;
@@ -172,7 +176,7 @@ public class KiteBoatAgent : Agent
             }
             else if (currentDistanceToWaypoint > previousDistanceToWaypoint)
             {
-                AddReward(-0.1f * (currentDistanceToWaypoint- previousDistanceToWaypoint));
+                AddReward(-0.5f * (currentDistanceToWaypoint- previousDistanceToWaypoint));
             }
             previousPosition = transform.position;
 
@@ -180,15 +184,18 @@ public class KiteBoatAgent : Agent
             {
                 Debug.Log("Finish");
                 hitFinish = true;
-                AddReward(10.0f);
-                CompleteEpisode();
+                AddReward(200.0f);
+                // CompleteEpisode();
+                waypointManager.NewWaypoint(lessonNumber);
             }
-        }
 
-        // negativly reward if the rudder is greater than 45 degrees by increasing the reward the further away from 45 degrees
-        if (Mathf.Abs(rudder.angle) > 60.0f)
-        {
-            AddReward(-0.001f * (Mathf.Abs(rudder.angle) - 60.0f));
+            currentRudderAngle = rudder.angle;
+            if (Mathf.Abs(currentRudderAngle) == Mathf.Abs(lastRudderAngle) && Mathf.Abs(currentRudderAngle) > 45.0f)
+            {
+                AddReward(-0.001f * (Mathf.Abs(currentRudderAngle)));
+            }
+            lastRudderAngle = currentRudderAngle;
+            
         }
 
         AddReward(-0.001f);
@@ -406,6 +413,12 @@ public class KiteBoatAgent : Agent
             {
                 AddReward(0.05f);
             }
+        }
+
+        // negativly reward if the rudder is greater than 45 degrees by increasing the reward the further away from 45 degrees
+        if (Mathf.Abs(rudder.angle) > 50.0f)
+        {
+            AddReward(-0.01f * (Mathf.Abs(rudder.angle) - 50.0f));
         }
 
         // float heightDifference = Mathf.Abs(kiteRigidbody.transform.localPosition.y - KiteStableHeight);

@@ -22,7 +22,7 @@ behaviors:
         strength: 0.1
         gamma: 0.99
         learning_rate: 3.0e-4
-    max_steps: 10000000
+    max_steps: 50000000
     time_horizon: 64
     summary_freq: 10000
     checkpoint_interval: 50000

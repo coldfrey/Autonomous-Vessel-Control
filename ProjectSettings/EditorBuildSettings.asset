@@ -11,8 +11,11 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/main_course.unity
     guid: 23baaf18a7489590cadaaee5aef3c9c5
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Training.unity
     guid: 1d17d2529071c4c4696c9b0e7436e7d5
+  - enabled: 1
+    path: Assets/Scenes/kiteboat_training.unity
+    guid: ce7f0fb9b3bbd420585e62e8112823d4
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

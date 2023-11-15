@@ -47,8 +47,7 @@ public class WaypointManager : MonoBehaviour
         }
         else if (currentLesson == 2)
         {
-            // Randomly choose an angle within an 80-degree sector facing the negative z direction
-            float angle = Random.Range(-80f, 80f); // Half of 80 degrees to either side
+            float angle = Random.Range(-50f, 50f); // Half of 80 degrees to either side
             spawnDirection = Quaternion.Euler(0, angle, 0) * spawnDirection;
         }
         else if (currentLesson == 3)

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2163.31, g: 2272.9556, b: 3307.8638, a: 1}
+  m_IndirectSpecularColor: {r: 2152.2502, g: 2286.8713, b: 3398.0747, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -705,7 +705,7 @@ MonoBehaviour:
   waypointHeight: 2
   waypointPrefab: {fileID: 3049488577073184054, guid: 9d9fa258faf42c385bd9c49864a665a4,
     type: 3}
-  completedWaypoints: 0
+  completedWaypoints: 15
 --- !u!4 &604526106
 Transform:
   m_ObjectHideFlags: 0
