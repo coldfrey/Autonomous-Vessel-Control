@@ -12,28 +12,30 @@
 \contentsline {chapter}{\chapternumberline {3}Methodology}{12}{chapter.3}%
 \contentsline {section}{\numberline {3.1}MLAgents}{12}{section.3.1}%
 \contentsline {subsection}{\numberline {3.1.1}Python Implementation}{12}{subsection.3.1.1}%
-\contentsline {section}{\numberline {3.2}The Environment}{14}{section.3.2}%
+\contentsline {section}{\numberline {3.2}The Environment}{15}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}Boat Model}{15}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Kite Model}{16}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.2}Kite Model}{17}{subsection.3.2.2}%
 \contentsline {subsection}{\numberline {3.2.3}Collision Detection}{18}{subsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.2.4}Course Generation}{18}{subsection.3.2.4}%
-\contentsline {section}{\numberline {3.3}Controls}{18}{section.3.3}%
-\contentsline {section}{\numberline {3.4}RL Implementation}{18}{section.3.4}%
+\contentsline {subsection}{\numberline {3.2.4}Course Generation}{19}{subsection.3.2.4}%
+\contentsline {section}{\numberline {3.3}Controls}{19}{section.3.3}%
+\contentsline {section}{\numberline {3.4}RL Implementation}{19}{section.3.4}%
 \contentsline {subsection}{\numberline {3.4.1}The Agent Script}{19}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}Observations}{19}{subsection.3.4.2}%
-\contentsline {subsection}{\numberline {3.4.3}Actions}{20}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.2}Observations}{20}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Actions}{21}{subsection.3.4.3}%
 \contentsline {subsection}{\numberline {3.4.4}Rewards}{21}{subsection.3.4.4}%
-\contentsline {section}{\numberline {3.5}Training}{21}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}Hyperparameters}{23}{subsection.3.5.1}%
-\contentsline {section}{\numberline {3.6}Optimization}{23}{section.3.6}%
-\contentsline {subsection}{\numberline {3.6.1}Blue Crystal HPC}{23}{subsection.3.6.1}%
-\contentsline {chapter}{\chapternumberline {4}Results and Validation}{25}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Final Experimental Setup}{25}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Training Results}{26}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Evaluation Of Agent Performance}{26}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Training Results}{26}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Evaluation Of Agent Performance}{26}{section.4.5}%
-\contentsline {section}{\numberline {4.6}Evaluation Introduction}{27}{section.4.6}%
-\contentsline {chapter}{\chapternumberline {5}Future Work}{29}{chapter.5}%
-\contentsline {appendix}{\chapternumberline {A}Appendix A}{30}{appendix.A}%
-\contentsline {chapter}{Bibliography}{31}{appendix*.13}%
+\contentsline {section}{\numberline {3.5}Training}{22}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Curriculum Learning}{23}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Hyperparameters}{23}{subsection.3.5.2}%
+\contentsline {section}{\numberline {3.6}Optimization}{24}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Blue Crystal HPC}{24}{subsection.3.6.1}%
+\contentsline {chapter}{\chapternumberline {4}Results and Validation}{26}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Final Experimental Setup}{26}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Training Results}{27}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Evaluation Of Agent Performance}{27}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Training Results}{27}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Evaluation Of Agent Performance}{27}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Evaluation Introduction}{28}{section.4.6}%
+\contentsline {chapter}{\chapternumberline {5}Future Work}{30}{chapter.5}%
+\contentsline {appendix}{\chapternumberline {A}Appendix A}{33}{appendix.A}%
+\contentsline {section}{\numberline {A.1}Unity Setup}{33}{section.A.1}%
+\contentsline {chapter}{Bibliography}{36}{appendix*.15}%

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.10.13)  14 NOV 2023 14:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.10.13)  20 NOV 2023 11:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1279,11 +1279,69 @@ Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
 \multirow@cntb=\count455
 \multirow@dima=\skip296
 \bigstrutjot=\dimen311
-) (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrows.code.tex
+) (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count456
+\lst@gtempboxa=\box81
+\lst@token=\toks66
+\lst@length=\count457
+\lst@currlwidth=\dimen312
+\lst@column=\count458
+\lst@pos=\count459
+\lst@lostspace=\dimen313
+\lst@width=\dimen314
+\lst@newlines=\count460
+\lst@lineno=\count461
+\lst@maxwidth=\dimen315
+ (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
+\c@lstnumber=\count462
+\lst@skipnumbers=\count463
+\lst@framebox=\box82
+) (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2020/03/24 1.8d listings configuration
+))
+Package: listings 2020/03/24 1.8d (Carsten Heinz)
+ (/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjustbox.sty
+Package: adjustbox 2020/08/19 v1.3 Adjusting TeX boxes (trim, clip, ...)
+ (/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjcalc.sty
+Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back-ends (calc, etex, pgfmath)
+) (/usr/share/texlive/texmf-dist/tex/latex/adjustbox/trimclip.sty
+Package: trimclip 2020/08/19 v1.2 Trim and clip general TeX material
+ (/usr/share/texlive/texmf-dist/tex/latex/collectbox/collectbox.sty
+Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
+\collectedbox=\box83
+)
+\tc@llx=\dimen316
+\tc@lly=\dimen317
+\tc@urx=\dimen318
+\tc@ury=\dimen319
+Package trimclip Info: Using driver 'tc-pdftex.def'.
+ (/usr/share/texlive/texmf-dist/tex/latex/adjustbox/tc-pdftex.def
+File: tc-pdftex.def 2019/01/04 v2.2 Clipping driver for pdftex
+))
+\adjbox@Width=\dimen320
+\adjbox@Height=\dimen321
+\adjbox@Depth=\dimen322
+\adjbox@Totalheight=\dimen323
+\adjbox@pwidth=\dimen324
+\adjbox@pheight=\dimen325
+\adjbox@pdepth=\dimen326
+\adjbox@ptotalheight=\dimen327
+ (/usr/share/texlive/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
+\c@checkoddpage=\count464
+LaTeX Info: Redefining \checkoddpage on input line 45.
+) (/usr/share/texlive/texmf-dist/tex/latex/varwidth/varwidth.sty
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box84
+\sift@deathcycles=\count465
+\@vwid@loff=\dimen328
+\@vwid@roff=\dimen329
+)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrows.code.tex
 File: tikzlibraryarrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
  (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.code.tex
 File: pgflibraryarrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\arrowsize=\dimen312
+\arrowsize=\dimen330
 )) (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.code.tex
 File: tikzlibraryshapes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
  (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.geometric.code.tex
@@ -1306,26 +1364,26 @@ File: pgflibraryshapes.arrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 File: tikzlibraryshapes.multipart.code.tex 2021/05/15 v3.1.9a (3.1.9a)
  (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.multipart.code.tex
 File: pgflibraryshapes.multipart.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgfnodepartlowerbox=\box81
-\pgfnodeparttwobox=\box82
-\pgfnodepartthreebox=\box83
-\pgfnodepartfourbox=\box84
-\pgfnodeparttwentybox=\box85
-\pgfnodepartnineteenbox=\box86
-\pgfnodeparteighteenbox=\box87
-\pgfnodepartseventeenbox=\box88
-\pgfnodepartsixteenbox=\box89
-\pgfnodepartfifteenbox=\box90
-\pgfnodepartfourteenbox=\box91
-\pgfnodepartthirteenbox=\box92
-\pgfnodeparttwelvebox=\box93
-\pgfnodepartelevenbox=\box94
-\pgfnodeparttenbox=\box95
-\pgfnodepartninebox=\box96
-\pgfnodeparteightbox=\box97
-\pgfnodepartsevenbox=\box98
-\pgfnodepartsixbox=\box99
-\pgfnodepartfivebox=\box100
+\pgfnodepartlowerbox=\box85
+\pgfnodeparttwobox=\box86
+\pgfnodepartthreebox=\box87
+\pgfnodepartfourbox=\box88
+\pgfnodeparttwentybox=\box89
+\pgfnodepartnineteenbox=\box90
+\pgfnodeparteighteenbox=\box91
+\pgfnodepartseventeenbox=\box92
+\pgfnodepartsixteenbox=\box93
+\pgfnodepartfifteenbox=\box94
+\pgfnodepartfourteenbox=\box95
+\pgfnodepartthirteenbox=\box96
+\pgfnodeparttwelvebox=\box97
+\pgfnodepartelevenbox=\box98
+\pgfnodeparttenbox=\box99
+\pgfnodepartninebox=\box100
+\pgfnodeparteightbox=\box101
+\pgfnodepartsevenbox=\box102
+\pgfnodepartsixbox=\box103
+\pgfnodepartfivebox=\box104
 ))) (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarysnakes.code.tex
 File: tikzlibrarysnakes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 
@@ -1333,133 +1391,133 @@ File: tikzlibrarysnakes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 Package pgf Warning: Snakes have been superseded by decorations. Please use the decoration libraries instead of the snakes library on input line 14.
 
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathmorphing.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.code.tex
-\pgfdecoratedcompleteddistance=\dimen313
-\pgfdecoratedremainingdistance=\dimen314
-\pgfdecoratedinputsegmentcompleteddistance=\dimen315
-\pgfdecoratedinputsegmentremainingdistance=\dimen316
-\pgf@decorate@distancetomove=\dimen317
-\pgf@decorate@repeatstate=\count456
-\pgfdecorationsegmentamplitude=\dimen318
-\pgfdecorationsegmentlength=\dimen319
+\pgfdecoratedcompleteddistance=\dimen331
+\pgfdecoratedremainingdistance=\dimen332
+\pgfdecoratedinputsegmentcompleteddistance=\dimen333
+\pgfdecoratedinputsegmentremainingdistance=\dimen334
+\pgf@decorate@distancetomove=\dimen335
+\pgf@decorate@repeatstate=\count466
+\pgfdecorationsegmentamplitude=\dimen336
+\pgfdecorationsegmentlength=\dimen337
 )
-\tikz@lib@dec@box=\box101
+\tikz@lib@dec@box=\box105
 ) (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathmorphing.code.tex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathreplacing.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathreplacing.code.tex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.shapes.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.shapes.code.tex))) (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryautomata.code.tex
 File: tikzlibraryautomata.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 ) (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarybackgrounds.code.tex
 File: tikzlibrarybackgrounds.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgf@layerbox@background=\box102
-\pgf@layerboxsaved@background=\box103
+\pgf@layerbox@background=\box106
+\pgf@layerboxsaved@background=\box107
 ) (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypetri.code.tex
 File: tikzlibrarypetri.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 )
-\c@proofcount=\count457
+\c@proofcount=\count467
  (/usr/share/texlive/texmf-dist/tex/latex/lettrine/lettrine.sty
 File: lettrine.sty 2020-03-14 v2.23 (Daniel Flipo)
  (/usr/share/texlive/texmf-dist/tex/generic/minifp/minifp.sty
 Package: minifp 2013/12/30 v0.96. Macros for real number operations and a stack-based programing language.
-\MFP@loopctr=\count458
+\MFP@loopctr=\count468
 )
-\c@DefaultLines=\count459
-\c@DefaultDepth=\count460
-\DefaultFindent=\dimen320
-\DefaultNindent=\dimen321
-\DefaultSlope=\dimen322
-\DiscardVskip=\dimen323
-\L@lbox=\box104
-\L@tbox=\box105
-\c@L@lines=\count461
-\c@L@depth=\count462
-\L@Pindent=\dimen324
-\L@Findent=\dimen325
-\L@Nindent=\dimen326
-\L@lraise=\dimen327
-\L@first=\dimen328
-\L@next=\dimen329
-\L@slope=\dimen330
-\L@height=\dimen331
-\L@novskip=\dimen332
-\L@target@ht=\dimen333
-\L@target@dp=\dimen334
-\L@target@tht=\dimen335
-\LettrineWidth=\dimen336
-\LettrineHeight=\dimen337
-\LettrineDepth=\dimen338
-\Llist@everypar=\toks66
+\c@DefaultLines=\count469
+\c@DefaultDepth=\count470
+\DefaultFindent=\dimen338
+\DefaultNindent=\dimen339
+\DefaultSlope=\dimen340
+\DiscardVskip=\dimen341
+\L@lbox=\box108
+\L@tbox=\box109
+\c@L@lines=\count471
+\c@L@depth=\count472
+\L@Pindent=\dimen342
+\L@Findent=\dimen343
+\L@Nindent=\dimen344
+\L@lraise=\dimen345
+\L@first=\dimen346
+\L@next=\dimen347
+\L@slope=\dimen348
+\L@height=\dimen349
+\L@novskip=\dimen350
+\L@target@ht=\dimen351
+\L@target@dp=\dimen352
+\L@target@tht=\dimen353
+\LettrineWidth=\dimen354
+\LettrineHeight=\dimen355
+\LettrineDepth=\dimen356
+\Llist@everypar=\toks67
 
 Loading lettrine.cfg
 (/usr/share/texlive/texmf-dist/tex/latex/lettrine/lettrine.cfg))
-\c@theo=\count463
-\c@prop=\count464
-\c@dfn=\count465
-\c@lema=\count466
-\c@cor=\count467
-\c@resu=\count468
+\c@theo=\count473
+\c@prop=\count474
+\c@dfn=\count475
+\c@lema=\count476
+\c@cor=\count477
+\c@resu=\count478
  (./thesis.aux)
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 303.
-LaTeX Font Info:    ... okay on input line 303.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 303.
-LaTeX Font Info:    ... okay on input line 303.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 303.
-LaTeX Font Info:    ... okay on input line 303.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 303.
-LaTeX Font Info:    ... okay on input line 303.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 303.
-LaTeX Font Info:    ... okay on input line 303.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 303.
-LaTeX Font Info:    ... okay on input line 303.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 303.
-LaTeX Font Info:    ... okay on input line 303.
-LaTeX Font Info:    Checking defaults for FML/fncmi/m/it on input line 303.
-LaTeX Font Info:    Trying to load font information for FML+fncmi on input line 303.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 304.
+LaTeX Font Info:    ... okay on input line 304.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 304.
+LaTeX Font Info:    ... okay on input line 304.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 304.
+LaTeX Font Info:    ... okay on input line 304.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 304.
+LaTeX Font Info:    ... okay on input line 304.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 304.
+LaTeX Font Info:    ... okay on input line 304.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 304.
+LaTeX Font Info:    ... okay on input line 304.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 304.
+LaTeX Font Info:    ... okay on input line 304.
+LaTeX Font Info:    Checking defaults for FML/fncmi/m/it on input line 304.
+LaTeX Font Info:    Trying to load font information for FML+fncmi on input line 304.
  (/usr/share/texlive/texmf-dist/tex/latex/fouriernc/fmlfncmi.fd
 File: fmlfncmi.fd 2005/12/20 Fontinst v1.928 font definitions for FML/fncmi.
 )
-LaTeX Font Info:    ... okay on input line 303.
-LaTeX Font Info:    Checking defaults for FMS/fncm/m/n on input line 303.
-LaTeX Font Info:    Trying to load font information for FMS+fncm on input line 303.
+LaTeX Font Info:    ... okay on input line 304.
+LaTeX Font Info:    Checking defaults for FMS/fncm/m/n on input line 304.
+LaTeX Font Info:    Trying to load font information for FMS+fncm on input line 304.
  (/usr/share/texlive/texmf-dist/tex/latex/fouriernc/fmsfncm.fd
 File: fmsfncm.fd 2005/12/20 Fontinst v1.928 font definitions for FMS/fncm.
 )
-LaTeX Font Info:    ... okay on input line 303.
-LaTeX Font Info:    Checking defaults for FMX/futm/m/n on input line 303.
-LaTeX Font Info:    Trying to load font information for FMX+futm on input line 303.
+LaTeX Font Info:    ... okay on input line 304.
+LaTeX Font Info:    Checking defaults for FMX/futm/m/n on input line 304.
+LaTeX Font Info:    Trying to load font information for FMX+futm on input line 304.
  (/usr/share/texlive/texmf-dist/tex/latex/fourier/fmxfutm.fd
 File: fmxfutm.fd futm-extension
 )
-LaTeX Font Info:    ... okay on input line 303.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 303.
-LaTeX Font Info:    ... okay on input line 303.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 303.
-LaTeX Font Info:    ... okay on input line 303.
-Package nag Info: pgf.sty is broken: disabling dollar check on input line 303.
-LaTeX Font Info:    Redeclaring math accent \widehat on input line 303.
-LaTeX Font Info:    Redeclaring math accent \widetilde on input line 303.
+LaTeX Font Info:    ... okay on input line 304.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 304.
+LaTeX Font Info:    ... okay on input line 304.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 304.
+LaTeX Font Info:    ... okay on input line 304.
+Package nag Info: pgf.sty is broken: disabling dollar check on input line 304.
+LaTeX Font Info:    Redeclaring math accent \widehat on input line 304.
+LaTeX Font Info:    Redeclaring math accent \widetilde on input line 304.
 
 
-Package layouts Warning: Layout scale set to 0.5 on input line 303.
+Package layouts Warning: Layout scale set to 0.5 on input line 304.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count469
-\scratchdimen=\dimen339
-\scratchbox=\box106
-\nofMPsegments=\count470
-\nofMParguments=\count471
-\everyMPshowfont=\toks67
-\MPscratchCnt=\count472
-\MPscratchDim=\dimen340
-\MPnumerator=\count473
-\makeMPintoPDFobject=\count474
-\everyMPtoPDFconversion=\toks68
+\scratchcounter=\count479
+\scratchdimen=\dimen357
+\scratchbox=\box110
+\nofMPsegments=\count480
+\nofMParguments=\count481
+\everyMPshowfont=\toks68
+\MPscratchCnt=\count482
+\MPscratchDim=\dimen358
+\MPnumerator=\count483
+\makeMPintoPDFobject=\count484
+\everyMPtoPDFconversion=\toks69
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring ON on input line 303.
+Package hyperref Info: Link coloring ON on input line 304.
  (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
  (/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
@@ -1467,30 +1525,30 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count475
+\c@section@level=\count485
 )
 Redoing nameref's sectioning
 Redoing nameref's label
-LaTeX Info: Redefining \nameref on input line 303.
-LaTeX Info: Redefining \ref on input line 303.
-LaTeX Info: Redefining \pageref on input line 303.
-LaTeX Info: Redefining \nameref on input line 303.
+LaTeX Info: Redefining \nameref on input line 304.
+LaTeX Info: Redefining \ref on input line 304.
+LaTeX Info: Redefining \pageref on input line 304.
+LaTeX Info: Redefining \nameref on input line 304.
 (./thesis.out) (./thesis.out)
 \@outlinefile=\write6
 \openout6 = `thesis.out'.
 
-LaTeX Info: Redefining \microtypecontext on input line 303.
-Package microtype Info: Applying patch `item' on input line 303.
-Package microtype Info: Applying patch `toc' on input line 303.
-Package microtype Info: Applying patch `eqnum' on input line 303.
-Package microtype Info: Applying patch `footnote' on input line 303.
+LaTeX Info: Redefining \microtypecontext on input line 304.
+Package microtype Info: Applying patch `item' on input line 304.
+Package microtype Info: Applying patch `toc' on input line 304.
+Package microtype Info: Applying patch `eqnum' on input line 304.
+Package microtype Info: Applying patch `footnote' on input line 304.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 303.
+LaTeX Info: Redefining \showhyphens on input line 304.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -1498,11 +1556,12 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `fnc' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-Package nag Info: Command \caption@xlabel not defined, skipping amendment on input line 303.
-Package nag Info: Command \captionabove not defined, skipping amendment on input line 303.
-Package nag Info: Command \captionbelow not defined, skipping amendment on input line 303.
-Package nag Info: Command \hc@caption not defined, skipping amendment on input line 303.
-Package nag Info: Command \topcaption not defined, skipping amendment on input line 303.
+\c@lstlisting=\count486
+Package nag Info: Command \caption@xlabel not defined, skipping amendment on input line 304.
+Package nag Info: Command \captionabove not defined, skipping amendment on input line 304.
+Package nag Info: Command \captionbelow not defined, skipping amendment on input line 304.
+Package nag Info: Command \hc@caption not defined, skipping amendment on input line 304.
+Package nag Info: Command \topcaption not defined, skipping amendment on input line 304.
  (./frontmatter/title.tex
 LaTeX Font Info:    Font shape `T1/fnc/m/n' will be
 (Font)              scaled to size 23.13821pt on input line 25.
@@ -1514,7 +1573,7 @@ LaTeX Font Info:    Font shape `T1/fnc/m/n' will be
 (Font)              scaled to size 11.15991pt on input line 30.
 LaTeX Font Info:    Font shape `T1/fnc/m/sc' will be
 (Font)              scaled to size 11.15991pt on input line 32.
-<logos/bristolcrest_colour.pdf, id=155, 114.4275pt x 137.51375pt>
+<logos/bristolcrest_colour.pdf, id=163, 114.4275pt x 137.51375pt>
 File: logos/bristolcrest_colour.pdf Graphic file (type pdf)
 <use logos/bristolcrest_colour.pdf>
 Package pdftex.def Info: logos/bristolcrest_colour.pdf  used on input line 34.
@@ -1619,7 +1678,7 @@ LaTeX Font Info:    Font shape `T1/fnc/b/n' will be
 
 ])
 LaTeX Font Info:    Font shape `T1/fnc/m/sc' will be
-(Font)              scaled to size 9.29993pt on input line 338.
+(Font)              scaled to size 9.29993pt on input line 339.
  [5] (./thesis.lof
 LaTeX Font Info:    Font shape `T1/fnc/b/sc' will be
 (Font)              scaled to size 10.18341pt on input line 2.
@@ -1658,7 +1717,7 @@ Package lettrine.sty Info: Targeted height = 39.06784pt
  [5
 
 ]
-<Images/RL_Loop.png, id=294, 714.67pt x 444.66125pt>
+<Images/RL_Loop.png, id=308, 714.67pt x 444.66125pt>
 File: Images/RL_Loop.png Graphic file (type png)
 <use Images/RL_Loop.png>
 Package pdftex.def Info: Images/RL_Loop.png  used on input line 35.
@@ -1673,7 +1732,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
  [7] [8] [9]
-<Images/ppo_explanation.png, id=358, 999.735pt x 862.22125pt>
+<Images/ppo_explanation.png, id=372, 999.735pt x 862.22125pt>
 File: Images/ppo_explanation.png Graphic file (type png)
 <use Images/ppo_explanation.png>
 Package pdftex.def Info: Images/ppo_explanation.png  used on input line 109.
@@ -1682,97 +1741,173 @@ Package pdftex.def Info: Images/ppo_explanation.png  used on input line 109.
 Package lettrine.sty Info: Targeted height = 39.06784pt
 (lettrine.sty)             (for loversize=0, accent excluded),
 (lettrine.sty)             Lettrine height = 39.76254pt ( \color {gray} {\textsc {T}});
-(lettrine.sty)             reported on input line 13.
- [12
+(lettrine.sty)             reported on input line 27.
+<Images/method.png, id=389, 984.67876pt x 1585.925pt>
+File: Images/method.png Graphic file (type png)
+<use Images/method.png>
+Package pdftex.def Info: Images/method.png  used on input line 31.
+(pdftex.def)             Requested size: 224.0pt x 360.7622pt.
 
-]
-<Images/MLAgents_Seq_Diagram.png, id=383, 1040.88875pt x 788.9475pt>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[12
+
+] [13 <./Images/method.png>]
+<Images/MLAgents_Seq_Diagram.png, id=406, 1040.88875pt x 788.9475pt>
 File: Images/MLAgents_Seq_Diagram.png Graphic file (type png)
 <use Images/MLAgents_Seq_Diagram.png>
-Package pdftex.def Info: Images/MLAgents_Seq_Diagram.png  used on input line 34.
+Package pdftex.def Info: Images/MLAgents_Seq_Diagram.png  used on input line 55.
 (pdftex.def)             Requested size: 224.0pt x 169.7769pt.
-<Images/unity_mlagents.png, id=384, 999.735pt x 862.22125pt>
-File: Images/unity_mlagents.png Graphic file (type png)
-<use Images/unity_mlagents.png>
-Package pdftex.def Info: Images/unity_mlagents.png  used on input line 54.
-(pdftex.def)             Requested size: 224.0pt x 193.18886pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[13 <./Images/MLAgents_Seq_Diagram.png>] [14 <./Images/unity_mlagents.png>]
-<Images/TrainingEnv.png, id=399, 1604.99625pt x 796.9775pt>
+ [14 <./Images/MLAgents_Seq_Diagram.png>]
+<Images/TrainingEnv.png, id=417, 1604.99625pt x 796.9775pt>
 File: Images/TrainingEnv.png Graphic file (type png)
 <use Images/TrainingEnv.png>
-Package pdftex.def Info: Images/TrainingEnv.png  used on input line 86.
+Package pdftex.def Info: Images/TrainingEnv.png  used on input line 107.
 (pdftex.def)             Requested size: 224.0pt x 111.22342pt.
- [15 <./Images/TrainingEnv.png>]
-<Images/kitediagram.jpg, id=408, 251.86095pt x 300.6432pt>
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[15] [16 <./Images/TrainingEnv.png>]
+<Images/kitediagram.jpg, id=433, 251.86095pt x 300.6432pt>
 File: Images/kitediagram.jpg Graphic file (type jpg)
 <use Images/kitediagram.jpg>
-Package pdftex.def Info: Images/kitediagram.jpg  used on input line 133.
+Package pdftex.def Info: Images/kitediagram.jpg  used on input line 154.
 (pdftex.def)             Requested size: 224.0pt x 267.38351pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[16] [17 <./Images/kitediagram.jpg>] [18]
+ [17 <./Images/kitediagram.jpg>] [18] [19] [20]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[19]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[20]
 LaTeX Font Info:    Font shape `T1/fnc/m/n' will be
-(Font)              scaled to size 8.36993pt on input line 266.
+(Font)              scaled to size 8.36993pt on input line 288.
 LaTeX Font Info:    Font shape `T1/fnc/m/n' will be
-(Font)              scaled to size 7.06795pt on input line 266.
+(Font)              scaled to size 7.06795pt on input line 288.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 8.27998pt on input line 266.
+(Font)              scaled to size 8.27998pt on input line 288.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 6.99199pt on input line 266.
+(Font)              scaled to size 6.99199pt on input line 288.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 8.27998pt on input line 266.
+(Font)              scaled to size 8.27998pt on input line 288.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 6.99199pt on input line 266.
- [21] [22] [23]) (./chapters/chapter05/results.tex [24]
+(Font)              scaled to size 6.99199pt on input line 288.
+[21]
+<Images/practiceTraining.png, id=474, 1609.01125pt x 745.78625pt>
+File: Images/practiceTraining.png Graphic file (type png)
+<use Images/practiceTraining.png>
+Package pdftex.def Info: Images/practiceTraining.png  used on input line 297.
+(pdftex.def)             Requested size: 224.0pt x 103.81761pt.
+ [22 <./Images/practiceTraining.png>]
+<Images/coursePath.png, id=482, 1742.51pt x 987.69pt>
+File: Images/coursePath.png Graphic file (type png)
+<use Images/coursePath.png>
+Package pdftex.def Info: Images/coursePath.png  used on input line 318.
+(pdftex.def)             Requested size: 224.0pt x 126.9574pt.
+ [23] [24 <./Images/coursePath.png>]) (./chapters/chapter05/results.tex [25]
 Overfull \hbox (44.71191pt too wide) in paragraph at lines 10--11
 \T1/fnc/m/n/10.95 (-20) The train-ing scene used for the fi-nal train-ing runs can be found in the \T1/cmtt/m/n/10.95 Assets/Scenes/kiteboat_training\T1/fnc/m/n/10.95 (-20) . 
  []
 
-[25
+[26
 
 ]
-<Images/hard_lock.png, id=477, 563.10374pt x 306.14375pt>
+<Images/hard_lock.png, id=509, 563.10374pt x 306.14375pt>
 File: Images/hard_lock.png Graphic file (type png)
 <use Images/hard_lock.png>
 Package pdftex.def Info: Images/hard_lock.png  used on input line 62.
 (pdftex.def)             Requested size: 358.40137pt x 194.85223pt.
- [26] [27 <./Images/hard_lock.png>]) (./chapters/chapter06/future_work.tex [28]) (./chapters/appendices/app0A.tex [29
+ [27] [28 <./Images/hard_lock.png>]) (./chapters/chapter06/future_work.tex [29] [30
 
-]
-Package lettrine.sty Info: Targeted height = 39.06784pt
-(lettrine.sty)             (for loversize=0, accent excluded),
-(lettrine.sty)             Lettrine height = 39.76254pt ( \color {gray} {\textsc {B}});
-(lettrine.sty)             reported on input line 10.
-) [30
+]) (./chapters/appendices/app0A.tex [31] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
+) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
+) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
+)
+Overfull \hbox (59.13892pt too wide) in paragraph at lines 22--23
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
 
-] (./thesis.bbl
+Package textcomp Info: Symbol \textminus not provided by
+(textcomp)             font family fnc in TS1 encoding.
+(textcomp)             Default family used instead on input line 26.
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-cmr.cfg
+File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
+)
+Overfull \hbox (126.3501pt too wide) in paragraph at lines 29--30
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+Package textcomp Info: Symbol \textminus not provided by
+(textcomp)             font family fnc in TS1 encoding.
+(textcomp)             Default family used instead on input line 32.
+
+Overfull \hbox (83.57935pt too wide) in paragraph at lines 36--37
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (211.8916pt too wide) in paragraph at lines 51--52
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+Package textcomp Info: Symbol \textminus not provided by
+(textcomp)             font family fnc in TS1 encoding.
+(textcomp)             Default family used instead on input line 54.
+Package textcomp Info: Symbol \textminus not provided by
+(textcomp)             font family fnc in TS1 encoding.
+(textcomp)             Default family used instead on input line 56.
+
+Overfull \hbox (156.90063pt too wide) in paragraph at lines 63--64
+[][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+Package textcomp Info: Symbol \textminus not provided by
+(textcomp)             font family fnc in TS1 encoding.
+(textcomp)             Default family used instead on input line 65.
+Package textcomp Info: Symbol \textminus not provided by
+(textcomp)             font family fnc in TS1 encoding.
+(textcomp)             Default family used instead on input line 98.
+Package textcomp Info: Symbol \textminus not provided by
+(textcomp)             font family fnc in TS1 encoding.
+(textcomp)             Default family used instead on input line 99.
+Package textcomp Info: Symbol \textminus not provided by
+(textcomp)             font family fnc in TS1 encoding.
+(textcomp)             Default family used instead on input line 110.
+Package textcomp Info: Symbol \textminus not provided by
+(textcomp)             font family fnc in TS1 encoding.
+(textcomp)             Default family used instead on input line 111.
+Package textcomp Info: Symbol \textminus not provided by
+(textcomp)             font family fnc in TS1 encoding.
+(textcomp)             Default family used instead on input line 112.
+Package textcomp Info: Symbol \textminus not provided by
+(textcomp)             font family fnc in TS1 encoding.
+(textcomp)             Default family used instead on input line 135.
+[32
+
+] [33]
+Overfull \vbox (302.37193pt too high) has occurred while \output is active []
+
+ [34]) [35] (./thesis.bbl
 LaTeX Font Info:    Font shape `T1/fnc/m/it' will be
 (Font)              scaled to size 10.18341pt on input line 13.
- [31
+ [36
 
 
-] [32]
+] [37]
 Underfull \hbox (badness 10000) in paragraph at lines 126--128
 []\T1/fnc/m/n/10.95 (+20) URL [][]$\T1/cmtt/m/n/10.95 https : / / docs . unity3d . com / ScriptReference / MonoBehaviour . FixedUpdate .
  []
 
-)
+
+Underfull \hbox (badness 10000) in paragraph at lines 163--165
+[]\T1/fnc/m/n/10.95 (+20) URL [][]$\T1/cmtt/m/n/10.95 https : / / docs . unity . cn / Packages / com . unity . render-[]pipelines .
+ []
+
+[38])
 No complaints by nag.
-[33]
+[39]
 \tf@toc=\write7
 \openout7 = `thesis.toc'.
 
@@ -1784,21 +1919,21 @@ No complaints by nag.
 
  (./thesis.aux)
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 157CC91E10ED539020F6D2D61B58C471;5285.
+(rerunfilecheck)             Checksum: BCEC6E270146EDD6FCAC92C8897F808E;5559.
  ) 
 Here is how much of TeX's memory you used:
- 35487 strings out of 478287
- 665844 string characters out of 5849288
- 1127493 words of memory out of 5000000
- 52418 multiletter control sequences out of 15000+600000
- 570316 words of font info for 332 fonts, out of 8000000 for 9000
+ 38546 strings out of 478287
+ 712622 string characters out of 5849288
+ 1460125 words of memory out of 5000000
+ 55284 multiletter control sequences out of 15000+600000
+ 571744 words of font info for 340 fonts, out of 8000000 for 9000
  1146 hyphenation exceptions out of 8191
- 70i,15n,79p,1380b,648s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/fourier/fourier-bb.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/fourier/fourier-mlit.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/fourier/fourier-ms.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/ncntrsbk/uncb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/ncntrsbk/uncr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/ncntrsbk/uncri8a.pfb>
-Output written on thesis.pdf (40 pages, 1613708 bytes).
+ 70i,15n,114p,1381b,1698s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/fourier/fourier-bb.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/fourier/fourier-mlit.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/fourier/fourier-ms.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/ncntrsbk/uncb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/ncntrsbk/uncr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/ncntrsbk/uncri8a.pfb>
+Output written on thesis.pdf (46 pages, 2201767 bytes).
 PDF statistics:
- 591 PDF objects out of 1000 (max. 8388607)
- 514 compressed objects within 6 object streams
- 146 named destinations out of 1000 (max. 500000)
- 97117 words of extra memory for PDF output out of 106986 (max. 10000000)
+ 804 PDF objects out of 1000 (max. 8388607)
+ 713 compressed objects within 8 object streams
+ 280 named destinations out of 1000 (max. 500000)
+ 98167 words of extra memory for PDF output out of 106986 (max. 10000000)
 

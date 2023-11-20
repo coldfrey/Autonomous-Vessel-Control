@@ -1,4 +1,4 @@
-\begin{thebibliography}{25}
+\begin{thebibliography}{28}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -148,11 +148,34 @@ Logan Engstrom, Andrew Ilyas, Shibani Santurkar, Dimitris Tsipras, F.~Janoos,
   Representations (ICLR)}, 2020.
 \newblock URL \url{https://dblp.org/rec/conf/iclr/EngstromISTJRM20.html}.
 
+\bibitem[Paszke et~al.(2019)Paszke, Gross, Massa, Lerer, Bradbury, Chanan,
+  Killeen, Lin, Gimelshein, Antiga, et~al.]{paszke2019pytorch}
+Adam Paszke, Sam Gross, Francisco Massa, Adam Lerer, James Bradbury, Gregory
+  Chanan, Trevor Killeen, Zeming Lin, Natalia Gimelshein, Luca Antiga, et~al.
+\newblock Pytorch: An imperative style, high-performance deep learning library.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2019.
+\newblock URL \url{https://ar5iv.org/abs/1912.01703}.
+
+\bibitem[{Unity Technologies}(2023)]{UnityHDRPWaterSystem}
+{Unity Technologies}.
+\newblock Unity high definition render pipeline water system.
+\newblock Unity Documentation, 2023.
+\newblock URL
+  \url{https://docs.unity.cn/Packages/com.unity.render-pipelines.high-definition@16.0/changelog/CHANGELOG.html}.
+\newblock Accessed: 2023-11-20.
+
 \bibitem[Gilbert et~al.(1988)Gilbert, Johnson, and Keerthi]{gilbert88gjk}
 E.~G. Gilbert, D.~W. Johnson, and S.~S. Keerthi.
 \newblock {A fast procedure for computing the distance between complex objects
   in three-dimensional space}.
 \newblock IEEE Journal on Robotics and Automation, 1988.
 \newblock The seminal work on the GJK collision detection algorithm.
+
+\bibitem[Bengio et~al.(2009)Bengio, Louradour, Collobert, and
+  Weston]{curriculumLearning}
+Yoshua Bengio, Jerome Louradour, Ronan Collobert, and Jason Weston.
+\newblock Curriculum learning, 2009.
+\newblock URL \url{https://qmro.qmul.ac.uk/xmlui/handle/123456789/15972}.
+\newblock Accessed: 2023-11-20.
 
 \end{thebibliography}

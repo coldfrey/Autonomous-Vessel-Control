@@ -2,22 +2,41 @@
 
 %
 \let\textcircled=\pgftextcircled\chapter{Methodology}
-% \label{chap:aims_and_opjectives}
 
-% \initial{T}his section will investigate the approach taken to create an autonomous kite-powered vessel.
-% - We need a physics engine
-% -we need to model a boat so that it behaves with realistic movements
-% - need to be able to run machine learning in the physics simulations
+% graph TD
+%     Start -->Tools[Decide Tools]
+%     Tools --> |Enviroment| Environment{Unity}
+%     Tools --> |RL| MLAgents{MLAgents}
+%     Environment -->|Create simulation| Models{Models}
+%     Models --> collisionDetection[Collision Detection]
+%     Models --> boatModel[Boat Model]
+%     Models --> kiteModel[Kite Model]
+%     boatModel --> Agent
+%     kiteModel --> Agent
+%     MLAgents --> Agent
+%     Agent --> Actions
+%     Agent --> Observations
+%     Agent --> Rewards
+%     Actions --> Training(Training)
+%     Observations --> Training
+%     Rewards --> Training
+%     Training -->|Curriculum| Optimization
+%     Optimization -->AdjustParameters[HyperParameters]
+%     AdjustParameters --> Training
+%     AdjustParameters --> Output
+\initial{T}he following chapter will discuss the steps taken to create a robust reinforcement learning algorithm that is capable of controlling a kiteboat. It will start by explaining the tooling used to create the RL algorithm and the environment, before moving on to the implementation of the environment and the RL algorithm. Finally it will discuss the training process and optimisation. The development process discussed in this chapter can be seen in figure$~$\ref{development_process}.
 
-% \initial{T}he future of autonomous navigation in maritime settings is not limited to large vessels plying the world's oceans; smaller, nimble crafts, harnessing natural forces such as wind, present their own set of challenges and opportunities. Imagine a vessel, propelled not just by the currents below, but by the gusts above, using a kite to harness the power of the wind. This not only promises sustainable navigation but also offers a glimpse into the intricate dance between machine intelligence, physics, and nature's unpredictability. This project dives deep into simulating such a system— a kite-powered boat that autonomously navigates its environment. This methodology section elucidates the steps taken to bridge the gap between vision and virtual reality.
-\initial{T}his project will utilise the Unity game engine as the training environment for RL\@.
-
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/method.png}
+    \caption{Development Process}\label{development_process}
+\end{figure}
 
 \section{MLAgents}
 MLAgents is an open-source project that allows games and simulations to serve as the environment for training intelligent agents. At its core MLAgents utilizes RL, although it also supports other methods such as imitation learning.
 
 \subsection{Python Implementation}
-The neural network used in the reinforcement learning is implemented in Python. MLAgents toolkit is a Python Library that acts as an interface between the environment (gym), in this case Unity, and PyTorch [CITE]. PyTorch is an open-source machine learning library based on the Torch library, known for its flexibility, ease of use, and native support for GPU acceleration, which is essential for the computation-heavy processes involved in training neural networks. Torch is a Python-based scientific computing package that provides prebuilt components for machine learning and deep learning, as well as a wide range of mathematical functions. MLAgents uses a low level API to communicate directly with the Unity environment (\texttt{mlagents\_envs}) frame by frame, and an entry point to train (\texttt{mlagents-learn}). This stepping process allows for the synchronous collection of observations, executions of actions and retrieval of rewards. The neural network used in this project is a Proximal Policy Optimization (PPO) network, and so will utilise the actor-critic method as discussed in section$~$\ref{sec:ppo_background}.
+The neural network used in the reinforcement learning is implemented in Python. MLAgents toolkit is a Python Library that acts as an interface between the environment (gym), in this case Unity, and PyTorch$~$\cite{paszke2019pytorch}. PyTorch is an open-source machine learning library based on the Torch library, known for its flexibility, ease of use, and native support for GPU acceleration, which is essential for the computation-heavy processes involved in training neural networks. Torch is a Python-based scientific computing package that provides prebuilt components for machine learning and deep learning, as well as a wide range of mathematical functions. MLAgents uses a low level API to communicate directly with the Unity environment (\texttt{mlagents\_envs}) frame by frame, and an entry point to train (\texttt{mlagents-learn}). This stepping process allows for the synchronous collection of observations, executions of actions and retrieval of rewards. The neural network used in this project is a Proximal Policy Optimization (PPO) network, and so will utilise the actor-critic method as discussed in section$~$\ref{sec:ppo_background}.
 
 RL, preveously discussed in section$~$\ref{RL_background}, is an approach to learning where an agent learns to make decisions by interacting with its environment. The fundamental components of this interaction with the environment are observations, actions and rewards.
 \begin{itemize}
@@ -31,7 +50,9 @@ A sequence diagram of the interaction between the Unity environment and the Pyth
 
 \begin{figure}[h]
     \centering
+    \resizebox{\textwidth}{!}{%
     \includegraphics[width=0.5\textwidth]{Images/MLAgents_Seq_Diagram.png}
+    }
     \caption{MLAgents Sequence Diagram}\label{MLAgents_Seq_Diagram}
 \end{figure}
 
@@ -49,11 +70,11 @@ A sequence diagram of the interaction between the Unity environment and the Pyth
 %     PyTorch->>PyTorch: Update Weights
 
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Images/unity_mlagents.png}
-    \caption{MLAgents Integration}\label{MLAgents_Integration}
-\end{figure}
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics[width=0.5\textwidth]{Images/unity_mlagents.png}
+%     \caption{MLAgents Integration}\label{MLAgents_Integration}
+% \end{figure}
 
 
 
@@ -73,7 +94,7 @@ Given the myriad of choices available, the Unity game engine emerged as the most
 The inherent support for mesh bodies, colliders, and a variety of joints made it an attractive option for simulating the kite-boat system, which comprised a complex dance of forces, and counterforces.
 Unity is recognized for its potent physics engine, however for this project the use of Unity's physics engine will be kept to a minimum. Unity will be used primarily for its visual capabilities and the ability to be used as the gym environment for machine learning simulations. 
 
-Central to our simulation is the depiction of water, the medium in which our boat will navigate. Here, the Unity HDRP Water System 16.0.3 [cite] came to the rescue. Bundled with Unity 2023.2.0b9 [cite], this water system provides a realistic representation of water with its undulating waves, refractions, and reflections. 
+Central to our simulation is the depiction of water, the medium in which our boat will navigate. Here, the Unity HDRP Water System 16.0.3$~$\cite{UnityHDRPWaterSystem} came to the rescue. Bundled with Unity 2023.2.0b9, this water system provides a realistic representation of water with its undulating waves, refractions, and reflections. 
 The alternative option to using Unity's water system was to model an entire particle fluid simulation, this would have had its advantages, however it would have been a lot more computationally expensive and would have taken a lot longer to implement. As this project was primarily focused on creating a RL algorithm for controlling a kiteboat it was decided that the Unity water system would be sufficient for this project.  
 
 The boat part of the kiteboat had two main component scripts, the buoyancy and the rudder, allowing the boat to float and be steered. The implementation of Buoyancy and the rudder are discussed in more detail in section$~$\ref{sec:Boat}. The kite had a single script that defined the physics and its explanation can be found in section$~$\ref{sec:Kite}. The final training environment can be seen in figure$~$\ref{training_enviroment}.
@@ -177,6 +198,7 @@ In order to use Unity game engine as the environment for RL it must be setup cor
     \item Add the Behaviour Parameters component to the game object.
     \item Create a new agent config file (\texttt{.yaml}) and set the `Behavioural Name' in the Behaviour Parameters component to the name of the config file.
 \end{enumerate}  
+A visual representation can be found in section$~$\ref{sec:unity_setup} of the appendix.
 
 \subsection{The Agent Script}
 The kiteboat agent sets up the scene for learning and in order for Unity to correctly process the script it must have the following 4 functions implemented:
@@ -268,19 +290,34 @@ The rewards provided to the agent each step are the fundamental input that influ
 
 
 \section{Training}\label{sec:training}
-Before commencing the training of the kiteboat agent, a simpler test agent was created to check the workflow and ensure the environment was setup correctly. This test agent was a simple cube that was trained to move towards a waypoint, following a pacemaker. This was a good test of the environment as it was a simple task that could be easily visualized as shown in figure .... However this test agent proved more tricky than initially anticipated and after some additional research some core RL training concepts that improve the quality of training were discovered. The first of these being make the problem a `Keep Alive' i.e. do the correct thing or die. In the context of the path follower this meant that should the cube ever be further away from the pacemaker than its original distance of 2m the episode was ended and a large negative reward given. This method encourages the agent to do the correct process if it wants to stay alive. Making the problem a keep alive problem is a simple way to improve the quality of training and is a common practice in RL. The path follower changed from not making much progress over the course of 500000 steps to being able to complete full laps of the course in around 100000 steps, as shown in figure  .....
+Before commencing the training of the kiteboat agent, a simpler test agent was created to check the workflow and ensure the environment was setup correctly. This test agent was a simple cube that was trained to move towards a waypoint, following a pacemaker. This was a good test of the environment as it was a simple task that could be easily visualized as shown in figure$~$\ref{pathFollower} However this test agent proved more tricky than initially anticipated and after some additional research some core RL training concepts that improve the quality of training were discovered. The first of these being make the problem a `Keep Alive' i.e. do the correct thing or die. In the context of the path follower this meant that should the cube ever be further away from the pacemaker than its original distance of 2m the episode was ended and a large negative reward given. This method encourages the agent to do the correct process if it wants to stay alive. Making the problem a keep alive problem is a simple way to improve the quality of training and is a common practice in RL. The path follower changed from not making much progress over the course of 500000 steps to being able to complete full laps of the course in around 100000 steps.
 
-The next RL technique to help improve training is called Curriculum Learning (CL). CL is an instructional strategy that structures the learning process, much like how a school curriculum guides human learning. It involves organising the leaning tasks from simple to complex, facilitating the agent's ability to incrementally acquire, transfer and refine knowledge. In essence it breaks down large complex tasks into more manageable bitesized chunks that the agent can progress through. CL was not utilised in the path follower but was used in the kiteboat agent. The kiteboat agent was trained in several stages shown below.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/practiceTraining.png}
+    \caption{Keep Alive}\label{pathFollower}
+\end{figure}
+
+\subsection{Curriculum Learning}
+The next RL technique to help improve training is called Curriculum Learning (CL)$~$\cite{curriculumLearning}. CL is an instructional strategy that structures the learning process, much like how a school curriculum guides human learning. It involves organising the leaning tasks from simple to complex, facilitating the agent's ability to incrementally acquire, transfer and refine knowledge. In essence it breaks down large complex tasks into more manageable bitesized chunks that the agent can progress through. CL was not utilised in the path follower but was used in the kiteboat agent. The kiteboat agent was trained in several stages shown below.
 \begin{enumerate}
     \item Master the controls- a keep alive problem
-    \item Sail Straight downwind
+    \item Sail downwind towards a target
     \item Progressively move the waypoints upwind with each completed waypoint
     \item Randomly generate waypoints in any direction 
 \end{enumerate}
 
 Step 1 in the curriculum ensures the agent has a fundamental grasp of the controls and is able to keep the kite in the air. This is a keep alive problem and so the agent is rewarded for keeping the kite in the air and penalised for crashing. The direction the boat sails is not important at this stage. Step 2 is a simple task that the agent can learn quickly, having now gained a grasp of the kite control it must learn to steer straight towards the waypoint. This was also turned into a keep alive problem, move closer to the next waypoint or end the episode. Step 3 is where the agent starts to learn to sail its own path, initially this will still be a straight line until the waypoints are spawning upwind of the kiteboats initial location. At this point the agent must start to experiment with finding the VMG (velocity made good), which is a measure of the speed at which a vessel is moving directly towards its destination, considering both its heading and wind direction. In stage 3 the waypoints will spawn more and more upwind until they are directly upwind, this is in an effort to encourage the agent to find the emergent property of Tacking, a maneuver by which the nose of the boat transitions through the wind while it turns around.  
 
-Figure ... shows the difference in the paths at stages 2 and 3 of the curriculum. The path in stage 2 is a straight line towards the waypoint, while the path in stage 3 is a zigzag as the agent tries to find the VMG. 
+Figure$~$\ref{curriculum} shows the difference in the paths at stages 2 and 3 of the curriculum. The path in stage 2 is a straight line towards the waypoint, while the path in stage 3 is a zigzag as the agent tries to find the VMG. 
+
+\begin{figure}
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \includegraphics[width=0.5\textwidth]{Images/coursePath.png}
+    }
+    \caption{Stages 2 and 3 of the curriculum}\label{curriculum}
+\end{figure}
 
 \subsection{Hyperparameters}\label{sec:hyperparameters}
 Hyperparameters are critical configurations that govern the training process of machine learning models. In reinforcement learning, particularly within the scope of PPO, they play a pivotal role in determining how effectively the model learns from its environment. The hyperparameters are defined within the boatAgent.yaml config file. A variety of different configurations were tested to find the a set of hyperparameters that yielded the best results. Experimentation was done with the 

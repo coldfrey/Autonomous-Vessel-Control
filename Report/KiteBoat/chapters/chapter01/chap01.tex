@@ -34,36 +34,45 @@ To achieve this primary aim, the objectives have been structured as follows:
 \begin{itemize}
     \item To design and implement a virtual marine environment that accurately emulates real-world maritime conditions.
     \item To construct a realistic model of a boat that exhibits appropriate physical movements in response to environmental forces such as wind and water currents.
+    \newline\textbf{Outcome Goal:} To have a physics-based boat able to be controlled and driven around a scene by a human player.
 \end{itemize}
 
 \subsection*{Objective 2: Kite Propulsion Modeling}
 \begin{itemize}
-    \item To create a physics-based model of a kite within the simulation that reflects authentic aerodynamic behaviors.
+    \item To create a physics-based model of a kite within the simulation that reflects authentic aerodynamic behaviors and integrate it onto the boat model.
     \item To integrate kite control mechanics into the agent’s available actions, allowing for simulated propulsion through wind energy harnessing.
+    \newline\textbf{Outcome Goal:} To have a physics-based kiteboat able to be controlled and driven around a scene by a human player, using the agent's heuristic controls.
 \end{itemize}
 
 \subsection*{Objective 3: Reinforcement Learning Framework Establishment}
 \begin{itemize}
     \item To formulate a set of observations, actions, and rewards that encapsulate the dynamics of autonomous kite-boat navigation.
     \item To deploy the Proximal Policy Optimization algorithm, leveraging its actor-critic method for effective policy learning.
+    \newline\textbf{Outcome Goal:} To have an agent begin training using PPO to learn to control the kiteboat.
 \end{itemize}
 
 \subsection*{Objective 4: Autonomous Agent Development}
 \begin{itemize}
     \item To develop an RL agent capable of learning basic control and maneuvers, starting with simple navigating towards a target and maintaining a constant course.
     \item To refine the agent's capability to adaptively control the kite's position and angle to optimize propulsion for speed while navigating towards a target in any direction.
+    \newline\textbf{Outcome Goal 1:} To have an agent that can navigate towards a target in a straight line.
+    \newline\textbf{Outcome Goal 2:} To have an agent that can navigate towards a target in any direction, including using maneuvers to take the fastest path.
 \end{itemize}
 
 \subsection*{Objective 5: Efficacy and Optimization Testing}
 \begin{itemize}
-    \item To rigorously evaluate the trained agent’s performance in simulating autonomous navigation in various environmental scenarios within the developed Unity environment.
     \item To utilize High-Performance Computing (HPC) resources for scaling up simulations and optimizing the training process.
+    \item To rigorously evaluate the trained agent’s performance in simulating autonomous navigation in various environmental scenarios.
+    \newline\textbf{Outcome Goal 1:} To train an agent using the HPC resources.
+    \newline\textbf{Outcome Goal 2:} To have an agent that can navigate towards a target in a straight line under various environmental conditions, including wind and waves.
 \end{itemize}
 
 \subsection*{Objective 6: Real-World Applicability Assessment}
 \begin{itemize}
-    \item To extrapolate simulation findings to assess real-world applicability and propose a framework for practical deployment of RL in kite-powered vessels.
+    \item To extrapolate simulation findings to assess real-world applicability and propose a  practical deployment of RL in kite-powered vessels.
     \item To provide recommendations for further research and development based on empirical results obtained from the simulation studies.
+    \newline\textbf{Outcome Goal 1:} To propose a practical deployment of RL in kite-powered vessels.
+    \newline\textbf{Outcome Goal 2:} To provide recommendations for further research and development.
 \end{itemize}
 
 These objectives pave the path towards achieving the central goal, ensuring each phase of development builds upon the last. By concluding this investigation with assessments geared towards real-world implementation, it is anticipated that the contributions made will significantly impact sustainable maritime transportation solutions.
