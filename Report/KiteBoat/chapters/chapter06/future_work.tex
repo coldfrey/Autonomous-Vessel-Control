@@ -3,16 +3,15 @@
 \let\textcircled=\pgftextcircled\chapter{Future Work}\label{chap:future_work}
 
 % Reward Functions
-\textbf{Curriculum}
+\subsection*{Curriculum}
 
 It is easy to imagine to the limitless possible combinations of rewards available, and as some of the desired behaviour was observed in the simulation, it is clear that the reward function was on the right lines. However, as explained earlier, due to the complex nature of the challenge at hand, a curriculum was used to split the reward function into smaller, more manageable stages. This proved beneficial but there was room for dissecting of the task into even smaller stages. This would have allowed for a more gradual learning process and hopefully given the agent a better chance at retaining what it had learnt in the previous stage. It would also have been good to try multiple different curriculum's to see if the agent could learn the task in a different order.
 
 
-\textbf{Evaluation of Performance}
-
+\subsection*{Evaluation of Performance}
 It would be advantageous to setup a comprehensive evaluation process that could be conducted in between each training run. This would provide clear incite into the runs success and help provide direction for the next training run. While training a complex system it is easy to get distracted in nuances of the training process as there are so many potential different factors effecting the outcome. 
 
-\textbf{Simulation}
+\subsection*{Simulation Environment}
 
 The simulation (training environment), albeit not perfect, was a good representation of the real world, and was a good starting point for the project. In future it would be good to create a more accurate simulation, representing the real world as closely as possible. This would allow for easier integration into a physical system, should the training reach a point where it is ready to be tested in the real world. To create a better simulation, the first aspect to be addressed would be the water model. Remove any water system and create a particle simulation from scratch, this would allow for proper mechanics and realistic water behaviour.
 

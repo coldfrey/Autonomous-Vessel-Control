@@ -26,16 +26,16 @@
 \contentsline {section}{\numberline {3.5}Training}{22}{section.3.5}%
 \contentsline {subsection}{\numberline {3.5.1}Curriculum Learning}{23}{subsection.3.5.1}%
 \contentsline {subsection}{\numberline {3.5.2}Hyperparameters}{23}{subsection.3.5.2}%
-\contentsline {section}{\numberline {3.6}Optimization}{24}{section.3.6}%
-\contentsline {subsection}{\numberline {3.6.1}Blue Crystal HPC}{24}{subsection.3.6.1}%
-\contentsline {chapter}{\chapternumberline {4}Results and Validation}{26}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Final Experimental Setup}{26}{section.4.1}%
+\contentsline {section}{\numberline {3.6}Optimization}{25}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Blue Crystal HPC}{25}{subsection.3.6.1}%
+\contentsline {chapter}{\chapternumberline {4}Results and Validation}{27}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Final Experimental Setup}{27}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Training Results}{27}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Evaluation Of Agent Performance}{27}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Training Results}{27}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Evaluation Of Agent Performance}{27}{section.4.5}%
-\contentsline {section}{\numberline {4.6}Evaluation Introduction}{28}{section.4.6}%
-\contentsline {chapter}{\chapternumberline {5}Future Work}{30}{chapter.5}%
-\contentsline {appendix}{\chapternumberline {A}Appendix A}{33}{appendix.A}%
-\contentsline {section}{\numberline {A.1}Unity Setup}{33}{section.A.1}%
-\contentsline {chapter}{Bibliography}{36}{appendix*.15}%
+\contentsline {section}{\numberline {4.3}Agent Performance}{27}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Evaluation Introduction}{29}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Technical Limitations}{29}{subsection.4.4.1}%
+\contentsline {chapter}{\chapternumberline {5}Future Work}{31}{chapter.5}%
+\contentsline {appendix}{\chapternumberline {A}Appendix A}{34}{appendix.A}%
+\contentsline {section}{\numberline {A.1}Unity Setup}{34}{section.A.1}%
+\contentsline {section}{\numberline {A.2}Scripts}{34}{section.A.2}%
+\contentsline {chapter}{Bibliography}{36}{appendix*.20}%

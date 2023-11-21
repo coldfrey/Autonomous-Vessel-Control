@@ -1813,6 +1813,7 @@ INPUT ./chapters/chapter05/results.tex
 INPUT chapters/chapter05/results.tex
 INPUT ./chapters/chapter05/results.tex
 INPUT chapters/chapter05/results.tex
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/ncntrsbk/pncri8t.tfm
 INPUT ./Images/hard_lock.png
 INPUT ./Images/hard_lock.png
 INPUT Images/hard_lock.png
@@ -1848,7 +1849,6 @@ INPUT ./thesis.bbl
 INPUT thesis.bbl
 INPUT ./thesis.bbl
 INPUT thesis.bbl
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/ncntrsbk/pncri8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/ncntrsbk/pncri8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/ncntrsbk/pncri8r.tfm
 OUTPUT thesis.toc

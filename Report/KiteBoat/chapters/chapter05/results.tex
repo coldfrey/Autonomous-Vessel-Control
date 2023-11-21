@@ -7,32 +7,10 @@ Briefly summarize the goals of the RL experiments.
 Outline the structure of the results chapter.
 
 \section{Final Experimental Setup}
-The training scene used for the final training runs can be found in the \texttt{Assets/Scenes/kiteboat\_training}. 
+The training scene used for the final training runs can be found in:
+\newline
+\texttt{Assets/Scenes/kiteboat\_training}. The final experimental setup was a combination of the best performing elements from the previous experiments. The model was configured with the config file shown in section$~$\ref{config} of the appendix. 
 
-The final experimental setup was a combination of the best performing elements from the previous experiments. The model was configured as follows, shown in table $~$\ref{model_config}:
-
-\begin{table}[h]
-    \centering
-    \begin{tabular}{c|c}
-        \textbf{Hyperparameters} & \textbf{Value} \\
-        \midrule
-        batch size & 256 \\
-        buffer size & 4096 \\
-        learning rate & 3.0e-4 \\
-
-        \midrule
-        \textbf{Network Architecture} & \textbf{Value} \\
-        \midrule
-        hidden units & 256 \\
-        hidden layers & 6 \\
-        \midrule
-        \textbf{Reward Signals} & \textbf{Value} \\
-        \midrule
-        
-        \hline
-    \end{tabular}
-    \caption{Model Configuration}\label{model_config}
-\end{table}
 
 Outline the training procedure, including any pre-training steps.
 
@@ -42,26 +20,16 @@ Present the learning curves for the agent, showing reward over time.
 Include a table or graph of the agent’s performance metrics at various checkpoints.
 Discuss any unexpected behaviors or anomalies observed during training.
 
-\section{Evaluation Of Agent Performance}
 
-Difficulties Encountered
+\section{Agent Performance}
 
-\section{Training Results}
-Training Results
-Present the learning curves for the agent, showing reward over time.
-Include a table or graph of the agent’s performance metrics at various checkpoints.
-Discuss any unexpected behaviors or anomalies observed during training.
-
-\section{Evaluation Of Agent Performance}
-
-Difficulties Encountered:
-There were several difficulties encountered when trying to get the agent to learn anything let alone the combination of directionally sailing a kiteboat. One of the most common local maxima that the agent fell into was for the agent to steer on `hard lock' with the rudder at ~70-90$^{\circ}$, shown in figure$~$\ref{hard_lock} where the target can be seen as the green area in the distance. This behavior allowed it to learn to fly the kite very reliably with the boat in a more consistent and stable position. These episodes provided false positives in the training data because as soon as the agent started to explore the rudder space more it was not able to fly the kite. To try and combat this behavior a large negative reward was added for aggressive steering as shown in table$~$\ref{rewards}. This went some way to discouraging this behavior but it was still observed in some of the later training runs. After this rudder reward was added it was observed that the agent took almost 5 times as long to learn to fly the kite with some reliability. 
+\subsection*{Difficulties Encountered}
+There were several difficulties encountered when trying to get the agent to learn anything let alone the combination of directionally sailing a kiteboat. One of the most common local maxima that the agent fell into was for the agent to steer on `hard lock' with the rudder at \textit{$\tilde{} ~70-90^{\circ}$}, shown in figure$~$\ref{hard_lock} where the target can be seen as the green area in the distance. This behavior allowed it to learn to fly the kite very reliably with the boat in a more consistent and stable position. These episodes provided false positives in the training data because as soon as the agent started to explore the rudder space more it was not able to fly the kite. To try and combat this behavior a large negative reward was added for aggressive steering as shown in table$~$\ref{rewards}. This went some way to discouraging this behavior but it was still observed in some of the later training runs. After this rudder reward was added it was observed that the agent took almost 5 times as long to learn to fly the kite with some reliability. 
 
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=0.8\textwidth]{Images/hard_lock.png}
-    \caption{The agent steering on hard lock}
-    \label{hard_lock}
+    \caption{The agent steering on hard lock}\label{hard_lock}
 \end{figure}
 
 
@@ -120,4 +88,5 @@ Conclusion
 Summarize the main takeaways from the evaluation.
 Discuss the conclusions that can be drawn about the RL agent's performance and the potential for real-world application.
 
-talk about how the hpc wasnt viable
+\subsection{Technical Limitations}\label{sec:limitations}
+There were several limitations that affected the quality of the training and thus the trained model. First and foremost was compute, as expected when conducting any machine learning training, the more compute available the better. The local machine used for training was a 16-core i9 with 32GB of RAM and a T2000 nvidia graphics, and took approximately 2 hours per million steps completed. This was not a viable option for training the agent to a high level of performance, and so the training was attempted to the university HPC. The HPC has 525 Lenovo nx360 m5 nodes each with two 14 core 2.4 GHz CPUs, and 32 GPU nodes with two cards each. At face value this looks wonderful and training should be a breeze, however the problem is two fold. First Unity does not support native multi threading, due to the complex nature of its physics engine, so it runs on a single CPU unless manually specified. Manual threading was possible but only for separate tasks that could be called independently of the model, such as the collision detection algorithm. As expected this severely limits the speed of training. The second more major problem was the wait time of the HPC, the longer a job was scheduled the longer it took for the resources to be allocated, for a job that was scheduled for 48 hours on a single node it could take up to 5 days for the job to begin. This was a major problem as it meant that the training could not be conducted in a timely manner, and iteration was very slow. The limited GPU's had the same problem, with only 32 available, and the fact that the HPC was shared with the entire university, it was very difficult to get access to the resources. For this reason the vast majority of training was conducted on the local machine, which had the advantage of also being able to see the training in real time, albeit slowly.   

@@ -78,11 +78,12 @@ A sequence diagram of the interaction between the Unity environment and the Pyth
 
 
 
-The technical instructions to setup MLAgents in Python and Unity can be found at:
-\newline$~$\url{https://github.com/lipj01/AI-Kite-Control} CHANGE TO MY REPO
-\newline$~$In summary the steps are as follows:
+The technical instructions to setup MLAgents in Python and Unity are as follows:
+% \newline$~$\url{https://github.com/lipj01/AI-Kite-Control} CHANGE TO MY REPO
 \begin{itemize}
-    \item 
+    \item Initialise a python virtual environment
+    \item Install MLAgents with the command \texttt{pip install mlagents}
+    \item Configure Unity project to use MLAgents by importing the MLAgents package, see section$~$\ref{sec:RL_Implementation} for more details.
 \end{itemize}
 
 \section{The Environment}
@@ -194,13 +195,13 @@ In order to use Unity game engine as the environment for RL it must be setup cor
     \item Enable MLAgents in Unity:
     Window $\rightarrow$ Package Manager $\rightarrow$ MLAgents $\rightarrow$ Install
     \item Create an empty game object in the scene.
-    \item Create a new \texttt{C\#} script of with class of type `agent' and attach it to the game object, include the methods discussed below.
+    \item Create a new \texttt{C\#} script of with class of type `agent' and attach it to the game object, include the methods discussed in subsection$~$\ref{agent_script}.
     \item Add the Behaviour Parameters component to the game object.
     \item Create a new agent config file (\texttt{.yaml}) and set the `Behavioural Name' in the Behaviour Parameters component to the name of the config file.
 \end{enumerate}  
 A visual representation can be found in section$~$\ref{sec:unity_setup} of the appendix.
 
-\subsection{The Agent Script}
+\subsection{The Agent Script}\label{agent_script}
 The kiteboat agent sets up the scene for learning and in order for Unity to correctly process the script it must have the following 4 functions implemented:
 \begin{itemize}
     \item OnEpisodeBegin()
@@ -309,7 +310,7 @@ The next RL technique to help improve training is called Curriculum Learning (CL
 
 Step 1 in the curriculum ensures the agent has a fundamental grasp of the controls and is able to keep the kite in the air. This is a keep alive problem and so the agent is rewarded for keeping the kite in the air and penalised for crashing. The direction the boat sails is not important at this stage. Step 2 is a simple task that the agent can learn quickly, having now gained a grasp of the kite control it must learn to steer straight towards the waypoint. This was also turned into a keep alive problem, move closer to the next waypoint or end the episode. Step 3 is where the agent starts to learn to sail its own path, initially this will still be a straight line until the waypoints are spawning upwind of the kiteboats initial location. At this point the agent must start to experiment with finding the VMG (velocity made good), which is a measure of the speed at which a vessel is moving directly towards its destination, considering both its heading and wind direction. In stage 3 the waypoints will spawn more and more upwind until they are directly upwind, this is in an effort to encourage the agent to find the emergent property of Tacking, a maneuver by which the nose of the boat transitions through the wind while it turns around.  
 
-Figure$~$\ref{curriculum} shows the difference in the paths at stages 2 and 3 of the curriculum. The path in stage 2 is a straight line towards the waypoint, while the path in stage 3 is a zigzag as the agent tries to find the VMG. 
+Figure$~$\ref{curriculum} shows the difference in the paths at stages 2 and 3 of the curriculum. The path in stage 2 is a mostly straight line towards the waypoint, while the path in stage 3 is a zigzag upwind. 
 
 \begin{figure}
     \centering
@@ -320,34 +321,46 @@ Figure$~$\ref{curriculum} shows the difference in the paths at stages 2 and 3 of
 \end{figure}
 
 \subsection{Hyperparameters}\label{sec:hyperparameters}
-Hyperparameters are critical configurations that govern the training process of machine learning models. In reinforcement learning, particularly within the scope of PPO, they play a pivotal role in determining how effectively the model learns from its environment. The hyperparameters are defined within the boatAgent.yaml config file. A variety of different configurations were tested to find the a set of hyperparameters that yielded the best results. Experimentation was done with the 
+Hyperparameters are critical configurations that govern the training process of machine learning models. In reinforcement learning, particularly within the scope of PPO, they play a pivotal role in determining how effectively the model learns from its environment. The hyperparameters are defined within the boatAgent.yaml config file. A variety of different configurations were tested to find the a set of hyperparameters that yielded the best results. It is also possible to schedule the hyperparameters to change over the course of the training, this can potentially lead to better results as the agent can adapt its learning behavior during different stages of training. To test which hyperparameters were the most effective, so simple experimentation was conducted. The performance metric of average reward per episode with a mex steps of 100000 was used with a manual search of the hyperparameter space. The following hyperparameters were experimented with:
+\begin{itemize}
+    \item Normalised network inputs- Adjusting normalized inputs ensures that the model receives input data within a consistent scale, which can aid in stabilizing and speeding up the training process.
+    \item Number of layers in the network- The depth of the network, defined by its number of layers, determines the level of abstraction the model can achieve, impacting its ability to learn complex patterns.
+    \item Number of nodes in each layer- The width of each layer, given by the number of nodes, influences the model's capacity to capture nuances in the data, with more nodes allowing for more complex representations.
+    \item Beta- The beta hyperparameter balances the exploration-exploitation trade-off by controlling the strength of the entropy term in the objective function, which affects the agent's policy diversity.
+    \item Epsilon- Epsilon values dictate the degree of policy randomness, serving as a threshold for exploration in the agent's decision-making process, promoting the discovery of new strategies and techniques.
+    \item Learning rate- The learning rate controls the magnitude of updates to the model's weights, with too high a rate risking overshooting minima and too low delaying convergence.
+    \item Curiosity- This motivation factor drives the agent to explore unseen states, enhancing learning in sparse reward environments by providing an internal reward signal.
+\end{itemize}
+
+The final config can be found in section$~$\ref{config} of the appendix. Given more time it would have been prudent to conduct a full grid search of the hyperparameters to ensure that the best combination was found for this project.
 
 
-Difficulties with initial training approaches:
--The learning of the kite is relativly straight forwards
--Rudder controls were tricky, boat has a habit of hard lock, letting the boat drag sideways seems to be a local maxima for stability,  lets the kite learn bettter
+% Difficulties with initial training approaches:
+% -The learning of the kite is relativly straight forwards
+% -Rudder controls were tricky, boat has a habit of hard lock, letting the boat drag sideways seems to be a local maxima for stability,  lets the kite learn bettter
 \section{Optimization}
 
 
 \subsection{Blue Crystal HPC}
 
-The Blue Crystal HPC, operated by the University of Bristol, offers significant computational resources tailored for intensive tasks such as machine learning simulations, like.
-
+The Blue Crystal HPC, operated by the University of Bristol, offers significant computational resources tailored for intensive tasks such as machine learning simulations, like. 
 
 To utilize Blue Crystal for MLAgents simulations, the following steps were undertaken:
 
 \begin{itemize}
     \item \textbf{Access and Security:} Gained access to the university's HPC and set up SSH keys for secure communication.
-    \item \textbf{File Preparation:} Built the .x86\_64 Unity build file and uploaded it, along with the necessary config file, to Google Drive.
+    \item \textbf{File Preparation:} Built the .x86\_64 Unity build file and uploaded it, along with the necessary config file and credentials, to Google Drive.
     \item \textbf{Automation with Shell Script:} Developed a shell script to automate the process. This script:
     \begin{itemize}
         \item Retrieves the build files from Google Drive.
         \item Sets up a virtual environment on Blue Crystal.
-        \item Installs the ML-Agents toolkit.
-        \item Initiates the simulation.
-        \item Upon completion, uploads the results back to Google Drive\textsuperscript{3}.
+        \item Installs the ML-Agents.
+        \item Manually runs the training for a given number of steps.
+        \item Upon completion, uploads the results back to Google Drive.
     \end{itemize}
 \end{itemize}
+
+The shell script can be found in section$~$\ref{sec:shell_script} of the appendix. Although the process appears simple there were a number of difficulties encountered during the usage of the HPC. First and foremost was handling the files required for training, Google Drive proved very useful, and using a link to a public folder the build files were easily accessible using \texttt{wget}. The HPC only outputs files in the form \texttt{.out}, this is unfortunately not very useful. Instead the results dir, which is created during the training and contains the trained \texttt{.onx} model was uploaded back to google drive using the credentials.json file. As this process had to be entirely autonomous and the HPC node could not perform any mouse clicks, the credentials.json was created by uploading the file to google drive locally and performing the manual authentication process, then uploaded to google drive. Again as no authentication could be completed the drive folder had to be public so anyone with the link could download it, this presented a security risk albeit not major. To mitigate this security risk the OAuth 2.0 Client ID was deleted after each training session.
 
 Useful commands for working with Blue Crystal:
 
@@ -362,8 +375,6 @@ Parallelization and Optimization:
 Initially, a single node on Blue Crystal was employed to run the simulation. This node with 28 CPUs was responsible for both hosting the environment and executing the model. However, Blue Crystal's architecture allows for more advanced parallelization strategies. Distributing the simulation across multiple nodes can enhance efficiency. Additionally, offloading the ML-Agents toolkit to a GPU core can further accelerate the learning process.
 
 However, it's worth noting that the demand for GPUs on Blue Crystal is high. For tasks that don't necessitate the power of GPUs, relying on CPUs, even if they take longer, is a practical choice given the limited GPU availability.
-
-
 
 
 
