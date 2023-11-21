@@ -10,46 +10,139 @@
 
 \section{Scripts}
 
-\subsection*{GJK Collision Detection}
+\subsection{GJK Collision Detection}
 
-\subsection*{Config}\label{config}
-\begin{adjustbox}{width=\textwidth/2}
-\begin{lstlisting}[language=C++]
-    behaviors:
+
+\subsection{Grid Search}\label{gridsearch}
+\begin{lstlisting}[language=Python]
+import itertools
+import os
+
+# Define the ranges for each hyperparameter you want to vary, with fewer options
+batch_size_options = [256, 512]
+buffer_size_options = [2048, 4096]
+learning_rate_options = [1.0e-4, 3.0e-4]
+beta_options = [1.0e-4, 5.0e-4]
+epsilon_options = [0.2, 0.3]
+lambd_options = [0.95, 0.99]
+num_epoch_options = [3, 4]
+hidden_units_options = [128, 256]
+num_layers_options = [4, 5]
+
+# Create a product of all the hyperparameter options
+grid_search = list(itertools.product(
+    batch_size_options,
+    buffer_size_options,
+    learning_rate_options,
+    beta_options,
+    epsilon_options,
+    lambd_options,
+    num_epoch_options,
+    hidden_units_options,
+    num_layers_options
+))
+
+# If there are more than 100 configurations, randomly sample 100 from them
+import random
+if len(grid_search) > 100:
+    grid_search = random.sample(grid_search, 100)
+
+    # Create a directory for the config files if it doesn't exist
+config_directory = "config_files"
+os.makedirs(config_directory, exist_ok=True)
+
+# Function to generate the config file content
+def generate_config_content(batch_size, buffer_size, learning_rate, beta, epsilon, 
+lambd, num_epoch, hidden_units, num_layers):
+
+    return f"""behaviors:
   BoatAgent:
     trainer_type: ppo
     hyperparameters:
-      batch_size: 256
-      buffer_size: 4096
-      learning_rate: 3.0e-4
-      beta: 5.0e-4
-      epsilon: 0.3
-      lambd: 0.99
-      num_epoch: 4
-      learning_rate_schedule: constant
+    batch_size: {batch_size}
+    buffer_size: {buffer_size}
+    learning_rate: {learning_rate}
+    beta: {beta}
+    epsilon: {epsilon}
+    lambd: {lambd}
+    num_epoch: {num_epoch}
+    learning_rate_schedule: constant
     network_settings:
-      normalize: false
-      hidden_units: 256
-      num_layers: 6
+    normalize: false
+    hidden_units: {hidden_units}
+    num_layers: {num_layers}
     reward_signals:
-      extrinsic:
-        gamma: 0.99
-        strength: 1.0
-      curiosity:
-        strength: 0.1
-        gamma: 0.99
-        learning_rate: 3.0e-4
-    max_steps: 50000000
+    extrinsic:
+    gamma: 0.99
+    strength: 1.0
+    curiosity:
+    strength: 0.1
+    gamma: 0.99
+    learning_rate: {learning_rate}
+    max_steps: 1000000
     time_horizon: 64
     summary_freq: 10000
     checkpoint_interval: 50000
     keep_checkpoints: 25
-\end{lstlisting}
-\end{adjustbox}
+    """
+    
+    # Generate and save the config files
+    for idx, config in enumerate(grid_search):
+    batch_size, buffer_size, learning_rate, beta, epsilon, lambd, num_epoch, 
+    hidden_units, num_layers = config
 
-\subsection*{HPC Shell Script}\label{sec:shell_script}
+    config_content = generate_config_content(batch_size, buffer_size, 
+    learning_rate, beta, epsilon, lambd, num_epoch, hidden_units, num_layers)
 
+    config_filename = f"config_{idx+1:03d}.yaml"
+    config_filepath = os.path.join(config_directory, config_filename)
+    with open(config_filepath, 'w') as file:
+    file.write(config_content)
+    
+    print(f"Generated {len(grid_search)} configuration files in the directory 
+    '{config_directory}'.")
+    
+    
+  \end{lstlisting}
 
+  \subsection{Config}\label{config}
+  \begin{adjustbox}{width=\textwidth/2}
+  \begin{lstlisting}[language=C++]
+      behaviors:
+    BoatAgent:
+      trainer_type: ppo
+      hyperparameters:
+        batch_size: 256
+        buffer_size: 4096
+        learning_rate: 3.0e-4
+        beta: 5.0e-4
+        epsilon: 0.3
+        lambd: 0.99
+        num_epoch: 4
+        learning_rate_schedule: constant
+      network_settings:
+        normalize: false
+        hidden_units: 256
+        num_layers: 6
+      reward_signals:
+        extrinsic:
+          gamma: 0.99
+          strength: 1.0
+        curiosity:
+          strength: 0.1
+          gamma: 0.99
+          learning_rate: 3.0e-4
+      max_steps: 50000000
+      time_horizon: 64
+      summary_freq: 10000
+      checkpoint_interval: 50000
+      keep_checkpoints: 25
+  \end{lstlisting}
+  \end{adjustbox}
+
+  \subsection*{HPC Shell Script}\label{sec:shell_script}
+  
+  
 % insert code here
 
 

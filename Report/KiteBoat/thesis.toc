@@ -31,11 +31,16 @@
 \contentsline {chapter}{\chapternumberline {4}Results and Validation}{27}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Final Experimental Setup}{27}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Training Results}{27}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Agent Performance}{27}{section.4.3}%
+\contentsline {subsection}{\numberline {4.2.1}Hyperparameter Tuning}{27}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Final Training}{27}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}Agent Performance}{28}{section.4.3}%
 \contentsline {section}{\numberline {4.4}Evaluation Introduction}{29}{section.4.4}%
 \contentsline {subsection}{\numberline {4.4.1}Technical Limitations}{29}{subsection.4.4.1}%
 \contentsline {chapter}{\chapternumberline {5}Future Work}{31}{chapter.5}%
-\contentsline {appendix}{\chapternumberline {A}Appendix A}{34}{appendix.A}%
-\contentsline {section}{\numberline {A.1}Unity Setup}{34}{section.A.1}%
-\contentsline {section}{\numberline {A.2}Scripts}{34}{section.A.2}%
-\contentsline {chapter}{Bibliography}{36}{appendix*.20}%
+\contentsline {appendix}{\chapternumberline {A}Appendix A}{33}{appendix.A}%
+\contentsline {section}{\numberline {A.1}Unity Setup}{33}{section.A.1}%
+\contentsline {section}{\numberline {A.2}Scripts}{33}{section.A.2}%
+\contentsline {subsection}{\numberline {A.2.1}GJK Collision Detection}{33}{subsection.A.2.1}%
+\contentsline {subsection}{\numberline {A.2.2}Grid Search}{33}{subsection.A.2.2}%
+\contentsline {subsection}{\numberline {A.2.3}Config}{36}{subsection.A.2.3}%
+\contentsline {chapter}{Bibliography}{37}{appendix*.19}%

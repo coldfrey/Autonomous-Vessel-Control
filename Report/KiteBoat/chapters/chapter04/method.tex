@@ -321,18 +321,17 @@ Figure$~$\ref{curriculum} shows the difference in the paths at stages 2 and 3 of
 \end{figure}
 
 \subsection{Hyperparameters}\label{sec:hyperparameters}
-Hyperparameters are critical configurations that govern the training process of machine learning models. In reinforcement learning, particularly within the scope of PPO, they play a pivotal role in determining how effectively the model learns from its environment. The hyperparameters are defined within the boatAgent.yaml config file. A variety of different configurations were tested to find the a set of hyperparameters that yielded the best results. It is also possible to schedule the hyperparameters to change over the course of the training, this can potentially lead to better results as the agent can adapt its learning behavior during different stages of training. To test which hyperparameters were the most effective, so simple experimentation was conducted. The performance metric of average reward per episode with a mex steps of 100000 was used with a manual search of the hyperparameter space. The following hyperparameters were experimented with:
+Hyperparameters are critical configurations that govern the training process of machine learning models. In reinforcement learning, particularly within the scope of PPO, they play a pivotal role in determining how effectively the model learns from its environment. The hyperparameters are defined within the boatAgent.yaml config file. A variety of different configurations were tested to find the a set of hyperparameters that yielded the best results. It is also possible to schedule the hyperparameters to change over the course of the training, this can potentially lead to better results as the agent can adapt its learning behavior during different stages of training. To test which hyperparameters were the most effective a grid search was performed. Section$~$\ref{gridsearch} of the appendix shows the python script used to generate the 100 config files to be tested. The performance metric of the average reward per episode with a max steps of 100000 was used to determine the best hyperparameters to then be used for the final long training runs. The following hyperparameters were experimented with:
 \begin{itemize}
-    \item Normalised network inputs- Adjusting normalized inputs ensures that the model receives input data within a consistent scale, which can aid in stabilizing and speeding up the training process.
-    \item Number of layers in the network- The depth of the network, defined by its number of layers, determines the level of abstraction the model can achieve, impacting its ability to learn complex patterns.
-    \item Number of nodes in each layer- The width of each layer, given by the number of nodes, influences the model's capacity to capture nuances in the data, with more nodes allowing for more complex representations.
-    \item Beta- The beta hyperparameter balances the exploration-exploitation trade-off by controlling the strength of the entropy term in the objective function, which affects the agent's policy diversity.
-    \item Epsilon- Epsilon values dictate the degree of policy randomness, serving as a threshold for exploration in the agent's decision-making process, promoting the discovery of new strategies and techniques.
-    \item Learning rate- The learning rate controls the magnitude of updates to the model's weights, with too high a rate risking overshooting minima and too low delaying convergence.
-    \item Curiosity- This motivation factor drives the agent to explore unseen states, enhancing learning in sparse reward environments by providing an internal reward signal.
+    \item \textbf{Normalised network inputs}- Adjusting normalized inputs ensures that the model receives input data within a consistent scale, which can aid in stabilizing and speeding up the training process.
+    \item \textbf{Number of layers in the network}- The depth of the network, defined by its number of layers, determines the level of abstraction the model can achieve, impacting its ability to learn complex patterns.
+    \item \textbf{Number of nodes in each layer}- The width of each layer, given by the number of nodes, influences the model's capacity to capture nuances in the data, with more nodes allowing for more complex representations.
+    \item \textbf{Beta}- The beta hyperparameter balances the exploration-exploitation trade-off by controlling the strength of the entropy term in the objective function, which affects the agent's policy diversity.
+    \item \textbf{Curiosity}- This motivation factor drives the agent to explore unseen states, enhancing learning in sparse reward environments by providing an internal reward signal.
+    \item \textbf{Epsilon}- Epsilon values dictate the degree of policy randomness, serving as a threshold for exploration in the agent's decision-making process, promoting the discovery of new strategies and techniques.
+    \item \textbf{Learning rate}- The learning rate controls the magnitude of updates to the model's weights, with too high a rate risking overshooting minima and too low delaying convergence.
 \end{itemize}
-
-The final config can be found in section$~$\ref{config} of the appendix. Given more time it would have been prudent to conduct a full grid search of the hyperparameters to ensure that the best combination was found for this project.
+The comparison between these different configurations can be viewed in chapter$~$\ref{chap:results}, section$~$\ref{sec:hyperparameter_tuning}. The final config can be found in section$~$\ref{config} of the appendix and is further explained in chapter$~$\ref{chap:results}. Given more time it would have been prudent to conduct a full grid search of the hyperparameters to ensure that the best combination was found for this project.
 
 
 % Difficulties with initial training approaches:
@@ -370,7 +369,7 @@ Useful commands for working with Blue Crystal:
     \item \textbf{scancel:} Cancels a job.
 \end{itemize}
 
-Parallelization and Optimization:
+\subsection*{Parallelization and Optimization}
 
 Initially, a single node on Blue Crystal was employed to run the simulation. This node with 28 CPUs was responsible for both hosting the environment and executing the model. However, Blue Crystal's architecture allows for more advanced parallelization strategies. Distributing the simulation across multiple nodes can enhance efficiency. Additionally, offloading the ML-Agents toolkit to a GPU core can further accelerate the learning process.
 
