@@ -7,40 +7,43 @@
 \contentsline {section}{\numberline {1.2}Aims and Objectives}{2}{section.1.2}%
 \contentsline {chapter}{\chapternumberline {2}Background}{5}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Reinforcement Learning (RL)}{6}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Unity Game Engine}{7}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Proximal Policy Optimization (PPO)}{8}{section.2.3}%
-\contentsline {chapter}{\chapternumberline {3}Methodology}{12}{chapter.3}%
-\contentsline {section}{\numberline {3.1}MLAgents}{12}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Python Implementation}{12}{subsection.3.1.1}%
-\contentsline {section}{\numberline {3.2}The Environment}{15}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Boat Model}{15}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Kite Model}{17}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Collision Detection}{18}{subsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.2.4}Course Generation}{19}{subsection.3.2.4}%
-\contentsline {section}{\numberline {3.3}Controls}{19}{section.3.3}%
-\contentsline {section}{\numberline {3.4}RL Implementation}{19}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}The Agent Script}{19}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}Observations}{20}{subsection.3.4.2}%
-\contentsline {subsection}{\numberline {3.4.3}Actions}{21}{subsection.3.4.3}%
-\contentsline {subsection}{\numberline {3.4.4}Rewards}{21}{subsection.3.4.4}%
-\contentsline {section}{\numberline {3.5}Training}{22}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}Curriculum Learning}{23}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}Hyperparameters}{23}{subsection.3.5.2}%
-\contentsline {section}{\numberline {3.6}Optimization}{25}{section.3.6}%
-\contentsline {subsection}{\numberline {3.6.1}Blue Crystal HPC}{25}{subsection.3.6.1}%
-\contentsline {chapter}{\chapternumberline {4}Results and Validation}{27}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Final Experimental Setup}{27}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Training Results}{27}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Hyperparameter Tuning}{27}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Final Training}{27}{subsection.4.2.2}%
-\contentsline {section}{\numberline {4.3}Agent Performance}{28}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Evaluation Introduction}{29}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Technical Limitations}{29}{subsection.4.4.1}%
-\contentsline {chapter}{\chapternumberline {5}Future Work}{31}{chapter.5}%
-\contentsline {appendix}{\chapternumberline {A}Appendix A}{33}{appendix.A}%
-\contentsline {section}{\numberline {A.1}Unity Setup}{33}{section.A.1}%
-\contentsline {section}{\numberline {A.2}Scripts}{33}{section.A.2}%
-\contentsline {subsection}{\numberline {A.2.1}GJK Collision Detection}{33}{subsection.A.2.1}%
-\contentsline {subsection}{\numberline {A.2.2}Grid Search}{33}{subsection.A.2.2}%
-\contentsline {subsection}{\numberline {A.2.3}Config}{36}{subsection.A.2.3}%
-\contentsline {chapter}{Bibliography}{37}{appendix*.19}%
+\contentsline {section}{\numberline {2.2}Proximal Policy Optimization (PPO)}{7}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Unity Game Engine}{10}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Existing Kiteboat Technologies}{11}{section.2.4}%
+\contentsline {chapter}{\chapternumberline {3}Methodology}{13}{chapter.3}%
+\contentsline {section}{\numberline {3.1}MLAgents}{13}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Python Implementation}{13}{subsection.3.1.1}%
+\contentsline {section}{\numberline {3.2}The Environment}{16}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Boat Model}{16}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Kite Model}{18}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Collision Detection}{19}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Course Generation}{20}{subsection.3.2.4}%
+\contentsline {section}{\numberline {3.3}Controls}{20}{section.3.3}%
+\contentsline {section}{\numberline {3.4}RL Implementation}{20}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}The Agent Script}{20}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Observations}{21}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Actions}{22}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.4}Rewards}{22}{subsection.3.4.4}%
+\contentsline {section}{\numberline {3.5}Training}{23}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Curriculum Learning}{24}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Hyperparameters}{24}{subsection.3.5.2}%
+\contentsline {section}{\numberline {3.6}Optimization}{26}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Blue Crystal HPC}{26}{subsection.3.6.1}%
+\contentsline {chapter}{\chapternumberline {4}Results and Validation}{29}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Final Experimental Setup}{29}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Training Results}{29}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Hyperparameter Tuning}{29}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Final Training}{29}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}Agent Performance}{30}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Human Comparison}{30}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Hardware}{31}{subsection.4.3.2}%
+\contentsline {section}{\numberline {4.4}Critical Evaluation}{31}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Objective's Met}{31}{subsection.4.4.1}%
+\contentsline {chapter}{\chapternumberline {5}Future Work}{32}{chapter.5}%
+\contentsline {appendix}{\chapternumberline {A}Appendix A}{34}{appendix.A}%
+\contentsline {section}{\numberline {A.1}Unity Setup}{34}{section.A.1}%
+\contentsline {section}{\numberline {A.2}Scripts}{34}{section.A.2}%
+\contentsline {subsection}{\numberline {A.2.1}GJK Collision Detection}{34}{subsection.A.2.1}%
+\contentsline {subsection}{\numberline {A.2.2}Grid Search}{34}{subsection.A.2.2}%
+\contentsline {subsection}{\numberline {A.2.3}Config}{37}{subsection.A.2.3}%
+\contentsline {chapter}{Bibliography}{38}{appendix*.19}%

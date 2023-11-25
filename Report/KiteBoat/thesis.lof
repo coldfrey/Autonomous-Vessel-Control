@@ -3,15 +3,17 @@
 \addvspace {10pt}
 \addvspace {10pt}
 \contentsline {figure}{\numberline {2.1}{\ignorespaces A diagram of the RL Loop}}{6}{figure.2.1}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Actor-Critic Method}}{10}{figure.2.2}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Actor-Critic Method}}{9}{figure.2.2}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Silent 60 with Wingit Kite Control}}{11}{figure.2.3}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Beyond The Sea 'SeaKite'}}{12}{figure.2.4}%
 \addvspace {10pt}
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Development Process}}{13}{figure.3.1}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces MLAgents Sequence Diagram}}{14}{figure.3.2}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Training Environment}}{16}{figure.3.3}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Kite Diagram}}{18}{figure.3.4}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Keep Alive}}{22}{figure.3.5}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Stages 2 and 3 of the curriculum}}{24}{figure.3.6}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Development Process}}{14}{figure.3.1}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces MLAgents Sequence Diagram}}{15}{figure.3.2}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Training Environment}}{17}{figure.3.3}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Kite Diagram}}{19}{figure.3.4}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Keep Alive}}{23}{figure.3.5}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Stages 2 and 3 of the curriculum}}{25}{figure.3.6}%
 \addvspace {10pt}
-\contentsline {figure}{\numberline {4.1}{\ignorespaces The agent steering on hard lock}}{28}{figure.4.1}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces The agent steering on hard lock}}{30}{figure.4.1}%
 \addvspace {10pt}
 \addvspace {10pt}

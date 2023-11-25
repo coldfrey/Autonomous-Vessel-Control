@@ -1,4 +1,4 @@
-\begin{thebibliography}{28}
+\begin{thebibliography}{29}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -96,6 +96,23 @@ Volodymyr Mnih et~al.
 \newblock Human-level control through deep reinforcement learning.
 \newblock \emph{Nature}, 518\penalty0 (7540):\penalty0 529--533, 2015.
 
+\bibitem[Schulman et~al.(2017)Schulman, Wolski, Dhariwal, Radford, and
+  Klimov]{schulman2017ppo}
+John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov.
+\newblock Proximal policy optimization algorithms.
+\newblock \emph{arXiv preprint arXiv:1707.06347}, 2017.
+\newblock URL
+  \url{https://arxiv.org/pdf/1707.06347.pdf?fbclid=IwAR1DwRSkBzhqXRhVh3XQ_Nu_XYvN_sMR4ppYM28h3qAtx9EK03LrlOcF7Dg}.
+
+\bibitem[Engstrom et~al.(2020)Engstrom, Ilyas, Santurkar, Tsipras, Janoos,
+  Rudolph, and Madry]{engstrom2020implementation}
+Logan Engstrom, Andrew Ilyas, Shibani Santurkar, Dimitris Tsipras, F.~Janoos,
+  L.~Rudolph, and A.~Madry.
+\newblock Implementation matters in deep rl: A case study on ppo and trpo.
+\newblock In \emph{Proceedings of the International Conference on Learning
+  Representations (ICLR)}, 2020.
+\newblock URL \url{https://dblp.org/rec/conf/iclr/EngstromISTJRM20.html}.
+
 \bibitem[Merlin(2023)]{unity100seconds}
 Merlin.
 \newblock Unity in 100 seconds, 2023.
@@ -120,33 +137,22 @@ Sue Blackman.
 \newblock \emph{Unity 3D Game Development by Example Beginner's Guide}.
 \newblock Packt Publishing Ltd, 2012.
 
-\bibitem[Technologies(2022{\natexlab{a}})]{unityupdatefixedupdate}
+\bibitem[Technologies(2022)]{unityupdatefixedupdate}
 Unity Technologies.
-\newblock Unity scripting api: Update and fixedupdate, 2022{\natexlab{a}}.
+\newblock Unity scripting api: Update and fixedupdate, 2022.
 \newblock URL
   \url{https://docs.unity3d.com/ScriptReference/MonoBehaviour.FixedUpdate.html}.
 
-\bibitem[Technologies(2022{\natexlab{b}})]{unityrigidbody}
-Unity Technologies.
-\newblock Unity scripting api: Rigidbody, 2022{\natexlab{b}}.
-\newblock URL \url{https://docs.unity3d.com/ScriptReference/Rigidbody.html}.
+\bibitem[{Wingit}(2023)]{wingit}
+{Wingit}.
+\newblock Wingit, 2023.
+\newblock URL \url{https://www.kite-boat.com/en/}.
+\newblock Accessed: 2023-11-20.
 
-\bibitem[Schulman et~al.(2017)Schulman, Wolski, Dhariwal, Radford, and
-  Klimov]{schulman2017ppo}
-John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov.
-\newblock Proximal policy optimization algorithms.
-\newblock \emph{arXiv preprint arXiv:1707.06347}, 2017.
-\newblock URL
-  \url{https://arxiv.org/pdf/1707.06347.pdf?fbclid=IwAR1DwRSkBzhqXRhVh3XQ_Nu_XYvN_sMR4ppYM28h3qAtx9EK03LrlOcF7Dg}.
-
-\bibitem[Engstrom et~al.(2020)Engstrom, Ilyas, Santurkar, Tsipras, Janoos,
-  Rudolph, and Madry]{engstrom2020implementation}
-Logan Engstrom, Andrew Ilyas, Shibani Santurkar, Dimitris Tsipras, F.~Janoos,
-  L.~Rudolph, and A.~Madry.
-\newblock Implementation matters in deep rl: A case study on ppo and trpo.
-\newblock In \emph{Proceedings of the International Conference on Learning
-  Representations (ICLR)}, 2020.
-\newblock URL \url{https://dblp.org/rec/conf/iclr/EngstromISTJRM20.html}.
+\bibitem[Parlier(2023)]{beyondthesea}
+Yves Parlier.
+\newblock Beyond the sea, 2023.
+\newblock URL \url{https://beyond-the-sea.com/en/seakite/}.
 
 \bibitem[Paszke et~al.(2019)Paszke, Gross, Massa, Lerer, Bradbury, Chanan,
   Killeen, Lin, Gimelshein, Antiga, et~al.]{paszke2019pytorch}

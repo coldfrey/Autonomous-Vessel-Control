@@ -15,17 +15,22 @@ The training scene used for the final training runs can be found in:
 Outline the training procedure, including any pre-training steps.
 
 \section{Training Results}
-Training Results
-Present the learning curves for the agent, showing reward over time.
-Include a table or graph of the agent’s performance metrics at various checkpoints.
-Discuss any unexpected behaviors or anomalies observed during training.
+% Training Results
+% Present the learning curves for the agent, showing reward over time.
+% Include a table or graph of the agent’s performance metrics at various checkpoints.
+% Discuss any unexpected behaviors or anomalies observed during training.
+
+The following section will present the results of the training runs, and discuss the overall performance of the agent. 
 
 \subsection{Hyperparameter Tuning}\label{sec:hyperparameter_tuning}
 
 Show the graphs with the results of the grid search and explain why the config set was chosen
+
+
+
 \subsection{Final Training}
 
-Present the graphs of the final training runs and discuss the results
+The final training consisted of 6 runs with different config files. The first was the manually created, which 
 
 \section{Agent Performance}
 
@@ -39,60 +44,29 @@ There were several difficulties encountered when trying to get the agent to lear
 \end{figure}
 
 
-Evaluation of Agent Performance
-Explain the methods used to evaluate the trained agent (e.g., test episodes in varied conditions).
-Present the results of these evaluations in a systematic manner (e.g., tables, graphs).
-Discuss the agent’s ability to generalize from its training to new scenarios.
-
-Comparison with Baselines
-If there are baseline models or industry standards, compare your results against these.
-Use statistical methods to determine the significance of the results.
-
-Ablation Studies
-Discuss any ablation studies conducted (if any) to understand the contribution of different components of the system.
-Present the impact of removing/modifying certain parts of the agent or the environment.
-
-Visualizations and Case Studies
-Provide visual representations of agent behavior, such as plots of trajectories or state visitation frequencies.
-Include screenshots or video stills from Unity to illustrate successful and unsuccessful episodes.
-
-Summary
-Sum up the main findings from the results.
-Discuss any limitations of these results or the experimental setup.
+\subsection{Human Comparison}
+Earlier it was mentioned that a heuristic playable game was created to make sure the model felt sensible and could be played by a human player. To create a baseline for the agent's performance 5 human players were asked to play the game for 5 minutes each in heuristic mode and their results were logged. The top 5 performing agents were then run for the same time and the same metrics recorded. 
 
 
-\section{Evaluation Introduction}
-Evaluation
-Introduction
-Reflect on the purpose of the evaluation.
 
-Methodology for Evaluation
-Explain the metrics used to evaluate the agent’s performance.
-Describe the process of collecting evaluation data.
 
-Performance Analysis
-Analyze the agent’s performance in depth, possibly breaking down by different types of tasks or challenges it faced.
-Use statistical methods to discuss the performance variability.
+\subsection{Hardware}\label{sec:hardware_evaluation}
+There were several limitations that affected the quality of the training and thus the trained model. First and foremost was compute, as expected when conducting any machine learning training, the more compute available the better. The local machine used for training was a 16-core i9 with 32GB of RAM and a T2000 nvidia graphics, and took approximately 2 hours per million steps completed. This was not a viable option for training the agent to a high level of performance, and so the training was attempted to the university HPC. The HPC has 525 Lenovo nx360 m5 nodes each with two 14 core 2.4 GHz CPUs, and 32 GPU nodes with two cards each. At face value this looks wonderful and training should be a breeze, this was not quite the case. Unity does not support native multi threading, due to the complex nature of its physics engine, so it runs on a single CPU unless manually specified. Manual threading was possible but only for separate tasks that could be called independently of the model, such as the collision detection algorithm. As expected this severely limits the speed of training, and using the hpc did not change these run times.
+However, the HPC was not without its advantages, the main being that it was possible to run multiple training runs in parallel, and so the hyperparameter tuning was conducted on the HPC. This would not have been possible on the local machine as it would have taken far too long to test all the combinations. The ability to submit a large batch of jobs to be run in parallel and then the results collection automated was a huge time saver. The HPC also had the advantage of being able to run the training for longer periods of time without causing inconvenience, so even though the training speed was limited it was not a problem to let them run for many days. 
 
-Robustness and Generalization
-Evaluate the agent's robustness to changes in the environment (e.g., different wind conditions, system perturbations).
-Discuss the agent's ability to generalize from its training environment to similar but unseen environments.
+The wait time for resources to be allocated increased the longer the job was scheduled to take 
 
-Comparison to Human Performance
-If relevant, compare the agent’s performance to that of a human completing the same task.
-Discuss any qualitative differences in approaches to the task between the agent and humans.
 
-Discussion of the Evaluation Results
-Interpret the results in the context of the project's objectives.
-Discuss the strengths and weaknesses of the agent as revealed by the evaluation.
+Thus this project wouldn't have been possible without the HPC.
 
-Implications for Future Work
-Suggest how the results might inform future projects or the development of RL agents for similar tasks.
-Discuss any additional experiments or data that would be valuable.
+% The second more major problem was the wait time of the HPC, the longer a job was scheduled the longer it took for the resources to be allocated, for a job that was scheduled for 48 hours on a single node it could take up to 5 days for the job to begin. This was a major problem as it meant that the training could not be conducted in a timely manner, and iteration was very slow. The limited GPU's had the same problem, with only 32 available, and the fact that the HPC was shared with the entire university, it was very difficult to get access to the resources. For this reason the vast majority of training was conducted on the local machine, which had the advantage of also being able to see the training in real time, albeit slowly.   
 
-Conclusion
-Summarize the main takeaways from the evaluation.
-Discuss the conclusions that can be drawn about the RL agent's performance and the potential for real-world application.
 
-\subsection{Technical Limitations}\label{sec:limitations}
-There were several limitations that affected the quality of the training and thus the trained model. First and foremost was compute, as expected when conducting any machine learning training, the more compute available the better. The local machine used for training was a 16-core i9 with 32GB of RAM and a T2000 nvidia graphics, and took approximately 2 hours per million steps completed. This was not a viable option for training the agent to a high level of performance, and so the training was attempted to the university HPC. The HPC has 525 Lenovo nx360 m5 nodes each with two 14 core 2.4 GHz CPUs, and 32 GPU nodes with two cards each. At face value this looks wonderful and training should be a breeze, however the problem is two fold. First Unity does not support native multi threading, due to the complex nature of its physics engine, so it runs on a single CPU unless manually specified. Manual threading was possible but only for separate tasks that could be called independently of the model, such as the collision detection algorithm. As expected this severely limits the speed of training. The second more major problem was the wait time of the HPC, the longer a job was scheduled the longer it took for the resources to be allocated, for a job that was scheduled for 48 hours on a single node it could take up to 5 days for the job to begin. This was a major problem as it meant that the training could not be conducted in a timely manner, and iteration was very slow. The limited GPU's had the same problem, with only 32 available, and the fact that the HPC was shared with the entire university, it was very difficult to get access to the resources. For this reason the vast majority of training was conducted on the local machine, which had the advantage of also being able to see the training in real time, albeit slowly.   
+\section{Critical Evaluation}
+
+
+\subsection{Objective's Met}
+Table opf objectives and outcome goals and wheather they were met or not
+
+
+
