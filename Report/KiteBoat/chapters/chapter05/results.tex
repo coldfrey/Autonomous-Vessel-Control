@@ -1,6 +1,6 @@
 
 
-\let\textcircled=\pgftextcircled\chapter{Results and Validation}\label{chap:results}
+\let\textcircled=\pgftextcircled\chapter{Results and Evaluation}\label{chap:results}
 
 Introduction
 Briefly summarize the goals of the RL experiments.
@@ -9,10 +9,9 @@ Outline the structure of the results chapter.
 \section{Final Experimental Setup}
 The training scene used for the final training runs can be found in:
 \newline
-\texttt{Assets/Scenes/kiteboat\_training}. The final experimental setup was a combination of the best performing elements from the previous experiments. The model was configured with the config file shown in section$~$\ref{config} of the appendix. 
+\texttt{Assets/Scenes/kiteboat\_training}. The final experimental setup was a combination of the best performing elements from the previous experiments. The model was configured with the config file shown in section$~$\ref{config} of the appendix, and run for 50,000,000 steps.
 
 
-Outline the training procedure, including any pre-training steps.
 
 \section{Training Results}
 % Training Results
@@ -24,17 +23,72 @@ The following section will present the results of the training runs, and discuss
 
 \subsection{Hyperparameter Tuning}\label{sec:hyperparameter_tuning}
 
-Show the graphs with the results of the grid search and explain why the config set was chosen
+This section presents the findings from the grid search of hypereparameters, and the effect they had on the training runs. The goal was to identify the best combination of hyperparameters for this training application to then use for the final training runs. The dataset comprised 500 runs, each with a unique configuration file. The hyperparameters include \texttt{batch\_size}, \texttt{buffer\_size}, \texttt{learning\_rate}, \texttt{beta}, \texttt{epsilon}, \texttt{lambd}, \texttt{num\_epoch}, \texttt{hidden\_units}, \texttt{num\_layers}, \texttt{curiosity\_strength}, and \texttt{curiosity\_learning\_rate}. The performance was measured using the `Best Episode Length'- a metric that represents the duration for which the model successfully flew the kite while navigating towards the waypoint. 
 
+A statistical summary was conducted to try and understand the most important tendencies of the data. The mean best episode length was found to be 5785 with a standard deviation of 7030, indicating a huge variability across different runs. A correlation matrix was computed to explore the linear relationship between the hyperparameters and the performance metric, the results of which can be seen in table$~$\ref{corr_matrix}. It was observed that \texttt{num\_epochs} had the strongest positive correlation (r=0.3007), suggesting a tendency for longer episodes with more epochs. On the other hand \texttt{batch\_size} and \texttt{epsilon} showed a negative correlation (r=-0.3007 and r=-0.3007 respectively).
 
+\begin{table}[!htb]
+    \centering
+    \begin{tabular}{c|c}
+        \textbf{Hyperparameter} & \textbf{Correlation} \\
+        \hline
+
+        \texttt{num\_epoch} & 0.3007 \\
+        \texttt{buffer\_size} & 0.2640 \\
+        \texttt{num\_layers} & 0.1246 \\
+        \texttt{Av Loss} & 0.0973 \\
+        \texttt{lambd} & 0.0964 \\
+        \texttt{beta} & 0.0424 \\
+        \texttt{curiosity\_strength} & -0.0074 \\
+        \texttt{hidden\_units} & -0.0185 \\
+        \texttt{curiosity\_learning\_rate} & -0.1168 \\
+        \texttt{learning\_rate} & -0.1168 \\
+        \texttt{epsilon} & -0.1258 \\
+        \texttt{batch\_size} & -0.2275 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Correlation matrix of hyperparameters}\label{corr_matrix}
+\end{table}
+
+A visualization of the relationships and distributions within the data was created and can be seen in figure$~$\ref{vis_matrix}. Scatter plot matrices were generated using \texttt{Seaborn} and \texttt{Matplotlib} libaries in Python to display the best pairwise relationships between the most correlated hyperparameters and the best episode length. Also included in figure$~$\ref{vis_matrix} are bar plots, which represent the feature importance derived from a Random Forest Model$~$\cite{randomforrestM}. A Random Forrest Regressor was utilized to estimate the importance of each hyperparameter in predicting the best episode length. The model was trained on a subset of the data and validated using a test set, resulting in a Mean Squared Error (MSE) of 53 million. This very large value indicates significant variability and suggests the model's performance is highly sensitive to changing hyperparameters. Figure$~$\ref{feature_importance} shows the feature importance bar plot, which emphasises the significance of \texttt{num\_epochs} and \texttt{buffer\_size} in the model's success.
+
+\begin{figure}[!htb]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \includegraphics[]{Images/scatter_plot_matrix.png}
+    }
+    \caption{Visualization matrix of hyperparameters}\label{vis_matrix}
+\end{figure}
+
+\begin{figure}[!htb]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \includegraphics[]{Images/feature_importance.png}
+    }
+    \caption{Feature importance of hyperparameters}\label{feature_importance}
+\end{figure}
+
+% After training was complete, the results were extracted and a linear regression model was created to illuminate which of the changing hyperparameter values had the greatest impact on the performance metric, in this case episode length, for this a python script was used REF APENDIX. The results of the linear regression model can be seen in Figure~\ref{regression}. The coefficients derived from the regression, depicted in the bar chart, offer a visual representation of the impact each hyperparameter had on the performance metric. Notably, the \texttt{learning\_rate}, \texttt{beta}, and \texttt{curiosity\_learning\_rate} had the greatest impact on the performance metric. This suggests that a smaller learning rate reduces the strength of the updates to the policy, and thus the agent learns slower, but more reliably for a complex task. Increasing the value of the \texttt{beta} hyperparameter, which is the strength of the entropy regularization term, also had a positive impact on the performance metric. This suggests that the agent was able to learn more effectively when the policy was encouraged to explore more.
+
+In hindsight, it would have been beneficial to experiment with a non constant learning rate, i.e scheduling it to change over the course of the training run. This would have started the process off with a high learning rate, encouraging the agent to learn lots very quickly, but as the training progressed the learning rate would have been reduced. The reducing learning rate would have allowed the agent to fine tune its policy and not unlearn previously learned behaviours, which is a common problem with RL agents.
+% \begin{figure}
+%     \centering
+%     \resizebox{\textwidth}{!}{%
+%     \includegraphics[]{Images/linear_regression_coefficients.png}
+%     }
+%     \caption{Linear regression model of hyperparameters}\label{regression}
+% \end{figure}
 
 \subsection{Final Training}
 
 The final training consisted of 6 runs with different config files. The first was the manually created, which 
 
-\section{Agent Performance}
+% compare the 5 best configs run for the different number of steps
+% Box plot showing the average score from 10 best episodes of the evaluation scenes 
 
-\subsection*{Difficulties Encountered}
+\subsection{Agent Performance}
+
+\subsubsection*{Difficulties Encountered}
 There were several difficulties encountered when trying to get the agent to learn anything let alone the combination of directionally sailing a kiteboat. One of the most common local maxima that the agent fell into was for the agent to steer on `hard lock' with the rudder at \textit{$\tilde{} ~70-90^{\circ}$}, shown in figure$~$\ref{hard_lock} where the target can be seen as the green area in the distance. This behavior allowed it to learn to fly the kite very reliably with the boat in a more consistent and stable position. These episodes provided false positives in the training data because as soon as the agent started to explore the rudder space more it was not able to fly the kite. To try and combat this behavior a large negative reward was added for aggressive steering as shown in table$~$\ref{rewards}. This went some way to discouraging this behavior but it was still observed in some of the later training runs. After this rudder reward was added it was observed that the agent took almost 5 times as long to learn to fly the kite with some reliability. 
 
 \begin{figure}[!htb]
@@ -44,8 +98,38 @@ There were several difficulties encountered when trying to get the agent to lear
 \end{figure}
 
 
-\subsection{Human Comparison}
+\subsubsection{Human Comparison}
 Earlier it was mentioned that a heuristic playable game was created to make sure the model felt sensible and could be played by a human player. To create a baseline for the agent's performance 5 human players were asked to play the game for 5 minutes each in heuristic mode and their results were logged. The top 5 performing agents were then run for the same time and the same metrics recorded. 
+
+\section{Critical Evaluation}
+The overarching aim of this research paper was to develope a system for autonomously controlling a kite-powered vessel using reinforcement learning. Tables$~$\ref{obj1} - explores the extent to which this aim was achieved by investigating the success of each objective and its outcome goal. To evaluate each objective in detail a score was assigned from 0 to 10, with the range shown in figure$~$\ref{score_range}. A total score was calculated for each objective and its value discussed.
+\newline
+\begin{chronology}[5]{0}{9}{\textwidth}
+    \event{0}{Failed}
+    \event{10}{Sucess}
+\end{chronology}\label{score_range}
+
+\begin{table}[!htb]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{p{0.8\textwidth}|c}
+        \textbf{Objective 1: Simulation Environment Development} & \textbf{Score} \\
+        \hline
+         To design and implement a virtual marine environment that accurately emulates real-world maritime conditions. & 9 \\
+        \midrule
+        To construct a realistic model of a boat that exhibits appropriate physical movements in response to environmental forces such as wind and water currents. & 8 \\
+        \hline
+        \textbf{Outcome Goal(s)} &  \\
+        \midrule
+        To design and implement a virtual marine environment that accurately emulates real-world maritime conditions. & 10 \\
+        \midrule
+        \textbf{Total} & \textbf{27/30} \\
+        \bottomrule
+    \end{tabular}
+    }
+    \caption{Objectives Evaluation}\label{obj1}
+\end{table}
+
 
 
 
@@ -60,13 +144,6 @@ The wait time for resources to be allocated increased the longer the job was sch
 Thus this project wouldn't have been possible without the HPC.
 
 % The second more major problem was the wait time of the HPC, the longer a job was scheduled the longer it took for the resources to be allocated, for a job that was scheduled for 48 hours on a single node it could take up to 5 days for the job to begin. This was a major problem as it meant that the training could not be conducted in a timely manner, and iteration was very slow. The limited GPU's had the same problem, with only 32 available, and the fact that the HPC was shared with the entire university, it was very difficult to get access to the resources. For this reason the vast majority of training was conducted on the local machine, which had the advantage of also being able to see the training in real time, albeit slowly.   
-
-
-\section{Critical Evaluation}
-
-
-\subsection{Objective's Met}
-Table opf objectives and outcome goals and wheather they were met or not
 
 
 

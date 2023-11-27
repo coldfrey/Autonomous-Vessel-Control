@@ -1,4 +1,4 @@
-\begin{thebibliography}{29}
+\begin{thebibliography}{32}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -20,8 +20,8 @@ Lionel Casson.
 \newblock \emph{Ships and Seamanship in the Ancient World}.
 \newblock Princeton University Press, 1995.
 
-\bibitem[Gardiner(1993)]{gardiner1993advent}
-Robert Gardiner.
+\bibitem[Greenhill(1993)]{gardiner1993advent}
+Basil Greenhill.
 \newblock \emph{The Advent of Steam - The Merchant Steamship before 1900}.
 \newblock Conway Maritime Press Ltd., 1993.
 
@@ -50,6 +50,7 @@ Richard~S Sutton and Andrew~G Barto.
 Christopher~J Watkins and Peter Dayan.
 \newblock Q-learning.
 \newblock \emph{Machine learning}, 8\penalty0 (3-4):\penalty0 279--292, 1992.
+\newblock URL \url{https://doi.org/10.1007/BF00992698}.
 
 \bibitem[Bellman(1957)]{bellman1957dynamic}
 Richard Bellman.
@@ -60,12 +61,14 @@ Richard Bellman.
 David Silver et~al.
 \newblock Mastering the game of go with deep neural networks and tree search.
 \newblock \emph{Nature}, 529\penalty0 (7587):\penalty0 484--489, 2016.
+\newblock URL \url{https://www.nature.com/articles/nature16961}.
 
-\bibitem[Yang and Wu(2020)]{yang2020reinforcement}
-Chen Yang and Lin Wu.
-\newblock Reinforcement learning-based control for autonomous boats: A survey.
-\newblock \emph{Journal of Marine Science and Technology}, 25\penalty0
-  (1):\penalty0 1--10, 2020.
+\bibitem[Erhard and Strauch(2013)]{erhard2013control}
+Michael Erhard and Hans Strauch.
+\newblock Control of towing kites for seagoing vessels.
+\newblock \emph{IEEE Transactions on Control Systems Technology}, 21\penalty0
+  (5):\penalty0 1629--1640, 2013.
+\newblock URL \url{https://arxiv.org/pdf/1202.3641.pdf}.
 
 \bibitem[Hallion(2003)]{hallion2003taking}
 Richard Hallion.
@@ -77,12 +80,6 @@ Richard Hallion.
 Uwe Fechner.
 \newblock \emph{A Methodology for the Design of Kite-Power Control Systems}.
 \newblock PhD thesis, Delft University of Technology, 2016.
-
-\bibitem[Erhard and Strauch(2013)]{erhard2013control}
-Moritz Erhard and Hauke Strauch.
-\newblock Control of towing kites for seagoing vessels.
-\newblock \emph{IEEE Transactions on Control Systems Technology}, 21\penalty0
-  (5):\penalty0 1629--1640, 2013.
 
 \bibitem[Christiansen et~al.(2013)Christiansen, Fagerholt, and
   Ronen]{christiansen2013ship}
@@ -104,14 +101,34 @@ John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov.
 \newblock URL
   \url{https://arxiv.org/pdf/1707.06347.pdf?fbclid=IwAR1DwRSkBzhqXRhVh3XQ_Nu_XYvN_sMR4ppYM28h3qAtx9EK03LrlOcF7Dg}.
 
+\bibitem[Beznosikov et~al.(2023)Beznosikov, Gorbunov, Berard, and
+  Loizou]{beznosikov2023stochastic}
+Aleksandr Beznosikov, Eduard Gorbunov, Hugo Berard, and Nicolas Loizou.
+\newblock Stochastic gradient descent-ascent: Unified theory and new efficient
+  methods, 2023.
+
 \bibitem[Engstrom et~al.(2020)Engstrom, Ilyas, Santurkar, Tsipras, Janoos,
-  Rudolph, and Madry]{engstrom2020implementation}
-Logan Engstrom, Andrew Ilyas, Shibani Santurkar, Dimitris Tsipras, F.~Janoos,
-  L.~Rudolph, and A.~Madry.
+  Rudolph, and Madry]{Engstrom2020Implementation}
+Logan Engstrom, Andrew Ilyas, Shibani Santurkar, Dimitris Tsipras, Firdaus
+  Janoos, Larry Rudolph, and Aleksander Madry.
 \newblock Implementation matters in deep rl: A case study on ppo and trpo.
-\newblock In \emph{Proceedings of the International Conference on Learning
-  Representations (ICLR)}, 2020.
-\newblock URL \url{https://dblp.org/rec/conf/iclr/EngstromISTJRM20.html}.
+\newblock In \emph{International Conference on Learning Representations}, 2020.
+\newblock URL \url{https://openreview.net/forum?id=r1etN1rtPB}.
+
+\bibitem[Larsen et~al.(2021)Larsen, Teigen, Laache, Varagnolo, and
+  Rasheed]{Larsen2021Comparing}
+TN~Larsen, H{\O}~Teigen, T~Laache, D~Varagnolo, and A~Rasheed.
+\newblock Comparing deep reinforcement learning algorithms' ability to safely
+  navigate challenging waters.
+\newblock \emph{Frontiers in Robotics and AI}, 8:\penalty0 738113, 2021.
+\newblock \doi{10.3389/frobt.2021.738113}.
+
+\bibitem[miyamotok0105(2018)]{mlagents_ppo}
+miyamotok0105.
+\newblock unity-ml-agents.
+\newblock 2018.
+\newblock URL
+  \url{https://github.com/miyamotok0105/unity-ml-agents/blob/master/docs/Training-PPO.md}.
 
 \bibitem[Merlin(2023)]{unity100seconds}
 Merlin.
@@ -127,15 +144,10 @@ Will Goldstone.
 \newblock \emph{Unity 3.x Game Development Essentials}.
 \newblock Packt Publishing Ltd, 2010.
 
-\bibitem[Harrison(2013)]{harrison2013}
-Ashley Harrison.
-\newblock \emph{Mastering Unity 2D Game Development}.
-\newblock Packt Publishing Ltd, 2013.
-
-\bibitem[Blackman(2012)]{blackman2012}
-Sue Blackman.
+\bibitem[Creighton(2010)]{blackman2012}
+Ryan~Henson Creighton.
 \newblock \emph{Unity 3D Game Development by Example Beginner's Guide}.
-\newblock Packt Publishing Ltd, 2012.
+\newblock Packt Publishing Ltd, 2010.
 
 \bibitem[Technologies(2022)]{unityupdatefixedupdate}
 Unity Technologies.
@@ -183,5 +195,18 @@ Yoshua Bengio, Jerome Louradour, Ronan Collobert, and Jason Weston.
 \newblock Curriculum learning, 2009.
 \newblock URL \url{https://qmro.qmul.ac.uk/xmlui/handle/123456789/15972}.
 \newblock Accessed: 2023-11-20.
+
+\bibitem[VMG(2023)]{vmg}
+VMG.
+\newblock Vmg.
+\newblock \emph{Dahlberg}, 2023.
+\newblock URL \url{https://www.dahlberg-sa.com/en/sailing-what-is-vmg/}.
+\newblock Accessed: 2023-11-20.
+
+\bibitem[IBM(2023)]{randomforrestM}
+IBM.
+\newblock What is random forest?
+\newblock \emph{dfssd}, \penalty0 (sdf), 2023.
+\newblock URL \url{https://www.ibm.com/topics/random-forest}.
 
 \end{thebibliography}

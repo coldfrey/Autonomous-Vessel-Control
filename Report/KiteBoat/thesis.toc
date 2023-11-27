@@ -6,10 +6,10 @@
 \contentsline {section}{\numberline {1.1}A Renewed Interest in Wind Propulsion}{2}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Aims and Objectives}{2}{section.1.2}%
 \contentsline {chapter}{\chapternumberline {2}Background}{5}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Reinforcement Learning (RL)}{6}{section.2.1}%
+\contentsline {section}{\numberline {2.1}Reinforcement Learning (RL)}{5}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Proximal Policy Optimization (PPO)}{7}{section.2.2}%
 \contentsline {section}{\numberline {2.3}Unity Game Engine}{10}{section.2.3}%
-\contentsline {section}{\numberline {2.4}Existing Kiteboat Technologies}{11}{section.2.4}%
+\contentsline {section}{\numberline {2.4}Existing Kiteboat Technologies}{10}{section.2.4}%
 \contentsline {chapter}{\chapternumberline {3}Methodology}{13}{chapter.3}%
 \contentsline {section}{\numberline {3.1}MLAgents}{13}{section.3.1}%
 \contentsline {subsection}{\numberline {3.1.1}Python Implementation}{13}{subsection.3.1.1}%
@@ -26,24 +26,23 @@
 \contentsline {subsection}{\numberline {3.4.4}Rewards}{22}{subsection.3.4.4}%
 \contentsline {section}{\numberline {3.5}Training}{23}{section.3.5}%
 \contentsline {subsection}{\numberline {3.5.1}Curriculum Learning}{24}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}Hyperparameters}{24}{subsection.3.5.2}%
-\contentsline {section}{\numberline {3.6}Optimization}{26}{section.3.6}%
-\contentsline {subsection}{\numberline {3.6.1}Blue Crystal HPC}{26}{subsection.3.6.1}%
-\contentsline {chapter}{\chapternumberline {4}Results and Validation}{29}{chapter.4}%
+\contentsline {subsection}{\numberline {3.5.2}Hyperparameters}{25}{subsection.3.5.2}%
+\contentsline {section}{\numberline {3.6}Optimization}{27}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Blue Crystal HPC}{27}{subsection.3.6.1}%
+\contentsline {chapter}{\chapternumberline {4}Results and Evaluation}{29}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Final Experimental Setup}{29}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Training Results}{29}{section.4.2}%
 \contentsline {subsection}{\numberline {4.2.1}Hyperparameter Tuning}{29}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Final Training}{29}{subsection.4.2.2}%
-\contentsline {section}{\numberline {4.3}Agent Performance}{30}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Human Comparison}{30}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Hardware}{31}{subsection.4.3.2}%
-\contentsline {section}{\numberline {4.4}Critical Evaluation}{31}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Objective's Met}{31}{subsection.4.4.1}%
-\contentsline {chapter}{\chapternumberline {5}Future Work}{32}{chapter.5}%
-\contentsline {appendix}{\chapternumberline {A}Appendix A}{34}{appendix.A}%
-\contentsline {section}{\numberline {A.1}Unity Setup}{34}{section.A.1}%
-\contentsline {section}{\numberline {A.2}Scripts}{34}{section.A.2}%
-\contentsline {subsection}{\numberline {A.2.1}GJK Collision Detection}{34}{subsection.A.2.1}%
-\contentsline {subsection}{\numberline {A.2.2}Grid Search}{34}{subsection.A.2.2}%
-\contentsline {subsection}{\numberline {A.2.3}Config}{37}{subsection.A.2.3}%
-\contentsline {chapter}{Bibliography}{38}{appendix*.19}%
+\contentsline {subsection}{\numberline {4.2.2}Final Training}{31}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Agent Performance}{32}{subsection.4.2.3}%
+\contentsline {subsubsection}{\numberline {4.2.3.1}Human Comparison}{32}{subsubsection.4.2.3.1}%
+\contentsline {section}{\numberline {4.3}Critical Evaluation}{33}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Hardware}{33}{subsection.4.3.1}%
+\contentsline {chapter}{\chapternumberline {5}Future Work}{35}{chapter.5}%
+\contentsline {appendix}{\chapternumberline {A}Appendix A}{37}{appendix.A}%
+\contentsline {section}{\numberline {A.1}Unity Setup}{37}{section.A.1}%
+\contentsline {section}{\numberline {A.2}Scripts}{37}{section.A.2}%
+\contentsline {subsection}{\numberline {A.2.1}GJK Collision Detection}{37}{subsection.A.2.1}%
+\contentsline {subsection}{\numberline {A.2.2}Grid Search}{37}{subsection.A.2.2}%
+\contentsline {subsection}{\numberline {A.2.3}Config}{40}{subsection.A.2.3}%
+\contentsline {chapter}{Bibliography}{41}{appendix*.19}%
