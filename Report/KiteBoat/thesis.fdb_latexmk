@@ -1,17 +1,17 @@
 # Fdb version 3
-["bibtex thesis"] 1701110817 "thesis.aux" "thesis.bbl" "thesis" 1701110822
+["bibtex thesis"] 1701189564 "thesis.aux" "thesis.bbl" "thesis" 1701189589
   "/usr/share/texlive/texmf-dist/bibtex/bst/natbib/unsrtnat.bst" 1233624470 24550 a41a6405f4de768c43e871d9fbce2bc8 ""
-  "thesis.aux" 1701110821 17808 398e52c161ab52a17aa1da0805aef6c8 "pdflatex"
+  "thesis.aux" 1701189589 19612 3ce15eb8d718cece89f664240aff2619 "pdflatex"
   "thesisbiblio.bib" 1701109211 9960 fa15a246729d3d4742553464e1799b25 ""
   (generated)
   "thesis.bbl"
   "thesis.blg"
-["makeindex thesis.idx"] 1701110170 "thesis.idx" "thesis.ind" "thesis" 1701110822
-  "thesis.idx" 1701110818 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+["makeindex thesis.idx"] 1701182478 "thesis.idx" "thesis.ind" "thesis" 1701189589
+  "thesis.idx" 1701189582 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
   "thesis.ilg"
   "thesis.ind"
-["pdflatex"] 1701110817 "/home/joshua/Documents/Unity/ai_kite/Report/KiteBoat/thesis.tex" "thesis.pdf" "thesis" 1701110822
+["pdflatex"] 1701189581 "/home/joshua/Documents/Unity/ai_kite/Report/KiteBoat/thesis.tex" "thesis.pdf" "thesis" 1701189589
   "/etc/texmf/web2c/texmf.cnf" 1696225864 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/joshua/Documents/Unity/ai_kite/Report/KiteBoat/thesis.tex" 1701102000 13503 271fdd00e619ad364220a1d8887c513e ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -332,24 +332,24 @@
   "Images/scatter_plot_matrix.png" 1701109072 359230 9caa58100bceab05da5483695718689b ""
   "Images/seakite.jpg" 1700919932 143725 82627cba362d09d3073ab5a13181d61a ""
   "chapters/appendices/app0A.tex" 1700581011 3854 34716ffdcce3ca79d4b28a352243c5f8 ""
-  "chapters/chapter01/chap01.tex" 1701082284 9945 a5f0a4c1a21ccefa5652352b895fc1c5 ""
+  "chapters/chapter01/chap01.tex" 1701186343 13715 f29e6c206f46ace1bbecb139136b8f8b ""
   "chapters/chapter02/background.tex" 1701086900 19940 23380e92783b09483598f804bc30eaa0 ""
-  "chapters/chapter04/method.tex" 1701092740 38184 76bd8708077e92a32cb49e778548a76c ""
-  "chapters/chapter05/results.tex" 1701110811 13099 65eb2ce18bbb10b1f821895fe0fb42c6 ""
-  "chapters/chapter06/future_work.tex" 1700916614 3798 39605edae6f6e2c16f2b7e0389b42fde ""
+  "chapters/chapter04/method.tex" 1701186276 38205 2ed3b0f9d87f4b8fbc77db584d52adf3 ""
+  "chapters/chapter05/results.tex" 1701189580 25146 75e37b1a7d908569a4407e8af1a63ddc ""
+  "chapters/chapter06/future_work.tex" 1701188819 4843 2a2424bd69cb1611ab33a05b5c764fe6 ""
   "frontmatter/abstract.tex" 1697182256 552 61169a66a5584b71876e7ae842600758 ""
   "frontmatter/declaration.tex" 1697182256 1546 3968de86521f8290e217cc92e0a833d6 ""
   "frontmatter/dedication.tex" 1697182256 240 c3b6171ef2b271e75d4cd39cd1a3343b ""
   "frontmatter/title.tex" 1699872002 1971 e7b91c17f02e9e56e8f6bcb2367688e8 ""
   "logos/bristolcrest_colour.pdf" 1697182256 133081 910fa2330406778c6658724a5c646377 ""
-  "thesis.aux" 1701110821 17808 398e52c161ab52a17aa1da0805aef6c8 "pdflatex"
-  "thesis.bbl" 1701110817 8575 3b87dfe05b851cac62e6d1e88e8293d0 "bibtex thesis"
-  "thesis.ind" 1701110170 0 d41d8cd98f00b204e9800998ecf8427e "makeindex thesis.idx"
-  "thesis.lof" 1701110821 1507 c781a4696660e3a7e0da3809824bacd3 "pdflatex"
-  "thesis.lot" 1701110821 654 cd9360264e773e9ab3d7939bc8d1b75e "pdflatex"
-  "thesis.out" 1701110821 6217 512087d2872435129be00d80e6a528d9 "pdflatex"
+  "thesis.aux" 1701189589 19612 3ce15eb8d718cece89f664240aff2619 "pdflatex"
+  "thesis.bbl" 1701189565 8575 2bb3ad1ba210f4b6bde89b56734f10f5 "bibtex thesis"
+  "thesis.ind" 1701182479 0 d41d8cd98f00b204e9800998ecf8427e "makeindex thesis.idx"
+  "thesis.lof" 1701189589 1508 74de6b5b59e6be729acf29f510e8ba2e "pdflatex"
+  "thesis.lot" 1701189589 1130 ae9c57be639e5d3c26413be054a3896f "pdflatex"
+  "thesis.out" 1701189589 6523 92aba37218cb7876264d15ddf8cd5bc3 "pdflatex"
   "thesis.tex" 1701102000 13503 271fdd00e619ad364220a1d8887c513e ""
-  "thesis.toc" 1701110821 3794 0ff8b4098b0df8b272fcb5172d8ef52c "pdflatex"
+  "thesis.toc" 1701189589 3953 ed30db940361d90e949797e928623194 "pdflatex"
   (generated)
   "thesis.aux"
   "thesis.idx"

@@ -3,14 +3,6 @@
 \let\textcircled=\pgftextcircled\chapter{Future Work}\label{chap:future_work}
 
 % Reward Functions
-\subsection*{Curriculum}
-
-It is easy to imagine to the limitless possible combinations of rewards available, and as some of the desired behaviour was observed in the simulation, it is clear that the reward function was on the right lines. However, as explained earlier, due to the complex nature of the challenge at hand, a curriculum was used to split the reward function into smaller, more manageable stages, which proved beneficial but there was room for dissecting the task into even smaller stages. This would have allowed for a more gradual learning process and hopefully given the agent a better chance at retaining what it had learnt in the previous stage. It would also have been good to try multiple different curriculum's to see if the agent could learn the task in a different order.
-
-
-\subsection*{Evaluation of Performance}
-It would be advantageous to setup a comprehensive evaluation process that could be conducted in between each training run. This would provide clear incite into the runs success and help provide direction for the next training run. While training a complex system it is easy to get distracted in nuances of the training process as there are so many potential different factors effecting the outcome. 
-
 \subsection*{Simulation Environment}
 
 The simulation (training environment), albeit not perfect, was a good representation of the real world, and was a good starting point for the project. In future it would be good to create a more accurate simulation, representing the real world as closely as possible. This would allow for easier integration into a physical system, should the training reach a point where it is ready to be tested in the real world. To create a better simulation, the first aspect to be addressed would be the water model. Remove any water system and create a particle simulation from scratch, this would allow for proper mechanics and realistic water behaviour.
@@ -21,3 +13,13 @@ Another part of improving the simulation (the water system), would be to add the
 
 
 % The addition of a water relaunch mechanism would also change the way the rewards were calculated, if the kite crashed into the water the episode would no longer be over, and so the reward function would need to be adjusted to reflect this.
+\subsection*{Curriculum}
+
+It is easy to imagine to the limitless possible combinations of rewards available, and as some of the desired behaviour was observed in the simulation, it is clear that the reward function was on the right lines. However, as explained earlier, due to the complex nature of the challenge at hand, a curriculum was used to split the reward function into smaller, more manageable stages, which proved beneficial but there was room for dissecting the task into even smaller stages. This would have allowed for a more gradual learning process and hopefully given the agent a better chance at retaining what it had learnt in the previous stage. It would also have been good to try multiple different curriculum's to see if the agent could learn the task in a different order.
+
+\subsection*{Agent Architecture}
+It is worth noting that the pursuit of a single agent that would be capable of full autonomous control may not be the best approach. It may be more beneficial to split the challenge and assign an specific agent to each task, for instance one agent for the kite control working with a hard coded steering algorithm. Another agent could be employed to direct the kite agent into different `modes', i.e to the left/right, close haul/bare away, based on the heading of the boat. This would massively simplify the task for each agent allowing for a much simpler reward function hopefully producing more reliable and successful results for the specific tasks. If the rudder control is removed from the agent it may be beneficial to use a control algorithm that is more suited to this task, such as a PID controller. Together these agents would be able to control the vessel, however this still has its own challenges, such as how to coordinate the agents and how to train them together for the same application. 
+
+
+% \subsection*{Evaluation of Performance}
+% It would be advantageous to setup a comprehensive evaluation process that could be conducted in between each training run. This would provide clear incite into the runs success and help provide direction for the next training run. While training a complex system it is easy to get distracted in nuances of the training process as there are so many potential different factors effecting the outcome. 

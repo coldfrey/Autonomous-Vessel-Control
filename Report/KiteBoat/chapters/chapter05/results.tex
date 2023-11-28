@@ -25,7 +25,7 @@ The following section will present the results of the training runs, and discuss
 
 This section presents the findings from the grid search of hypereparameters, and the effect they had on the training runs. The goal was to identify the best combination of hyperparameters for this training application to then use for the final training runs. The dataset comprised 500 runs, each with a unique configuration file. The hyperparameters include \texttt{batch\_size}, \texttt{buffer\_size}, \texttt{learning\_rate}, \texttt{beta}, \texttt{epsilon}, \texttt{lambd}, \texttt{num\_epoch}, \texttt{hidden\_units}, \texttt{num\_layers}, \texttt{curiosity\_strength}, and \texttt{curiosity\_learning\_rate}. The performance was measured using the `Best Episode Length'- a metric that represents the duration for which the model successfully flew the kite while navigating towards the waypoint. 
 
-A statistical summary was conducted to try and understand the most important tendencies of the data. The mean best episode length was found to be 5785 with a standard deviation of 7030, indicating a huge variability across different runs. A correlation matrix was computed to explore the linear relationship between the hyperparameters and the performance metric, the results of which can be seen in table$~$\ref{corr_matrix}. It was observed that \texttt{num\_epochs} had the strongest positive correlation (r=0.3007), suggesting a tendency for longer episodes with more epochs. On the other hand \texttt{batch\_size} and \texttt{epsilon} showed a negative correlation (r=-0.3007 and r=-0.3007 respectively).
+A statistical summary was conducted to try and understand the most important tendencies of the data. The mean best episode length was found to be 5785 with a standard deviation of 7030, indicating a huge variability across different runs. A correlation matrix was computed to explore the linear relationship between the hyperparameters and the performance metric, the results of which can be seen in table$~$\ref{corr_matrix}. It was observed that \texttt{num\_epochs} had the strongest positive correlation (r=0.3007), suggesting a tendency for longer episodes with more epochs. On the other hand \texttt{batch\_size} and \texttt{epsilon} showed a negative correlation (r=-0.3007 and r=-0.3007 respectively) to the episode length.
 
 \begin{table}[!htb]
     \centering
@@ -50,7 +50,7 @@ A statistical summary was conducted to try and understand the most important ten
     \caption{Correlation matrix of hyperparameters}\label{corr_matrix}
 \end{table}
 
-A visualization of the relationships and distributions within the data was created and can be seen in figure$~$\ref{vis_matrix}. Scatter plot matrices were generated using \texttt{Seaborn} and \texttt{Matplotlib} libaries in Python to display the best pairwise relationships between the most correlated hyperparameters and the best episode length. Also included in figure$~$\ref{vis_matrix} are bar plots, which represent the feature importance derived from a Random Forest Model$~$\cite{randomforrestM}. A Random Forrest Regressor was utilized to estimate the importance of each hyperparameter in predicting the best episode length. The model was trained on a subset of the data and validated using a test set, resulting in a Mean Squared Error (MSE) of 53 million. This very large value indicates significant variability and suggests the model's performance is highly sensitive to changing hyperparameters. Figure$~$\ref{feature_importance} shows the feature importance bar plot, which emphasises the significance of \texttt{num\_epochs} and \texttt{buffer\_size} in the model's success.
+A visualization of the relationships and distributions within the data was created and can be seen in figure$~$\ref{vis_matrix}. Scatter plot matrices were generated using \texttt{Seaborn} and \texttt{Matplotlib} libraries in Python to display the best pairwise relationships between the most correlated hyperparameters and the best episode length. Also included in figure$~$\ref{vis_matrix} are bar plots, which represent the feature importance derived from a Random Forest Model$~$\cite{randomforrestM}. A Random Forrest Regressor was utilized to estimate the importance of each hyperparameter in predicting the best episode length. The model was trained on a subset of the data and validated using a test set, resulting in a Mean Squared Error (MSE) of 53 million. This very large value indicates significant variability and suggests the model's performance is highly sensitive to changing hyperparameters. Figure$~$\ref{feature_importance} shows the feature importance bar plot, which emphasises the significance of \texttt{num\_epochs} and \texttt{buffer\_size} in the model's success. The \texttt{analysis.py} script, that performs the above calculations can be found in section XYZ of the appendix.
 
 \begin{figure}[!htb]
     \centering
@@ -70,7 +70,7 @@ A visualization of the relationships and distributions within the data was creat
 
 % After training was complete, the results were extracted and a linear regression model was created to illuminate which of the changing hyperparameter values had the greatest impact on the performance metric, in this case episode length, for this a python script was used REF APENDIX. The results of the linear regression model can be seen in Figure~\ref{regression}. The coefficients derived from the regression, depicted in the bar chart, offer a visual representation of the impact each hyperparameter had on the performance metric. Notably, the \texttt{learning\_rate}, \texttt{beta}, and \texttt{curiosity\_learning\_rate} had the greatest impact on the performance metric. This suggests that a smaller learning rate reduces the strength of the updates to the policy, and thus the agent learns slower, but more reliably for a complex task. Increasing the value of the \texttt{beta} hyperparameter, which is the strength of the entropy regularization term, also had a positive impact on the performance metric. This suggests that the agent was able to learn more effectively when the policy was encouraged to explore more.
 
-In hindsight, it would have been beneficial to experiment with a non constant learning rate, i.e scheduling it to change over the course of the training run. This would have started the process off with a high learning rate, encouraging the agent to learn lots very quickly, but as the training progressed the learning rate would have been reduced. The reducing learning rate would have allowed the agent to fine tune its policy and not unlearn previously learned behaviours, which is a common problem with RL agents.
+In hindsight, it would have been beneficial to experiment with a non constant learning rate, i.e scheduling it to change over the course of the training run. This would have started the process off with a high learning rate, encouraging the agent to learn lots very quickly, but as the training progressed the learning rate would have been reduced. The reducing learning rate would have allowed the agent to fine tune its policy and not unlearn previously learned behaviours, which is a common problem with RL agents. It is also possible to set non-linear scheduled learning rates, which could have been used to reduce the learning rate at a slower rate towards the end of the training run.  
 % \begin{figure}
 %     \centering
 %     \resizebox{\textwidth}{!}{%
@@ -86,53 +86,6 @@ The final training consisted of 6 runs with different config files. The first wa
 % compare the 5 best configs run for the different number of steps
 % Box plot showing the average score from 10 best episodes of the evaluation scenes 
 
-\subsection{Agent Performance}
-
-\subsubsection*{Difficulties Encountered}
-There were several difficulties encountered when trying to get the agent to learn anything let alone the combination of directionally sailing a kiteboat. One of the most common local maxima that the agent fell into was for the agent to steer on `hard lock' with the rudder at \textit{$\tilde{} ~70-90^{\circ}$}, shown in figure$~$\ref{hard_lock} where the target can be seen as the green area in the distance. This behavior allowed it to learn to fly the kite very reliably with the boat in a more consistent and stable position. These episodes provided false positives in the training data because as soon as the agent started to explore the rudder space more it was not able to fly the kite. To try and combat this behavior a large negative reward was added for aggressive steering as shown in table$~$\ref{rewards}. This went some way to discouraging this behavior but it was still observed in some of the later training runs. After this rudder reward was added it was observed that the agent took almost 5 times as long to learn to fly the kite with some reliability. 
-
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[width=0.8\textwidth]{Images/hard_lock.png}
-    \caption{The agent steering on hard lock}\label{hard_lock}
-\end{figure}
-
-
-\subsubsection{Human Comparison}
-Earlier it was mentioned that a heuristic playable game was created to make sure the model felt sensible and could be played by a human player. To create a baseline for the agent's performance 5 human players were asked to play the game for 5 minutes each in heuristic mode and their results were logged. The top 5 performing agents were then run for the same time and the same metrics recorded. 
-
-\section{Critical Evaluation}
-The overarching aim of this research paper was to develope a system for autonomously controlling a kite-powered vessel using reinforcement learning. Tables$~$\ref{obj1} - explores the extent to which this aim was achieved by investigating the success of each objective and its outcome goal. To evaluate each objective in detail a score was assigned from 0 to 10, with the range shown in figure$~$\ref{score_range}. A total score was calculated for each objective and its value discussed.
-\newline
-\begin{chronology}[5]{0}{9}{\textwidth}
-    \event{0}{Failed}
-    \event{10}{Sucess}
-\end{chronology}\label{score_range}
-
-\begin{table}[!htb]
-    \centering
-    \resizebox{\textwidth}{!}{%
-    \begin{tabular}{p{0.8\textwidth}|c}
-        \textbf{Objective 1: Simulation Environment Development} & \textbf{Score} \\
-        \hline
-         To design and implement a virtual marine environment that accurately emulates real-world maritime conditions. & 9 \\
-        \midrule
-        To construct a realistic model of a boat that exhibits appropriate physical movements in response to environmental forces such as wind and water currents. & 8 \\
-        \hline
-        \textbf{Outcome Goal(s)} &  \\
-        \midrule
-        To design and implement a virtual marine environment that accurately emulates real-world maritime conditions. & 10 \\
-        \midrule
-        \textbf{Total} & \textbf{27/30} \\
-        \bottomrule
-    \end{tabular}
-    }
-    \caption{Objectives Evaluation}\label{obj1}
-\end{table}
-
-
-
-
 
 \subsection{Hardware}\label{sec:hardware_evaluation}
 There were several limitations that affected the quality of the training and thus the trained model. First and foremost was compute, as expected when conducting any machine learning training, the more compute available the better. The local machine used for training was a 16-core i9 with 32GB of RAM and a T2000 nvidia graphics, and took approximately 2 hours per million steps completed. This was not a viable option for training the agent to a high level of performance, and so the training was attempted to the university HPC. The HPC has 525 Lenovo nx360 m5 nodes each with two 14 core 2.4 GHz CPUs, and 32 GPU nodes with two cards each. At face value this looks wonderful and training should be a breeze, this was not quite the case. Unity does not support native multi threading, due to the complex nature of its physics engine, so it runs on a single CPU unless manually specified. Manual threading was possible but only for separate tasks that could be called independently of the model, such as the collision detection algorithm. As expected this severely limits the speed of training, and using the hpc did not change these run times.
@@ -146,4 +99,201 @@ Thus this project wouldn't have been possible without the HPC.
 % The second more major problem was the wait time of the HPC, the longer a job was scheduled the longer it took for the resources to be allocated, for a job that was scheduled for 48 hours on a single node it could take up to 5 days for the job to begin. This was a major problem as it meant that the training could not be conducted in a timely manner, and iteration was very slow. The limited GPU's had the same problem, with only 32 available, and the fact that the HPC was shared with the entire university, it was very difficult to get access to the resources. For this reason the vast majority of training was conducted on the local machine, which had the advantage of also being able to see the training in real time, albeit slowly.   
 
 
+\subsection{Agent Performance}
 
+\subsubsection*{Difficulties Encountered}
+There were several difficulties encountered when trying to get the agent to learn anything let alone the combination of directionally sailing a kiteboat. One of the most common local maxima that the agent fell into was for the agent to steer on `hard lock' with the rudder at \textit{$\tilde{} ~70-90^{\circ}$}, shown in figure$~$\ref{hard_lock} where the target can be seen as the green area in the distance. This behavior allowed it to learn to fly the kite very reliably with the boat in a more consistent and stable position. These episodes provided false positives in the training data because as soon as the agent started to explore the rudder space more it was not able to fly the kite. To try and combat this behavior a large negative reward was added for aggressive steering as shown in table$~$\ref{rewards}. This went some way to discouraging this behavior but it was still observed in some of the later training runs. After this rudder reward was added it was observed that the agent took almost 5 times as long to learn to fly the kite with some reliability. 
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Images/hard_lock.png}
+    \caption{The agent steering on hard lock}\label{hard_lock}
+\end{figure}
+
+
+\subsubsection{Human Comparison}\label{hcomp}
+Earlier it was mentioned that a heuristic playable game was created to make sure the model felt sensible and could be played by a human player. To create a baseline for the agent's performance 5 human players were asked to play the game for 5 minutes each in heuristic mode and their results were logged. The top 5 performing agents were then run for the same time and the same metrics recorded. 
+
+\section{Practical Deployment}\label{sec:practical_deployment}
+The results of the model demonstrate unreliability in the agents performance and so it would not be recommended to deploy this particular model into the real world. However, the results do show promise and it is likely possible to create a model that performs reliably enough to warrant building a physical prototype. Integration into a physical system would first require a boat and kite. The boat would need to be large enough to safely contain all the components (including electrics) so a vessel of appropriately 18 - 30ft would be advised. For the kite a standard off the shelf LEI kite would perform fine, the size of the kite could be changed depending on the wind conditions it would be tested in as it wouldn't noticeably affect the handling. The remainder of the system would involve addressing the following design and manufacture points:  
+
+\begin{itemize}
+    \item Kite Control System:
+    \begin{itemize}
+        \item Custom reinforced attachment point to the boat. Similar to a mast base attachment point.
+        \item Electronic winches for kite line management.
+        \item Load cells for tension measurement in kite lines.
+        \item Gyroscopic sensors to measure kite orientation.
+        \item Anemometer for wind speed and direction data.
+        \item Manual override for emergency control.
+    \end{itemize}
+    \item Rudder Control System:
+    \begin{itemize}
+        \item Electric linear actuators
+        \item Rudder position sensor
+        \item Manual steering mechanism
+    \end{itemize}
+    \item Central Processing Unit
+    \begin{itemize}
+        \item Microcontroller to run the control system.
+        \item Data acquisition system (DAQ) to interface with sensors and actuators.
+        \item GPS module for positioning.
+        \item Compass module for heading data.
+    \end{itemize}
+    \item Power Supply
+    \begin{itemize}
+        \item Battery bank with charge controller.
+        \item Solar panels for charging.
+    \end{itemize}
+\end{itemize}
+
+Addressing these points would lead to an mvp capable of testing. It is important to note that all the observations provided to the agent in the simulation must still be provided to the trained model, so the same observations would have to be collected.
+
+\section{Critical Evaluation}
+The overarching aim of this research paper was to develope a system for autonomously controlling a kite-powered vessel using reinforcement learning. Tables$~$\ref{obj1} - explores the extent to which this aim was achieved by investigating the success of each objective and its outcome goal. To evaluate each objective in detail a score was assigned from 0 to 10, with the range shown in figure$~$\ref{score_range}. A total score was calculated for each objective and its value discussed.
+\newline
+\begin{chronology}[5]{0}{9}{\textwidth}
+    \event{0}{Failed}
+    \event{5}{Satisfactory}
+    \event{10}{Best Result}
+\end{chronology}\label{score_range}
+
+\begin{table}[!htb]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{p{0.8\textwidth}|c}
+        \textbf{Objective 1: Simulation Environment Development} & \textbf{Score} \\
+        \hline
+         To design and implement a virtual marine environment that accurately emulates real-world maritime conditions. & 9 \\
+        \midrule
+        To construct a realistic model of a boat that exhibits appropriate physical movements in response to environmental forces such as wind and water currents. & 7 \\
+        \hline
+        \textbf{Outcome Goal(s)} &  \\
+        \midrule
+        To have a physics-based boat able to be controlled and driven around a scene by a human player. & 10 \\
+        \midrule
+        \textbf{Total} & \textbf{$\frac{26}{30}$} \\
+        \bottomrule
+    \end{tabular}
+    }
+    \caption{Objective 1 Evaluation}\label{obj1}
+\end{table}
+
+Objective 1 scored a total of $\frac{27}{30}$, the Unity environment implemented was capable of delivering real world conditions with a variety of wind and waves. The boat model was able to be accurately controlled by a human player and experienced buoyant and drag forces. There was room for improvement within the boat model by implementing a custom particle simulation instead of the Unity water system, which would have provided complete control over the interaction between the water and the boat. 
+
+\begin{table}[!htb]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{p{0.8\textwidth}|c}
+        \textbf{Objective 2: Kite Propulsion Modeling} & \textbf{Score} \\
+        \hline
+        To create a physics-based model of a kite within the simulation that reflects authentic aerodynamic behaviors and integrate it onto the boat model. & 5 \\
+        \midrule
+        To integrate kite control mechanics into an agent’s available action space. & 9 \\
+        \hline
+        \textbf{Outcome Goal(s)} &  \\
+        \midrule
+        To have a physics-based kiteboat able to be controlled and driven around a scene by a human player, using an agent's heuristic controls. & 10 \\
+        \midrule
+        \textbf{Total} & \textbf{$\frac{25}{30}$} \\
+        \bottomrule
+    \end{tabular}
+    }
+    \caption{Objective 2 Evaluation}\label{obj2}
+\end{table}
+
+Objective 2 scored a total of $\frac{24}{30}$, shown in table$~$\ref{obj2}, the physics of the kite model were satisfactory. The kite generated a resultant force that was capable of pulling the boat and the outcome goal was fully achieved. However there was definitely room for improvement in the kite model, specifically in how the kite rotated. To keep the model simple a torque was applied to the kite about the centre of mass, this was not a realistic representation of how a kite would rotate. A more realistic approach would have been to apply a torque about edge of the kite on the side it was rotating. Even better than this would be to create a kite model that didn't rely on the assumption that wind was laminar over the entire kite. This would have allowed for non uniform lift over the kite giving it a realistic rotation behaviour. That being said that model employed in this project was sufficient. The kite controls were successfully placed into discrete actions that the agent could control, it would have been interesting to experiment further with continuous actions, but this would have also increased the complexity of the already difficult learning task.
+
+\begin{table}[!htb]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{p{0.8\textwidth}|c}
+        \textbf{Objective 3: Reinforcement Learning Framework Establishment} & \textbf{Score} \\
+        \hline
+        To formulate a set of observations, actions, and rewards that encapsulate the dynamics of autonomous kite-boat control and navigation. & 9 \\
+        \midrule
+        To deploy the Proximal Policy Optimization algorithm, leveraging its actor-critic method for effective policy learning. & 8 \\
+        \hline
+        \textbf{Outcome Goal(s)} &  \\
+        \midrule
+        To have an agent begin training using PPO to learn to control the kiteboat. & 10 \\
+        \midrule
+        \textbf{Total} & \textbf{$\frac{27}{30}$} \\
+        \bottomrule
+    \end{tabular}
+    }
+    \caption{Objective 3 Evaluation}\label{obj3}
+\end{table}
+
+Objective 3 scored a total of $\frac{27}{30}$, shown in table$~$\ref{obj3}, the observations, actions, and rewards were all successfully formulated and the agent was able to begin training. The observations and rewards were tuned through lots of trial and error in an attempt to create a stable system for the agent to learn. The PPO algorithm was successfully implemented and the agent was able to train.
+
+\begin{table}[!htb]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{p{0.8\textwidth}|c}
+        \textbf{Objective 4: Autonomous Agent Development} & \textbf{Score} \\
+        \hline
+        To develop an RL agent capable of learning basic control and maneuvers, starting with simple navigating towards a target and maintaining a constant course. & 8 \\
+        \midrule
+        To refine the agent's capability to adaptively control the kite's position and angle to optimize propulsion for speed while navigating towards a target. & 5 \\
+        \hline
+        \textbf{Outcome Goal(s)} &  \\
+        \midrule
+        To have an agent that can navigate towards a target in a straight line. & 8 \\
+        \midrule
+        To have an agent that can navigate towards a target in any direction, including using maneuvers to take the optimal path. & 0 \\
+        \midrule
+        \textbf{Total} & \textbf{$\frac{21}{40}$} \\
+        \bottomrule
+    \end{tabular}
+    }
+    \caption{Objective 4 Evaluation}\label{obj4}
+\end{table}
+Objective 4 scored a total of $\frac{21}{40}$, shown in table$~$\ref{obj4}, the agent was capable of learning the controls of the kiteboat, and able to reliably fly the kite and steer. It was at this point where the complexity of the task started to limit the agents progression through the curriculum. Reliability was a problem when attempting to optimize for speed, the agents performance was inconsistent meaning that on occasion it was able to maintain control and attempt to navigate towards several waypoints as discussed in section$~$\ref{hcomp}, but this was not consistent enough to progress through the curriculum and learn to sail upwind. As a result the model was not able to navigate in any direction. It is likely that this control problem is well within the capabilities of RL and the PPO algorithm, but the complexity of the task necessitated a more realistic model, more complex reward function and better hyperparameter tuning. Objective 4 was not fully achieved, but the agent was able to learn the controls of the kiteboat and navigate towards a target in a straight line.  
+
+\begin{table}[!htb]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{p{0.8\textwidth}|c}
+        \textbf{Objective 5: Efficacy and Optimization Testing} & \textbf{Score} \\
+        \hline
+        To utilize High-Performance Computing (HPC) resources for scaling up simulations and optimizing the training process. & 8 \\
+        \midrule
+        To rigorously evaluate the trained agent’s performance in simulating autonomous navigation in various environmental scenarios. & 8 \\
+        \hline
+        \textbf{Outcome Goal(s)} &  \\
+        \midrule
+        To train an agent using the HPC resources. & 8 \\
+        \midrule
+        To have an agent that can navigate towards a target in a straight line under various environmental conditions, including wind and waves. & 2 \\
+        \midrule
+        \textbf{Total} & \textbf{$\frac{26}{40}$} \\
+        \bottomrule
+    \end{tabular}
+    }
+    \caption{Objective 5 Evaluation}\label{obj5}
+\end{table}
+
+Objective 5 scored a total of $\frac{26}{40}$, shown in table$~$\ref{obj5}. The HPC was used extensively for training a large number of models, but it does not warrant a full score as it was not used with any in depth parallelization strategies, merely single runs on single nodes. The trained agents were run in the evaluation scene and compared against human baselines, testing all the learnt behaviours and scoring them appropriately. It would have been exciting to pit multiple agents against one another during the evaluation for a direct comparison, but this remains future work. The agent was able to navigate towards a target in a straight line, and was still able to do so under changing sea states. The wind was not changed during the evaluation as the agent was only trained on laminar wind and never progressed to the stages of changing weather conditions.
+
+\begin{table}[!htb]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{p{0.8\textwidth}|c}
+        \textbf{Objective 6: Real-World Applicability Assessment} & \textbf{Score} \\
+        \hline
+        To extrapolate simulation findings to assess real-world applicability and propose a  practical deployment of RL in kite-powered vessels. & 8 \\
+        \midrule
+        To provide recommendations for further research and development based on empirical results obtained from the simulation studies. & 8 \\
+        \midrule
+        \textbf{Total} & \textbf{$\frac{16}{20}$} \\
+        \bottomrule
+    \end{tabular}
+    }
+    \caption{Objective 6 Evaluation}\label{obj6}
+\end{table}
+
+Objective 6 scored a total of $\frac{16}{20}$, shown in table$~$\ref{obj6}. A practical deployment of the kiteboat was considered in section$~$\ref{sec:practical_deployment}, although there is likely to be a significant amount of work to build a physical prototype. Other considerations such as where to test the mvp, and how to ensure safety would need to be addressed. The recommendations for further research and development are discussed in Chapter$~$\ref{chap:future_work}. 
+
+
+After the evaluation of the objectives and their outcome goals a final score of $\frac{141}{180}$ was achieved, which equates to 78.3\%. This score is an individual evaluation of the performance of the system against the specified objectives and so is not a direct score of how well the system performs as a whole, merely how close it came to meeting the goals set out at the start of the project. 

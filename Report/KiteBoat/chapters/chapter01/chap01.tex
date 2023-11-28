@@ -24,9 +24,29 @@ Reinforcement Learning (RL), a subset of artificial intelligence, presents a com
 % The objective of this paper is to delineate a novel Reinforcement Learning approach aimed at optimizing the autonomous control of kite-powered vessels. By leveraging the prowess of RL, we endeavor to address the challenges inherent in autonomous sail control, thereby contributing to the overarching goal of sustainable and efficient maritime transportation. The ensuing discourse will elucidate the theoretical underpinnings of our approach, the experimental setup, and the empirical findings, underscoring the potential benefits in terms of reducing operational costs and mitigating environmental impact.
 
 
+\section{Project Definition}
+This project aims to develope a simulation environment that can be used to train an RL agent to autonomously control a kite-powered vessel. The development of a simulation environment is crucial, attempting to train an agent to fly a kite let alone navigate a boat in the real world would not be feasible; the simulation environment will allow for the agent to learn in a safe and controlled fashion, not to mention the iteration time and cost will be significantly reduced. However simulation creates its own issues. Integration into the real world becomes an significant factor, how realistic is good enough? What features of the real world are the most important to implement? How do we know if the agent will be able to perform in the real world? These are all questions that will be considered throughout the project. 
+
+The kite-powered vessel in question is displayed in figure XYZ, and is comprised of a boat hull and LEI (leading edge inflatable) kite, connected by 4 control lines, this configuration is further explained in section$~$\ref{sec:env}. 
+
+Autonomous control is a broad term, in this case it means enabling self-governance of the vessel control functions with no human input. For the purpose of this project the agent will be trained to navigate the kiteboat towards a target location (waypoint). The better the agent performs this task, the harder the problem will become with waypoints moving to different locations. This process if taken to its extreme could represent full autonomous control, with the entire navigation and control down to the agent. `Control', what does control mean in this scenario. The agent will have a number of actions, these will represent steering the boats rudder and flying the kite. A single agent will be trained to control both the kite and the boat, this makes the learning problem more complicated but was attempted as a novel approach to create a system that had full control of the vessel. In this vein success is two-fold, the agent must be able to fly the kite reliably while continuously steering towards the next waypoint.
+
+For any machine learning endeavor, especially one with such intricate physical dynamics, the choice of simulation environment is paramount. Not only does it provide the playground for our AI agent to learn and make mistakes safely, but it also serves as a litmus test for the robustness and realism of the designed model.
+
+Given the myriad of choices available, the Unity game engine emerged as the most suitable platform. Its native support for machine learning applications through the MLAgents toolkit was unmatched. Beyond its reputation in gaming, the inherent support for mesh bodies, colliders, and a variety of joints made it an attractive option for simulating the kite-boat system, which comprised a complex dance of forces, and counterforces. Unity is recognized for its potent physics engine, however for this project the use of Unity's physics engine will be kept to a minimum, with an emphasis on implementing as much of the simulation from scratch as possible. Unity will be used primarily for its visual capabilities and the ability to be used as the gym environment for machine learning simulations. 
+
+Central to this simulation is the depiction of water, the medium in which the boat will navigate. Here, the Unity HDRP Water System 16.0.3$~$\cite{UnityHDRPWaterSystem}, bundled with Unity 2023.2.0b9, provides a realistic representation of water with its undulating waves, refractions, and reflections. 
+
+The alternative option to using Unity's water system was to model an entire particle fluid simulation, this would have had its advantages, however it would have been a lot more computationally expensive and would have taken a lot longer to implement. As this project was primarily focused on training a RL algorithm for controlling a kiteboat it was decided that the Unity water system would be sufficient for this project.  
+
+
+
+
+
+
 \section{Aims and Objectives}
 
-The overarching aim of this research is to develope a system for controlling kite-powered vessels using Reinforcement Learning (RL) techniques. This objective stems from the need to advance sustainable maritime travel technologies and reduce the environmental impact of current propulsion systems.
+The overarching aim of this research is to develope a system for controlling kite-powered vessels using Reinforcement Learning (RL) techniques. This objective stems from the need to advance sustainable maritime travel technologies and reduce the environmental impact of current propulsion systems. 
 
 To achieve this primary aim, the objectives have been structured as follows:
 
@@ -71,8 +91,6 @@ To achieve this primary aim, the objectives have been structured as follows:
 \begin{itemize}
     \item To extrapolate simulation findings to assess real-world applicability and propose a  practical deployment of RL in kite-powered vessels.
     \item To provide recommendations for further research and development based on empirical results obtained from the simulation studies.
-    \newline\textbf{Outcome Goal 1:} To propose a practical deployment of RL in kite-powered vessels.
-    \newline\textbf{Outcome Goal 2:} To provide recommendations for further research and development.
 \end{itemize}
 
 These objectives pave the path towards achieving the central goal, ensuring each phase of development builds upon the last. By concluding this investigation it is anticipated that the contributions made could impact sustainable maritime transportation solutions.
