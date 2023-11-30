@@ -2,15 +2,7 @@
 
 \let\textcircled=\pgftextcircled\chapter{Results and Evaluation}\label{chap:results}
 
-Introduction
-Briefly summarize the goals of the RL experiments.
-Outline the structure of the results chapter.
-
-\section{Final Experimental Setup}
-The training scene used for the final training runs can be found in:
-\newline
-\texttt{Assets/Scenes/kiteboat\_training}. The final experimental setup was a combination of the best performing elements from the previous experiments. The model was configured with the config file shown in section$~$\ref{config} of the appendix, and run for 50,000,000 steps.
-
+\initial{T}his chapter will delve into the results and evaluation of the reinforcement learning (RL) experiments aimed at optimizing the autonomous control of kite-powered vessels using PPO. The chapter is structured to first present the outcomes of the training steps and hyperparameter tuning, followed by an in depth analysis of the training results and the agents learning process. Subsequent sections provide insights into the agents overall performance, including comparisons to human baselines, and a discussion of the practical deployment of a trained model. The chapter concludes with a critical evaluation of the project, discussing the extent to which the project aims were achieved and the potential for future work.
 
 
 \section{Training Results}
@@ -19,11 +11,16 @@ The training scene used for the final training runs can be found in:
 % Include a table or graph of the agent’s performance metrics at various checkpoints.
 % Discuss any unexpected behaviors or anomalies observed during training.
 
-The following section will present the results of the training runs, and discuss the overall performance of the agent. 
+The training scene used for the final training runs can be found in:
+\newline
+\texttt{Assets/Scenes/kiteboat\_training}. 
+The final experimental setup was a combination of the best performing elements from the previous experiments. The model was configured with the config file shown in section$~$\ref{config} of the appendix, and run for 30,000,000 steps.
+
+This section presents the results of the hyperparameter tuning and the final training runs. It includes analyses of the learning curves, performance metrics, and unexpected behaviours observed during training.
 
 \subsection{Hyperparameter Tuning}\label{sec:hyperparameter_tuning}
 
-This section presents the findings from the grid search of hypereparameters, and the effect they had on the training runs. The goal was to identify the best combination of hyperparameters for this training application to then use for the final training runs. The dataset comprised 500 runs, each with a unique configuration file. The hyperparameters include \texttt{batch\_size}, \texttt{buffer\_size}, \texttt{learning\_rate}, \texttt{beta}, \texttt{epsilon}, \texttt{lambd}, \texttt{num\_epoch}, \texttt{hidden\_units}, \texttt{num\_layers}, \texttt{curiosity\_strength}, and \texttt{curiosity\_learning\_rate}. The performance was measured using the `Best Episode Length'- a metric that represents the duration for which the model successfully flew the kite while navigating towards the waypoint. 
+This subsection presents the findings from the grid search of hypereparameters, and the effect they had on the training runs. The goal was to identify the best combination of hyperparameters for this training application to then use for the final training runs. The dataset comprised 500 runs, each with a unique configuration file. The hyperparameters include \texttt{batch\_size}, \texttt{buffer\_size}, \texttt{learning\_rate}, \texttt{beta}, \texttt{epsilon}, \texttt{lambd}, \texttt{num\_epoch}, \texttt{hidden\_units}, \texttt{num\_layers}, \texttt{curiosity\_strength}, and \texttt{curiosity\_learning\_rate}. The performance was measured using the `Best Episode Length'- a metric that represents the duration for which the model successfully flew the kite while navigating towards the waypoint. 
 
 A statistical summary was conducted to try and understand the most important tendencies of the data. The mean best episode length was found to be 5785 with a standard deviation of 7030, indicating a huge variability across different runs. A correlation matrix was computed to explore the linear relationship between the hyperparameters and the performance metric, the results of which can be seen in table$~$\ref{corr_matrix}. It was observed that \texttt{num\_epochs} had the strongest positive correlation (r=0.3007), suggesting a tendency for longer episodes with more epochs. On the other hand \texttt{batch\_size} and \texttt{epsilon} showed a negative correlation (r=-0.3007 and r=-0.3007 respectively) to the episode length.
 
@@ -50,15 +47,17 @@ A statistical summary was conducted to try and understand the most important ten
     \caption{Correlation matrix of hyperparameters}\label{corr_matrix}
 \end{table}
 
-A visualization of the relationships and distributions within the data was created and can be seen in figure$~$\ref{vis_matrix}. Scatter plot matrices were generated using \texttt{Seaborn} and \texttt{Matplotlib} libraries in Python to display the best pairwise relationships between the most correlated hyperparameters and the best episode length. Also included in figure$~$\ref{vis_matrix} are bar plots, which represent the feature importance derived from a Random Forest Model$~$\cite{randomforrestM}. A Random Forrest Regressor was utilized to estimate the importance of each hyperparameter in predicting the best episode length. The model was trained on a subset of the data and validated using a test set, resulting in a Mean Squared Error (MSE) of 53 million. This very large value indicates significant variability and suggests the model's performance is highly sensitive to changing hyperparameters. Figure$~$\ref{feature_importance} shows the feature importance bar plot, which emphasises the significance of \texttt{num\_epochs} and \texttt{buffer\_size} in the model's success. The \texttt{analysis.py} script, that performs the above calculations can be found in section XYZ of the appendix.
+% A visualization of the relationships and distributions within the data was created and can be seen in figure$~$\ref{vis_matrix}. Scatter plot matrices were generated using \texttt{Seaborn} and \texttt{Matplotlib} libraries in Python to display the best pairwise relationships between the most correlated hyperparameters and the best episode length. Also included in figure$~$\ref{vis_matrix} are bar plots, which represent the feature importance derived from a Random Forest Model$~$\cite{randomforrestM}. 
 
-\begin{figure}[!htb]
-    \centering
-    \resizebox{\textwidth}{!}{%
-    \includegraphics[]{Images/scatter_plot_matrix.png}
-    }
-    \caption{Visualization matrix of hyperparameters}\label{vis_matrix}
-\end{figure}
+A Random Forrest Regressor$~$\cite{randomforrestM} was utilized to estimate the importance of each hyperparameter in predicting the best episode length. The model was trained on a subset of the data and validated using a test set, resulting in a Mean Squared Error (MSE) of 53 million. This very large value indicates significant variability and suggests the model's performance is highly sensitive to changing hyperparameters. Figure$~$\ref{feature_importance} shows the feature importance bar plot, which emphasises the significance of \texttt{num\_epochs} and \texttt{buffer\_size} in the model's success. The \texttt{analysis.py} script, that performs the above calculations can be found in section$~$\ref{sec:analysis} of the appendices.
+
+% \begin{figure}[!htb]
+%     \centering
+%     \resizebox{\textwidth}{!}{%
+%     \includegraphics[]{Images/scatter_plot_matrix.png}
+%     }
+%     \caption{Visualization matrix of hyperparameters}\label{vis_matrix}
+% \end{figure}
 
 \begin{figure}[!htb]
     \centering
@@ -70,7 +69,9 @@ A visualization of the relationships and distributions within the data was creat
 
 % After training was complete, the results were extracted and a linear regression model was created to illuminate which of the changing hyperparameter values had the greatest impact on the performance metric, in this case episode length, for this a python script was used REF APENDIX. The results of the linear regression model can be seen in Figure~\ref{regression}. The coefficients derived from the regression, depicted in the bar chart, offer a visual representation of the impact each hyperparameter had on the performance metric. Notably, the \texttt{learning\_rate}, \texttt{beta}, and \texttt{curiosity\_learning\_rate} had the greatest impact on the performance metric. This suggests that a smaller learning rate reduces the strength of the updates to the policy, and thus the agent learns slower, but more reliably for a complex task. Increasing the value of the \texttt{beta} hyperparameter, which is the strength of the entropy regularization term, also had a positive impact on the performance metric. This suggests that the agent was able to learn more effectively when the policy was encouraged to explore more.
 
-In hindsight, it would have been beneficial to experiment with a non constant learning rate, i.e scheduling it to change over the course of the training run. This would have started the process off with a high learning rate, encouraging the agent to learn lots very quickly, but as the training progressed the learning rate would have been reduced. The reducing learning rate would have allowed the agent to fine tune its policy and not unlearn previously learned behaviours, which is a common problem with RL agents. It is also possible to set non-linear scheduled learning rates, which could have been used to reduce the learning rate at a slower rate towards the end of the training run.  
+In hindsight, incorporating a dynamic learning rate that varies throughout the training phase would have been beneficial i.e scheduling it to change over the course of the training run. This approach would involve initiating the training with a relatively high learning rate, thereby facilitating rapid learning in the initial stages. As the training progressed, gradually reducing the learning rate would allow the agent to fine tune its policy without unlearning previously learned behaviours, which is a common problem with RL agents. Moreover, employing an non-linear learning rate schedule could have provided a more controlled reduction in pace, enhancing the stability in the latter stages of the training. 
+
+
 % \begin{figure}
 %     \centering
 %     \resizebox{\textwidth}{!}{%
@@ -81,38 +82,62 @@ In hindsight, it would have been beneficial to experiment with a non constant le
 
 \subsection{Final Training}
 
-The final training consisted of 6 runs with different config files. The first was the manually created, which 
+The final training consisted of 6 different config files, each run for \textit{500,000}, \textit{1,000,000}, \textit{10,000,000} and \textit{30,000,000} steps. Figure$~$\ref{500k_steps} shows the Environment/Cumulative reward for the training runs conducted for 500k steps. It appears the score converges, but on closer inspection it can be seen that all these runs converge on approximately -9.75, which is very far from the theoretical maximum available. This graph suggests these runs were falling into local maxima and didn't have the number of iterations for the curiosity to force the agent to explore beyond this local maxima.
+\begin{figure}[!htb]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \includegraphics[]{Images/reward_graph_500k.png}
+    }
+    \caption{Environment/Cumulative reward for 500k steps}\label{500k_steps}
+\end{figure}
 
-% compare the 5 best configs run for the different number of steps
-% Box plot showing the average score from 10 best episodes of the evaluation scenes 
+For the other training runs, it is hard to draw any conclusions about the quality of the training from the model output graphs, shown in section$~$\ref{sec:env_cum_reward} of the appendices, and so all the models were run in heuristic mode in an evaluation scene that logged the performance over time. Several of these models were not even able to control the kiteboat and had completely failed to learn anything. Figure XYZ shows the cumulative reward accumulated over a 90s evaluation run for the ........
 
+The highest performing model was boatAgent\_2 trained for \textit{10,000,000} steps, figure$~$\ref{agent_stats} shows how it performed in the heuristic evaluation given a 300 second time slot. This is the best performing heuristic run of 5 conducted. These figures present the evaluation metrics of \texttt{Cumulative Reward}, \texttt{Completed Waypoints}, \texttt{Distance Covered}, \texttt{Boat Speed}, \texttt{Rudder Angle} and \texttt{Kite Height}. After some initial inconsistency the agent navigated through 3 waypoints, with an average boat speed of 5.05 m/s. Over the course of the evaluation it crashed the kite into the water 6 times. These results show the best performing model was able to sail the kiteboat across a number of waypoints, gaining a large reward and maintaining a good speed, however it was still inconsistent unable to fly the kite reliably for the total duration of the evaluation scene. 
+\begin{figure}
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \includegraphics[]{Images/agent_stats.png}
+    }
+    \caption{Agent stats for 10,000,000 steps model}\label{agent_stats}
+\end{figure}
+
+\subsection*{Human Comparison}\label{hcomp}
+Earlier it was mentioned that a heuristic playable game was created to make sure the model felt sensible and could be played by a human player. To create a baseline for the agent's performance a human player played the game for 5 minutes in heuristic mode and the results were logged. The top performing agent was then compared against this baseline to see how it performed. The results can be seen in figure$~$\ref{human_comparison}. This figure shows the average \texttt{Cumulative Reward}, \texttt{Distance Traveled}, \texttt{Boat Speed} and {Waypoints Reached} per episode, from the 300s evaluation period. It can be seen that the human outperformed the agent in all catagories
+
+\begin{figure}
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \includegraphics[]{Images/performance_comparison.png}
+    }
+    \caption{Human comparison vs Model Evaluation}\label{human_comparison}
+\end{figure}
 
 \subsection{Hardware}\label{sec:hardware_evaluation}
-There were several limitations that affected the quality of the training and thus the trained model. First and foremost was compute, as expected when conducting any machine learning training, the more compute available the better. The local machine used for training was a 16-core i9 with 32GB of RAM and a T2000 nvidia graphics, and took approximately 2 hours per million steps completed. This was not a viable option for training the agent to a high level of performance, and so the training was attempted to the university HPC. The HPC has 525 Lenovo nx360 m5 nodes each with two 14 core 2.4 GHz CPUs, and 32 GPU nodes with two cards each. At face value this looks wonderful and training should be a breeze, this was not quite the case. Unity does not support native multi threading, due to the complex nature of its physics engine, so it runs on a single CPU unless manually specified. Manual threading was possible but only for separate tasks that could be called independently of the model, such as the collision detection algorithm. As expected this severely limits the speed of training, and using the hpc did not change these run times.
+There were several limitations that affected the quality of the training and thus the trained model. First and foremost was compute, as expected when conducting any machine learning training, the more compute available the better. The local machine used for training was a 16-core i9 with 32GB of RAM and a T2000 nvidia graphics, and took approximately 2 hours per million steps completed. This was not a viable option for training multiple agents to a high level of performance, and so the training was attempted to the university HPC. The HPC has 525 Lenovo nx360 m5 nodes each with two 14 core 2.4 GHz CPUs, and 32 GPU nodes with two cards each. At face value this looks wonderful and training should be a breeze, this was not quite the case. Unity does not support native multi threading, due to the complex nature of its physics engine, so it runs on a single CPU unless manually specified. Manual threading was possible but only for separate tasks that could be called independently of the model, such as the collision detection algorithm. As expected this severely limits the speed of training, and using the hpc did not radically increase these run times.
 However, the HPC was not without its advantages, the main being that it was possible to run multiple training runs in parallel, and so the hyperparameter tuning was conducted on the HPC. This would not have been possible on the local machine as it would have taken far too long to test all the combinations. The ability to submit a large batch of jobs to be run in parallel and then the results collection automated was a huge time saver. The HPC also had the advantage of being able to run the training for longer periods of time without causing inconvenience, so even though the training speed was limited it was not a problem to let them run for many days. 
 
-The wait time for resources to be allocated increased the longer the job was scheduled to take 
+% The wait time for resources to be allocated increased the longer the job was scheduled to take 
 
 
-Thus this project wouldn't have been possible without the HPC.
+% Thus this project wouldn't have been possible without the HPC.
 
 % The second more major problem was the wait time of the HPC, the longer a job was scheduled the longer it took for the resources to be allocated, for a job that was scheduled for 48 hours on a single node it could take up to 5 days for the job to begin. This was a major problem as it meant that the training could not be conducted in a timely manner, and iteration was very slow. The limited GPU's had the same problem, with only 32 available, and the fact that the HPC was shared with the entire university, it was very difficult to get access to the resources. For this reason the vast majority of training was conducted on the local machine, which had the advantage of also being able to see the training in real time, albeit slowly.   
 
 
-\subsection{Agent Performance}
+\section{Agent Performance}
 
 \subsubsection*{Difficulties Encountered}
-There were several difficulties encountered when trying to get the agent to learn anything let alone the combination of directionally sailing a kiteboat. One of the most common local maxima that the agent fell into was for the agent to steer on `hard lock' with the rudder at \textit{$\tilde{} ~70-90^{\circ}$}, shown in figure$~$\ref{hard_lock} where the target can be seen as the green area in the distance. This behavior allowed it to learn to fly the kite very reliably with the boat in a more consistent and stable position. These episodes provided false positives in the training data because as soon as the agent started to explore the rudder space more it was not able to fly the kite. To try and combat this behavior a large negative reward was added for aggressive steering as shown in table$~$\ref{rewards}. This went some way to discouraging this behavior but it was still observed in some of the later training runs. After this rudder reward was added it was observed that the agent took almost 5 times as long to learn to fly the kite with some reliability. 
-
+There were several difficulties encountered when trying to get the agent to learn anything let alone the combination of directionally sailing a kiteboat. One of the most common local maxima that the agent fell into was to steer on `hard lock' with the rudder at \textit{$\tilde{} ~70-90^{\circ}$}, shown in figure$~$\ref{hard_lock} where the target can be seen as the green area in the distance. This behavior allowed it to learn to fly the kite very reliably with the boat in a more consistent and stable position. These episodes provided false positives in the training data because as soon as the agent started to explore the rudder space more it was not able to fly the kite. To try and combat this behavior a large negative reward was added for aggressive steering as shown in table$~$\ref{rewards}. This went some way to discouraging this behavior but it was still observed in some of the later training runs. After this rudder reward was added it was observed that the agent took almost 5 times as long to learn to fly the kite with some reliability. 
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=0.8\textwidth]{Images/hard_lock.png}
     \caption{The agent steering on hard lock}\label{hard_lock}
 \end{figure}
 
+\subsection*{Performance in Curriculum}
+While the agent showed promise in its basic understanding and control, it was unable to progress sufficiently through the training curriculum. The curriculum, which was designed to gradually increase in complexity, required the agent to reliably control of the kiteboat if it wanted to progress to the next stages, including sailing upwind. The agent's overall inconsistent performance in kite control hindered its progression, preventing it from reaching these more advanced stages.
 
-\subsubsection{Human Comparison}\label{hcomp}
-Earlier it was mentioned that a heuristic playable game was created to make sure the model felt sensible and could be played by a human player. To create a baseline for the agent's performance 5 human players were asked to play the game for 5 minutes each in heuristic mode and their results were logged. The top 5 performing agents were then run for the same time and the same metrics recorded. 
 
 \section{Practical Deployment}\label{sec:practical_deployment}
 The results of the model demonstrate unreliability in the agents performance and so it would not be recommended to deploy this particular model into the real world. However, the results do show promise and it is likely possible to create a model that performs reliably enough to warrant building a physical prototype. Integration into a physical system would first require a boat and kite. The boat would need to be large enough to safely contain all the components (including electrics) so a vessel of appropriately 18 - 30ft would be advised. For the kite a standard off the shelf LEI kite would perform fine, the size of the kite could be changed depending on the wind conditions it would be tested in as it wouldn't noticeably affect the handling. The remainder of the system would involve addressing the following design and manufacture points:  

@@ -9,45 +9,45 @@ Warning--entry type for "unityupdatefixedupdate" isn't style-file defined
 --line 188 of file thesisbiblio.bib
 Warning--empty journal in mlagents_ppo
 Warning--there's a number but no volume in randomforrestM
-You've used 32 entries,
+You've used 30 entries,
             2481 wiz_defined-function locations,
-            742 strings with 9736 characters,
-and the built_in function-call counts, 10551 in all, are:
-= -- 856
-> -- 512
-< -- 23
-+ -- 214
-- -- 150
-* -- 709
-:= -- 1733
-add.period$ -- 113
-call.type$ -- 32
-change.case$ -- 55
-chr.to.int$ -- 32
-cite$ -- 34
-duplicate$ -- 563
-empty$ -- 1025
-format.name$ -- 191
-if$ -- 2243
+            728 strings with 9229 characters,
+and the built_in function-call counts, 9823 in all, are:
+= -- 795
+> -- 472
+< -- 22
++ -- 198
+- -- 138
+* -- 656
+:= -- 1611
+add.period$ -- 104
+call.type$ -- 30
+change.case$ -- 51
+chr.to.int$ -- 30
+cite$ -- 32
+duplicate$ -- 530
+empty$ -- 959
+format.name$ -- 177
+if$ -- 2089
 int.to.chr$ -- 1
-int.to.str$ -- 33
-missing$ -- 29
-newline$ -- 185
-num.names$ -- 96
-pop$ -- 306
+int.to.str$ -- 31
+missing$ -- 28
+newline$ -- 172
+num.names$ -- 90
+pop$ -- 289
 preamble$ -- 1
-purify$ -- 32
+purify$ -- 30
 quote$ -- 0
-skip$ -- 343
+skip$ -- 323
 stack$ -- 0
-substring$ -- 260
-swap$ -- 66
+substring$ -- 238
+swap$ -- 62
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 203
+type$ -- 189
 warning$ -- 2
-while$ -- 74
+while$ -- 69
 width$ -- 0
-write$ -- 435
+write$ -- 404
 (There were 4 warnings)

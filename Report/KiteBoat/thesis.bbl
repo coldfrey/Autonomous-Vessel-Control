@@ -1,4 +1,4 @@
-\begin{thebibliography}{32}
+\begin{thebibliography}{30}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -40,14 +40,6 @@ M.~Vahs.
   (A4):\penalty0 641, 2019.
 \newblock
   \doi{https://www.intmaritimeengineering.org/index.php/ijme/article/view/1146}.
-
-\bibitem[{Unity Technologies}(2023)]{UnityHDRPWaterSystem}
-{Unity Technologies}.
-\newblock Unity high definition render pipeline water system.
-\newblock Unity Documentation, 2023.
-\newblock URL
-  \url{https://docs.unity.cn/Packages/com.unity.render-pipelines.high-definition@16.0/changelog/CHANGELOG.html}.
-\newblock Accessed: 2023-11-20.
 
 \bibitem[Sutton and Barto(2018)]{sutton2018reinforcement}
 Richard~S Sutton and Andrew~G Barto.
@@ -122,14 +114,6 @@ Logan Engstrom, Andrew Ilyas, Shibani Santurkar, Dimitris Tsipras, Firdaus
 \newblock Implementation matters in deep rl: A case study on ppo and trpo.
 \newblock In \emph{International Conference on Learning Representations}, 2020.
 \newblock URL \url{https://openreview.net/forum?id=r1etN1rtPB}.
-
-\bibitem[Larsen et~al.(2021)Larsen, Teigen, Laache, Varagnolo, and
-  Rasheed]{Larsen2021Comparing}
-TN~Larsen, H{\O}~Teigen, T~Laache, D~Varagnolo, and A~Rasheed.
-\newblock Comparing deep reinforcement learning algorithms' ability to safely
-  navigate challenging waters.
-\newblock \emph{Frontiers in Robotics and AI}, 8:\penalty0 738113, 2021.
-\newblock \doi{10.3389/frobt.2021.738113}.
 
 \bibitem[miyamotok0105(2018)]{mlagents_ppo}
 miyamotok0105.

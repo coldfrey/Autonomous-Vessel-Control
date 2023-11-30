@@ -46,22 +46,32 @@ Reinforcement Learning is not just another tool in the AI toolkit; it's a paradi
 
 \section{Proximal Policy Optimization (PPO)}\label{sec:ppo_background}
 
-Reinforcement Learning (RL) has witnessed a plethora of algorithms, each striving to optimize policy in its unique way. Among these, the Proximal Policy Optimization (PPO) algorithm stands out as a beacon of efficiency$~$\cite{schulman2017ppo}.
+% Reinforcement Learning (RL) has witnessed a plethora of algorithms, each striving to optimize policy in its unique way. Among these, the Proximal Policy Optimization (PPO) algorithm stands out as a beacon of efficiency$~$\cite{schulman2017ppo}.
 
-PPO is a member of the policy gradient family of RL algorithms. Unlike traditional policy gradient methods that perform a single gradient update per data sample, PPO introduces a `surrogate' objective function, which is designed to improve the new policy while ensuring that it does not deviate too far from the old policy. This approach allows for multiple epochs of minibatch updates, which optimize the policy over a series of iterations. The essence of PPO lies in its ability to alternate between sampling data through interaction with the environment and optimizing the surrogate objective using stochastic gradient ascent$~$\cite{beznosikov2023stochastic}.
+% PPO is a member of the policy gradient family of RL algorithms. Unlike traditional policy gradient methods that perform a single gradient update per data sample, PPO introduces a `surrogate' objective function, which is designed to improve the new policy while ensuring that it does not deviate too far from the old policy. This approach allows for multiple epochs of minibatch updates, which optimize the policy over a series of iterations. The essence of PPO lies in its ability to alternate between sampling data through interaction with the environment and optimizing the surrogate objective using stochastic gradient ascent$~$\cite{beznosikov2023stochastic}.
 
-The inception of PPO was driven by the need for an algorithm that combined the best of all worlds: scalability, data efficiency, and robustness. While deep Q-learning and vanilla policy gradient methods have their merits, they often fall short in terms of data efficiency and robustness. Trust Region Policy Optimization (TRPO), on the other hand, although effective, is relatively intricate and lacks compatibility with certain architectures$~$\cite{Engstrom2020Implementation}.
+% The inception of PPO was driven by the need for an algorithm that combined the best of all worlds: scalability, data efficiency, and robustness. While deep Q-learning and vanilla policy gradient methods have their merits, they often fall short in terms of data efficiency and robustness. Trust Region Policy Optimization (TRPO), on the other hand, although effective, is relatively intricate and lacks compatibility with certain architectures$~$\cite{Engstrom2020Implementation}.
 
-PPO seeks to bridge these gaps. It aims to achieve the data efficiency and consistent performance of TRPO but does so using only first-order optimization. The brilliance of PPO is in its objective with clipped probability ratios. This objective provides a pessimistic estimate (or a lower bound) of the policy's performance, meaning it never strays too far from the current policy. The optimization process in PPO is iterative, alternating between data sampling from the policy and performing several epochs of optimization on this sampled data.
+% PPO seeks to bridge these gaps. It aims to achieve the data efficiency and consistent performance of TRPO but does so using only first-order optimization. The brilliance of PPO is in its objective with clipped probability ratios. This objective provides a pessimistic estimate (or a lower bound) of the policy's performance, meaning it never strays too far from the current policy. The optimization process in PPO is iterative, alternating between data sampling from the policy and performing several epochs of optimization on this sampled data.
 
-Empirical evidence outlines the efficacy and success of PPO. When compared against various versions of the surrogate objective, PPO, with its clipped probability ratios, emerges as the top performer. Furthermore, in head-to-head comparisons with other algorithms, PPO excels$~$\cite{Larsen2021Comparing}. On continuous control tasks, PPO outperforms its competitors. In the realm of Atari games, showcasing superior sample complexity compared to A2C and performs on par with ACER, all while maintaining a simpler architecture.
+% Empirical evidence outlines the efficacy and success of PPO. When compared against various versions of the surrogate objective, PPO, with its clipped probability ratios, emerges as the top performer. Furthermore, in head-to-head comparisons with other algorithms, PPO excels$~$\cite{Larsen2021Comparing}. On continuous control tasks, PPO outperforms its competitors. In the realm of Atari games, showcasing superior sample complexity compared to A2C and performs on par with ACER, all while maintaining a simpler architecture.
 
-PPO is an on-policy algorithm, meaning that it learns from the most recent experiences and it uses an `actor-critic' method. The actor-critic method is a combination of two neural networks, the actor and the critic. The actor is responsible for learning the optimal policy, while the critic is responsible for evaluating the actions of the actor by estimating the value function.  
+Proximal Policy Optimization (PPO) has emerged as a landmark algorithm in the Reinforcement Learning (RL), distinguishing itself through its blend of efficiency, simplicity, and effectiveness$~$\cite{schulman2017ppo}. PPO is part of the policy gradient family of RL algorithms and is designed to resolve some of the challenges encountered in earlier RL methods.
+
+Traditional policy gradient methods typically update the policy based on each data sample, a process that can be inefficient and unstable. PPO innovates on this by introducing a `surrogate' objective function. This function is key to PPO's operation: it not only guides the improvement of the policy but also ensures the new policy does not deviate too far from the previous one. This balance is achieved through multiple epochs of minibatch updates, allowing for a more gradual and stable policy evolution$~$\cite{beznosikov2023stochastic}.
+
+PPO's development was motivated by the need for an algorithm that could offer scalability, data efficiency, and robustness in a more accessible form than its predecessors. Deep Q-learning and standard policy gradient methods often fell short in robustness and efficiency. Trust Region Policy Optimization (TRPO), although effective in ensuring safe policy updates, was complex and less adaptable to different architectures$~$\cite{Engstrom2020Implementation}.
+
+The cornerstone of PPO lies in its objective function, which uses clipped probability ratios. This clipping mechanism acts as a safety net, ensuring that updates do not diverge too greatly from the current policy, providing a lower bound on policy performance. This mechanism allows PPO to iteratively sample data from the environment and optimize the policy, maintaining a balance between exploration and exploitation.
+
+Empirical studies have demonstrated PPO's superiority in various applications, particularly in environments with continuous control tasks and complex decision-making scenarios. In comparative analyses, PPO has consistently outperformed other algorithms, achieving better sample complexity and simpler architecture while maintaining competitive performance (Larsen, 2021).
+
+PPO employs an 'actor-critic' approach, utilizing two neural networks: the actor, which determines the policy, and the critic, which evaluates the actions based on the value function. This dual-network system enables PPO to learn optimal policies effectively by balancing the actor's exploration of new strategies with the critic's evaluation of past experiences.
 
 The actor-critic method can be broken down into the following steps:
 \begin{enumerate}
     \item \textbf{Actor}: The actor network proposes an action given in the current state. The action is drawn from a probability distribution (the policy $\pi$) parameterized by the networks weights.
-    \item \textbf{Critic}: The critic network estimates the value function $V(s)$ $V(s)$, which predicts the expected return (sum of future rewards) from state s under the current policy.
+    \item \textbf{Critic}: The critic network estimates the value function $V(s)$, which predicts the expected return (sum of future rewards) from state s under the current policy.
     \item \textbf{Advantage Estimation}: The advantage function $A(s,a)$ quantifies how much better taking a particular action a is, compared to the average action in state s, and is computed as 
     \begin{equation}
         A(s,a) = Q(s,a) - V(s)
@@ -73,7 +83,7 @@ The actor-critic method can be broken down into the following steps:
     \end{equation}
     were $r_t(\theta)$ is the probability ratio between the new and old policy, $\hat{A}_t$ is the advantage at time step $t$, and $\epsilon$ is a hyperparameter that controls the size of the policy update.
     \item \textbf{Policy Update}: PPO uses this objective to update the actor network's weights, maximizing the expected return while avoiding too large policy updates.
-    \item \textbf{Value Function Loss}: The critic network is trained to minimize the value function loss, which is typically the Mean Squared Error between the estimated value function V(s) and the observed return R.
+    \item \textbf{Value Function Loss}: The critic network is trained to minimize the value function loss, which is typically the Mean Squared Error between the estimated value function $V(s)$ and the observed return R.
     \item \textbf{Entropy Bonus}: To encourage exploration, PPO adds an entropy bonus to the objective function, which incourages the policy to produce a wider distribution of actions. This is done by adding the entropy $H(\pi)$ of the policy to the objective function, weighted by a hyperparameter $\beta$.
 \end{enumerate}
 
@@ -93,12 +103,11 @@ But the story doesn't end with PPO alone. Unity's ML-Agents toolkit, which is in
 
 The Proximal Policy Optimization algorithm is a testament to the continuous evolution and innovation in the field of Reinforcement Learning. Its simplicity, efficiency, and robustness make it a prime choice for a huge range of applications. 
 
-
 \section{Unity Game Engine}\label{unity}
 
-Unity, a name that resonates with game developers was born in the vibrant city of Copenhagen, Denmark, in 2005, Unity has since evolved into a powerhouse, breathing life into games like `Among Us' and `Pokemon Go' \cite{unity100seconds}.
+Unity, a name that resonates with game developers was born in the vibrant city of Copenhagen, Denmark, in 2005, Unity has since evolved into a powerhouse, responsible for games like `Among Us' and `Pokemon Go' \cite{unity100seconds}.
 
-At its heart, Unity is a cross-platform game engine designed to craft both 2D and 3D experiences. It offers a harmonious blend of a powerful graphical editor and the flexibility of \texttt{C\#} coding, allowing developers to translate their visions into virtual realities$~$\cite{unitymanual2021}. While the engine's core is written in C++, it graciously opens its arms to developers familiar with \texttt{C\#}, making the development process both intuitive and efficient.
+At its heart, Unity is a cross-platform game engine designed to craft both 2D and 3D experiences. It offers a harmonious blend of a powerful graphical editor and the flexibility of \texttt{C\#} coding, allowing developers to translate their visions into virtual realities$~$\cite{unitymanual2021}, while the engine's core is written in C++.
 
 Diving into the basics of Unity game development, one is greeted with a plethora of tools and components that simulate real-world interactions. Unity's lighting, physics, rigidbody, and colliders work in tandem to create immersive and impressively realistic environments. Whether it's the glint of sunlight reflecting off a surface or the bounce of a ball$~$\cite{goldstone2010}. Developers can further enhance objects with custom \texttt{C\#} scripts, giving rise to unique and custom gameplay experiences.
 
