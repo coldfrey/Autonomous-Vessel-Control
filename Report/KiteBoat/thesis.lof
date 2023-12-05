@@ -1,23 +1,26 @@
 \babel@toc {english}{}\relax 
 \par \nobreak \textbf {{\scshape Figure} \hfill Page}\par \nobreak 
 \addvspace {10pt}
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Silent 60 with Wingit Kite Control}}{3}{figure.1.1}%
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Simulation Kiteboat}}{3}{figure.1.2}%
 \addvspace {10pt}
 \contentsline {figure}{\numberline {2.1}{\ignorespaces A diagram of the RL Loop}}{7}{figure.2.1}%
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Actor-Critic Method}}{10}{figure.2.2}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Silent 60 with Wingit Kite Control}}{12}{figure.2.3}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Beyond The Sea's 'SeaKite'}}{13}{figure.2.4}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Beyond The Sea's `SeaKite'}}{12}{figure.2.3}%
 \addvspace {10pt}
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Development Process}}{15}{figure.3.1}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces MLAgents Sequence Diagram}}{17}{figure.3.2}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Training Environment}}{18}{figure.3.3}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Kite Diagram}}{19}{figure.3.4}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Keep Alive}}{25}{figure.3.5}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Stages 2 and 3 of the curriculum}}{26}{figure.3.6}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Development Process}}{14}{figure.3.1}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces MLAgents Sequence Diagram}}{16}{figure.3.2}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Training Environment}}{17}{figure.3.3}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces LEI Kite Diagram}}{18}{figure.3.4}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Keep Alive}}{23}{figure.3.5}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Stages 2 and 3 of the curriculum}}{25}{figure.3.6}%
 \addvspace {10pt}
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Feature importance of hyperparameters}}{32}{figure.4.1}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Environment/Cumulative reward for 500k steps}}{33}{figure.4.2}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Agent stats for 10,000,000 steps model}}{34}{figure.4.3}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Human comparison vs Model Evaluation}}{35}{figure.4.4}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces The agent steering on hard lock}}{36}{figure.4.5}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Feature importance of hyperparameters}}{31}{figure.4.1}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Environment/Cumulative reward for 500k steps}}{32}{figure.4.2}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Cumulative reward of 3 Agents evaluated for 90s}}{33}{figure.4.3}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Agent stats for 10,000,000 steps model}}{34}{figure.4.4}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Human comparison vs Model Evaluation}}{35}{figure.4.5}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces The agent steering on hard lock}}{36}{figure.4.6}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Physical kiteboat system}}{38}{figure.4.7}%
 \addvspace {10pt}
 \addvspace {10pt}

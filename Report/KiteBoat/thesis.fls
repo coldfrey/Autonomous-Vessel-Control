@@ -1649,7 +1649,6 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/microtype/mt-eur.cfg
 INPUT /usr/share/texlive/texmf-dist/tex/latex/microtype/mt-eur.cfg
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/euler/eurm10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/euler/eurm7.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/ncntrsbk/pncr8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/ncntrsbk/pncr8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/ncntrsbk/pncr8r.tfm
 INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
@@ -1662,8 +1661,6 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/ncntrsbk/pncr8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/ncntrsbk/pncr8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/ncntrsbk/pncr8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/ncntrsbk/pncrc8t.vf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/ncntrsbk/pncr8r.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/ncntrsbk/pncr8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/ncntrsbk/pncr8r.tfm
 INPUT ./frontmatter/abstract.tex
 INPUT ./frontmatter/abstract.tex
@@ -1703,8 +1700,10 @@ INPUT thesis.toc
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/ncntrsbk/pncb8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/ncntrsbk/pncb8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/ncntrsbk/pncb8r.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/ncntrsbk/pncr8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/ncntrsbk/pncrc8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/ncntrsbk/pncrc8t.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/ncntrsbk/pncr8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/ncntrsbk/pncr8r.tfm
 INPUT ./thesis.lof
 INPUT thesis.lof
@@ -1729,6 +1728,16 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/ncntrsbk/pncb8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/ncntrsbk/pncb8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/ncntrsbk/pncb8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/ncntrsbk/pncb8r.tfm
+INPUT ./Images/kiteboat.jpg
+INPUT ./Images/kiteboat.jpg
+INPUT Images/kiteboat.jpg
+INPUT ./Images/kiteboat.jpg
+INPUT ./Images/kiteboat.jpg
+INPUT ./Images/kiteboat_diagram.png
+INPUT ./Images/kiteboat_diagram.png
+INPUT Images/kiteboat_diagram.png
+INPUT ./Images/kiteboat_diagram.png
+INPUT ./Images/kiteboat_diagram.png
 INPUT /usr/share/texlive/texmf-dist/tex/latex/fouriernc/ts1fnc.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/fouriernc/ts1fnc.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/fouriernc/ts1fnc.fd
@@ -1768,11 +1777,6 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ectt1095.tfm
-INPUT ./Images/kiteboat.jpg
-INPUT ./Images/kiteboat.jpg
-INPUT Images/kiteboat.jpg
-INPUT ./Images/kiteboat.jpg
-INPUT ./Images/kiteboat.jpg
 INPUT ./Images/seakite.jpg
 INPUT ./Images/seakite.jpg
 INPUT Images/seakite.jpg
@@ -1845,12 +1849,12 @@ INPUT Images/coursePath.png
 INPUT ./Images/coursePath.png
 INPUT ./Images/coursePath.png
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/ncntrsbk/pncri8t.tfm
+INPUT ./chapters/chapter05/results.tex
+INPUT chapters/chapter05/results.tex
+INPUT ./chapters/chapter05/results.tex
+INPUT chapters/chapter05/results.tex
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/ncntrsbk/pncri8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/ncntrsbk/pncri8r.tfm
-INPUT ./chapters/chapter05/results.tex
-INPUT chapters/chapter05/results.tex
-INPUT ./chapters/chapter05/results.tex
-INPUT chapters/chapter05/results.tex
 INPUT ./Images/feature_importance.png
 INPUT ./Images/feature_importance.png
 INPUT Images/feature_importance.png
@@ -1861,6 +1865,11 @@ INPUT ./Images/reward_graph_500k.png
 INPUT Images/reward_graph_500k.png
 INPUT ./Images/reward_graph_500k.png
 INPUT ./Images/reward_graph_500k.png
+INPUT ./Images/Cumulative_Reward Over Time.png
+INPUT ./Images/Cumulative_Reward Over Time.png
+INPUT Images/Cumulative_Reward Over Time.png
+INPUT ./Images/Cumulative_Reward Over Time.png
+INPUT ./Images/Cumulative_Reward Over Time.png
 INPUT ./Images/agent_stats.png
 INPUT ./Images/agent_stats.png
 INPUT Images/agent_stats.png
@@ -1876,6 +1885,11 @@ INPUT ./Images/hard_lock.png
 INPUT Images/hard_lock.png
 INPUT ./Images/hard_lock.png
 INPUT ./Images/hard_lock.png
+INPUT ./Images/Slide1.jpg
+INPUT ./Images/Slide1.jpg
+INPUT Images/Slide1.jpg
+INPUT ./Images/Slide1.jpg
+INPUT ./Images/Slide1.jpg
 INPUT ./chapters/chapter06/future_work.tex
 INPUT chapters/chapter06/future_work.tex
 INPUT ./chapters/chapter06/future_work.tex
@@ -1884,10 +1898,6 @@ INPUT ./chapters/appendices/app0A.tex
 INPUT chapters/appendices/app0A.tex
 INPUT ./chapters/appendices/app0A.tex
 INPUT chapters/appendices/app0A.tex
-INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm1095.tfm
 INPUT /usr/share/texlive/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 INPUT /usr/share/texlive/texmf-dist/tex/latex/microtype/mt-cmr.cfg
@@ -1898,14 +1908,15 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecit1000.tfm
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT ./thesis.bbl
 INPUT thesis.bbl
 INPUT ./thesis.bbl
@@ -1916,13 +1927,15 @@ OUTPUT thesis.lot
 INPUT thesis.aux
 INPUT ./thesis.out
 INPUT ./thesis.out
-INPUT /usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 INPUT /usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc
+INPUT /usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 INPUT /usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/fourier/fourier-bb.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/fourier/fourier-mlit.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/fourier/fourier-ms.pfb
+INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfit1000.pfb
 INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb
+INPUT /usr/share/texmf/fonts/type1/public/cm-super/sftt1000.pfb
 INPUT /usr/share/texmf/fonts/type1/public/cm-super/sftt1095.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/urw/ncntrsbk/uncb8a.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/urw/ncntrsbk/uncr8a.pfb

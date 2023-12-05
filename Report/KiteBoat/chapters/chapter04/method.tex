@@ -20,17 +20,17 @@
 %     Actions --> Training(Training)
 %     Observations --> Training
 %     Rewards --> Training
-%     Training -->|Curriculum| Optimization
-%     Optimization -->AdjustParameters[HyperParameters]
+%     Training -->|Curriculum| optimisation
+%     optimisation -->AdjustParameters[HyperParameters]
 %     AdjustParameters --> Training
 %     AdjustParameters --> Output
 % \initial{T}he following chapter will discuss the steps taken to create a robust reinforcement learning solution that is capable of controlling a kiteboat. It will start by explaining the tooling used to create the RL algorithm and the environment, before moving on to the implementation of the environment and the Agent. Finally it will discuss the training process and optimisation. The development process discussed in this chapter can be seen in figure$~$\ref{development_process}.
 
 \initial{T}his chapter outlines the methodology used to develop an autonomous control system for a kite-powered vessel using Reinforcement Learning (RL). It begins with an overview of the essential tools, including the MLAgents toolkit and its integration with Python and PyTorch, crucial for the RL algorithm and the simulation environment. The focus then shifts to the development of the simulation environment, detailing the boat and kite models and the assumptions underlying their design.
 
-Key to the simulation is the implementation of the Gilbert-Johnson-Keerthi (GJK) algorithm for collision detection and the establishment of control mechanisms for both autonomous and manual operation. The chapter delves into the RL implementation, discussing the agent script and the dynamics of observations, actions, and rewards that guide the agent's learning within the Unity environment.
+% Key to the simulation is the implementation of the Gilbert-Johnson-Keerthi (GJK) algorithm for collision detection and the establishment of control mechanisms for both autonomous and manual operation. 
 
-Finally, the chapter covers the training process, highlighting the use of Curriculum Learning to enhance the agent's learning efficiency and the optimization strategies employed, including hyperparameter tuning and the utilization of the Blue Crystal High-Performance Computing (HPC) facility. This section aims to provide an understanding of the computational efforts and processes that were pivotal in the project’s development, shown in figure$~$\ref{development_process}. 
+The chapter delves into the RL implementation, discussing the agent script and the dynamics of observations, actions, and rewards that guide the agent's learning within the Unity environment. Finally, the chapter covers the training process, highlighting the use of Curriculum Learning to enhance the agent's learning efficiency and the optimisation strategies employed, including hyperparameter tuning and the utilisation of the Blue Crystal High-Performance Computing (HPC) facility. This section aims to provide an understanding of the computational efforts and processes that were pivotal in the project’s development, shown in figure$~$\ref{development_process}. 
 
 \begin{figure}[h]
     \centering
@@ -39,7 +39,7 @@ Finally, the chapter covers the training process, highlighting the use of Curric
 \end{figure}
 
 \section{MLAgents}
-MLAgents is an open-source project that allows games and simulations to serve as the environment for training intelligent agents. At its core MLAgents utilizes RL, although it also supports other methods such as imitation learning.
+MLAgents is an open-source project that allows games and simulations to serve as the environment for training intelligent agents. At its core MLAgents utilises RL, although it also supports other methods such as imitation learning.
 
 \subsection{Python Implementation}
 % The neural network used in the reinforcement learning is implemented in Python.
@@ -47,13 +47,13 @@ MLAgents is an open-source project that allows games and simulations to serve as
 MLAgents toolkit is a Python Library that acts as an interface between the environment (gym), in this case Unity, and PyTorch$~$\cite{paszke2019pytorch}. PyTorch is an open-source machine learning library based on the Torch library, known for its flexibility, ease of use, and native support for GPU acceleration, which is essential for the computation-heavy processes involved in training neural networks. Torch is a Python-based scientific computing package that provides prebuilt components for machine learning and deep learning, as well as a wide range of mathematical functions. MLAgents uses a low level API to communicate directly with the Unity environment (\texttt{mlagents\_envs}) frame by frame, and an entry point to train (\texttt{mlagents-learn}). This stepping process allows for the synchronous collection of observations, executions of actions and retrieval of rewards. 
 
 
-The algorithm used in this project is a Proximal Policy Optimization (PPO) network, and so will utilise the actor-critic method as discussed in section$~$\ref{sec:ppo_background}.
+The algorithm used in this project is a Proximal Policy optimisation (PPO) network, and so will utilise the actor-critic method as discussed in section$~$\ref{sec:ppo_background}.
 
 RL, preveously discussed in section$~$\ref{RL_background}, is an approach to learning where an agent learns to make decisions by interacting with its environment. The fundamental components of this interaction with the environment are observations, actions and rewards.
 \begin{itemize}
     \item Observations (State): These are the pieces of information that the agent receives from the environment at each step or frame. In Unity, observations are collected through sensors or manually coded to be extracted from the game objects. They are typically fed into the neural network as a vector of floating-point numbers, representing the current state of the environment.
-    \item Actions: Based on the observations, the agent takes actions which are the outputs of the neural network. These actions can be discrete (e.g., turn left, turn right) or continuous (e.g., change angle by a certain degree). The neural network's output layer is designed accordingly to provide the appropriate action space for the agent. (Configured as part of the behavioral parameters in Unity)
-    \item Rewards: After taking an action, the agent receives a reward signal, which is a numerical value indicating how well the action contributed to achieving its goal. This reward is used to adjust the neural network's weights, with the aim of maximizing the total accumulated reward.
+    \item Actions: Based on the observations, the agent takes actions which are the outputs of the neural network. These actions can be discrete (e.g., turn left, turn right) or continuous (e.g., change angle by a certain degree). The neural network's output layer is designed accordingly to provide the appropriate action space for the agent. (Configured as part of the behavioural parameters in Unity)
+    \item Rewards: After taking an action, the agent receives a reward signal, which is a numerical value indicating how well the action contributed to achieving its goal. This reward is used to adjust the neural network's weights, with the aim of maximising the total accumulated reward.
 \end{itemize}
 A full breakdown of the actions, observations, rewards, and how the agent script configures these for this project can be found in section$~$\ref{sec:RL_Implementation}.
 
@@ -129,7 +129,7 @@ As with any simulation the first step was to define a series of assumptions that
     \item The rudder forces of lift and drag could be aproximated to a torque applied about the rear of the boat.
     \item Once the boat is moving at a speed greater than 0.25m/s the lift and drag forces of the keel are equal to the downwind component of the kite's resultant force- essentially providing a non'slip condition.
 \end{itemize}
-Buoyancy, the force that allows ships to float, was the first physical property to be addressed. Rooted in Archimedes' Principle, it dictates that the buoyant force exerted on a submerged body is equivalent to the weight of the fluid displaced by that body. In our Unity environment, the boat's hull, represented as a `mesh', was divided into many small triangles or Voxels. These Voxels became the fundamental units for calculating buoyancy, allowing for a granular and realistic representation of the boat's interaction with water. This was achieved by first calculating the total Archimedes force (AF) of the entire boat using equation$~$\ref{archimedes}, followed by a local AF at each Voxel. The water level, y component, was then computed at each voxel's (x,z) coordinates to determine if it was above or below the surface. If below the surface the component of the AF was applied vertically at each voxel. This implementation can be viewed in the buoy.cs script in the project REF IN APENDIX.
+Buoyancy, the force that allows ships to float, was the first physical property to be addressed. Rooted in Archimedes' Principle, it dictates that the buoyant force exerted on a submerged body is equivalent to the weight of the fluid displaced by that body. In our Unity environment, the boat's hull, represented as a `mesh', was divided into many small triangles or Voxels. These Voxels became the fundamental units for calculating buoyancy, allowing for a granular and realistic representation of the boat's interaction with water. This was achieved by first calculating the total Archimedes force (AF) of the entire boat using equation$~$\ref{archimedes}, followed by a local AF at each Voxel. The water level, y component, was then computed at each voxel's (x,z) coordinates to determine if it was above or below the surface. If below the surface the component of the AF was applied vertically at each voxel. This implementation can be viewed in the buoy.cs script in the project$~$\ref{sec:buoyancy}.
 
 \begin{equation}
     F_B = \rho_{w}gV
@@ -153,21 +153,21 @@ Capturing the intricate movements of a kite as it fly's through the air involves
 
 \textbf{Kite Assumptions}
 \begin{itemize}
-    \item The kite is modeled as a symmetrical aerofoil, with constant lift and drag coefficients.
+    \item The kite is modelled as a symmetrical aerofoil, with constant lift and drag coefficients.
     \item Constant wind angle and laminar flow over the entire kite.
     \item The kite is always in the air, for the initial model the case where the kite crashes and requires relaunching was not considered. This would require adding buoyancy to the kite.
 \end{itemize}
 
-This sections outlines a kite model that, while simplified, serves as an effective tool for designing and testing the RL algorithm. The model is geared towards a realistic representation of the kites behavior and its response to control inputs. The kite chosen for this project was a Leading Edge Inflatable (LEI) kite, which is the most popular and mass produced recreational style of kites that exists. These kites connect to a control bar via 4 dyneema kite lines. Two center power lines take the load of the kite, while the outside two are responsible for steering, as shown in figure$~$\ref{kite_diagram}.
+This sections outlines a kite model that, while simplified, serves as an effective tool for designing and testing the RL algorithm. The model is geared towards a realistic representation of the kites behaviour and its response to control inputs. The kite chosen for this project was a Leading Edge Inflatable (LEI) kite, which is the most popular and mass produced recreational style of kites that exists. These kites connect to a control bar via 4 dyneema kite lines. Two center power lines take the load of the kite, while the outside two are responsible for steering, as shown in figure$~$\ref{kite_diagram}.
 
 % insert kite diagram
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/kitediagram.jpg}
-    \caption{Kite Diagram}\label{kite_diagram}
+    \caption{LEI Kite Diagram}\label{kite_diagram}
 \end{figure}
 
-The kite model was implemented using the kite.cs script. The kite was modeled as a symmetrical aerofoil, and implemented as a rigid body with constant lift and drag coefficients. The lift and drag forces were calculated using the equations shown in equation$~$\ref{lift} and equation$~$\ref{drag}.
+The kite model was implemented using the kite.cs script. The kite was modelled as a symmetrical aerofoil, and implemented as a rigid body with constant lift and drag coefficients. The lift and drag forces were calculated using the equations shown in equation$~$\ref{lift} and equation$~$\ref{drag}.
 \begin{equation}
     F_L = \rho C_L A \frac{v^2}{2} 
     \label{lift}
@@ -179,12 +179,12 @@ The kite model was implemented using the kite.cs script. The kite was modeled as
 
 where $F_L$ is the lift force, $F_D$ is the drag force, $\rho$ is the density of air, $C_L$ is the lift coefficient, $C_D$ is the drag coefficient, $A$ is the area of the kite and $v$ is the velocity of the kite relative to the wind.
 
-In order to replicate the kite's mechanics and bar configuration, the model uses 4 configurable joints. These joints were fixed at certain lengths from the deck of the boat, designed to permit movement across all rotational axis without any `bounce' effect. This design enables the kite to descend or `fall' in conditions of low wind, mirroring real-world behavior where the kite may lose altitude but can be maneuvered back into position. To simulate the bar being pulled in, the lift and drag coefficients were increased, this has the effect of increasing the angle of attack of the kite.
+In order to replicate the kite's mechanics and bar configuration, the model uses 4 configurable joints. These joints were fixed at certain lengths from the deck of the boat, designed to permit movement across all rotational axis without any `bounce' effect. This design enables the kite to descend or `fall' in conditions of low wind, mirroring real-world behaviour where the kite may lose altitude but can be maneuvered back into position. To simulate the bar being pulled in, the lift and drag coefficients were increased, this has the effect of increasing the angle of attack of the kite.
 
 
 \subsection{Collision Detection}
 The Gilbert-Johnson-Keerthi (GJK)$~$\cite{gilbert88gjk} algorithm is a sophisticated method for collision detection between convex shapes. This algorithm was the approach taken to detect weather the kiteboat had reached the waypoint during training, and later, to work out if it had rounded the marks of the racecourse. The implementation of the GJK algorithm can be found in the GJK.cs script of the unity project or section$~$\ref{sec:gjk} of the appendices.
-The GJK algorithm operates by iterative refinement of a simplex, which is a set of points that can define a line segment, triangle, or tetrahedron. The algorithm progresses by assessing whether the simplex contains the origin, which would imply an overlap between the two shapes. The initial direction d is determined by the normalized vector from center of object 1 to the center of object 2, constrained in the x-z plane by nullifying the y component, meaning the algorithm is only concerned with the horizontal plane.  
+The GJK algorithm operates by iterative refinement of a simplex, which is a set of points that can define a line segment, triangle, or tetrahedron. The algorithm progresses by assessing whether the simplex contains the origin, which would imply an overlap between the two shapes. The initial direction d is determined by the normalised vector from center of object 1 to the center of object 2, constrained in the x-z plane by nullifying the y component, meaning the algorithm is only concerned with the horizontal plane.  
 
 Within the GJK method, the Support function plays a pivotal role, calculating the Minkowski difference between the two shapes in a specified direction. This is achieved by finding the farthest points along that direction on both shapes and then subtracting them to obtain a single point in the Minkowski space.
 
@@ -193,7 +193,7 @@ The HandleSimplex function is a recursive strategy that adjusts the simplex and 
 % \subsection{Mark Roundings}
 
 \section{Controls}
-In order to ensure the agent would be able to learn to sail the kiteboat a playable game version was created. As discussed above the kite was modeled using 4 configurable joints to replicate the line system. There are several ways of configuring these so that a simple control input will result in the desired movement of the kite. The controls chosen for this project were 6 discrete actions, shown in table$~$\ref{actions}, allowing the kiteboat to be steered and the kite to be flown. 
+In order to ensure the agent would be able to learn to sail the kiteboat a playable game version was created. As discussed above the kite was modelled using 4 configurable joints to replicate the line system. There are several ways of configuring these so that a simple control input will result in the desired movement of the kite. The controls chosen for this project were 6 discrete actions, shown in table$~$\ref{actions}, allowing the kiteboat to be steered and the kite to be flown. 
 
 
 \section{RL Implementation}\label{sec:RL_Implementation}
@@ -218,7 +218,7 @@ The kiteboat agent sets up the scene for learning and in order for Unity to corr
     \item Heuristic(in ActionBuffers actionsOut)
 \end{itemize}
 
-These are the minimum requirements for the agent setup, however there are several other functions that can be implemented to further customize the agent, handle errors and provide additional information. The agent starts by taking in the Kite and the Boat rigid bodies, as well as the rudder and kite scripts. A new gjkCollisionDetection is also initialised. The script starts with the OnEpisodeBegin method, which in turn starts by ensuring the training environment has been reset. The reset method sets the velocities and angular velocities of all rigid bodies in the scene to 0 and returns the kiteboat to a starting position. The remaining methods will be discussed in more detail below.
+These are the minimum requirements for the agent setup, however there are several other functions that can be implemented to further customise the agent, handle errors and provide additional information. The agent starts by taking in the Kite and the Boat rigid bodies, as well as the rudder and kite scripts. A new gjkCollisionDetection is also initialised. The script starts with the OnEpisodeBegin method, which in turn starts by ensuring the training environment has been reset. The reset method sets the velocities and angular velocities of all rigid bodies in the scene to 0 and returns the kiteboat to a starting position. The remaining methods will be discussed in more detail below.
 
 
 \subsection{Observations}
@@ -243,7 +243,7 @@ CollectObservations provides the network will all the information about the Stat
     \caption{Observations}\label{observations}
 \end{table}
 
-The total number of observations passed to the network is 14, this is a relatively small number of observations and so the network should be able to process them quickly. When providing observations to an agent is is essential they have no discontinuity in their values, as this can cause the network to become unstable. Observations that may be discontinuous are normalized to a value between 0 and 1. Normalised observations can increase the learning speed of algorithms, as the network does not have to learn the scale of the observations.
+The total number of observations passed to the network is 14, this is a relatively small number of observations and so the network should be able to process them quickly. When providing observations to an agent is is essential they have no discontinuity in their values, as this can cause the network to become unstable. Observations that may be discontinuous are normalised to a value between 0 and 1. Normalised observations can increase the learning speed of algorithms, as the network does not have to learn the scale of the observations.
 
 \subsection{Actions}
 When the agent starts to train it has no idea what to do, it is essentially a blank slate, so starts by randomly flicking around the actions. The agent was given a discrete action space of 6 actions, these are shown in table$~$\ref{actions}. The actions are passed to the network as a vector of discrete 6 values (i.e float of either 0 or 1). The network then interprets these values and outputs the appropriate action. The actions are then passed to the OnActionReceived method, which in turn calls the methods that control the kite and boat. Discrete actions were chosen so that the rate of change of the angles that control the rudder and kite are not the choice of the network. Some brief experimentation with continuous actions showed the agent was prone to extremes. By limiting the rate of change of the rotations it gives the network an easier job and means the amount of freedom the network has can be configured. i.e. if the network could pick any value between 0 and 1 for the bar position, it would see far more aggressive controls making it harder for a stable flight to be achieved. On the other had the discrete action space encourages the agent to make a decision and stick with it while the action is being applied, this behaviour was further encouraged with the reward functions. 
@@ -268,7 +268,7 @@ These actions were tested as part of making a playable game, where the agent rec
 
 \subsection{Rewards}
 
-The rewards provided to the agent each step are the fundamental input that influences the future actions taken by the neural network, and so must be carefully applied when the agent performs positive actions and penalized when it performs negative actions. The reward function is the most important part of the RL algorithm, as it is the only way the agent can learn. The reward function is also the most difficult part of the RL algorithm to get right, as it is very easy to create a reward function that does not encourage the desired behavior, moreover it is common to create a reward function that helps the agent fall into local maxima while training, especially with complex tasks. Table$~$\ref{rewards} shows the rewards used in this project, These rewards were however not all applied at the same time, they were applied in stages as the agent progressed through the curriculum. This is discussed in more detail in the following section$~$\ref{sec:training}.
+The rewards provided to the agent each step are the fundamental input that influences the future actions taken by the neural network, and so must be carefully applied when the agent performs positive actions and penalised when it performs negative actions. The reward function is the most important part of the RL algorithm, as it is the only way the agent can learn. The reward function is also the most difficult part of the RL algorithm to get right, as it is very easy to create a reward function that does not encourage the desired behaviour, moreover it is common to create a reward function that helps the agent fall into local maxima while training, especially with complex tasks. Table$~$\ref{rewards} shows the rewards used in this project, These rewards were however not all applied at the same time, they were applied in stages as the agent progressed through the curriculum. This is discussed in more detail in the following section$~$\ref{sec:training}.
 
 
 \begin{table}[h]
@@ -296,10 +296,10 @@ The rewards provided to the agent each step are the fundamental input that influ
 \end{table}
 \footnotetext[1]{`previous' is the previous distance to the waypoint at the previous time step, and `current' is the current distance to the waypoint.}
 
-It is crucial to emphasise that rewards are allocated incrementally, as apposed to a single value per step. For instance, the `Boat Forward Speed' reward is calculated and added every fixed update cycle, whereas the `Kite Flying' reward is applied after each action taken by the agent. As discussed in section$~$\ref{sec:ppo_background}, the PPO algorithm employed utilizes multiple iterations of minibatch updates. This approach necessitates the immediate allocation of rewards to the network, ensuring they are included in the next epoch evaluation, thus aligning the reward system with the temporary dynamics of the learning process.
+It is crucial to emphasise that rewards are allocated incrementally, as apposed to a single value per step. For instance, the `Boat Forward Speed' reward is calculated and added every fixed update cycle, whereas the `Kite Flying' reward is applied after each action taken by the agent. As discussed in section$~$\ref{sec:ppo_background}, the PPO algorithm employed utilises multiple iterations of minibatch updates. This approach necessitates the immediate allocation of rewards to the network, ensuring they are included in the next epoch evaluation, thus aligning the reward system with the temporary dynamics of the learning process.
 
 \section{Training}\label{sec:training}
-Before commencing the training of the kiteboat agent, a simpler test agent was created to check the workflow and ensure the environment was setup correctly. This test agent was a simple cube that was trained to move towards a waypoint, following a pacemaker. This was a good test of the environment as it was a simple task that could be easily visualized as shown in figure$~$\ref{pathFollower} However this test agent proved more tricky than initially anticipated and after additional research some core RL training concepts that improve the quality of training were discovered. The first of these was to make the problem a `Keep Alive' i.e. do the correct thing or die. In the context of the path follower this meant that should the cube ever be further away from the pacemaker than its original distance of 2m the episode was ended and a large negative reward given. This method encourages the agent to do the correct process if it wants to stay alive. Making the problem a keep alive is a simple way to improve the quality of training and is a common practice in RL. The path follower changed from not making much progress over the course of 500000 steps to being able to complete full laps of the course in around 100000 steps.
+Before commencing the training of the kiteboat agent, a simpler test agent was created to check the workflow and ensure the environment was setup correctly. This test agent was a simple cube that was trained to move towards a waypoint, following a pacemaker. This was a good test of the environment as it was a simple task that could be easily visualised as shown in figure$~$\ref{pathFollower} However this test agent proved more tricky than initially anticipated and after additional research some core RL training concepts that improve the quality of training were discovered. The first of these was to make the problem a `Keep Alive' i.e. do the correct thing or die. In the context of the path follower this meant that should the cube ever be further away from the pacemaker than its original distance of 2m the episode was ended and a large negative reward given. This method encourages the agent to do the correct process if it wants to stay alive. Making the problem a keep alive is a simple way to improve the quality of training and is a common practice in RL. The path follower changed from not making much progress over the course of 500000 steps to being able to complete full laps of the course in around 100000 steps.
 
 \begin{figure}[h]
     \centering
@@ -329,9 +329,9 @@ Figure$~$\ref{curriculum} shows the extremes of the difference in the paths at s
 \end{figure}
 
 \subsection{Hyperparameters}\label{sec:hyperparameters}
-Hyperparameters are critical configurations that govern the training process of machine learning models. In reinforcement learning, particularly within the scope of PPO, they play a pivotal role in determining how effectively the model learns from its environment. The hyperparameters are defined within the boatAgent.yaml config file. A variety of different configurations were tested to find a set of hyperparameters that yielded the best results. It is also possible to schedule the hyperparameters to change over the course of the training, this can potentially lead to better results as the agent can adapt its learning behavior during different stages of training. To test which hyperparameters were the most effective a grid search was performed. Section$~$\ref{gridsearch} of the appendices shows the python script used to generate the 100 config files to be tested. The performance metric of the average reward per episode with a max steps of 1,000,000 was used to determine the best hyperparameters to then be used for the final long training runs. The following hyperparameters were experimented with:
+Hyperparameters are critical configurations that govern the training process of machine learning models. In reinforcement learning, particularly within the scope of PPO, they play a pivotal role in determining how effectively the model learns from its environment. The hyperparameters are defined within the boatAgent.yaml config file. A variety of different configurations were tested to find a set of hyperparameters that yielded the best results. It is also possible to schedule the hyperparameters to change over the course of the training, this can potentially lead to better results as the agent can adapt its learning behaviour during different stages of training. To test which hyperparameters were the most effective a grid search was performed. Section$~$\ref{gridsearch} of the appendices shows the python script used to generate the 100 config files to be tested. The performance metric of the average reward per episode with a max steps of 1,000,000 was used to determine the best hyperparameters to then be used for the final long training runs. The following hyperparameters were experimented with:
 \begin{itemize}
-    \item \textbf{Normalised network inputs}- Adjusting normalized inputs ensures that the model receives input data within a consistent scale, which can aid in stabilizing and speeding up the training process.
+    \item \textbf{Normalised network inputs}- Adjusting normalised inputs ensures that the model receives input data within a consistent scale, which can aid in stabilising and speeding up the training process.
     \item \textbf{Number of layers in the network}- The depth of the network, defined by its number of layers, determines the level of abstraction the model can achieve, impacting its ability to learn complex patterns.
     \item \textbf{Number of nodes in each layer}- The width of each layer, given by the number of nodes, influences the model's capacity to capture nuances in the data, with more nodes allowing for more complex representations.
     \item \textbf{Beta}- The beta hyperparameter balances the exploration-exploitation trade-off by controlling the strength of the entropy term in the objective function, which affects the agent's policy diversity.
@@ -346,14 +346,14 @@ The comparison between these different configurations can be viewed in chapter$~
 % Difficulties with initial training approaches:
 % -The learning of the kite is relativly straight forwards
 % -Rudder controls were tricky, boat has a habit of hard lock, letting the boat drag sideways seems to be a local maxima for stability,  lets the kite learn bettter
-\section{Optimization}
+\section{optimisation}
 
 
 \subsection{Blue Crystal HPC}
 
 The Blue Crystal HPC, operated by the University of Bristol, offers significant computational resources tailored for intensive tasks such as machine learning simulations. 
 
-To utilize Blue Crystal for MLAgents simulations, the following steps were undertaken:
+To utilise Blue Crystal for MLAgents simulations, the following steps were undertaken:
 
 \begin{itemize}
     \item \textbf{Access and Security:} Gained access to the university's HPC and set up SSH keys for secure communication.
@@ -380,9 +380,9 @@ Useful commands for working with Blue Crystal:
     \item \textbf{scancel:} Cancels a job.
 \end{itemize}
 
-\subsection*{Parallelization and Optimization}
+\subsection*{Parallelisation and Optimisation}
 
-Initially, a single node on Blue Crystal was employed to run the simulation. This node with 28 CPUs was responsible for both hosting the environment and executing the model. However, Blue Crystal's architecture allows for more advanced parallelization strategies. Distributing the simulation across multiple nodes can enhance efficiency. Additionally, offloading the ML-Agents toolkit to a GPU core can further accelerate the learning process.
+Initially, a single node on Blue Crystal was employed to run the simulation. This node with 28 CPUs was responsible for both hosting the environment and executing the model. However, Blue Crystal's architecture allows for more advanced parallelisation strategies. Distributing the simulation across multiple nodes can enhance efficiency. Additionally, offloading the ML-Agents toolkit to a GPU core can further accelerate the learning process.
 
 However, it's worth noting that the demand for GPUs on Blue Crystal is high. For tasks that don't necessitate the power of GPUs, relying on CPUs, even if they take longer, is a practical choice given the limited GPU availability.
 
