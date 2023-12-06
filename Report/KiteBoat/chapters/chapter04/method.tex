@@ -179,7 +179,7 @@ The kite model was implemented using the kite.cs script. The kite was modelled a
 
 where $F_L$ is the lift force, $F_D$ is the drag force, $\rho$ is the density of air, $C_L$ is the lift coefficient, $C_D$ is the drag coefficient, $A$ is the area of the kite and $v$ is the velocity of the kite relative to the wind.
 
-In order to replicate the kite's mechanics and bar configuration, the model uses 4 configurable joints. These joints were fixed at certain lengths from the deck of the boat, designed to permit movement across all rotational axis without any `bounce' effect. This design enables the kite to descend or `fall' in conditions of low wind, mirroring real-world behaviour where the kite may lose altitude but can be maneuvered back into position. To simulate the bar being pulled in, the lift and drag coefficients were increased, this has the effect of increasing the angle of attack of the kite.
+In order to replicate the kite's mechanics and bar configuration, the model uses 4 configurable joints. These joints were fixed at certain lengths from the deck of the boat, designed to permit movement across all rotational axis without any `bounce' effect. This design enables the kite to descend or `fall' in conditions of low wind, mirroring real-world behaviour where the kite may lose altitude but can be menoeuvered back into position. To simulate the bar being pulled in, the lift and drag coefficients were increased, this has the effect of increasing the angle of attack of the kite.
 
 
 \subsection{Collision Detection}
@@ -316,7 +316,7 @@ The next RL technique to help improve training is called Curriculum Learning (CL
     \item Randomly generate waypoints in any direction 
 \end{enumerate}
 
-Step 1 in the curriculum ensures the agent has a fundamental grasp of the controls and is able to keep the kite in the air. This is a keep alive problem and so the agent is rewarded for keeping the kite in the air and penalised for crashing. The direction the boat sails is not important at this stage, so the reward for distance to the waypoint was not present in this stage. Step 2 is a simple task that the agent can learn quickly, having now gained a grasp of the kite control it must learn to steer straight towards the waypoint. This was also turned into a keep alive problem, move closer to the next waypoint or end the episode. Step 3 is where the agent starts to learn to sail its own path, initially this will still be a straight line until the waypoints are spawning upwind of the kiteboats initial location. At this point the agent must start to experiment with finding the VMG (velocity made good)$~$\cite{vmg}, which is a measure of the speed at which a vessel is moving directly towards its destination, considering both its heading and wind direction. In stage 3 the waypoints will spawn more and more upwind until they are directly upwind, this is in an effort to encourage the agent to find the emergent property of Tacking, a maneuver by which the nose of the boat transitions through the wind while it turns around.  
+Step 1 in the curriculum ensures the agent has a fundamental grasp of the controls and is able to keep the kite in the air. This is a keep alive problem and so the agent is rewarded for keeping the kite in the air and penalised for crashing. The direction the boat sails is not important at this stage, so the reward for distance to the waypoint was not present in this stage. Step 2 is a simple task that the agent can learn quickly, having now gained a grasp of the kite control it must learn to steer straight towards the waypoint. This was also turned into a keep alive problem, move closer to the next waypoint or end the episode. Step 3 is where the agent starts to learn to sail its own path, initially this will still be a straight line until the waypoints are spawning upwind of the kiteboats initial location. At this point the agent must start to experiment with finding the VMG (velocity made good)$~$\cite{vmg}, which is a measure of the speed at which a vessel is moving directly towards its destination, considering both its heading and wind direction. In stage 3 the waypoints will spawn more and more upwind until they are directly upwind, this is in an effort to encourage the agent to find the emergent property of Tacking, a manoeuver by which the nose of the boat transitions through the wind while it turns around.  
 
 Figure$~$\ref{curriculum} shows the extremes of the difference in the paths at stages 2 and 3 of the curriculum. The path in stage 2 is a mostly straight line towards the waypoint, with the boat navigating downwind. The path in stage 3 is a zigzag upwind from the boats initial location to the waypoint. 
 
@@ -346,7 +346,7 @@ The comparison between these different configurations can be viewed in chapter$~
 % Difficulties with initial training approaches:
 % -The learning of the kite is relativly straight forwards
 % -Rudder controls were tricky, boat has a habit of hard lock, letting the boat drag sideways seems to be a local maxima for stability,  lets the kite learn bettter
-\section{optimisation}
+\section{Optimisation}
 
 
 \subsection{Blue Crystal HPC}

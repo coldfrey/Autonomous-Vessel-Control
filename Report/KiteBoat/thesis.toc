@@ -33,7 +33,7 @@
 \contentsline {section}{\numberline {3.5}Training}{23}{section.3.5}%
 \contentsline {subsection}{\numberline {3.5.1}Curriculum Learning}{24}{subsection.3.5.1}%
 \contentsline {subsection}{\numberline {3.5.2}Hyperparameters}{24}{subsection.3.5.2}%
-\contentsline {section}{\numberline {3.6}optimisation}{26}{section.3.6}%
+\contentsline {section}{\numberline {3.6}Optimisation}{26}{section.3.6}%
 \contentsline {subsection}{\numberline {3.6.1}Blue Crystal HPC}{26}{subsection.3.6.1}%
 \contentsline {chapter}{\chapternumberline {4}Results and Evaluation}{29}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Training Results}{29}{section.4.1}%
@@ -47,19 +47,19 @@
 \contentsline {section}{\numberline {5.1}Conclusion}{43}{section.5.1}%
 \contentsline {appendix}{\chapternumberline {A}Appendix A}{46}{appendix.A}%
 \contentsline {section}{\numberline {A.1}Unity Setup}{46}{section.A.1}%
-\contentsline {section}{\numberline {A.2}Final Config}{46}{section.A.2}%
+\contentsline {section}{\numberline {A.2}Final Configuration}{46}{section.A.2}%
 \contentsline {section}{\numberline {A.3}Scripts}{47}{section.A.3}%
 \contentsline {subsection}{\numberline {A.3.1}KiteBoat Agent}{47}{subsection.A.3.1}%
 \contentsline {subsection}{\numberline {A.3.2}Buoyancy}{62}{subsection.A.3.2}%
-\contentsline {subsection}{\numberline {A.3.3}Rudder}{69}{subsection.A.3.3}%
-\contentsline {subsection}{\numberline {A.3.4}Kite Model}{72}{subsection.A.3.4}%
-\contentsline {subsection}{\numberline {A.3.5}GJK Collision Detection}{78}{subsection.A.3.5}%
-\contentsline {subsection}{\numberline {A.3.6}Grid Search}{81}{subsection.A.3.6}%
-\contentsline {subsection}{\numberline {A.3.7}HPC Shell Script}{83}{subsection.A.3.7}%
-\contentsline {subsection}{\numberline {A.3.8}Extract Results}{86}{subsection.A.3.8}%
-\contentsline {subsection}{\numberline {A.3.9}Combine Results}{88}{subsection.A.3.9}%
-\contentsline {subsection}{\numberline {A.3.10}Analysis}{90}{subsection.A.3.10}%
-\contentsline {subsection}{\numberline {A.3.11}Plot Results}{92}{subsection.A.3.11}%
-\contentsline {section}{\numberline {A.4}Results}{92}{section.A.4}%
-\contentsline {subsection}{\numberline {A.4.1}Environment/Cumulative Reward}{92}{subsection.A.4.1}%
-\contentsline {chapter}{Bibliography}{93}{appendix*.20}%
+\contentsline {subsection}{\numberline {A.3.3}Rudder}{68}{subsection.A.3.3}%
+\contentsline {subsection}{\numberline {A.3.4}Kite Model}{70}{subsection.A.3.4}%
+\contentsline {subsection}{\numberline {A.3.5}GJK Collision Detection}{74}{subsection.A.3.5}%
+\contentsline {subsection}{\numberline {A.3.6}Grid Search}{77}{subsection.A.3.6}%
+\contentsline {subsection}{\numberline {A.3.7}HPC Shell Script}{79}{subsection.A.3.7}%
+\contentsline {subsection}{\numberline {A.3.8}Extract Results}{83}{subsection.A.3.8}%
+\contentsline {subsection}{\numberline {A.3.9}Combine Results}{84}{subsection.A.3.9}%
+\contentsline {subsection}{\numberline {A.3.10}Analysis}{87}{subsection.A.3.10}%
+\contentsline {subsection}{\numberline {A.3.11}Plot Results}{88}{subsection.A.3.11}%
+\contentsline {section}{\numberline {A.4}Results}{88}{section.A.4}%
+\contentsline {subsection}{\numberline {A.4.1}Environment/Cumulative Reward}{88}{subsection.A.4.1}%
+\contentsline {chapter}{Bibliography}{89}{appendix*.20}%

@@ -8,7 +8,7 @@
 
 \section{Unity Setup}\label{sec:unity_setup}
 
-\section{Final Config}\label{config}
+\section{Final Configuration}\label{config}
 \begin{adjustbox}{width=\textwidth/2}
 \begin{lstlisting}
     behaviors:
@@ -599,267 +599,223 @@
 \subsection{Buoyancy}\label{sec:buoyancy}
 
 \begin{lstlisting}
-
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.HighDefinition;
 
-
 public class Buoy : MonoBehaviour
 {
-    public WaterSurface water;
-    WaterSearchParameters searchParameters = new WaterSearchParameters();
-    WaterSearchResult searchResult = new WaterSearchResult();
-	public float density = 500;
-	public int slicesPerAxis = 2;
-	public bool isConcave = false;
-	public int voxelsLimit = 16;
+    public WaterSurface seaSurface;
+    WaveSearchParameters waveParameters = new WaveSearchParameters();
+    WaveSearchResult waveResult = new WaveSearchResult();
+    public float buoyancyDensity = 500;
+    public int divisionsPerDimension = 2;
+    public bool hasConcaveShape = false;
+    public int maxVoxels = 16;
 
-	public float DAMPFER = 0.3f;
-	public float WATER_DENSITY = 1000;
+    public float RESISTANCE = 0.3f;
+    public float LIQUID_DENSITY = 1000;
 
-	private float voxelHalfHeight;
-	private Vector3 localArchimedesForce;
-	private List<Vector3> voxels;
-	private bool isMeshCollider;
+    private float halfVoxelHeight;
+    private Vector3 archimedesForceLocal;
+    private List<Vector3> voxelPoints;
+    private bool hasMeshCollider;
 
-	private void Start()
-	{
+    private void Start()
+    {
+        var initialRotation = transform.rotation;
+        var initialPosition = transform.position;
+        transform.rotation = Quaternion.identity;
+        transform.position = Vector3.zero;
 
-		// Store original rotation and position
-		var originalRotation = transform.rotation;
-		var originalPosition = transform.position;
-		transform.rotation = Quaternion.identity;
-		transform.position = Vector3.zero;
-
-		// The object must have a collider
-		if (GetComponent<Collider>() == null)
-		{
-			gameObject.AddComponent<MeshCollider>();
-			Debug.LogWarning(string.Format("[Buoyancy.cs] Object \"{0}\" had no collider. MeshCollider has been added.", name));
-		}
-		// gameObject.GetComponent<MeshCollider>().convex = true;
-		isMeshCollider = GetComponent<MeshCollider>() != null;
-
-		var bounds = GetComponent<Collider>().bounds;
-		if (bounds.size.x < bounds.size.y)
-		{
-			voxelHalfHeight = bounds.size.x;
-		}
-		else
-		{
-			voxelHalfHeight = bounds.size.y;
-		}
-		if (bounds.size.z < voxelHalfHeight)
-		{
-			voxelHalfHeight = bounds.size.z;
-		}
-		voxelHalfHeight /= 2 * slicesPerAxis;
-
-		// The object must have a RidigBody
-		if (GetComponent<Rigidbody>() == null)
-		{
-			gameObject.AddComponent<Rigidbody>();
-			Debug.LogWarning(string.Format("[Buoyancy.cs] Object \"{0}\" had no Rigidbody. Rigidbody has been added.", name));
-		}
-		GetComponent<Rigidbody>().centerOfMass = new Vector3(0, -10f, -1) + transform.InverseTransformPoint(bounds.center);
-
-		voxels = SliceIntoVoxels(isMeshCollider && isConcave);
-
-		// Restore original rotation and position
-		transform.rotation = originalRotation;
-		transform.position = originalPosition;
-
-		float volume = GetComponent<Rigidbody>().mass / density;
-
-		JoinPoints(voxels, voxelsLimit);
-
-		float archimedesForceMagnitude = WATER_DENSITY * Mathf.Abs(Physics.gravity.y) * volume;
-		localArchimedesForce = new Vector3(0, archimedesForceMagnitude, 0) / voxels.Count;
-
-		// Debug.Log(string.Format("[Buoyancy.cs] Name=\"{0}\" volume={1:0.0}, mass={2:0.0}, density={3:0.0}", name, volume, GetComponent<Rigidbody>().mass, density));
-	}
-
-	// returns a list of points where the object is sliced
-	private List<Vector3> SliceIntoVoxels(bool isConcave)
-	{
-		var points = new List<Vector3>(slicesPerAxis * slicesPerAxis * slicesPerAxis);
-
-		if (isConcave)
-		{
-			var meshCol = GetComponent<MeshCollider>();
-
-			var convexValue = meshCol.convex;
-			meshCol.convex = false;
-
-			// Concave slicing
-			var bounds = GetComponent<Collider>().bounds;
-			for (int ix = 0; ix < slicesPerAxis; ix++)
-			{
-				for (int iy = 0; iy < slicesPerAxis; iy++)
-				{
-					for (int iz = 0; iz < slicesPerAxis; iz++)
-					{
-						float x = bounds.min.x + bounds.size.x / slicesPerAxis * (0.5f + ix);
-						float y = bounds.min.y + bounds.size.y / slicesPerAxis * (0.5f + iy);
-						float z = bounds.min.z + bounds.size.z / slicesPerAxis * (0.5f + iz);
-
-						var p = transform.InverseTransformPoint(new Vector3(x, y, z));
-
-						if (PointIsInsideMeshCollider(meshCol, p))
-						{
-							points.Add(p);
-						}
-					}
-				}
-			}
-			if (points.Count == 0)
-			{
-				points.Add(bounds.center);
-			}
-
-			meshCol.convex = convexValue;
-		}
-		else
-		{
-			// Convex slicing
-			var bounds = GetComponent<Collider>().bounds;
-			for (int ix = 0; ix < slicesPerAxis; ix++)
-			{
-				for (int iy = 0; iy < slicesPerAxis; iy++)
-				{
-					for (int iz = 0; iz < slicesPerAxis; iz++)
-					{
-						float x = bounds.min.x + bounds.size.x / slicesPerAxis * (0.5f + ix);
-						float y = bounds.min.y + bounds.size.y / slicesPerAxis * (0.5f + iy);
-						float z = bounds.min.z + bounds.size.z / slicesPerAxis * (0.5f + iz);
-
-						var p = transform.InverseTransformPoint(new Vector3(x, y, z));
-
-						points.Add(p);
-					}
-				}
-			}
-		}
-
-		return points;
-	}
-
-	// returns true if the point is inside the mesh collider
-	private static bool PointIsInsideMeshCollider(Collider meshColl, Vector3 point)
-	{
-		Vector3[] directions = { Vector3.up, Vector3.down, Vector3.left, Vector3.right, Vector3.forward, Vector3.back };
-
-		foreach (var ray in directions)
-		{
-			RaycastHit hit;
-			if (meshColl.Raycast(new Ray(point - ray * 1000, ray), out hit, 1000f) == false)
-			{
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-
-	// returns the two closest points in the list
-	private static void FindClosestPoints(IList<Vector3> list, out int firstIndex, out int secondIndex)
-	{
-		float minDistance = float.MaxValue, maxDistance = float.MinValue;
-		firstIndex = 0;
-		secondIndex = 1;
-
-		for (int i = 0; i < list.Count - 1; i++)
-		{
-			for (int j = i + 1; j < list.Count; j++)
-			{
-				float distance = Vector3.Distance(list[i], list[j]);
-				if (distance < minDistance)
-				{
-					minDistance = distance;
-					firstIndex = i;
-					secondIndex = j;
-				}
-				if (distance > maxDistance)
-				{
-					maxDistance = distance;
-				}
-			}
-		}
-	}
-
-
-
-	private static void JoinPoints(IList<Vector3> list, int targetCount)
-	{
-		if (list.Count <= 2 || targetCount < 2)
-		{
-			return;
-		}
-
-		while (list.Count > targetCount)
-		{
-			int first, second;
-			FindClosestPoints(list, out first, out second);
-
-			var mixed = (list[first] + list[second]) * 0.5f;
-			list.RemoveAt(second); // the second index is always greater that the first => removing the second item first
-			list.RemoveAt(first);
-			list.Add(mixed);
-		}
-	}
-
-	private float GetWaterLevel(float xCoord, float zCoord)
-	{
-        if (water == null)
+        if (GetComponent<Collider>() == null)
         {
-            Debug.Log("water is null");
+            gameObject.AddComponent<MeshCollider>();
+            Debug.LogWarning($"[SeaFloat.cs] Object \"{name}\" had no collider. MeshCollider has been added.");
+        }
+        hasMeshCollider = GetComponent<MeshCollider>() != null;
+
+        var colliderBounds = GetComponent<Collider>().bounds;
+        halfVoxelHeight = Mathf.Min(colliderBounds.size.x, colliderBounds.size.y, colliderBounds.size.z) / (2 * divisionsPerDimension);
+
+        if (GetComponent<Rigidbody>() == null)
+        {
+            gameObject.AddComponent<Rigidbody>();
+            Debug.LogWarning($"[SeaFloat.cs] Object \"{name}\" had no Rigidbody. Rigidbody has been added.");
+        }
+        GetComponent<Rigidbody>().centerOfMass = new Vector3(0, -10f, -1) + transform.InverseTransformPoint(colliderBounds.center);
+
+        voxelPoints = DivideIntoVoxels(hasMeshCollider && hasConcaveShape);
+
+        transform.rotation = initialRotation;
+        transform.position = initialPosition;
+
+        float objectVolume = GetComponent<Rigidbody>().mass / buoyancyDensity;
+        CombineVoxels(voxelPoints, maxVoxels);
+
+        float buoyantForceMagnitude = LIQUID_DENSITY * Mathf.Abs(Physics.gravity.y) * objectVolume;
+        archimedesForceLocal = new Vector3(0, buoyantForceMagnitude, 0) / voxelPoints.Count;
+    }
+
+    private List<Vector3> DivideIntoVoxels(bool concave)
+    {
+        var points = new List<Vector3>(divisionsPerDimension * divisionsPerDimension * divisionsPerDimension);
+        var objectBounds = GetComponent<Collider>().bounds;
+        if (concave)
+        {
+            var meshCollider = GetComponent<MeshCollider>();
+            bool originalConvex = meshCollider.convex;
+            meshCollider.convex = false;
+
+            SliceConcaveShape(meshCollider, objectBounds, points);
+            meshCollider.convex = originalConvex;
+        }
+        else
+        {
+            SliceConvexShape(objectBounds, points);
+        }
+
+        return points;
+    }
+
+    private void SliceConcaveShape(MeshCollider meshCollider, Bounds bounds, List<Vector3> points)
+    {
+        for (int x = 0; x < divisionsPerDimension; x++)
+        {
+            for (int y = 0; y < divisionsPerDimension; y++)
+            {
+                for (int z = 0; z < divisionsPerDimension; z++)
+                {
+                    Vector3 point = CalculatePoint(bounds, x, y, z);
+                    if (IsPointInside(meshCollider, point))
+                    {
+                        points.Add(point);
+                    }
+                }
+            }
+        }
+
+        if (points.Count == 0)
+        {
+            points.Add(bounds.center);
+        }
+    }
+
+    private void SliceConvexShape(Bounds bounds, List<Vector3> points)
+    {
+        for (int x = 0; x < divisionsPerDimension; x++)
+        {
+            for (int y = 0; y < divisionsPerDimension; y++)
+            {
+                for (int z = 0; z < divisionsPerDimension; z++)
+                {
+                    Vector3 point = CalculatePoint(bounds, x, y, z);
+                    points.Add(point);
+                }
+            }
+        }
+    }
+
+    private Vector3 CalculatePoint(Bounds bounds, int x, int y, int z)
+    {
+        float posX = bounds.min.x + bounds.size.x / divisionsPerDimension * (0.5f + x);
+        float posY = bounds.min.y + bounds.size.y / divisionsPerDimension * (0.5f + y);
+        float posZ = bounds.min.z + bounds.size.z / divisionsPerDimension * (0.5f + z);
+        return transform.InverseTransformPoint(new Vector3(posX, posY, posZ));
+    }
+
+    private static bool IsPointInside(Collider collider, Vector3 point)
+    {
+        Vector3[] directions = { Vector3.up, Vector3.down, Vector3.left, Vector3.right, Vector3.forward, Vector3.back };
+        foreach (var direction in directions)
+        {
+            if (!collider.Raycast(new Ray(point - direction * 1000, direction), out _, 1000f))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static void FindNearestPoints(IList<Vector3> points, out int indexA, out int indexB)
+    {
+        float minDistance = float.MaxValue;
+        indexA = 0;
+        indexB = 1;
+
+        for (int i = 0; i < points.Count - 1; i++)
+        {
+            for (int j = i + 1; j < points.Count; j++)
+            {
+                float distance = Vector3.Distance(points[i], points[j]);
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    indexA = i;
+                    indexB = j;
+                }
+            }
+        }
+    }
+
+    private static void CombineVoxels(IList<Vector3> points, int targetCount)
+    {
+        if (points.Count <= 2 || targetCount < 2)
+        {
+            return;
+        }
+
+        while (points.Count > targetCount)
+        {
+            FindNearestPoints(points, out int first, out int second);
+
+            Vector3 combinedPoint = (points[first] + points[second]) * 0.5f;
+            points.RemoveAt(second); // Remove second point first as its index is higher
+            points.RemoveAt(first);
+            points.Add(combinedPoint);
+        }
+    }
+
+    private float DetermineWaterLevel(float xCoord, float zCoord)
+    {
+        if (seaSurface == null)
+        {
+            Debug.Log("seaSurface is null");
             return 0.0f;
         }
 
-        if (water.ProjectPointOnWaterSurface(searchParameters, out searchResult))
+        if (seaSurface.ProjectPointOnWaterSurface(waveParameters, out waveResult))
         {
-            return searchResult.projectedPositionWS.y;
+            return waveResult.projectedPositionWS.y;
         }
         else
         {
             return 0.0f;
         }
-	}
+    }
 
-	private void FixedUpdate()
-	{
+    private void FixedUpdate()
+    {
+        foreach (var voxel in voxelPoints)
+        {
+            var worldPoint = transform.TransformPoint(voxel);
+            float seaLevel = DetermineWaterLevel(worldPoint.x, worldPoint.z);
 
-		foreach (var point in voxels)
-		{
-			var wp = transform.TransformPoint(point);
-			float waterLevel = GetWaterLevel(wp.x, wp.z);
-            // Debug.Log("waterLevel: " + waterLevel);
+            if (worldPoint.y - halfVoxelHeight < seaLevel)
+            {
+                float displacement = (seaLevel - worldPoint.y) / (2 * halfVoxelHeight) + 0.5f;
+                displacement = Mathf.Clamp(displacement, 0f, 1f);
 
-			if (wp.y - voxelHalfHeight < waterLevel)
-			{
-				float k = (waterLevel - wp.y) / (2 * voxelHalfHeight) + 0.5f;
-				if (k > 1)
-				{
-					k = 1f;
-				}
-				else if (k < 0)
-				{
-					k = 0f;
-				}
+                var velocity = GetComponent<Rigidbody>().GetPointVelocity(worldPoint);
+                var dampingForce = -velocity * RESISTANCE * GetComponent<Rigidbody>().mass;
+                var buoyancyForce = dampingForce + Mathf.Sqrt(displacement) * archimedesForceLocal;
 
-				var velocity = GetComponent<Rigidbody>().GetPointVelocity(wp);
-				var localDampingForce = -velocity * DAMPFER * GetComponent<Rigidbody>().mass;
-				var force = localDampingForce + Mathf.Sqrt(k) * localArchimedesForce;
-                // Debug.Log("force: " + force);
-				GetComponent<Rigidbody>().AddForceAtPosition(force, wp);
-
-			}
-		}
-	}
-
+                GetComponent<Rigidbody>().AddForceAtPosition(buoyancyForce, worldPoint);
+            }
+        }
+    }
 }
+
 \end{lstlisting}
 
 \subsection{Rudder}\label{sec:rudder}
@@ -952,232 +908,159 @@ public class Rudder : MonoBehaviour
 \end{lstlisting}
 \subsection{Kite Model}\label{sec:kite}
 \begin{lstlisting}
-  using System.Collections;
-  using System.Collections.Generic;
-  using UnityEngine;
-  using UnityEngine.Rendering.HighDefinition;
-  
-  
-  public class KiteSim : MonoBehaviour
-  {
-      public Vector3 currentResultantForce;
-      public float forceMultiplier = 1.0f;
-  
-      public WindSim windSim = null;
-  
-      public float lineLength = 35.0f;
-  
-      public ConfigurableJoint linePowerLeft;
-      public ConfigurableJoint linePowerRight;
-      public ConfigurableJoint lineSteeringLeft;
-      public ConfigurableJoint lineSteeringRight;
-  
-      public float liftCoefficient = 0.3f;
-      public float dragCoefficient = 0.1f;
-      private float _dragCoefficient = 0.1f;
-  
-      public float barPower = 0.15f;
-  
-      public SphereCollider kiteCollider;
-  
-      public float debugScale = 1.0f;
-      public Rigidbody KiteRigidbody;
-      public Rigidbody BaseRigidbody;
-  
-      public Transform windIndicator;
-  
-      public Vector3 windAtKite;
-      private float time;
-  
-      public int counter = 0;
-  
-      public float score = 0.0f;
-  
-      public Vector2 BarPositionAsControlInput;
-      
-      private float stepsPerSecond = 0f;
-  
-      public bool isResetting = false;
-      private int resetCounter = 0;
-  
-      private bool isSteeringLeft = false;
-      private bool isSteeringRight = false;
-      public float steerSpeed = 0.1f;
-      public float returnSpeed = 0.05f;
-  
-      // kite start position
-      private Vector3 startPosition;
-      private Quaternion startRotation;
-  
-      private Vector3 boatStartPosition;
-  
-      private Quaternion boatStartRotation;
-  
-      private void Start() {
-          // Set the wind direction
-          time = 0;
-          // UpdateWindAtKite(time, Vector3.zero);
-          UpdateWindAtKite();
-          stepsPerSecond = (1 / Time.fixedDeltaTime);
-          // start timer to simulate the wind (5 seconds)
-          InvokeRepeating("UpdateWindAtKite", 0, 5);
-          startPosition = KiteRigidbody.transform.position;
-          startRotation = KiteRigidbody.transform.rotation;
-          boatStartPosition = BaseRigidbody.transform.position;
-          boatStartRotation = BaseRigidbody.transform.rotation;
-  
-      }
-  
-      // private void UpdateWindAtKite(float time, Vector3 space) {
-      private void UpdateWindAtKite() {
-          windAtKite = windSim.wind;
-      }
-  
-      private void Update() {
-          time += Time.deltaTime;
-          // constrainRotationOfKite();
-      }
-  
-      private float calculateAngleOfAttack(Vector3 apparentWind) {
-          // Calculate the angle of attack
-          float angleOfAttack = 180 - Vector3.Angle(apparentWind, KiteRigidbody.transform.forward);
-          // Debug.Log("Angle of attack: " + angleOfAttack);
-          return angleOfAttack;
-      }
-  
-      public void SteerLeft()
-      {
-          isSteeringLeft = true;
-          isSteeringRight = false;
-      }
-  
-      public void SteerRight()
-      {
-          isSteeringRight = true;
-          isSteeringLeft = false;
-      }
-  
-      public void StopSteering()
-      {
-          isSteeringLeft = false;
-          isSteeringRight = false;
-      }
-  
-      private void UpdateBarPosition()
-      {
-          if (isSteeringLeft)
-          {
-              BarPositionAsControlInput.x -= steerSpeed;
-              BarPositionAsControlInput.x = Mathf.Clamp(BarPositionAsControlInput.x, -1f, 1f);  // Assuming a max range of -1 to 1.
-          }
-          else if (isSteeringRight)
-          {
-              BarPositionAsControlInput.x += steerSpeed;
-              BarPositionAsControlInput.x = Mathf.Clamp(BarPositionAsControlInput.x, -1f, 1f);
-          }
-          else
-          {
-              // Lerp back to center if neither steer is active
-              BarPositionAsControlInput.x = Mathf.Lerp(BarPositionAsControlInput.x, 0, returnSpeed);
-          }
-      }
-  
-      public void ResetKite() {
-          KiteRigidbody.velocity = Vector3.zero;
-          KiteRigidbody.angularVelocity = Vector3.zero;
-          BaseRigidbody.velocity = Vector3.zero;
-          BaseRigidbody.angularVelocity = Vector3.zero;
-          BaseRigidbody.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>().velocity = Vector3.zero;
-          BaseRigidbody.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-  
-          StopSteering();
-  
-          KiteRigidbody.transform.position = startPosition;
-          KiteRigidbody.transform.rotation = startRotation;
-      
-          BaseRigidbody.transform.position = boatStartPosition;
-          BaseRigidbody.transform.rotation = boatStartRotation;
-          // get the 'Keel' child and set its child the 'mass' rigidbody to zero velocity
-          score = 0.0f;
-          counter = 0;
-      }
-  
-  
-  
-  
-      private void FixedUpdate() {
-          counter++;
-  
-          UpdateBarPosition();
-  
-          Vector3 apparentWind = windAtKite - KiteRigidbody.velocity;
-  
-          float angleOfAttack = calculateAngleOfAttack(apparentWind);
-  
-          float _liftCoefficient = liftCoefficient * Mathf.Cos((angleOfAttack-20f) * Mathf.Deg2Rad) * liftCoefficient;
-  
-          float apparentWindSpeedSquared = apparentWind.sqrMagnitude;
-          
-          Vector3 liftForce = Vector3.Cross(apparentWind, -KiteRigidbody.transform.right).normalized * apparentWindSpeedSquared / 2  * _liftCoefficient;
-          
-          // Calculate the drag force
-          Vector3 dragForce = apparentWind.normalized * apparentWindSpeedSquared / 2 * _dragCoefficient;
-  
-          // Apply the forces to the kite
-  
-          currentResultantForce = liftForce + dragForce;
-  
-          // multiply the resultant force by a constant to increase it
-          Vector3 forceOnBoat = currentResultantForce * forceMultiplier;
-          // KiteRigidbody.AddForce(liftForce + dragForce);
-          KiteRigidbody.AddForce(forceOnBoat);
-  
-          // Apply a torque to the kite relative to barPosition.x
-          float torqueMultiplier = 2f * KiteRigidbody.angularVelocity.magnitude + 10f * KiteRigidbody.velocity.magnitude + 1.8f;
-          KiteRigidbody.AddTorque(-BarPositionAsControlInput.x * torqueMultiplier * KiteRigidbody.transform.up);
-          // cap the angular velocity
-          KiteRigidbody.angularVelocity = Vector3.ClampMagnitude(KiteRigidbody.angularVelocity, 3f);
-  
-          // slow down horizontal velocity (local to kite)
-          Vector3 localVelocity = KiteRigidbody.transform.InverseTransformDirection(KiteRigidbody.velocity);
-          localVelocity.x *= 0.9f;
-          KiteRigidbody.velocity = KiteRigidbody.transform.TransformDirection(localVelocity);
-  
-          if (counter < stepsPerSecond * 5) {
-              score += 0.02f;
-          }
-  
-          
-                  // add the forces together
-          currentResultantForce = new Vector3(0, 0, 0);
-          currentResultantForce += linePowerLeft.currentForce;
-          currentResultantForce += linePowerRight.currentForce;
-          currentResultantForce += lineSteeringLeft.currentForce;
-          currentResultantForce += lineSteeringRight.currentForce;
-  
-      }
-  
-      private void OnDrawGizmos()
-      {
-          // Draw the wind direction
-          // Gizmos.color = Color.blue;
-          // Gizmos.DrawLine(windIndicator.position, windIndicator.position - windAtKite);
-  
-          // // Draw the resultant force from the boat's position
-          // Gizmos.color = Color.yellow;
-          // Gizmos.DrawLine(BaseRigidbody.position, BaseRigidbody.position + currentResultantForce * debugScale);
-  
-          Vector3 normalisedResultantForce = currentResultantForce.normalized;
-  
-          // draw joint power lines
-          Gizmos.color = Color.white;
-          // Gizmos.DrawLine(jointPowerLeft.transform.position, jointPowerLeft.transform.position + normalisedResultantForce * 35 * debugScale); 
-          // Gizmos.DrawLine(jointPowerRight.transform.position, jointPowerRight.transform.position + normalisedResultantForce * 35 * debugScale);
-          // Gizmos.DrawLine(jointSteeringLeft.transform.position, jointSteeringLeft.transform.position + normalisedResultantForce * 35 * debugScale);
-          Gizmos.DrawLine(lineSteeringRight.transform.position, lineSteeringRight.transform.position + normalisedResultantForce * 35 * debugScale);
-  
-      }
-  }
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEngine;
+    using UnityEngine.Rendering.HighDefinition;
+    
+    public class KiteSim : MonoBehaviour
+    {
+        public Vector3 currentResultantForce;
+        public float forceMultiplier = 1.0f;
+        public WindSim windSim = null;
+        public float lineLength = 35.0f;
+        public ConfigurableJoint linePowerLeft, linePowerRight, lineSteeringLeft, lineSteeringRight;
+        public float liftCoefficient = 0.3f, dragCoefficient = 0.1f, _dragCoefficient = 0.1f;
+        public float barPower = 0.15f;
+        public SphereCollider kiteCollider;
+        public float debugScale = 1.0f;
+        public Rigidbody KiteRigidbody, BaseRigidbody;
+        public Transform windIndicator;
+        public Vector3 windAtKite;
+        private float time;
+        public int counter = 0;
+        public float score = 0.0f;
+        public Vector2 BarPositionAsControlInput;
+        private float stepsPerSecond = 0f;
+        public bool isResetting = false;
+        private int resetCounter = 0;
+        private bool isSteeringLeft = false, isSteeringRight = false;
+        public float steerSpeed = 0.1f, returnSpeed = 0.05f;
+        private Vector3 startPosition, boatStartPosition;
+        private Quaternion startRotation, boatStartRotation;
+    
+        private void Start()
+        {
+            time = 0;
+            UpdateWindAtKite();
+            stepsPerSecond = 1 / Time.fixedDeltaTime;
+            InvokeRepeating("UpdateWindAtKite", 0, 5);
+            startPosition = KiteRigidbody.transform.position;
+            startRotation = KiteRigidbody.transform.rotation;
+            boatStartPosition = BaseRigidbody.transform.position;
+            boatStartRotation = BaseRigidbody.transform.rotation;
+        }
+    
+        private void UpdateWindAtKite()
+        {
+            windAtKite = windSim.wind;
+        }
+    
+        private void Update()
+        {
+            time += Time.deltaTime;
+        }
+    
+        private float calculateAngleOfAttack(Vector3 apparentWind)
+        {
+            return 180 - Vector3.Angle(apparentWind, KiteRigidbody.transform.forward);
+        }
+    
+        public void SteerLeft()
+        {
+            isSteeringLeft = true;
+            isSteeringRight = false;
+        }
+    
+        public void SteerRight()
+        {
+            isSteeringRight = true;
+            isSteeringLeft = false;
+        }
+    
+        public void StopSteering()
+        {
+            isSteeringLeft = false;
+            isSteeringRight = false;
+        }
+    
+        private void UpdateBarPosition()
+        {
+            if (isSteeringLeft)
+            {
+                BarPositionAsControlInput.x = Mathf.Max(BarPositionAsControlInput.x - steerSpeed, -1f);
+            }
+            else if (isSteeringRight)
+            {
+                BarPositionAsControlInput.x = Mathf.Min(BarPositionAsControlInput.x + steerSpeed, 1f);
+            }
+            else
+            {
+                BarPositionAsControlInput.x = Mathf.Lerp(BarPositionAsControlInput.x, 0, returnSpeed);
+            }
+        }
+    
+        public void ResetKite()
+        {
+            KiteRigidbody.velocity = Vector3.zero;
+            KiteRigidbody.angularVelocity = Vector3.zero;
+            BaseRigidbody.velocity = Vector3.zero;
+            BaseRigidbody.angularVelocity = Vector3.zero;
+            Rigidbody keelRigidbody = BaseRigidbody.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>();
+            keelRigidbody.velocity = Vector3.zero;
+            keelRigidbody.angularVelocity = Vector3.zero;
+            StopSteering();
+            KiteRigidbody.transform.position = startPosition;
+            KiteRigidbody.transform.rotation = startRotation;
+            BaseRigidbody.transform.position = boatStartPosition;
+            BaseRigidbody.transform.rotation = boatStartRotation;
+            score = 0.0f;
+            counter = 0;
+        }
+    
+        private void FixedUpdate()
+        {
+            counter++;
+            UpdateBarPosition();
+            Vector3 apparentWind = windAtKite - KiteRigidbody.velocity;
+            float angleOfAttack = calculateAngleOfAttack(apparentWind);
+            float adjustedLiftCoefficient = liftCoefficient * Mathf.Cos((angleOfAttack - 20f) * Mathf.Deg2Rad) * liftCoefficient;
+            float apparentWindSpeedSquared = apparentWind.sqrMagnitude;
+            Vector3 liftForce = Vector3.Cross(apparentWind, -KiteRigidbody.transform.right).normalized * apparentWindSpeedSquared / 2 * adjustedLiftCoefficient;
+            Vector3 dragForce = apparentWind.normalized * apparentWindSpeedSquared / 2 * _dragCoefficient;
+            currentResultantForce = liftForce + dragForce;
+            Vector3 forceOnBoat = currentResultantForce * forceMultiplier;
+            KiteRigidbody.AddForce(forceOnBoat);
+            float torqueMultiplier = 2f * KiteRigidbody.angularVelocity.magnitude + 10f * KiteRigidbody.velocity.magnitude + 1.8f;
+            KiteRigidbody.AddTorque(-BarPositionAsControlInput.x * torqueMultiplier * KiteRigidbody.transform.up);
+            KiteRigidbody.angularVelocity = Vector3.ClampMagnitude(KiteRigidbody.angularVelocity, 3f);
+            Vector3 localVelocity = KiteRigidbody.transform.InverseTransformDirection(KiteRigidbody.velocity);
+            localVelocity.x *= 0.9f;
+            KiteRigidbody.velocity = KiteRigidbody.transform.TransformDirection(localVelocity);
+            if (counter < stepsPerSecond * 5)
+            {
+                score += 0.02f;
+            }
+            ResetForces();
+        }
+    
+        private void ResetForces()
+        {
+            currentResultantForce = Vector3.zero;
+            currentResultantForce += linePowerLeft.currentForce;
+            currentResultantForce += linePowerRight.currentForce;
+            currentResultantForce += lineSteeringLeft.currentForce;
+            currentResultantForce += lineSteeringRight.currentForce;
+        }
+    
+        private void OnDrawGizmos()
+        {
+            Vector3 normalizedResultantForce = currentResultantForce.normalized;
+            Gizmos.color = Color.white;
+            Gizmos.DrawLine(lineSteeringRight.transform.position, lineSteeringRight.transform.position + normalizedResultantForce * 35 * debugScale);
+        }
+    }
+    
 \end{lstlisting}  
 
 
