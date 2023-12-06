@@ -6,7 +6,7 @@
 
 \chapter{Appendix A}\label{app:app01}
 
-\section{Unity Setup}\label{sec:unity_setup}
+% \section{Unity Setup}\label{sec:unity_setup}
 
 \section{Final Configuration}\label{config}
 \begin{adjustbox}{width=\textwidth/2}
@@ -45,1150 +45,1150 @@
 
 \section{Scripts}
 
-\subsection{KiteBoat Agent}\label{sec:kiteboat_agent}
-\lstset{
-  breaklines=true,   % sets automatic line breaking
-  breakatwhitespace=false,    % sets if automatic breaks should only happen at whitespace
-}
-\lstset{
-  basicstyle=\ttfamily\small,
-  breaklines=true
-}
+% \subsection{KiteBoat Agent}\label{sec:kiteboat_agent}
+% \lstset{
+%   breaklines=true,   % sets automatic line breaking
+%   breakatwhitespace=false,    % sets if automatic breaks should only happen at whitespace
+% }
+% \lstset{
+%   basicstyle=\ttfamily\small,
+%   breaklines=true
+% }
   
-\begin{lstlisting}
-  using System.Collections;
-  using System.Collections.Generic;
-  using UnityEngine;
-  using Unity.MLAgents;
-  using Unity.MLAgents.Sensors;
-  using Unity.MLAgents.Actuators;
-  using PathCreation.Examples;
-  using System.IO;
+% \begin{lstlisting}
+%   using System.Collections;
+%   using System.Collections.Generic;
+%   using UnityEngine;
+%   using Unity.MLAgents;
+%   using Unity.MLAgents.Sensors;
+%   using Unity.MLAgents.Actuators;
+%   using PathCreation.Examples;
+%   using System.IO;
   
-  public class KiteBoatAgent : Agent
-  {
-      public Rudder rudder;
+%   public class KiteBoatAgent : Agent
+%   {
+%       public Rudder rudder;
   
-      public KiteSim kiteSim;
+%       public KiteSim kiteSim;
   
-      public Rigidbody kiteRigidbody;
+%       public Rigidbody kiteRigidbody;
   
-      public Rigidbody boatRigidbody;
+%       public Rigidbody boatRigidbody;
   
-      public WaypointManager waypointManager;
+%       public WaypointManager waypointManager;
   
-      private GJKCollisionDetection gjkCollisionDetection = new GJKCollisionDetection();
+%       private GJKCollisionDetection gjkCollisionDetection = new GJKCollisionDetection();
   
-      private const int RudderActionSize = 3; // left, none, right for rudder
-      private const int KiteControlActionSize = 3; // left, none, right for kite control
+%       private const int RudderActionSize = 3; // left, none, right for rudder
+%       private const int KiteControlActionSize = 3; // left, none, right for kite control
   
-      private Vector3 previousPosition; // To store the previous position
+%       private Vector3 previousPosition; // To store the previous position
   
-      private float boatForwardSpeed;
+%       private float boatForwardSpeed;
   
-      private float currentDistanceToWaypoint;
-      private float previousDistanceToWaypoint;
+%       private float currentDistanceToWaypoint;
+%       private float previousDistanceToWaypoint;
   
-      private float checkInterval = 5f;
-      private Coroutine checkPositionRoutine;
+%       private float checkInterval = 5f;
+%       private Coroutine checkPositionRoutine;
   
-      public UnityEngine.UI.Text rewardText;
+%       public UnityEngine.UI.Text rewardText;
   
-      public UnityEngine.UI.Text actionText;
+%       public UnityEngine.UI.Text actionText;
   
-      public UnityEngine.UI.Text completedWaypointsText;
-      public UnityEngine.UI.Text lessonText;
+%       public UnityEngine.UI.Text completedWaypointsText;
+%       public UnityEngine.UI.Text lessonText;
   
-      private Vector3 startPosition;
-      private Quaternion startRotation;
+%       private Vector3 startPosition;
+%       private Quaternion startRotation;
   
-      private Vector3 startKitePosition;
+%       private Vector3 startKitePosition;
   
-      private Quaternion startKiteRotation;
+%       private Quaternion startKiteRotation;
   
-      private bool hitFinish = false;
+%       private bool hitFinish = false;
   
-      private bool isFirstEpisode = true;
+%       private bool isFirstEpisode = true;
   
-      public int lessonNumber = 0;
+%       public int lessonNumber = 0;
       
-      public float goneTheDistance = 0;
+%       public float goneTheDistance = 0;
   
-      public float lvl0Success = 5;
-      private bool hitLessonTarget = false;
+%       public float lvl0Success = 5;
+%       private bool hitLessonTarget = false;
   
-      private const float KiteStableHeight = 10f; // Example stable height for the kite
-      private const float KiteHeightRewardMultiplier = 0.1f;
+%       private const float KiteStableHeight = 10f; // Example stable height for the kite
+%       private const float KiteHeightRewardMultiplier = 0.1f;
   
-      private int[] lastActions = new int[2];
-      private float currentRudderAngle = 0f;
-      private float lastRudderAngle = 0f;
+%       private int[] lastActions = new int[2];
+%       private float currentRudderAngle = 0f;
+%       private float lastRudderAngle = 0f;
   
-      private StreamWriter writer;
+%       private StreamWriter writer;
   
-      private int episodeCount = 0;
+%       private int episodeCount = 0;
   
   
-      public override void OnEpisodeBegin()
-      {
-          // jointSim.ResetKite();
-          if (isFirstEpisode)
-          {
-              isFirstEpisode = false;
-              startPosition = transform.position;
-              // startRotation = transform.rotation;
-              startKitePosition = kiteRigidbody.transform.position;
-              startKiteRotation = kiteRigidbody.transform.rotation;
+%       public override void OnEpisodeBegin()
+%       {
+%           // jointSim.ResetKite();
+%           if (isFirstEpisode)
+%           {
+%               isFirstEpisode = false;
+%               startPosition = transform.position;
+%               // startRotation = transform.rotation;
+%               startKitePosition = kiteRigidbody.transform.position;
+%               startKiteRotation = kiteRigidbody.transform.rotation;
   
-              string folderPath = "ML_PPO/HeuristicLogs/";
-              string fullPath = Path.Combine(Application.dataPath, folderPath);
-              if (!Directory.Exists(fullPath))
-              {
-                  Directory.CreateDirectory(fullPath);
-              }
+%               string folderPath = "ML_PPO/HeuristicLogs/";
+%               string fullPath = Path.Combine(Application.dataPath, folderPath);
+%               if (!Directory.Exists(fullPath))
+%               {
+%                   Directory.CreateDirectory(fullPath);
+%               }
   
-              // var behaviorParameters = GetComponent<BehaviorParameters>();
-              // // Determine the player type based on the BehaviorType
-              // string playerTypePrefix = (behaviorParameters.BehaviorType == BehaviorType.HeuristicOnly) ? "human_" : "model_";
-              // string fileName = playerTypePrefix + "Log_" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".csv";
-              // string filePath = Path.Combine(fullPath, fileName);
+%               // var behaviorParameters = GetComponent<BehaviorParameters>();
+%               // // Determine the player type based on the BehaviorType
+%               // string playerTypePrefix = (behaviorParameters.BehaviorType == BehaviorType.HeuristicOnly) ? "human_" : "model_";
+%               // string fileName = playerTypePrefix + "Log_" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".csv";
+%               // string filePath = Path.Combine(fullPath, fileName);
   
-              // Now the directory exists, proceed to create the StreamWriter
-              string filePath = Path.Combine(fullPath, "HeuristicLog_" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".csv");
-              writer = new StreamWriter(filePath, true);
-              writer.AutoFlush = true;
-              writer.WriteLine("Episode, Step, Time, Cumulative_Reward, Lesson, Waypoints_Reached, Distance, Boat_Speed, Rudder_Angle, Kite_Height");
-              print("Created new file at: " + filePath);
+%               // Now the directory exists, proceed to create the StreamWriter
+%               string filePath = Path.Combine(fullPath, "HeuristicLog_" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".csv");
+%               writer = new StreamWriter(filePath, true);
+%               writer.AutoFlush = true;
+%               writer.WriteLine("Episode, Step, Time, Cumulative_Reward, Lesson, Waypoints_Reached, Distance, Boat_Speed, Rudder_Angle, Kite_Height");
+%               print("Created new file at: " + filePath);
   
-          }
-          if (lessonNumber != 0 && waypointManager.GetWaypoint() == null)
-          {
-              waypointManager.CreateWaypoint();
-          }
-          if (lessonNumber == 3) checkInterval = 10f;
-          if (lessonNumber == 4) checkInterval = 20f;
-          // ResetEnvironment();
-          StartCoroutine(ResetEnvironment());
-          previousPosition = transform.position;
-          if (checkPositionRoutine != null)
-          {
-              StopCoroutine(checkPositionRoutine);
-          }
-          checkPositionRoutine = StartCoroutine(CheckPosition());
-          // StartCoroutine(WaitAndRequestDecision());
-          SetReward(0f);
-          Debug.Log("OnEpisodeBegin, post ResetEnvironment");
-          episodeCount ++;
-          RequestDecision();
-      }
-      private IEnumerator ResetEnvironment() 
-      {
+%           }
+%           if (lessonNumber != 0 && waypointManager.GetWaypoint() == null)
+%           {
+%               waypointManager.CreateWaypoint();
+%           }
+%           if (lessonNumber == 3) checkInterval = 10f;
+%           if (lessonNumber == 4) checkInterval = 20f;
+%           // ResetEnvironment();
+%           StartCoroutine(ResetEnvironment());
+%           previousPosition = transform.position;
+%           if (checkPositionRoutine != null)
+%           {
+%               StopCoroutine(checkPositionRoutine);
+%           }
+%           checkPositionRoutine = StartCoroutine(CheckPosition());
+%           // StartCoroutine(WaitAndRequestDecision());
+%           SetReward(0f);
+%           Debug.Log("OnEpisodeBegin, post ResetEnvironment");
+%           episodeCount ++;
+%           RequestDecision();
+%       }
+%       private IEnumerator ResetEnvironment() 
+%       {
   
-          yield return null;
+%           yield return null;
           
-          kiteRigidbody.velocity = Vector3.zero;
-          kiteRigidbody.angularVelocity = Vector3.zero;
-          boatRigidbody.velocity = Vector3.zero;
-          boatRigidbody.angularVelocity = Vector3.zero;
-          boatRigidbody.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>().velocity = Vector3.zero;
-          boatRigidbody.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+%           kiteRigidbody.velocity = Vector3.zero;
+%           kiteRigidbody.angularVelocity = Vector3.zero;
+%           boatRigidbody.velocity = Vector3.zero;
+%           boatRigidbody.angularVelocity = Vector3.zero;
+%           boatRigidbody.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>().velocity = Vector3.zero;
+%           boatRigidbody.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
           
-          rudder.angle = 0f;
-          rudder.SetRudderTargetAngle(0f);
-          kiteSim.StopSteering();
+%           rudder.angle = 0f;
+%           rudder.SetRudderTargetAngle(0f);
+%           kiteSim.StopSteering();
   
-          startRotation = Quaternion.Euler(0, Random.Range(90, 270), 0);
-          transform.SetPositionAndRotation(startPosition + new Vector3(0, 2, 0), startRotation);
-          kiteRigidbody.transform.SetPositionAndRotation(startKitePosition, startKiteRotation);
+%           startRotation = Quaternion.Euler(0, Random.Range(90, 270), 0);
+%           transform.SetPositionAndRotation(startPosition + new Vector3(0, 2, 0), startRotation);
+%           kiteRigidbody.transform.SetPositionAndRotation(startKitePosition, startKiteRotation);
   
-          if (hitFinish)
-          {
-              waypointManager.NewWaypoint(lessonNumber);
-              hitFinish = false;
+%           if (hitFinish)
+%           {
+%               waypointManager.NewWaypoint(lessonNumber);
+%               hitFinish = false;
               
-          }
-          kiteRigidbody.velocity = Vector3.zero;
-          kiteRigidbody.angularVelocity = Vector3.zero;
-          boatRigidbody.velocity = Vector3.zero;
-          boatRigidbody.angularVelocity = Vector3.zero;
-          boatRigidbody.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>().velocity = Vector3.zero;
-          boatRigidbody.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+%           }
+%           kiteRigidbody.velocity = Vector3.zero;
+%           kiteRigidbody.angularVelocity = Vector3.zero;
+%           boatRigidbody.velocity = Vector3.zero;
+%           boatRigidbody.angularVelocity = Vector3.zero;
+%           boatRigidbody.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>().velocity = Vector3.zero;
+%           boatRigidbody.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
   
-          // goneTheDistance = 0;
-          hitLessonTarget = false;
-          if (lessonNumber != 0 && waypointManager.GetWaypoint() == null)
-          {
-              waypointManager.CreateWaypoint();
-          }
+%           // goneTheDistance = 0;
+%           hitLessonTarget = false;
+%           if (lessonNumber != 0 && waypointManager.GetWaypoint() == null)
+%           {
+%               waypointManager.CreateWaypoint();
+%           }
   
-          yield return new WaitForSeconds(1.0f);
-      }
+%           yield return new WaitForSeconds(1.0f);
+%       }
       
   
-      public void FixedUpdate()
-      {
-          // try catch edge cases
-          if (GetCumulativeReward() < -100.0f || rudder.GetBoatForwardSpeed() > 100.0f || transform.position.y > 10.0f)
-          {
-              print("GetCumulativeReward: " + GetCumulativeReward() + ", rudder.GetBoatForwardSpeed(): " + rudder.GetBoatForwardSpeed() + ", transform.position.y: " + transform.position.y);
-              CompleteEpisode();
-          }
+%       public void FixedUpdate()
+%       {
+%           // try catch edge cases
+%           if (GetCumulativeReward() < -100.0f || rudder.GetBoatForwardSpeed() > 100.0f || transform.position.y > 10.0f)
+%           {
+%               print("GetCumulativeReward: " + GetCumulativeReward() + ", rudder.GetBoatForwardSpeed(): " + rudder.GetBoatForwardSpeed() + ", transform.position.y: " + transform.position.y);
+%               CompleteEpisode();
+%           }
   
-          boatForwardSpeed = rudder.GetBoatForwardSpeed();
+%           boatForwardSpeed = rudder.GetBoatForwardSpeed();
   
-          // reward: greater +ve velocity
-          if (boatForwardSpeed > 1f) {
-              AddReward(boatForwardSpeed * 0.005f);
-              if (boatForwardSpeed > 4f)
-              {
-                  AddReward(boatForwardSpeed * 0.01f);
-              }
-          }
-          else if (boatForwardSpeed < 0.1f)
-          {
-              AddReward(-0.001f);
-          }
-          // reward if the boat is moving towards the waypoint
-          if (lessonNumber != 0 && waypointManager.GetWaypoint() != null)
-          {
-              currentDistanceToWaypoint = Vector3.Distance(transform.position, waypointManager.GetWaypoint().transform.position);
-              previousDistanceToWaypoint = Vector3.Distance(previousPosition, waypointManager.GetWaypoint().transform.position);        
-              if (currentDistanceToWaypoint < previousDistanceToWaypoint)
-              {
-                  // AddReward(0.001f);
-                  // make the reward inversely proportional to the distance
-                  AddReward(10f / currentDistanceToWaypoint);
-              }
-              else if (currentDistanceToWaypoint > previousDistanceToWaypoint)
-              {
-                  AddReward(-0.5f * (currentDistanceToWaypoint- previousDistanceToWaypoint));
-              }
-              previousPosition = transform.position;
+%           // reward: greater +ve velocity
+%           if (boatForwardSpeed > 1f) {
+%               AddReward(boatForwardSpeed * 0.005f);
+%               if (boatForwardSpeed > 4f)
+%               {
+%                   AddReward(boatForwardSpeed * 0.01f);
+%               }
+%           }
+%           else if (boatForwardSpeed < 0.1f)
+%           {
+%               AddReward(-0.001f);
+%           }
+%           // reward if the boat is moving towards the waypoint
+%           if (lessonNumber != 0 && waypointManager.GetWaypoint() != null)
+%           {
+%               currentDistanceToWaypoint = Vector3.Distance(transform.position, waypointManager.GetWaypoint().transform.position);
+%               previousDistanceToWaypoint = Vector3.Distance(previousPosition, waypointManager.GetWaypoint().transform.position);        
+%               if (currentDistanceToWaypoint < previousDistanceToWaypoint)
+%               {
+%                   // AddReward(0.001f);
+%                   // make the reward inversely proportional to the distance
+%                   AddReward(10f / currentDistanceToWaypoint);
+%               }
+%               else if (currentDistanceToWaypoint > previousDistanceToWaypoint)
+%               {
+%                   AddReward(-0.5f * (currentDistanceToWaypoint- previousDistanceToWaypoint));
+%               }
+%               previousPosition = transform.position;
   
-              if (gjkCollisionDetection.GJK(gameObject.GetComponent<MeshFilter>(), transform.position, waypointManager.GetWaypoint().GetComponent<MeshFilter>(), waypointManager.GetWaypoint().transform.position))
-              {
-                  Debug.Log("Finish");
-                  hitFinish = true;
-                  AddReward(200.0f);
-                  // CompleteEpisode();
-                  waypointManager.NewWaypoint(lessonNumber);
-              }
+%               if (gjkCollisionDetection.GJK(gameObject.GetComponent<MeshFilter>(), transform.position, waypointManager.GetWaypoint().GetComponent<MeshFilter>(), waypointManager.GetWaypoint().transform.position))
+%               {
+%                   Debug.Log("Finish");
+%                   hitFinish = true;
+%                   AddReward(200.0f);
+%                   // CompleteEpisode();
+%                   waypointManager.NewWaypoint(lessonNumber);
+%               }
   
-              currentRudderAngle = rudder.angle;
-              if (Mathf.Abs(currentRudderAngle) == Mathf.Abs(lastRudderAngle) && Mathf.Abs(currentRudderAngle) > 45.0f)
-              {
-                  AddReward(-0.001f * (Mathf.Abs(currentRudderAngle)));
-              }
-              lastRudderAngle = currentRudderAngle;
+%               currentRudderAngle = rudder.angle;
+%               if (Mathf.Abs(currentRudderAngle) == Mathf.Abs(lastRudderAngle) && Mathf.Abs(currentRudderAngle) > 45.0f)
+%               {
+%                   AddReward(-0.001f * (Mathf.Abs(currentRudderAngle)));
+%               }
+%               lastRudderAngle = currentRudderAngle;
               
-          }
+%           }
   
-          AddReward(-0.001f);
-          CheckLessonSuccess();
-          completedWaypointsText.text = "Completed Waypoints: " + waypointManager.GetCompletedWaypoints().ToString();
-          if (lessonNumber == 0)
-          {
-              lessonText.text = "Lesson: 0, " + goneTheDistance.ToString() + "/" + lvl0Success.ToString() + ", " + (500f - Vector3.Distance(transform.position, startPosition)).ToString("0.0") + "m to go";
-          }
-          else 
-          {
-              lessonText.text = "Lesson: " + lessonNumber.ToString();
-          }
-          if (Academy.Instance.StepCount % 100 == 0)
-          {
-              print("Logging data step: " + Academy.Instance.StepCount);
-              LogData();
-          }
-      }
+%           AddReward(-0.001f);
+%           CheckLessonSuccess();
+%           completedWaypointsText.text = "Completed Waypoints: " + waypointManager.GetCompletedWaypoints().ToString();
+%           if (lessonNumber == 0)
+%           {
+%               lessonText.text = "Lesson: 0, " + goneTheDistance.ToString() + "/" + lvl0Success.ToString() + ", " + (500f - Vector3.Distance(transform.position, startPosition)).ToString("0.0") + "m to go";
+%           }
+%           else 
+%           {
+%               lessonText.text = "Lesson: " + lessonNumber.ToString();
+%           }
+%           if (Academy.Instance.StepCount % 100 == 0)
+%           {
+%               print("Logging data step: " + Academy.Instance.StepCount);
+%               LogData();
+%           }
+%       }
   
-      private void CheckLessonSuccess()
-      {
-          // to graduate from lesson 0 to 1, the boat must travel 500m from the start position 5 times
-          if (lessonNumber == 0 && Vector3.Distance(transform.position, startPosition) > 500f)
-          {
-              if (hitLessonTarget) return;
-              goneTheDistance ++;
-              hitLessonTarget = true;
-              if (goneTheDistance >= lvl0Success)
-              {
-                  lessonNumber ++;
-                  waypointManager.CreateWaypoint();
-                  goneTheDistance = 0;
-              }
-          }
-          // to graduate from lesson 1 to 2, the boat must complete 10 waypoints in the 45 degree window
-          if (lessonNumber == 1 && waypointManager.GetCompletedWaypoints() > 10f)
-          {
-              lessonNumber ++;
-          }
-          if (lessonNumber == 2 && waypointManager.GetCompletedWaypoints() > 50f)
-          {
-              lessonNumber ++;
-          }
-          if (lessonNumber == 3 && waypointManager.GetCompletedWaypoints() > 80f)
-          {
-              lessonNumber ++;
-          }
-          if (lessonNumber == 4 && waypointManager.GetCompletedWaypoints() > 150f)
-          {
-              lessonNumber ++;
-          }
+%       private void CheckLessonSuccess()
+%       {
+%           // to graduate from lesson 0 to 1, the boat must travel 500m from the start position 5 times
+%           if (lessonNumber == 0 && Vector3.Distance(transform.position, startPosition) > 500f)
+%           {
+%               if (hitLessonTarget) return;
+%               goneTheDistance ++;
+%               hitLessonTarget = true;
+%               if (goneTheDistance >= lvl0Success)
+%               {
+%                   lessonNumber ++;
+%                   waypointManager.CreateWaypoint();
+%                   goneTheDistance = 0;
+%               }
+%           }
+%           // to graduate from lesson 1 to 2, the boat must complete 10 waypoints in the 45 degree window
+%           if (lessonNumber == 1 && waypointManager.GetCompletedWaypoints() > 10f)
+%           {
+%               lessonNumber ++;
+%           }
+%           if (lessonNumber == 2 && waypointManager.GetCompletedWaypoints() > 50f)
+%           {
+%               lessonNumber ++;
+%           }
+%           if (lessonNumber == 3 && waypointManager.GetCompletedWaypoints() > 80f)
+%           {
+%               lessonNumber ++;
+%           }
+%           if (lessonNumber == 4 && waypointManager.GetCompletedWaypoints() > 150f)
+%           {
+%               lessonNumber ++;
+%           }
   
-      }
+%       }
   
-      private IEnumerator CheckPosition()
-      {
-          while (true)
-          {
-              yield return new WaitForSeconds(checkInterval);
-              if (lessonNumber != 0)
-              {
-                  float startDistanceToWaypoint = Vector3.Distance(startPosition, waypointManager.GetWaypoint().transform.position);
-                  // If the boat if further away now than it started end episode
-                  if (currentDistanceToWaypoint >= startDistanceToWaypoint + 10.0f)
-                  {               
-                      print("currentDistanceToWaypoint: " + currentDistanceToWaypoint + ", started at position: " + startDistanceToWaypoint);
-                      AddReward(-10.0f);
-                      CompleteEpisode();
-                  }
-              }
-          }
-      }
+%       private IEnumerator CheckPosition()
+%       {
+%           while (true)
+%           {
+%               yield return new WaitForSeconds(checkInterval);
+%               if (lessonNumber != 0)
+%               {
+%                   float startDistanceToWaypoint = Vector3.Distance(startPosition, waypointManager.GetWaypoint().transform.position);
+%                   // If the boat if further away now than it started end episode
+%                   if (currentDistanceToWaypoint >= startDistanceToWaypoint + 10.0f)
+%                   {               
+%                       print("currentDistanceToWaypoint: " + currentDistanceToWaypoint + ", started at position: " + startDistanceToWaypoint);
+%                       AddReward(-10.0f);
+%                       CompleteEpisode();
+%                   }
+%               }
+%           }
+%       }
   
-      private Vector3 PolarAngles(Vector3 kitePosition, Vector3 wind)
-      {
-          Vector3 basePosition = boatRigidbody.position + new Vector3(0, 1f, 0);
-          // Debug.DrawLine(basePosition, basePosition + kitePosition, Color.green, 1.0f);
-          // Debug.Log("kitePosition: " + kitePosition);
-          // wind projected on floor
-          Vector3 windOnFloor = new Vector3(wind.x, 0, wind.z);
-          // kite position projected on floor
-          Vector3 kitePositionOnFloor = Vector3.ProjectOnPlane(kitePosition, Vector3.up);
-          // angle between wind and kite
-          // Debug.DrawLine(basePosition, basePosition + windOnFloor, Color.red, 1.0f);
-          // Debug.DrawLine(basePosition, basePosition + kitePositionOnFloor, Color.blue, 1.0f);
+%       private Vector3 PolarAngles(Vector3 kitePosition, Vector3 wind)
+%       {
+%           Vector3 basePosition = boatRigidbody.position + new Vector3(0, 1f, 0);
+%           // Debug.DrawLine(basePosition, basePosition + kitePosition, Color.green, 1.0f);
+%           // Debug.Log("kitePosition: " + kitePosition);
+%           // wind projected on floor
+%           Vector3 windOnFloor = new Vector3(wind.x, 0, wind.z);
+%           // kite position projected on floor
+%           Vector3 kitePositionOnFloor = Vector3.ProjectOnPlane(kitePosition, Vector3.up);
+%           // angle between wind and kite
+%           // Debug.DrawLine(basePosition, basePosition + windOnFloor, Color.red, 1.0f);
+%           // Debug.DrawLine(basePosition, basePosition + kitePositionOnFloor, Color.blue, 1.0f);
   
-          float angleHorizontal = Vector3.Angle(windOnFloor, kitePositionOnFloor);
-          bool angleHorizontalSign = Vector3.Cross(windOnFloor, kitePositionOnFloor).y < 0;
-          if (angleHorizontalSign)
-          {
-              angleHorizontal = -angleHorizontal;
-          }
-          // wind projected on vertical plane as defined by direction of kitePositionOnFloor and up.
-          // Vector3 windOnVerticalPlane = Vector3.ProjectOnPlane(wind, Vector3.Cross(kitePositionOnFloor, Vector3.up));
-          // Debug.DrawLine(basePosition, basePosition + windOnVerticalPlane, Color.yellow, 1.0f);
-          // angle between windOnVerticalPlane and kitePosition
-          float angleVertical = Vector3.Angle(kitePositionOnFloor, kitePosition);
-          // kite transform.forward projected on plane defined by kitePositionOnFloor
-          Vector3 kiteForwardOnPlane = Vector3.ProjectOnPlane(kiteRigidbody.transform.forward, kitePositionOnFloor);
-          // Debug.DrawLine(basePosition, basePosition + kiteForwardOnPlane, Color.magenta, 1.0f);
-          // angle between kiteForwardOnPlane and up
-          float angleKiteUp = Vector3.Angle(kiteForwardOnPlane, Vector3.up);
+%           float angleHorizontal = Vector3.Angle(windOnFloor, kitePositionOnFloor);
+%           bool angleHorizontalSign = Vector3.Cross(windOnFloor, kitePositionOnFloor).y < 0;
+%           if (angleHorizontalSign)
+%           {
+%               angleHorizontal = -angleHorizontal;
+%           }
+%           // wind projected on vertical plane as defined by direction of kitePositionOnFloor and up.
+%           // Vector3 windOnVerticalPlane = Vector3.ProjectOnPlane(wind, Vector3.Cross(kitePositionOnFloor, Vector3.up));
+%           // Debug.DrawLine(basePosition, basePosition + windOnVerticalPlane, Color.yellow, 1.0f);
+%           // angle between windOnVerticalPlane and kitePosition
+%           float angleVertical = Vector3.Angle(kitePositionOnFloor, kitePosition);
+%           // kite transform.forward projected on plane defined by kitePositionOnFloor
+%           Vector3 kiteForwardOnPlane = Vector3.ProjectOnPlane(kiteRigidbody.transform.forward, kitePositionOnFloor);
+%           // Debug.DrawLine(basePosition, basePosition + kiteForwardOnPlane, Color.magenta, 1.0f);
+%           // angle between kiteForwardOnPlane and up
+%           float angleKiteUp = Vector3.Angle(kiteForwardOnPlane, Vector3.up);
   
-          return new Vector3(angleHorizontal, angleVertical, angleKiteUp);
+%           return new Vector3(angleHorizontal, angleVertical, angleKiteUp);
   
-      }
+%       }
   
-      public override void CollectObservations(VectorSensor sensor)
-      {
-          Vector3 boatPosition = transform.position;
-          Vector3 boatForward = transform.forward;
-          Vector3 wind = kiteSim.windAtKite;
-          float distanceToWaypoint;
-          if (lessonNumber == 0)
-          {
-              distanceToWaypoint = 0;
-          }
-          else 
-          {
-              Vector3 waypointPosition = waypointManager.GetWaypoint().transform.position;
-              distanceToWaypoint = Vector3.Distance(boatPosition, waypointPosition);
-          }
+%       public override void CollectObservations(VectorSensor sensor)
+%       {
+%           Vector3 boatPosition = transform.position;
+%           Vector3 boatForward = transform.forward;
+%           Vector3 wind = kiteSim.windAtKite;
+%           float distanceToWaypoint;
+%           if (lessonNumber == 0)
+%           {
+%               distanceToWaypoint = 0;
+%           }
+%           else 
+%           {
+%               Vector3 waypointPosition = waypointManager.GetWaypoint().transform.position;
+%               distanceToWaypoint = Vector3.Distance(boatPosition, waypointPosition);
+%           }
   
-          // Distance to waypoint
-          sensor.AddObservation(distanceToWaypoint);
-          // Boat speed
-          sensor.AddObservation(boatForwardSpeed);
-          // Wind
-          sensor.AddObservation(wind);
-          // kite polar angles
-          sensor.AddObservation(PolarAngles(kiteRigidbody.transform.localPosition, wind));
+%           // Distance to waypoint
+%           sensor.AddObservation(distanceToWaypoint);
+%           // Boat speed
+%           sensor.AddObservation(boatForwardSpeed);
+%           // Wind
+%           sensor.AddObservation(wind);
+%           // kite polar angles
+%           sensor.AddObservation(PolarAngles(kiteRigidbody.transform.localPosition, wind));
   
-          // Calculate the relative wind direction in the horizontal plane
-          Vector3 windDirectionOnHorizontalPlane = Vector3.ProjectOnPlane(wind, Vector3.up).normalized;
-          Vector3 boatForwardOnHorizontalPlane = Vector3.ProjectOnPlane(boatForward, Vector3.up).normalized;
+%           // Calculate the relative wind direction in the horizontal plane
+%           Vector3 windDirectionOnHorizontalPlane = Vector3.ProjectOnPlane(wind, Vector3.up).normalized;
+%           Vector3 boatForwardOnHorizontalPlane = Vector3.ProjectOnPlane(boatForward, Vector3.up).normalized;
   
-          // Calculate the angle using atan2 for a smooth transition
-          float angleToWind = Mathf.Atan2(
-              Vector3.Dot(Vector3.Cross(boatForwardOnHorizontalPlane, windDirectionOnHorizontalPlane), Vector3.up),
-              Vector3.Dot(boatForwardOnHorizontalPlane, windDirectionOnHorizontalPlane)
-          );
+%           // Calculate the angle using atan2 for a smooth transition
+%           float angleToWind = Mathf.Atan2(
+%               Vector3.Dot(Vector3.Cross(boatForwardOnHorizontalPlane, windDirectionOnHorizontalPlane), Vector3.up),
+%               Vector3.Dot(boatForwardOnHorizontalPlane, windDirectionOnHorizontalPlane)
+%           );
   
-          // Normalize the angle to be between 0 and 1
-          float normalizedAngleToWind = (angleToWind + Mathf.PI) / (2 * Mathf.PI);
+%           // Normalize the angle to be between 0 and 1
+%           float normalizedAngleToWind = (angleToWind + Mathf.PI) / (2 * Mathf.PI);
   
-          sensor.AddObservation(normalizedAngleToWind);
+%           sensor.AddObservation(normalizedAngleToWind);
   
-          // Additional observations for kite control
-          Vector3 kiteVelocityRelative = kiteRigidbody.velocity - boatRigidbody.velocity;
-          sensor.AddObservation(kiteVelocityRelative); // Relative velocity of kite to boat
+%           // Additional observations for kite control
+%           Vector3 kiteVelocityRelative = kiteRigidbody.velocity - boatRigidbody.velocity;
+%           sensor.AddObservation(kiteVelocityRelative); // Relative velocity of kite to boat
   
-          float normalizedKiteHeight = Mathf.Clamp01((kiteRigidbody.transform.localPosition.y - 1f) / (KiteStableHeight - 1f));
-          sensor.AddObservation(normalizedKiteHeight); // Kite height relative to water
-  
-  
-          float normalizedRudderAngle = rudder.angle / 90.0f;
-          sensor.AddObservation(normalizedRudderAngle);
-  
-          // Kite position relative to boat, normalised relative position rotated to boat view and distance
-          // Vector3 kiteRelativePosition = kiteRigidbody.transform.position - transform.position;
-          // Vector3 kiteRelativePositionNormalised = kiteRelativePosition.normalized;
-          // sensor.AddObservation(Quaternion.Inverse(transform.rotation) * kiteRelativePositionNormalised);
-          // sensor.AddObservation(kiteRelativePosition.magnitude);
-          // print("angle of boat to wind: " + angleToWind * Mathf.Rad2Deg);
-  
-      }
-  
-      public override void OnActionReceived(ActionBuffers actions)
-      {
-  
-          int rudderAction = actions.DiscreteActions[0];
-          int kiteControlAction = actions.DiscreteActions[1];
-  
-          actionText.text = "Rudder: " + rudderAction + ", Kite Control: " + kiteControlAction;
-  
-          // discrete actions
-          // Rudder control (left, right, none)
-          if (rudderAction == 1)
-          {
-              rudder.RudderLeft();
-          }
-          else if (rudderAction == 2)
-          {
-              rudder.RudderRight();
-          }
-  
-          // Kite control (left, right, none)
-          if (kiteControlAction == 0)
-          {
-              kiteSim.SteerLeft();
-          }
-          else if (kiteControlAction == 1)
-          {
-              kiteSim.StopSteering();
-          }
-          else if (kiteControlAction == 2)
-          {
-              kiteSim.SteerRight();
-          }
-  
-          if (lastActions[0] != rudderAction || lastActions[1] != kiteControlAction)
-          {
-              AddReward(-0.1f);
-          }
-          lastActions[0] = rudderAction;
-          lastActions[1] = kiteControlAction;
-  
-          // if the kite is less that 1m above the water, end the episode
-          if (kiteRigidbody.transform.localPosition.y < 1.0f)
-          {
-              AddReward(-10f);
-              CompleteEpisode();
-          }
-  
-          if (PolarAngles(kiteRigidbody.transform.localPosition, kiteSim.windAtKite).y >15)
-          {
-              AddReward(0.01f);
-              if (PolarAngles(kiteRigidbody.transform.localPosition, kiteSim.windAtKite).y > 45.0f)
-              {
-                  AddReward(0.05f);
-              }
-          }
-  
-          // negativly reward if the rudder is greater than 45 degrees by increasing the reward the further away from 45 degrees
-          if (Mathf.Abs(rudder.angle) > 50.0f)
-          {
-              AddReward(-0.01f * (Mathf.Abs(rudder.angle) - 50.0f));
-          }
-  
-          // float heightDifference = Mathf.Abs(kiteRigidbody.transform.localPosition.y - KiteStableHeight);
-          // if (heightDifference < 2f) // Kite is within the desired height range
-          // {
-          //     AddReward((2f - heightDifference) * KiteHeightRewardMultiplier);
-          // }
-          // else
-          // {
-          //     AddReward(-heightDifference * KiteHeightRewardMultiplier);
-          // }
-  
-          rewardText.text = "Reward: " + GetCumulativeReward().ToString("0.0000");
-  
-          RequestDecision();
-      }
-  
-      public override void Heuristic(in ActionBuffers actionsOut)
-      {
-          // Implementation of heuristic for manual control
-          // It's useful for testing the agent with keyboard input
-          var discreteActionsOut = actionsOut.DiscreteActions;
-          discreteActionsOut.Clear();
-  
-          if (Input.GetKey(KeyCode.A))
-          {
-              discreteActionsOut[0] = 1; // Rudder left
-          }
-          else if (Input.GetKey(KeyCode.D))
-          {
-              discreteActionsOut[0] = 2; // Rudder right
-          }
-  
-          if (Input.GetKey(KeyCode.LeftArrow))
-          {
-              discreteActionsOut[1] = 0; // Kite control left
-          }
-          else if (Input.GetKey(KeyCode.RightArrow))
-          {
-              discreteActionsOut[1] = 2; // Kite control right
-          }
-          else
-          {
-              discreteActionsOut[1] = 1; // Kite control none
-          }
-      }
+%           float normalizedKiteHeight = Mathf.Clamp01((kiteRigidbody.transform.localPosition.y - 1f) / (KiteStableHeight - 1f));
+%           sensor.AddObservation(normalizedKiteHeight); // Kite height relative to water
   
   
-      private void LogData()
-      {
-          // writer.WriteLine("Episode, Step, Reward, Lesson, Waypoints_Reached, Distance, Episode_Length, Boat_Speed, Rudder_Angle, Kite_Height");
+%           float normalizedRudderAngle = rudder.angle / 90.0f;
+%           sensor.AddObservation(normalizedRudderAngle);
   
-          try
-          {
-              writer.WriteLine(episodeCount + "," + Academy.Instance.StepCount + "," + Time.time + "," + GetCumulativeReward() + "," + lessonNumber + "," + waypointManager.GetCompletedWaypoints() + "," + Vector3.Distance(transform.position, startPosition) + "," + boatForwardSpeed + "," + rudder.angle + "," + kiteRigidbody.transform.localPosition.y);
+%           // Kite position relative to boat, normalised relative position rotated to boat view and distance
+%           // Vector3 kiteRelativePosition = kiteRigidbody.transform.position - transform.position;
+%           // Vector3 kiteRelativePositionNormalised = kiteRelativePosition.normalized;
+%           // sensor.AddObservation(Quaternion.Inverse(transform.rotation) * kiteRelativePositionNormalised);
+%           // sensor.AddObservation(kiteRelativePosition.magnitude);
+%           // print("angle of boat to wind: " + angleToWind * Mathf.Rad2Deg);
   
-              writer.Flush();
-          }
-          catch (System.Exception e)
-          {
-              print("Error writing to file: " + e);
-          }
-      }
+%       }
   
-      void OnDestroy()
-      {
-          // Close the writer when the agent is destroyed
-          if (writer != null)
-          {
-              writer.Flush();
-              writer.Close();
-              writer = null;
-          }
-      }
-      public void CompleteEpisode()
-      {
-          // ResetEnvironment();
-          StartCoroutine(ResetEnvironment());
-          StopCoroutine(checkPositionRoutine);
-          // StartCoroutine(WaitAndRequestDecision());
-          // ResetEnvironment();
-          EndEpisode();
-      }
+%       public override void OnActionReceived(ActionBuffers actions)
+%       {
   
-  }
-\end{lstlisting}
+%           int rudderAction = actions.DiscreteActions[0];
+%           int kiteControlAction = actions.DiscreteActions[1];
+  
+%           actionText.text = "Rudder: " + rudderAction + ", Kite Control: " + kiteControlAction;
+  
+%           // discrete actions
+%           // Rudder control (left, right, none)
+%           if (rudderAction == 1)
+%           {
+%               rudder.RudderLeft();
+%           }
+%           else if (rudderAction == 2)
+%           {
+%               rudder.RudderRight();
+%           }
+  
+%           // Kite control (left, right, none)
+%           if (kiteControlAction == 0)
+%           {
+%               kiteSim.SteerLeft();
+%           }
+%           else if (kiteControlAction == 1)
+%           {
+%               kiteSim.StopSteering();
+%           }
+%           else if (kiteControlAction == 2)
+%           {
+%               kiteSim.SteerRight();
+%           }
+  
+%           if (lastActions[0] != rudderAction || lastActions[1] != kiteControlAction)
+%           {
+%               AddReward(-0.1f);
+%           }
+%           lastActions[0] = rudderAction;
+%           lastActions[1] = kiteControlAction;
+  
+%           // if the kite is less that 1m above the water, end the episode
+%           if (kiteRigidbody.transform.localPosition.y < 1.0f)
+%           {
+%               AddReward(-10f);
+%               CompleteEpisode();
+%           }
+  
+%           if (PolarAngles(kiteRigidbody.transform.localPosition, kiteSim.windAtKite).y >15)
+%           {
+%               AddReward(0.01f);
+%               if (PolarAngles(kiteRigidbody.transform.localPosition, kiteSim.windAtKite).y > 45.0f)
+%               {
+%                   AddReward(0.05f);
+%               }
+%           }
+  
+%           // negativly reward if the rudder is greater than 45 degrees by increasing the reward the further away from 45 degrees
+%           if (Mathf.Abs(rudder.angle) > 50.0f)
+%           {
+%               AddReward(-0.01f * (Mathf.Abs(rudder.angle) - 50.0f));
+%           }
+  
+%           // float heightDifference = Mathf.Abs(kiteRigidbody.transform.localPosition.y - KiteStableHeight);
+%           // if (heightDifference < 2f) // Kite is within the desired height range
+%           // {
+%           //     AddReward((2f - heightDifference) * KiteHeightRewardMultiplier);
+%           // }
+%           // else
+%           // {
+%           //     AddReward(-heightDifference * KiteHeightRewardMultiplier);
+%           // }
+  
+%           rewardText.text = "Reward: " + GetCumulativeReward().ToString("0.0000");
+  
+%           RequestDecision();
+%       }
+  
+%       public override void Heuristic(in ActionBuffers actionsOut)
+%       {
+%           // Implementation of heuristic for manual control
+%           // It's useful for testing the agent with keyboard input
+%           var discreteActionsOut = actionsOut.DiscreteActions;
+%           discreteActionsOut.Clear();
+  
+%           if (Input.GetKey(KeyCode.A))
+%           {
+%               discreteActionsOut[0] = 1; // Rudder left
+%           }
+%           else if (Input.GetKey(KeyCode.D))
+%           {
+%               discreteActionsOut[0] = 2; // Rudder right
+%           }
+  
+%           if (Input.GetKey(KeyCode.LeftArrow))
+%           {
+%               discreteActionsOut[1] = 0; // Kite control left
+%           }
+%           else if (Input.GetKey(KeyCode.RightArrow))
+%           {
+%               discreteActionsOut[1] = 2; // Kite control right
+%           }
+%           else
+%           {
+%               discreteActionsOut[1] = 1; // Kite control none
+%           }
+%       }
+  
+  
+%       private void LogData()
+%       {
+%           // writer.WriteLine("Episode, Step, Reward, Lesson, Waypoints_Reached, Distance, Episode_Length, Boat_Speed, Rudder_Angle, Kite_Height");
+  
+%           try
+%           {
+%               writer.WriteLine(episodeCount + "," + Academy.Instance.StepCount + "," + Time.time + "," + GetCumulativeReward() + "," + lessonNumber + "," + waypointManager.GetCompletedWaypoints() + "," + Vector3.Distance(transform.position, startPosition) + "," + boatForwardSpeed + "," + rudder.angle + "," + kiteRigidbody.transform.localPosition.y);
+  
+%               writer.Flush();
+%           }
+%           catch (System.Exception e)
+%           {
+%               print("Error writing to file: " + e);
+%           }
+%       }
+  
+%       void OnDestroy()
+%       {
+%           // Close the writer when the agent is destroyed
+%           if (writer != null)
+%           {
+%               writer.Flush();
+%               writer.Close();
+%               writer = null;
+%           }
+%       }
+%       public void CompleteEpisode()
+%       {
+%           // ResetEnvironment();
+%           StartCoroutine(ResetEnvironment());
+%           StopCoroutine(checkPositionRoutine);
+%           // StartCoroutine(WaitAndRequestDecision());
+%           // ResetEnvironment();
+%           EndEpisode();
+%       }
+  
+%   }
+% \end{lstlisting}
 
-\subsection{Buoyancy}\label{sec:buoyancy}
+% \subsection{Buoyancy}\label{sec:buoyancy}
 
-\begin{lstlisting}
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Rendering.HighDefinition;
+% \begin{lstlisting}
+% using System.Collections.Generic;
+% using UnityEngine;
+% using UnityEngine.Rendering.HighDefinition;
 
-public class Buoy : MonoBehaviour
-{
-    public WaterSurface seaSurface;
-    WaveSearchParameters waveParameters = new WaveSearchParameters();
-    WaveSearchResult waveResult = new WaveSearchResult();
-    public float buoyancyDensity = 500;
-    public int divisionsPerDimension = 2;
-    public bool hasConcaveShape = false;
-    public int maxVoxels = 16;
+% public class Buoy : MonoBehaviour
+% {
+%     public WaterSurface seaSurface;
+%     WaveSearchParameters waveParameters = new WaveSearchParameters();
+%     WaveSearchResult waveResult = new WaveSearchResult();
+%     public float buoyancyDensity = 500;
+%     public int divisionsPerDimension = 2;
+%     public bool hasConcaveShape = false;
+%     public int maxVoxels = 16;
 
-    public float RESISTANCE = 0.3f;
-    public float LIQUID_DENSITY = 1000;
+%     public float RESISTANCE = 0.3f;
+%     public float LIQUID_DENSITY = 1000;
 
-    private float halfVoxelHeight;
-    private Vector3 archimedesForceLocal;
-    private List<Vector3> voxelPoints;
-    private bool hasMeshCollider;
+%     private float halfVoxelHeight;
+%     private Vector3 archimedesForceLocal;
+%     private List<Vector3> voxelPoints;
+%     private bool hasMeshCollider;
 
-    private void Start()
-    {
-        var initialRotation = transform.rotation;
-        var initialPosition = transform.position;
-        transform.rotation = Quaternion.identity;
-        transform.position = Vector3.zero;
+%     private void Start()
+%     {
+%         var initialRotation = transform.rotation;
+%         var initialPosition = transform.position;
+%         transform.rotation = Quaternion.identity;
+%         transform.position = Vector3.zero;
 
-        if (GetComponent<Collider>() == null)
-        {
-            gameObject.AddComponent<MeshCollider>();
-            Debug.LogWarning($"[SeaFloat.cs] Object \"{name}\" had no collider. MeshCollider has been added.");
-        }
-        hasMeshCollider = GetComponent<MeshCollider>() != null;
+%         if (GetComponent<Collider>() == null)
+%         {
+%             gameObject.AddComponent<MeshCollider>();
+%             Debug.LogWarning($"[SeaFloat.cs] Object \"{name}\" had no collider. MeshCollider has been added.");
+%         }
+%         hasMeshCollider = GetComponent<MeshCollider>() != null;
 
-        var colliderBounds = GetComponent<Collider>().bounds;
-        halfVoxelHeight = Mathf.Min(colliderBounds.size.x, colliderBounds.size.y, colliderBounds.size.z) / (2 * divisionsPerDimension);
+%         var colliderBounds = GetComponent<Collider>().bounds;
+%         halfVoxelHeight = Mathf.Min(colliderBounds.size.x, colliderBounds.size.y, colliderBounds.size.z) / (2 * divisionsPerDimension);
 
-        if (GetComponent<Rigidbody>() == null)
-        {
-            gameObject.AddComponent<Rigidbody>();
-            Debug.LogWarning($"[SeaFloat.cs] Object \"{name}\" had no Rigidbody. Rigidbody has been added.");
-        }
-        GetComponent<Rigidbody>().centerOfMass = new Vector3(0, -10f, -1) + transform.InverseTransformPoint(colliderBounds.center);
+%         if (GetComponent<Rigidbody>() == null)
+%         {
+%             gameObject.AddComponent<Rigidbody>();
+%             Debug.LogWarning($"[SeaFloat.cs] Object \"{name}\" had no Rigidbody. Rigidbody has been added.");
+%         }
+%         GetComponent<Rigidbody>().centerOfMass = new Vector3(0, -10f, -1) + transform.InverseTransformPoint(colliderBounds.center);
 
-        voxelPoints = DivideIntoVoxels(hasMeshCollider && hasConcaveShape);
+%         voxelPoints = DivideIntoVoxels(hasMeshCollider && hasConcaveShape);
 
-        transform.rotation = initialRotation;
-        transform.position = initialPosition;
+%         transform.rotation = initialRotation;
+%         transform.position = initialPosition;
 
-        float objectVolume = GetComponent<Rigidbody>().mass / buoyancyDensity;
-        CombineVoxels(voxelPoints, maxVoxels);
+%         float objectVolume = GetComponent<Rigidbody>().mass / buoyancyDensity;
+%         CombineVoxels(voxelPoints, maxVoxels);
 
-        float buoyantForceMagnitude = LIQUID_DENSITY * Mathf.Abs(Physics.gravity.y) * objectVolume;
-        archimedesForceLocal = new Vector3(0, buoyantForceMagnitude, 0) / voxelPoints.Count;
-    }
+%         float buoyantForceMagnitude = LIQUID_DENSITY * Mathf.Abs(Physics.gravity.y) * objectVolume;
+%         archimedesForceLocal = new Vector3(0, buoyantForceMagnitude, 0) / voxelPoints.Count;
+%     }
 
-    private List<Vector3> DivideIntoVoxels(bool concave)
-    {
-        var points = new List<Vector3>(divisionsPerDimension * divisionsPerDimension * divisionsPerDimension);
-        var objectBounds = GetComponent<Collider>().bounds;
-        if (concave)
-        {
-            var meshCollider = GetComponent<MeshCollider>();
-            bool originalConvex = meshCollider.convex;
-            meshCollider.convex = false;
+%     private List<Vector3> DivideIntoVoxels(bool concave)
+%     {
+%         var points = new List<Vector3>(divisionsPerDimension * divisionsPerDimension * divisionsPerDimension);
+%         var objectBounds = GetComponent<Collider>().bounds;
+%         if (concave)
+%         {
+%             var meshCollider = GetComponent<MeshCollider>();
+%             bool originalConvex = meshCollider.convex;
+%             meshCollider.convex = false;
 
-            SliceConcaveShape(meshCollider, objectBounds, points);
-            meshCollider.convex = originalConvex;
-        }
-        else
-        {
-            SliceConvexShape(objectBounds, points);
-        }
+%             SliceConcaveShape(meshCollider, objectBounds, points);
+%             meshCollider.convex = originalConvex;
+%         }
+%         else
+%         {
+%             SliceConvexShape(objectBounds, points);
+%         }
 
-        return points;
-    }
+%         return points;
+%     }
 
-    private void SliceConcaveShape(MeshCollider meshCollider, Bounds bounds, List<Vector3> points)
-    {
-        for (int x = 0; x < divisionsPerDimension; x++)
-        {
-            for (int y = 0; y < divisionsPerDimension; y++)
-            {
-                for (int z = 0; z < divisionsPerDimension; z++)
-                {
-                    Vector3 point = CalculatePoint(bounds, x, y, z);
-                    if (IsPointInside(meshCollider, point))
-                    {
-                        points.Add(point);
-                    }
-                }
-            }
-        }
+%     private void SliceConcaveShape(MeshCollider meshCollider, Bounds bounds, List<Vector3> points)
+%     {
+%         for (int x = 0; x < divisionsPerDimension; x++)
+%         {
+%             for (int y = 0; y < divisionsPerDimension; y++)
+%             {
+%                 for (int z = 0; z < divisionsPerDimension; z++)
+%                 {
+%                     Vector3 point = CalculatePoint(bounds, x, y, z);
+%                     if (IsPointInside(meshCollider, point))
+%                     {
+%                         points.Add(point);
+%                     }
+%                 }
+%             }
+%         }
 
-        if (points.Count == 0)
-        {
-            points.Add(bounds.center);
-        }
-    }
+%         if (points.Count == 0)
+%         {
+%             points.Add(bounds.center);
+%         }
+%     }
 
-    private void SliceConvexShape(Bounds bounds, List<Vector3> points)
-    {
-        for (int x = 0; x < divisionsPerDimension; x++)
-        {
-            for (int y = 0; y < divisionsPerDimension; y++)
-            {
-                for (int z = 0; z < divisionsPerDimension; z++)
-                {
-                    Vector3 point = CalculatePoint(bounds, x, y, z);
-                    points.Add(point);
-                }
-            }
-        }
-    }
+%     private void SliceConvexShape(Bounds bounds, List<Vector3> points)
+%     {
+%         for (int x = 0; x < divisionsPerDimension; x++)
+%         {
+%             for (int y = 0; y < divisionsPerDimension; y++)
+%             {
+%                 for (int z = 0; z < divisionsPerDimension; z++)
+%                 {
+%                     Vector3 point = CalculatePoint(bounds, x, y, z);
+%                     points.Add(point);
+%                 }
+%             }
+%         }
+%     }
 
-    private Vector3 CalculatePoint(Bounds bounds, int x, int y, int z)
-    {
-        float posX = bounds.min.x + bounds.size.x / divisionsPerDimension * (0.5f + x);
-        float posY = bounds.min.y + bounds.size.y / divisionsPerDimension * (0.5f + y);
-        float posZ = bounds.min.z + bounds.size.z / divisionsPerDimension * (0.5f + z);
-        return transform.InverseTransformPoint(new Vector3(posX, posY, posZ));
-    }
+%     private Vector3 CalculatePoint(Bounds bounds, int x, int y, int z)
+%     {
+%         float posX = bounds.min.x + bounds.size.x / divisionsPerDimension * (0.5f + x);
+%         float posY = bounds.min.y + bounds.size.y / divisionsPerDimension * (0.5f + y);
+%         float posZ = bounds.min.z + bounds.size.z / divisionsPerDimension * (0.5f + z);
+%         return transform.InverseTransformPoint(new Vector3(posX, posY, posZ));
+%     }
 
-    private static bool IsPointInside(Collider collider, Vector3 point)
-    {
-        Vector3[] directions = { Vector3.up, Vector3.down, Vector3.left, Vector3.right, Vector3.forward, Vector3.back };
-        foreach (var direction in directions)
-        {
-            if (!collider.Raycast(new Ray(point - direction * 1000, direction), out _, 1000f))
-            {
-                return false;
-            }
-        }
-        return true;
-    }
+%     private static bool IsPointInside(Collider collider, Vector3 point)
+%     {
+%         Vector3[] directions = { Vector3.up, Vector3.down, Vector3.left, Vector3.right, Vector3.forward, Vector3.back };
+%         foreach (var direction in directions)
+%         {
+%             if (!collider.Raycast(new Ray(point - direction * 1000, direction), out _, 1000f))
+%             {
+%                 return false;
+%             }
+%         }
+%         return true;
+%     }
 
-    private static void FindNearestPoints(IList<Vector3> points, out int indexA, out int indexB)
-    {
-        float minDistance = float.MaxValue;
-        indexA = 0;
-        indexB = 1;
+%     private static void FindNearestPoints(IList<Vector3> points, out int indexA, out int indexB)
+%     {
+%         float minDistance = float.MaxValue;
+%         indexA = 0;
+%         indexB = 1;
 
-        for (int i = 0; i < points.Count - 1; i++)
-        {
-            for (int j = i + 1; j < points.Count; j++)
-            {
-                float distance = Vector3.Distance(points[i], points[j]);
-                if (distance < minDistance)
-                {
-                    minDistance = distance;
-                    indexA = i;
-                    indexB = j;
-                }
-            }
-        }
-    }
+%         for (int i = 0; i < points.Count - 1; i++)
+%         {
+%             for (int j = i + 1; j < points.Count; j++)
+%             {
+%                 float distance = Vector3.Distance(points[i], points[j]);
+%                 if (distance < minDistance)
+%                 {
+%                     minDistance = distance;
+%                     indexA = i;
+%                     indexB = j;
+%                 }
+%             }
+%         }
+%     }
 
-    private static void CombineVoxels(IList<Vector3> points, int targetCount)
-    {
-        if (points.Count <= 2 || targetCount < 2)
-        {
-            return;
-        }
+%     private static void CombineVoxels(IList<Vector3> points, int targetCount)
+%     {
+%         if (points.Count <= 2 || targetCount < 2)
+%         {
+%             return;
+%         }
 
-        while (points.Count > targetCount)
-        {
-            FindNearestPoints(points, out int first, out int second);
+%         while (points.Count > targetCount)
+%         {
+%             FindNearestPoints(points, out int first, out int second);
 
-            Vector3 combinedPoint = (points[first] + points[second]) * 0.5f;
-            points.RemoveAt(second); // Remove second point first as its index is higher
-            points.RemoveAt(first);
-            points.Add(combinedPoint);
-        }
-    }
+%             Vector3 combinedPoint = (points[first] + points[second]) * 0.5f;
+%             points.RemoveAt(second); // Remove second point first as its index is higher
+%             points.RemoveAt(first);
+%             points.Add(combinedPoint);
+%         }
+%     }
 
-    private float DetermineWaterLevel(float xCoord, float zCoord)
-    {
-        if (seaSurface == null)
-        {
-            Debug.Log("seaSurface is null");
-            return 0.0f;
-        }
+%     private float DetermineWaterLevel(float xCoord, float zCoord)
+%     {
+%         if (seaSurface == null)
+%         {
+%             Debug.Log("seaSurface is null");
+%             return 0.0f;
+%         }
 
-        if (seaSurface.ProjectPointOnWaterSurface(waveParameters, out waveResult))
-        {
-            return waveResult.projectedPositionWS.y;
-        }
-        else
-        {
-            return 0.0f;
-        }
-    }
+%         if (seaSurface.ProjectPointOnWaterSurface(waveParameters, out waveResult))
+%         {
+%             return waveResult.projectedPositionWS.y;
+%         }
+%         else
+%         {
+%             return 0.0f;
+%         }
+%     }
 
-    private void FixedUpdate()
-    {
-        foreach (var voxel in voxelPoints)
-        {
-            var worldPoint = transform.TransformPoint(voxel);
-            float seaLevel = DetermineWaterLevel(worldPoint.x, worldPoint.z);
+%     private void FixedUpdate()
+%     {
+%         foreach (var voxel in voxelPoints)
+%         {
+%             var worldPoint = transform.TransformPoint(voxel);
+%             float seaLevel = DetermineWaterLevel(worldPoint.x, worldPoint.z);
 
-            if (worldPoint.y - halfVoxelHeight < seaLevel)
-            {
-                float displacement = (seaLevel - worldPoint.y) / (2 * halfVoxelHeight) + 0.5f;
-                displacement = Mathf.Clamp(displacement, 0f, 1f);
+%             if (worldPoint.y - halfVoxelHeight < seaLevel)
+%             {
+%                 float displacement = (seaLevel - worldPoint.y) / (2 * halfVoxelHeight) + 0.5f;
+%                 displacement = Mathf.Clamp(displacement, 0f, 1f);
 
-                var velocity = GetComponent<Rigidbody>().GetPointVelocity(worldPoint);
-                var dampingForce = -velocity * RESISTANCE * GetComponent<Rigidbody>().mass;
-                var buoyancyForce = dampingForce + Mathf.Sqrt(displacement) * archimedesForceLocal;
+%                 var velocity = GetComponent<Rigidbody>().GetPointVelocity(worldPoint);
+%                 var dampingForce = -velocity * RESISTANCE * GetComponent<Rigidbody>().mass;
+%                 var buoyancyForce = dampingForce + Mathf.Sqrt(displacement) * archimedesForceLocal;
 
-                GetComponent<Rigidbody>().AddForceAtPosition(buoyancyForce, worldPoint);
-            }
-        }
-    }
-}
+%                 GetComponent<Rigidbody>().AddForceAtPosition(buoyancyForce, worldPoint);
+%             }
+%         }
+%     }
+% }
 
-\end{lstlisting}
+% \end{lstlisting}
 
-\subsection{Rudder}\label{sec:rudder}
+% \subsection{Rudder}\label{sec:rudder}
 
-\begin{lstlisting}
-  using UnityEngine;
+% \begin{lstlisting}
+%   using UnityEngine;
 
-public class Rudder : MonoBehaviour
-{
-    public float angle = 0;
-    public float turnSensitivity = 1.0F;
-    public float rudderLerpSpeed = 5.0F;
-    public Transform[] rudder;
+% public class Rudder : MonoBehaviour
+% {
+%     public float angle = 0;
+%     public float turnSensitivity = 1.0F;
+%     public float rudderLerpSpeed = 5.0F;
+%     public Transform[] rudder;
 
-    public float keelEfficiency = 0.5F;
-    private Rigidbody boatRb;
-    private float targetAngle = 0;
-    private bool inputReceived = false; // Flag to check if any rudder input was received
+%     public float keelEfficiency = 0.5F;
+%     private Rigidbody boatRb;
+%     private float targetAngle = 0;
+%     private bool inputReceived = false; // Flag to check if any rudder input was received
 
-    [SerializeField] private float boatForwardSpeed = 0;
+%     [SerializeField] private float boatForwardSpeed = 0;
 
-    public float rotationScale = 10.0F;
-    private void Awake()
-    {
-        boatRb = GetComponentInParent<Rigidbody>();
-    }
+%     public float rotationScale = 10.0F;
+%     private void Awake()
+%     {
+%         boatRb = GetComponentInParent<Rigidbody>();
+%     }
 
-    void Update()
-    {
-        // Smoothly interpolate between the current angle and the target angle
-        angle = Mathf.Lerp(angle, targetAngle, rudderLerpSpeed * Time.deltaTime);
+%     void Update()
+%     {
+%         // Smoothly interpolate between the current angle and the target angle
+%         angle = Mathf.Lerp(angle, targetAngle, rudderLerpSpeed * Time.deltaTime);
 
-        // Calculate the forward speed of the boat
-        boatForwardSpeed = Vector3.Dot(boatRb.velocity, transform.forward);
+%         // Calculate the forward speed of the boat
+%         boatForwardSpeed = Vector3.Dot(boatRb.velocity, transform.forward);
 
-        // Adjust the rudder angle based on boat's forward speed
-        // float adjustedAngle = angle * turnSensitivity * boatForwardSpeed;
-        float adjustedAngle = angle * turnSensitivity;
+%         // Adjust the rudder angle based on boat's forward speed
+%         // float adjustedAngle = angle * turnSensitivity * boatForwardSpeed;
+%         float adjustedAngle = angle * turnSensitivity;
 
-        for (int i = 0; i < rudder.Length; i++)
-            rudder[i].localRotation = Quaternion.Euler(0, adjustedAngle, 0);
+%         for (int i = 0; i < rudder.Length; i++)
+%             rudder[i].localRotation = Quaternion.Euler(0, adjustedAngle, 0);
 
-        // Apply turning force based on rudder's angle and boat's speed
-        float turnForce = angle * boatForwardSpeed * rotationScale;
-        boatRb.AddTorque(transform.up * turnForce);
+%         // Apply turning force based on rudder's angle and boat's speed
+%         float turnForce = angle * boatForwardSpeed * rotationScale;
+%         boatRb.AddTorque(transform.up * turnForce);
 
-        // if (boatForwardSpeed > 0.25 || boatForwardSpeed < -1)
-        // {
-            Vector3 lateralVelocity = Vector3.Dot(boatRb.velocity, transform.right) * transform.right;
-            boatRb.velocity -= lateralVelocity;
-        // }
+%         // if (boatForwardSpeed > 0.25 || boatForwardSpeed < -1)
+%         // {
+%             Vector3 lateralVelocity = Vector3.Dot(boatRb.velocity, transform.right) * transform.right;
+%             boatRb.velocity -= lateralVelocity;
+%         // }
         
 
 
-        // If no input is received, set target angle back to center
-        if (!inputReceived)
-        {
-            targetAngle = 0;
-        }
+%         // If no input is received, set target angle back to center
+%         if (!inputReceived)
+%         {
+%             targetAngle = 0;
+%         }
 
-        // Reset input flag for next frame
-        inputReceived = false;
-    }
+%         // Reset input flag for next frame
+%         inputReceived = false;
+%     }
 
-    public void RudderLeft()
-    {
-        targetAngle -= 1F;
-        targetAngle = Mathf.Clamp(targetAngle, -90F, 90F);
-        inputReceived = true;
-    }
+%     public void RudderLeft()
+%     {
+%         targetAngle -= 1F;
+%         targetAngle = Mathf.Clamp(targetAngle, -90F, 90F);
+%         inputReceived = true;
+%     }
 
-    public void RudderRight()
-    {
-        targetAngle += 1F;
-        targetAngle = Mathf.Clamp(targetAngle, -90F, 90F);
-        inputReceived = true;
-    }
+%     public void RudderRight()
+%     {
+%         targetAngle += 1F;
+%         targetAngle = Mathf.Clamp(targetAngle, -90F, 90F);
+%         inputReceived = true;
+%     }
 
-    public float GetBoatForwardSpeed()
-    {
-        return boatForwardSpeed;
-    }
+%     public float GetBoatForwardSpeed()
+%     {
+%         return boatForwardSpeed;
+%     }
 
-    public void SetRudderTargetAngle(float targetAngle)
-    {
-        this.targetAngle = targetAngle;
-    }
-    }
+%     public void SetRudderTargetAngle(float targetAngle)
+%     {
+%         this.targetAngle = targetAngle;
+%     }
+%     }
     
-\end{lstlisting}
-\subsection{Kite Model}\label{sec:kite}
-\begin{lstlisting}
-    using System.Collections;
-    using System.Collections.Generic;
-    using UnityEngine;
-    using UnityEngine.Rendering.HighDefinition;
+% \end{lstlisting}
+% \subsection{Kite Model}\label{sec:kite}
+% \begin{lstlisting}
+%     using System.Collections;
+%     using System.Collections.Generic;
+%     using UnityEngine;
+%     using UnityEngine.Rendering.HighDefinition;
     
-    public class KiteSim : MonoBehaviour
-    {
-        public Vector3 currentResultantForce;
-        public float forceMultiplier = 1.0f;
-        public WindSim windSim = null;
-        public float lineLength = 35.0f;
-        public ConfigurableJoint linePowerLeft, linePowerRight, lineSteeringLeft, lineSteeringRight;
-        public float liftCoefficient = 0.3f, dragCoefficient = 0.1f, _dragCoefficient = 0.1f;
-        public float barPower = 0.15f;
-        public SphereCollider kiteCollider;
-        public float debugScale = 1.0f;
-        public Rigidbody KiteRigidbody, BaseRigidbody;
-        public Transform windIndicator;
-        public Vector3 windAtKite;
-        private float time;
-        public int counter = 0;
-        public float score = 0.0f;
-        public Vector2 BarPositionAsControlInput;
-        private float stepsPerSecond = 0f;
-        public bool isResetting = false;
-        private int resetCounter = 0;
-        private bool isSteeringLeft = false, isSteeringRight = false;
-        public float steerSpeed = 0.1f, returnSpeed = 0.05f;
-        private Vector3 startPosition, boatStartPosition;
-        private Quaternion startRotation, boatStartRotation;
+%     public class KiteSim : MonoBehaviour
+%     {
+%         public Vector3 currentResultantForce;
+%         public float forceMultiplier = 1.0f;
+%         public WindSim windSim = null;
+%         public float lineLength = 35.0f;
+%         public ConfigurableJoint linePowerLeft, linePowerRight, lineSteeringLeft, lineSteeringRight;
+%         public float liftCoefficient = 0.3f, dragCoefficient = 0.1f, _dragCoefficient = 0.1f;
+%         public float barPower = 0.15f;
+%         public SphereCollider kiteCollider;
+%         public float debugScale = 1.0f;
+%         public Rigidbody KiteRigidbody, BaseRigidbody;
+%         public Transform windIndicator;
+%         public Vector3 windAtKite;
+%         private float time;
+%         public int counter = 0;
+%         public float score = 0.0f;
+%         public Vector2 BarPositionAsControlInput;
+%         private float stepsPerSecond = 0f;
+%         public bool isResetting = false;
+%         private int resetCounter = 0;
+%         private bool isSteeringLeft = false, isSteeringRight = false;
+%         public float steerSpeed = 0.1f, returnSpeed = 0.05f;
+%         private Vector3 startPosition, boatStartPosition;
+%         private Quaternion startRotation, boatStartRotation;
     
-        private void Start()
-        {
-            time = 0;
-            UpdateWindAtKite();
-            stepsPerSecond = 1 / Time.fixedDeltaTime;
-            InvokeRepeating("UpdateWindAtKite", 0, 5);
-            startPosition = KiteRigidbody.transform.position;
-            startRotation = KiteRigidbody.transform.rotation;
-            boatStartPosition = BaseRigidbody.transform.position;
-            boatStartRotation = BaseRigidbody.transform.rotation;
-        }
+%         private void Start()
+%         {
+%             time = 0;
+%             UpdateWindAtKite();
+%             stepsPerSecond = 1 / Time.fixedDeltaTime;
+%             InvokeRepeating("UpdateWindAtKite", 0, 5);
+%             startPosition = KiteRigidbody.transform.position;
+%             startRotation = KiteRigidbody.transform.rotation;
+%             boatStartPosition = BaseRigidbody.transform.position;
+%             boatStartRotation = BaseRigidbody.transform.rotation;
+%         }
     
-        private void UpdateWindAtKite()
-        {
-            windAtKite = windSim.wind;
-        }
+%         private void UpdateWindAtKite()
+%         {
+%             windAtKite = windSim.wind;
+%         }
     
-        private void Update()
-        {
-            time += Time.deltaTime;
-        }
+%         private void Update()
+%         {
+%             time += Time.deltaTime;
+%         }
     
-        private float calculateAngleOfAttack(Vector3 apparentWind)
-        {
-            return 180 - Vector3.Angle(apparentWind, KiteRigidbody.transform.forward);
-        }
+%         private float calculateAngleOfAttack(Vector3 apparentWind)
+%         {
+%             return 180 - Vector3.Angle(apparentWind, KiteRigidbody.transform.forward);
+%         }
     
-        public void SteerLeft()
-        {
-            isSteeringLeft = true;
-            isSteeringRight = false;
-        }
+%         public void SteerLeft()
+%         {
+%             isSteeringLeft = true;
+%             isSteeringRight = false;
+%         }
     
-        public void SteerRight()
-        {
-            isSteeringRight = true;
-            isSteeringLeft = false;
-        }
+%         public void SteerRight()
+%         {
+%             isSteeringRight = true;
+%             isSteeringLeft = false;
+%         }
     
-        public void StopSteering()
-        {
-            isSteeringLeft = false;
-            isSteeringRight = false;
-        }
+%         public void StopSteering()
+%         {
+%             isSteeringLeft = false;
+%             isSteeringRight = false;
+%         }
     
-        private void UpdateBarPosition()
-        {
-            if (isSteeringLeft)
-            {
-                BarPositionAsControlInput.x = Mathf.Max(BarPositionAsControlInput.x - steerSpeed, -1f);
-            }
-            else if (isSteeringRight)
-            {
-                BarPositionAsControlInput.x = Mathf.Min(BarPositionAsControlInput.x + steerSpeed, 1f);
-            }
-            else
-            {
-                BarPositionAsControlInput.x = Mathf.Lerp(BarPositionAsControlInput.x, 0, returnSpeed);
-            }
-        }
+%         private void UpdateBarPosition()
+%         {
+%             if (isSteeringLeft)
+%             {
+%                 BarPositionAsControlInput.x = Mathf.Max(BarPositionAsControlInput.x - steerSpeed, -1f);
+%             }
+%             else if (isSteeringRight)
+%             {
+%                 BarPositionAsControlInput.x = Mathf.Min(BarPositionAsControlInput.x + steerSpeed, 1f);
+%             }
+%             else
+%             {
+%                 BarPositionAsControlInput.x = Mathf.Lerp(BarPositionAsControlInput.x, 0, returnSpeed);
+%             }
+%         }
     
-        public void ResetKite()
-        {
-            KiteRigidbody.velocity = Vector3.zero;
-            KiteRigidbody.angularVelocity = Vector3.zero;
-            BaseRigidbody.velocity = Vector3.zero;
-            BaseRigidbody.angularVelocity = Vector3.zero;
-            Rigidbody keelRigidbody = BaseRigidbody.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>();
-            keelRigidbody.velocity = Vector3.zero;
-            keelRigidbody.angularVelocity = Vector3.zero;
-            StopSteering();
-            KiteRigidbody.transform.position = startPosition;
-            KiteRigidbody.transform.rotation = startRotation;
-            BaseRigidbody.transform.position = boatStartPosition;
-            BaseRigidbody.transform.rotation = boatStartRotation;
-            score = 0.0f;
-            counter = 0;
-        }
+%         public void ResetKite()
+%         {
+%             KiteRigidbody.velocity = Vector3.zero;
+%             KiteRigidbody.angularVelocity = Vector3.zero;
+%             BaseRigidbody.velocity = Vector3.zero;
+%             BaseRigidbody.angularVelocity = Vector3.zero;
+%             Rigidbody keelRigidbody = BaseRigidbody.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>();
+%             keelRigidbody.velocity = Vector3.zero;
+%             keelRigidbody.angularVelocity = Vector3.zero;
+%             StopSteering();
+%             KiteRigidbody.transform.position = startPosition;
+%             KiteRigidbody.transform.rotation = startRotation;
+%             BaseRigidbody.transform.position = boatStartPosition;
+%             BaseRigidbody.transform.rotation = boatStartRotation;
+%             score = 0.0f;
+%             counter = 0;
+%         }
     
-        private void FixedUpdate()
-        {
-            counter++;
-            UpdateBarPosition();
-            Vector3 apparentWind = windAtKite - KiteRigidbody.velocity;
-            float angleOfAttack = calculateAngleOfAttack(apparentWind);
-            float adjustedLiftCoefficient = liftCoefficient * Mathf.Cos((angleOfAttack - 20f) * Mathf.Deg2Rad) * liftCoefficient;
-            float apparentWindSpeedSquared = apparentWind.sqrMagnitude;
-            Vector3 liftForce = Vector3.Cross(apparentWind, -KiteRigidbody.transform.right).normalized * apparentWindSpeedSquared / 2 * adjustedLiftCoefficient;
-            Vector3 dragForce = apparentWind.normalized * apparentWindSpeedSquared / 2 * _dragCoefficient;
-            currentResultantForce = liftForce + dragForce;
-            Vector3 forceOnBoat = currentResultantForce * forceMultiplier;
-            KiteRigidbody.AddForce(forceOnBoat);
-            float torqueMultiplier = 2f * KiteRigidbody.angularVelocity.magnitude + 10f * KiteRigidbody.velocity.magnitude + 1.8f;
-            KiteRigidbody.AddTorque(-BarPositionAsControlInput.x * torqueMultiplier * KiteRigidbody.transform.up);
-            KiteRigidbody.angularVelocity = Vector3.ClampMagnitude(KiteRigidbody.angularVelocity, 3f);
-            Vector3 localVelocity = KiteRigidbody.transform.InverseTransformDirection(KiteRigidbody.velocity);
-            localVelocity.x *= 0.9f;
-            KiteRigidbody.velocity = KiteRigidbody.transform.TransformDirection(localVelocity);
-            if (counter < stepsPerSecond * 5)
-            {
-                score += 0.02f;
-            }
-            ResetForces();
-        }
+%         private void FixedUpdate()
+%         {
+%             counter++;
+%             UpdateBarPosition();
+%             Vector3 apparentWind = windAtKite - KiteRigidbody.velocity;
+%             float angleOfAttack = calculateAngleOfAttack(apparentWind);
+%             float adjustedLiftCoefficient = liftCoefficient * Mathf.Cos((angleOfAttack - 20f) * Mathf.Deg2Rad) * liftCoefficient;
+%             float apparentWindSpeedSquared = apparentWind.sqrMagnitude;
+%             Vector3 liftForce = Vector3.Cross(apparentWind, -KiteRigidbody.transform.right).normalized * apparentWindSpeedSquared / 2 * adjustedLiftCoefficient;
+%             Vector3 dragForce = apparentWind.normalized * apparentWindSpeedSquared / 2 * _dragCoefficient;
+%             currentResultantForce = liftForce + dragForce;
+%             Vector3 forceOnBoat = currentResultantForce * forceMultiplier;
+%             KiteRigidbody.AddForce(forceOnBoat);
+%             float torqueMultiplier = 2f * KiteRigidbody.angularVelocity.magnitude + 10f * KiteRigidbody.velocity.magnitude + 1.8f;
+%             KiteRigidbody.AddTorque(-BarPositionAsControlInput.x * torqueMultiplier * KiteRigidbody.transform.up);
+%             KiteRigidbody.angularVelocity = Vector3.ClampMagnitude(KiteRigidbody.angularVelocity, 3f);
+%             Vector3 localVelocity = KiteRigidbody.transform.InverseTransformDirection(KiteRigidbody.velocity);
+%             localVelocity.x *= 0.9f;
+%             KiteRigidbody.velocity = KiteRigidbody.transform.TransformDirection(localVelocity);
+%             if (counter < stepsPerSecond * 5)
+%             {
+%                 score += 0.02f;
+%             }
+%             ResetForces();
+%         }
     
-        private void ResetForces()
-        {
-            currentResultantForce = Vector3.zero;
-            currentResultantForce += linePowerLeft.currentForce;
-            currentResultantForce += linePowerRight.currentForce;
-            currentResultantForce += lineSteeringLeft.currentForce;
-            currentResultantForce += lineSteeringRight.currentForce;
-        }
+%         private void ResetForces()
+%         {
+%             currentResultantForce = Vector3.zero;
+%             currentResultantForce += linePowerLeft.currentForce;
+%             currentResultantForce += linePowerRight.currentForce;
+%             currentResultantForce += lineSteeringLeft.currentForce;
+%             currentResultantForce += lineSteeringRight.currentForce;
+%         }
     
-        private void OnDrawGizmos()
-        {
-            Vector3 normalizedResultantForce = currentResultantForce.normalized;
-            Gizmos.color = Color.white;
-            Gizmos.DrawLine(lineSteeringRight.transform.position, lineSteeringRight.transform.position + normalizedResultantForce * 35 * debugScale);
-        }
-    }
+%         private void OnDrawGizmos()
+%         {
+%             Vector3 normalizedResultantForce = currentResultantForce.normalized;
+%             Gizmos.color = Color.white;
+%             Gizmos.DrawLine(lineSteeringRight.transform.position, lineSteeringRight.transform.position + normalizedResultantForce * 35 * debugScale);
+%         }
+%     }
     
-\end{lstlisting}  
+% \end{lstlisting}  
 
 
-\subsection{GJK Collision Detection}\label{sec:gjk}
-\begin{lstlisting}
-  using UnityEngine;
-  using System.Collections.Generic;
+% \subsection{GJK Collision Detection}\label{sec:gjk}
+% \begin{lstlisting}
+%   using UnityEngine;
+%   using System.Collections.Generic;
   
-  public class GJKCollisionDetection
-  { 
+%   public class GJKCollisionDetection
+%   { 
   
-      Vector3 ORIGIN = Vector3.zero;
-      public bool GJK(MeshFilter mf1, Vector3 mf1Pos, MeshFilter mf2, Vector3 mf2Pos)
-      {
-          Vector3[] vertices1 = mf1.mesh.vertices;
-          Vector3[] vertices2 = mf2.mesh.vertices;
-          Vector3 d = (mf2Pos - mf1Pos).normalized;
-          d.y = 0;
+%       Vector3 ORIGIN = Vector3.zero;
+%       public bool GJK(MeshFilter mf1, Vector3 mf1Pos, MeshFilter mf2, Vector3 mf2Pos)
+%       {
+%           Vector3[] vertices1 = mf1.mesh.vertices;
+%           Vector3[] vertices2 = mf2.mesh.vertices;
+%           Vector3 d = (mf2Pos - mf1Pos).normalized;
+%           d.y = 0;
   
-          Vector3 simplexPoint = Support(vertices1, mf1.transform, vertices2, mf2.transform, d);
-          List<Vector3> simplex = new List<Vector3> { simplexPoint };
+%           Vector3 simplexPoint = Support(vertices1, mf1.transform, vertices2, mf2.transform, d);
+%           List<Vector3> simplex = new List<Vector3> { simplexPoint };
   
-          d = -simplexPoint;
+%           d = -simplexPoint;
   
-          while (true)
-          {
-              Vector3 A = Support(vertices1, mf1.transform, vertices2, mf2.transform, d);
-              A.y = 0;
-              if (Vector3.Dot(A, d) < 0)
-              {
-                  return false;
-              }
+%           while (true)
+%           {
+%               Vector3 A = Support(vertices1, mf1.transform, vertices2, mf2.transform, d);
+%               A.y = 0;
+%               if (Vector3.Dot(A, d) < 0)
+%               {
+%                   return false;
+%               }
   
-              simplex.Add(A);
-              if (HandleSimplex(simplex, ref d))
-              {
-                  return true;
-              }
-          }
-      }
+%               simplex.Add(A);
+%               if (HandleSimplex(simplex, ref d))
+%               {
+%                   return true;
+%               }
+%           }
+%       }
   
-      private Vector3 Support(Vector3[] vertices1, Transform t1, Vector3[] vertices2, Transform t2, Vector3 d)
-      {
-          Vector3 p1 = GetFarthestPointInDirection(vertices1, t1, d);
-          Vector3 p2 = GetFarthestPointInDirection(vertices2, t2, -d);
+%       private Vector3 Support(Vector3[] vertices1, Transform t1, Vector3[] vertices2, Transform t2, Vector3 d)
+%       {
+%           Vector3 p1 = GetFarthestPointInDirection(vertices1, t1, d);
+%           Vector3 p2 = GetFarthestPointInDirection(vertices2, t2, -d);
   
-          return p1 - p2;
-      }
+%           return p1 - p2;
+%       }
   
-      private Vector3 GetFarthestPointInDirection(Vector3[] vertices, Transform transform, Vector3 d)
-      {
-          float highest = -Mathf.Infinity;
-          Vector3 supportVertex = Vector3.zero;
+%       private Vector3 GetFarthestPointInDirection(Vector3[] vertices, Transform transform, Vector3 d)
+%       {
+%           float highest = -Mathf.Infinity;
+%           Vector3 supportVertex = Vector3.zero;
   
-          foreach (Vector3 vertex in vertices)
-          {
-              Vector3 vertexWorld = transform.TransformPoint(vertex);
-              float dot = Vector3.Dot(vertexWorld, d);
-              if (dot > highest)
-              {
-                  highest = dot;
-                  supportVertex = vertexWorld;
-              }
-          }
+%           foreach (Vector3 vertex in vertices)
+%           {
+%               Vector3 vertexWorld = transform.TransformPoint(vertex);
+%               float dot = Vector3.Dot(vertexWorld, d);
+%               if (dot > highest)
+%               {
+%                   highest = dot;
+%                   supportVertex = vertexWorld;
+%               }
+%           }
   
-          return supportVertex;
-      }
+%           return supportVertex;
+%       }
   
-      private bool HandleSimplex(List<Vector3> simplex, ref Vector3 d)
-      {
-          if (simplex.Count == 2)
-          {
-              return LineCase(simplex, ref d);
-          }
-          else
-          {
-              return TriangleCase(simplex, ref d);
-          }
-      }
+%       private bool HandleSimplex(List<Vector3> simplex, ref Vector3 d)
+%       {
+%           if (simplex.Count == 2)
+%           {
+%               return LineCase(simplex, ref d);
+%           }
+%           else
+%           {
+%               return TriangleCase(simplex, ref d);
+%           }
+%       }
   
-      private bool LineCase(List<Vector3> simplex, ref Vector3 d)
-      {
-          Vector3 B = simplex[0];
-          Vector3 A = simplex[1];
-          Vector3 AB = B - A;
-          Vector3 AO = ORIGIN - A;
-          Vector3 ABperp = TripleProd(AB, AO, AB);
-          d = ABperp;
-          return false;
-      }
+%       private bool LineCase(List<Vector3> simplex, ref Vector3 d)
+%       {
+%           Vector3 B = simplex[0];
+%           Vector3 A = simplex[1];
+%           Vector3 AB = B - A;
+%           Vector3 AO = ORIGIN - A;
+%           Vector3 ABperp = TripleProd(AB, AO, AB);
+%           d = ABperp;
+%           return false;
+%       }
   
-      private bool TriangleCase(List<Vector3> simplex, ref Vector3 d)
-      {
-          Vector3 C = simplex[0];
-          Vector3 B = simplex[1];
-          Vector3 A = simplex[2];
-          Vector3 AB = B - A;
-          Vector3 AC = C - A;
-          Vector3 AO = ORIGIN - A;
+%       private bool TriangleCase(List<Vector3> simplex, ref Vector3 d)
+%       {
+%           Vector3 C = simplex[0];
+%           Vector3 B = simplex[1];
+%           Vector3 A = simplex[2];
+%           Vector3 AB = B - A;
+%           Vector3 AC = C - A;
+%           Vector3 AO = ORIGIN - A;
   
-          Vector3 ABperp = TripleProd(AC, AB, AB);
-          Vector3 ACperp = TripleProd(AB, AC, AC);
+%           Vector3 ABperp = TripleProd(AC, AB, AB);
+%           Vector3 ACperp = TripleProd(AB, AC, AC);
   
-          if (Vector3.Dot(ABperp, AO) > 0)
-          {
-              simplex.RemoveAt(0);
-              d = ABperp;
-              return false;
-          }
-          else if (Vector3.Dot(ACperp, AO) > 0)
-          {
-              simplex.RemoveAt(1);
-              d = ACperp;
-              return false;
-          }
+%           if (Vector3.Dot(ABperp, AO) > 0)
+%           {
+%               simplex.RemoveAt(0);
+%               d = ABperp;
+%               return false;
+%           }
+%           else if (Vector3.Dot(ACperp, AO) > 0)
+%           {
+%               simplex.RemoveAt(1);
+%               d = ACperp;
+%               return false;
+%           }
   
-          return true;
-      }
+%           return true;
+%       }
   
-      private Vector3 TripleProd(Vector3 a, Vector3 b, Vector3 c)
-      {
-          Vector3 result = b * Vector3.Dot(c, a) - a * Vector3.Dot(c, b);
-          result.y = 0;
-          return result;
-      }
-  }
+%       private Vector3 TripleProd(Vector3 a, Vector3 b, Vector3 c)
+%       {
+%           Vector3 result = b * Vector3.Dot(c, a) - a * Vector3.Dot(c, b);
+%           result.y = 0;
+%           return result;
+%       }
+%   }
 
-\end{lstlisting}
+% \end{lstlisting}
 
 
 \subsection{Grid Search}\label{gridsearch}
@@ -1316,9 +1316,9 @@ except ImportError:
 # 3. Download the config file and Unity executable from Google Drive.
 
 # Direct download links converted from the shared URLs
-yaml_link="https://drive.google.com/uc?export=download&id=12hXL2oNMrQE9hX3fg5O9H7bU8KZkuFI7"
-creds_link="https://drive.google.com/uc?export=download&id=1X-UzOz-NO7U8P_m0qXU3fAfHbgLomIyc"
-setting_link="https://drive.google.com/uc?export=download&id=1DnGWbR_w-MVa3KsxsGaJ_OcvgAavKut3"
+yaml_link="https://drive.google.com/uc?export=download&id=..."
+creds_link="https://drive.google.com/uc?export=download&id=..."
+setting_link="https://drive.google.com/uc?export=download&id=..."
 
 # navigate to the directory where the files will be downloaded ~/ML_PPO
 mkdir ML_PPO
@@ -1328,11 +1328,13 @@ wget -O trainer_config.yaml $yaml_link
 wget -O credentials.json $creds_link
 wget -O settings.yaml $setting_link
 
-fileid="1cPf8wL_XeYnqwFw1GEz_lDaBjR5I55Ra"
+fileid="..."
 filename="build.zip"
-query=`curl -c ./cookie.txt -s -L "https://drive.google.com/uc?export=download&id=${fileid}" |\
+query=`curl -c ./cookie.txt -s -L "https://drive.google.com/uc?export=download&id=
+${fileid}" |\
      perl -nE'say/confirm=(\w+)/'`
-curl -Lb ./cookie.txt "https://drive.google.com/uc?export=download&confirm=${query}&id=${fileid}" -o ${filename}
+curl -Lb ./cookie.txt "https://drive.google.com/uc?export=download&confirm=${query}&id=
+{fileid}" -o ${filename}
 
 
 # Unzip the Unity build folder
@@ -1343,7 +1345,6 @@ env_name="./HeadlessBuilds/build.x86_64"
 trainer_config_file="./trainer_config.yaml"
 run_identifier="test_1"
 
-# Assuming the unity build is an executable. If it isn't, adjust the command to execute it appropriately.
 chmod +x $env_name 
 chmod +x $trainer_config_file
 chmod +x HeadlessBuilds
@@ -1639,11 +1640,11 @@ correlation_matrix = data.corr(method='spearman')
 print(correlation_matrix['Best Episode Length'].sort_values(ascending=False))
 \end{lstlisting}
 
-\subsection{Plot Results}\label{sec:plot_results}
+% \subsection{Plot Results}\label{sec:plot_results}
 
-\section{Results}
+% \section{Results}
 
-\subsection{Environment/Cumulative Reward}\label{sec:env_cum_reward}
+% \subsection{Environment/Cumulative Reward}\label{sec:env_cum_reward}
 % insert code here
 
 

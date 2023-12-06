@@ -1,7 +1,7 @@
 \babel@toc {english}{}\relax 
 \par \nobreak \mbox {}\hfill {\bfseries Page}\par \nobreak 
-\contentsline {chapter}{List of Figures}{vii}{section*.5}%
-\contentsline {chapter}{List of Tables}{viii}{section*.6}%
+\contentsline {chapter}{List of Figures}{vi}{section*.5}%
+\contentsline {chapter}{List of Tables}{vii}{section*.6}%
 \contentsline {chapter}{\chapternumberline {1}Introduction and Motivation}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}A Renewed Interest in Wind Propulsion}{2}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Project Definition}{2}{section.1.2}%
@@ -19,7 +19,7 @@
 \contentsline {section}{\numberline {2.4}Existing Kiteboat Technologies}{11}{section.2.4}%
 \contentsline {chapter}{\chapternumberline {3}Methodology}{13}{chapter.3}%
 \contentsline {section}{\numberline {3.1}MLAgents}{13}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Python Implementation}{13}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.1}Python Implementation}{14}{subsection.3.1.1}%
 \contentsline {section}{\numberline {3.2}The Environment}{15}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}Boat Model}{16}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}Kite Model}{17}{subsection.3.2.2}%
@@ -46,20 +46,11 @@
 \contentsline {chapter}{\chapternumberline {5}Future Work}{42}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Conclusion}{43}{section.5.1}%
 \contentsline {appendix}{\chapternumberline {A}Appendix A}{46}{appendix.A}%
-\contentsline {section}{\numberline {A.1}Unity Setup}{46}{section.A.1}%
-\contentsline {section}{\numberline {A.2}Final Configuration}{46}{section.A.2}%
-\contentsline {section}{\numberline {A.3}Scripts}{47}{section.A.3}%
-\contentsline {subsection}{\numberline {A.3.1}KiteBoat Agent}{47}{subsection.A.3.1}%
-\contentsline {subsection}{\numberline {A.3.2}Buoyancy}{62}{subsection.A.3.2}%
-\contentsline {subsection}{\numberline {A.3.3}Rudder}{68}{subsection.A.3.3}%
-\contentsline {subsection}{\numberline {A.3.4}Kite Model}{70}{subsection.A.3.4}%
-\contentsline {subsection}{\numberline {A.3.5}GJK Collision Detection}{74}{subsection.A.3.5}%
-\contentsline {subsection}{\numberline {A.3.6}Grid Search}{77}{subsection.A.3.6}%
-\contentsline {subsection}{\numberline {A.3.7}HPC Shell Script}{79}{subsection.A.3.7}%
-\contentsline {subsection}{\numberline {A.3.8}Extract Results}{83}{subsection.A.3.8}%
-\contentsline {subsection}{\numberline {A.3.9}Combine Results}{84}{subsection.A.3.9}%
-\contentsline {subsection}{\numberline {A.3.10}Analysis}{87}{subsection.A.3.10}%
-\contentsline {subsection}{\numberline {A.3.11}Plot Results}{88}{subsection.A.3.11}%
-\contentsline {section}{\numberline {A.4}Results}{88}{section.A.4}%
-\contentsline {subsection}{\numberline {A.4.1}Environment/Cumulative Reward}{88}{subsection.A.4.1}%
-\contentsline {chapter}{Bibliography}{89}{appendix*.20}%
+\contentsline {section}{\numberline {A.1}Final Configuration}{46}{section.A.1}%
+\contentsline {section}{\numberline {A.2}Scripts}{46}{section.A.2}%
+\contentsline {subsection}{\numberline {A.2.1}Grid Search}{46}{subsection.A.2.1}%
+\contentsline {subsection}{\numberline {A.2.2}HPC Shell Script}{49}{subsection.A.2.2}%
+\contentsline {subsection}{\numberline {A.2.3}Extract Results}{53}{subsection.A.2.3}%
+\contentsline {subsection}{\numberline {A.2.4}Combine Results}{54}{subsection.A.2.4}%
+\contentsline {subsection}{\numberline {A.2.5}Analysis}{56}{subsection.A.2.5}%
+\contentsline {chapter}{Bibliography}{59}{appendix*.20}%
